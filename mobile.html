@@ -91,7 +91,7 @@
                     <div class="mobile-input-grid">
                       <div class="card">
                         <div style="font-weight: 600; font-size: 18px; margin-bottom: 6px">From</div>
-                        <input id="fromValue" placeholder="Enter value" />
+                        <input id="fromValue" type="number" placeholder="Enter value" />
                         <div id="fromUnitButtons" class="mobile-unit-buttons"></div>
                       </div>
                       <div class="card">
@@ -148,7 +148,7 @@
                     <div style="margin-top: 12px;">
                       <label>Height</label>
                       <div class="mobile-height-input">
-                        <input id="heightVal" placeholder="Enter height" />
+                        <input id="heightVal" type="number" placeholder="Enter height" />
                         <div id="heightModeButtons" class="mobile-unit-buttons"></div>
                       </div>
                     </div>
@@ -230,15 +230,15 @@
                   <div class="mobile-emi-inputs">
                     <div>
                       <label>Loan Amount</label>
-                      <input id="emiAmt" />
+                      <input id="emiAmt" type="number" placeholder="Enter loan amount" />
                     </div>
                     <div>
                       <label>Annual Rate (%)</label>
-                      <input id="emiRate" />
+                      <input id="emiRate" type="number" step="0.1" placeholder="Enter annual rate" />
                     </div>
                     <div>
                       <label>Tenure (months)</label>
-                      <input id="emiMonths" />
+                      <input id="emiMonths" type="number" placeholder="Enter tenure in months" />
                     </div>
                   </div>
 

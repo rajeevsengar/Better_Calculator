@@ -596,6 +596,19 @@
     color: var(--text-primary);
   }
 
+  /* Ensure number inputs show numeric keyboard on mobile */
+  .mobile-container input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .mobile-container input[type="number"]::-webkit-outer-spin-button,
+  .mobile-container input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   .mobile-container input:focus,
   .mobile-container select:focus {
     outline: none;
