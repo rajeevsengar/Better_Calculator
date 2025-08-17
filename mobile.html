@@ -18,7 +18,10 @@
             <img id="siteLogo" src="images/site_logo.png" alt="Logo">
             <div class="mobile-brand-text">
               <h1>Calculator.net</h1>
-              <div class="muted tagline">Minimal - Fast - Powerful</div>
+              <div class="muted tagline">
+              <div class="tagline-line tagline-first">Minimal - Fast - Powerful</div>
+              <div class="tagline-line tagline-second">Imagined by Human, Designed by AI</div>
+            </div>
             </div>
           </div>
           <div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -87,9 +90,9 @@
             <section id="conversion" class="active-section" style="display: block;">
               <!-- Modes at the top in 3-column grid -->
               <div class="card modes-card" style="margin-bottom: 16px;">
-                <div style="font-weight: 600; font-size: 16px; margin-bottom: 12px; text-align: center;">Unit Types:</div>
+                <div style="font-weight: 600; font-size: 16px; margin-bottom: 12px; text-align: center;" id="unitTypesTitle">Unit Types:</div>
                 <div id="modesList" class="mobile-modes-grid"></div>
-                <div class="muted" style="margin-top: 8px; text-align: center; font-size: 14px;">
+                <div class="muted" style="margin-top: 8px; text-align: center; font-size: 14px;" id="modesInstruction">
                   Click a mode above to switch units.
                 </div>
               </div>
@@ -559,8 +562,9 @@
 
     <!-- Scripts -->
     <script src="js/constants.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/text-config.js"></script>
     <script src="js/util.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/emi-calculator.js"></script>
     <script src="js/investment-calculator.js"></script>
     <script src="js/unit-converter.js"></script>

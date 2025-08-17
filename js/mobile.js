@@ -1,6 +1,7 @@
 // Mobile-specific functionality for Pro Multi-Calculator
 
-document.addEventListener('DOMContentLoaded', function() {
+// Wait for all resources to load, including scripts
+window.addEventListener('load', function() {
     initializeMobile();
 });
 
@@ -20,8 +21,15 @@ function initializeMobile() {
     // Force numeric keyboard for all number inputs
     forceNumericKeyboard();
     
-    // Initialize the first panel (conversion)
+    // Initialize the first panel (conversion) - this will make elements visible
     showMobilePanel('conversion');
+    
+    // Now populate text content after panel is shown and elements are visible
+    setTimeout(() => {
+        if (typeof populateTextContent === 'function') {
+            populateTextContent();
+        }
+    }, 100);
 }
 
 function initializeMobileMenu() {
@@ -89,8 +97,6 @@ function initializeMobileNavigation() {
 }
 
 function showMobilePanel(panelId) {
-    console.log('Showing mobile panel:', panelId);
-    
     // Hide all panels
     const panels = document.querySelectorAll('section');
     panels.forEach(panel => {
@@ -104,20 +110,13 @@ function showMobilePanel(panelId) {
         targetPanel.classList.add('active-section');
         targetPanel.style.display = 'block';
         
-        console.log('Panel displayed:', targetPanel);
-        
         // Initialize panel-specific functionality
         initializePanelFunctionality(panelId);
-    } else {
-        console.error('Panel not found:', panelId);
     }
 }
 
 function initializePanelFunctionality(panelId) {
     // Initialize calculators when panels are shown
-    console.log('Panel activated:', panelId);
-    
-    // Initialize calculators lazily (same logic as desktop)
     switch(panelId) {
         case 'emi':        window.EMI?.initializeEMICalculator?.(); break;
         case 'investment': window.Investment?.initializeInvestmentCalculator?.(); break;
@@ -128,12 +127,8 @@ function initializePanelFunctionality(panelId) {
     }
     
     // Initialize ribbons using the desktop system
-    console.log('Setting up ribbons for panel:', panelId);
     if (window.setupRibbons && typeof window.setupRibbons === 'function') {
-        console.log('Calling setupRibbons...');
         window.setupRibbons(panelId);
-    } else {
-        console.log('setupRibbons not available:', window.setupRibbons);
     }
 }
 
@@ -282,6 +277,8 @@ function forceNumericKeyboard() {
         }
     });
 }
+
+// Text content is now populated from util.js
 
 // Close function handled by desktop ribbon system
 

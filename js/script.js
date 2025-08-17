@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (isMobile) {
     // Mobile initialization - handled by mobile.js
-    console.log('Mobile version detected - using mobile initialization');
     return;
   }
   
@@ -58,24 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize theme switcher
   initializeThemeSwitcher();
   
+  // Populate text content from configuration
+  populateTextContent();
+  
   // Export functions for global access
   window.setupRibbons = setupRibbons;
 });
 
+// Text content is now populated from util.js
+
 function setupRibbons(panelId) {
-  console.log('setupRibbons called for panel:', panelId);
   const ribbons = document.querySelectorAll('.ribbon');
   const popup = document.getElementById('ribbonPopup');
-  console.log('Found ribbons:', ribbons.length, 'popup:', popup);
   
   if (!popup || ribbons.length === 0) {
-    console.log('No ribbons or popup found, returning');
     return;
   }
   
   // Check if we're on mobile
   const isMobile = document.querySelector('.mobile-container') !== null;
-  console.log('Is mobile:', isMobile);
 
   const getContent = (type) => {
     const panelMap = (window.RIBBONS_CONTENT && window.RIBBONS_CONTENT[panelId]) || {};
@@ -99,16 +99,13 @@ function setupRibbons(panelId) {
     if (isMobile) {
       // Mobile: click to show/hide popup
       r.onclick = (e) => {
-        console.log('Ribbon clicked:', r.dataset.type);
         const type = r.dataset.type;
         
         // Toggle popup visibility
         const isVisible = popup.getAttribute('aria-hidden') === 'false';
-        console.log('Popup currently visible:', isVisible);
         
         if (isVisible) {
           popup.setAttribute('aria-hidden', 'true');
-          console.log('Hiding popup');
         } else {
           // Update content
           if (popup.innerHTML !== popupContent[type]) {
@@ -121,7 +118,6 @@ function setupRibbons(panelId) {
           popup.style.top = '50%';
           popup.style.transform = 'translate(-50%, -50%)';
           popup.setAttribute('aria-hidden', 'false');
-          console.log('Showing popup for type:', type);
         }
       };
     } else {

@@ -13,7 +13,7 @@
       <header class="header1">
         <div class="header-inner">
           <img src="images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo" class="flag-icon">
-          <p style="color:black; font-family:Helvetica Neue">
+          <p id="builtWithLove" style="color:black; font-family:Helvetica Neue">
             Built with ❤️ in India.
           </p>
         </div>
@@ -23,8 +23,11 @@
           <div class="brand">
             <img id="siteLogo" src="images/site_logo.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo">
             <div class="brand-text">
-              <h1>Calculator.net</h1>
-              <div class="muted tagline">Minimal - Fast - Powerful</div>
+              <h1 id="brandName">Calculator.net</h1>
+              <div id="tagline" class="muted tagline">
+                <div class="tagline-line tagline-first">Minimal - Fast - Powerful</div>
+                <div class="tagline-line tagline-second">Imagined by Human, Designed by AI</div>
+              </div>
             </div>
           </div>
         </div>
@@ -43,7 +46,7 @@
             <div class="item" data-panel="investment">5 • Investment Calculator</div>
     
             <div class="theme-switcher">
-              <div class="theme-label">Theme:</div>
+              <div id="themeLabel" class="theme-label">Theme:</div>
               <div class="theme-options">
                 <label class="theme-option" data-theme="default">
                   <input type="radio" name="theme" value="default" checked />
@@ -67,9 +70,9 @@
     
             <!-- Global ribbons -->
             <div class="ribbons">
-              <div class="ribbon" data-type="tips">Tips</div>
-              <div class="ribbon" data-type="instructions">Instructions</div>
-              <div class="ribbon" data-type="examples">Examples</div>
+              <div id="ribbonTips" class="ribbon" data-type="tips">Tips</div>
+              <div id="ribbonInstructions" class="ribbon" data-type="instructions">Instructions</div>
+              <div id="ribbonExamples" class="ribbon" data-type="examples">Examples</div>
               <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
             </div>
             
@@ -787,6 +790,7 @@
     </div>
 
     <script src="js/constants.js"></script>
+    <script src="js/text-config.js"></script>
     <script src="js/script.js"></script>
     <script src="js/util.js"></script>
     <script src="js/emi-calculator.js"></script>

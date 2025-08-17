@@ -47,8 +47,17 @@
 
   .mobile-brand-text .tagline {
     font-size: 0.875rem;
+    height: 1.4rem;
+    line-height: 1.4rem;
     color: var(--background-color);
     opacity: 0.9;
+    position: relative;
+    overflow: visible;
+    min-width: max-content;
+  }
+
+  .mobile-brand-text .tagline-line {
+    line-height: 1.4rem;
   }
 
   /* Mobile Menu Toggle */

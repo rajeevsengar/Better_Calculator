@@ -71,6 +71,200 @@ function getFtInFromInches(value) {
   return formatted;
 }
 
+// Function to populate text content from configuration file
+function populateTextContent() {
+  if (window.TEXT_CONFIG) {
+    // Header and branding (Desktop)
+    const builtWithLove = document.getElementById('builtWithLove');
+    if (builtWithLove) {
+      builtWithLove.textContent = window.getText('header.builtWithLove');
+    }
+    
+    const brandName = document.getElementById('brandName');
+    if (brandName) {
+      brandName.textContent = window.getText('header.brandName');
+    }
+    
+    const tagline = document.getElementById('tagline');
+    if (tagline) {
+      const firstLine = tagline.querySelector('.tagline-first');
+      const secondLine = tagline.querySelector('.tagline-second');
+      if (firstLine) firstLine.textContent = window.getText('header.tagline');
+      if (secondLine) secondLine.textContent = window.getText('header.taglineSecond');
+    }
+    
+    // Header and branding (Mobile)
+    const mobileBrandName = document.querySelector('header h1');
+    if (mobileBrandName && mobileBrandName.textContent === 'Calculator.net') {
+      mobileBrandName.textContent = window.getText('header.brandName');
+    }
+    
+    const mobileTagline = document.querySelector('header .tagline');
+    if (mobileTagline) {
+      const mobileFirstLine = mobileTagline.querySelector('.tagline-first');
+      const mobileSecondLine = mobileTagline.querySelector('.tagline-second');
+      if (mobileFirstLine) mobileFirstLine.textContent = window.getText('header.tagline');
+      if (mobileSecondLine) mobileSecondLine.textContent = window.getText('header.taglineSecond');
+    }
+    
+    // Menu items (Desktop)
+    const menuItems = document.querySelectorAll('.menu .item');
+    if (menuItems.length >= 5) {
+      menuItems[0].textContent = window.getText('menu.unitConverter');
+      menuItems[1].textContent = window.getText('menu.bmiCalculator');
+      menuItems[2].textContent = window.getText('menu.dateCalculator');
+      menuItems[3].textContent = window.getText('menu.emiCalculator');
+      menuItems[4].textContent = window.getText('menu.investmentCalculator');
+    }
+    
+    // Menu items (Mobile)
+    const mobileMenuItems = document.querySelectorAll('.mobile-item');
+    if (mobileMenuItems.length >= 5) {
+      const unitText = window.getText('menu.unitConverter').split('• ')[1];
+      const bmiText = window.getText('menu.bmiCalculator').split('• ')[1];
+      const dateText = window.getText('menu.dateCalculator').split('• ')[1];
+      const emiText = window.getText('menu.emiCalculator').split('• ')[1];
+      const investmentText = window.getText('menu.investmentCalculator').split('• ')[1];
+      
+      mobileMenuItems[0].textContent = `1 • ${unitText}`;
+      mobileMenuItems[1].textContent = `2 • ${bmiText}`;
+      mobileMenuItems[2].textContent = `3 • ${dateText}`;
+      mobileMenuItems[3].textContent = `4 • ${emiText}`;
+      mobileMenuItems[4].textContent = `5 • ${investmentText}`;
+    }
+    
+    // Theme switcher (Desktop)
+    const themeLabel = document.getElementById('themeLabel');
+    if (themeLabel) {
+      themeLabel.textContent = window.getText('theme.label');
+    }
+    
+    // Theme switcher (Mobile)
+    const mobileThemeLabels = document.querySelectorAll('.theme-label');
+    mobileThemeLabels.forEach(label => {
+      if (label.textContent === 'Theme:') {
+        label.textContent = window.getText('theme.label');
+      }
+    });
+    
+    // Ribbons
+    const ribbonTips = document.getElementById('ribbonTips');
+    if (ribbonTips) {
+      ribbonTips.textContent = window.getText('ribbons.tips');
+    }
+    
+    const ribbonInstructions = document.getElementById('ribbonInstructions');
+    if (ribbonInstructions) {
+      ribbonInstructions.textContent = window.getText('ribbons.instructions');
+    }
+    
+    const ribbonExamples = document.getElementById('ribbonExamples');
+    if (ribbonExamples) {
+      ribbonExamples.textContent = window.getText('ribbons.examples');
+    }
+    
+    // Unit Converter (Desktop)
+    const fromLabel = document.querySelector('#conversion .card:first-child .card:first-child div:first-child');
+    if (fromLabel) {
+      fromLabel.textContent = window.getText('unitConverter.from');
+    }
+    
+    const toLabel = document.querySelector('#conversion .card:first-child .card:nth-child(2) div:first-child');
+    if (toLabel) {
+      toLabel.textContent = window.getText('unitConverter.to');
+    }
+    
+    const fromInput = document.getElementById('fromValue');
+    if (fromInput) {
+      fromInput.placeholder = window.getText('unitConverter.fromPlaceholder');
+    }
+    
+    const toInput = document.getElementById('toValue');
+    if (toInput) {
+      toInput.placeholder = window.getText('unitConverter.toPlaceholder');
+    }
+    
+    const swapButton = document.querySelector('button[onclick="swapUnits()"]');
+    if (swapButton) {
+      swapButton.textContent = window.getText('unitConverter.swapButton');
+    }
+    
+    const modesInstruction = document.querySelector('#conversion .modes-card .muted');
+    if (modesInstruction) {
+      modesInstruction.textContent = window.getText('unitConverter.modesInstruction');
+    }
+    
+    // Unit Converter (Mobile)
+    const unitTypesTitle = document.getElementById('unitTypesTitle');
+    if (unitTypesTitle) {
+      unitTypesTitle.textContent = window.getText('unitConverter.title');
+    }
+    
+    const mobileModesInstruction = document.getElementById('modesInstruction');
+    if (mobileModesInstruction) {
+      mobileModesInstruction.textContent = window.getText('unitConverter.modesInstruction');
+    }
+    
+    // Footer
+    const footerTagline = document.querySelector('.footer-tagline');
+    if (footerTagline) {
+      footerTagline.textContent = window.getText('footer.tagline');
+    }
+    
+    const footerHighlight = document.querySelector('.footer-highlight');
+    if (footerHighlight) {
+      footerHighlight.innerHTML = `${window.getText('footer.highlight')} <span id="emi-link" class="footer-link">${window.getText('footer.emiLink')}</span> ${window.getText('footer.highlightEnd')}`;
+    }
+    
+    const footerEasterEgg = document.getElementById('falseEasterEgg');
+    if (footerEasterEgg) {
+      footerEasterEgg.innerHTML = window.getText('footer.easterEgg');
+    }
+  } else {
+    console.warn('TEXT_CONFIG not found - using default text');
+  }
+}
+
+// Expose functions globally so they can be used by other scripts
+window.populateTextContent = populateTextContent;
+window.convertUnit = convertUnit;
+window.buildUnitChips = buildUnitChips;
+window.updateChipSelection = updateChipSelection;
+window.formatFtInField = formatFtInField;
+window.getInchesFromFtIn = getInchesFromFtIn;
+window.getFtInFromInches = getFtInFromInches;
+
+// Function to animate tagline between two lines
+function animateTagline() {
+  const taglines = document.querySelectorAll('.tagline');
+  taglines.forEach(tagline => {
+    // Start with first line visible
+    tagline.classList.remove('animate');
+    
+    // After 1.5 seconds, animate to second line
+    setTimeout(() => {
+      tagline.classList.add('animate');
+    }, 1500);
+    
+    // After 3 seconds, animate back to first line
+    setTimeout(() => {
+      tagline.classList.remove('animate');
+    }, 3000);
+  });
+}
+
+// Auto-start tagline animation
+window.addEventListener('load', () => {
+  // Start animation after a short delay
+  setTimeout(animateTagline, 500);
+  
+  // Repeat animation every 6 seconds
+  setInterval(animateTagline, 6000);
+});
+
+// Manual trigger for testing (can be called from console)
+window.triggerTaglineAnimation = animateTagline;
+
 function convertUnit(valueToConvert, mode, fromUnit, toUnit) {
   if (!(fromUnit && toUnit)) {
     return;
