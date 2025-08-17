@@ -214,6 +214,39 @@
     text-align: center;
   }
 
+  /* Mobile Modes Grid - 3 columns */
+  .mobile-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .mobile-modes-grid li {
+    list-style: none;
+    padding: 12px 8px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .mobile-modes-grid li:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .mobile-modes-grid li.active-mode {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
   /* Ribbon popup uses desktop system - no mobile overrides needed */
 
   /* Mobile Container */
@@ -258,7 +291,7 @@
   /* Mobile Unit Buttons */
   .mobile-unit-buttons {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     margin-top: 8px;
   }

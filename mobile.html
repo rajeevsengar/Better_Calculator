@@ -85,13 +85,23 @@
           <div class="mobile-container">
             <!-- Unit Converter -->
             <section id="conversion" class="active-section" style="display: block;">
+              <!-- Modes at the top in 3-column grid -->
+              <div class="card modes-card" style="margin-bottom: 16px;">
+                <div style="font-weight: 600; font-size: 16px; margin-bottom: 12px; text-align: center;">Unit Types:</div>
+                <div id="modesList" class="mobile-modes-grid"></div>
+                <div class="muted" style="margin-top: 8px; text-align: center; font-size: 14px;">
+                  Click a mode above to switch units.
+                </div>
+              </div>
+
+              <!-- Input fields below -->
               <div class="mobile-conversion-grid">
                 <div class="mobile-conversion-col">
                   <div class="card modes-card">
                     <div class="mobile-input-grid">
                       <div class="card">
                         <div style="font-weight: 600; font-size: 18px; margin-bottom: 6px">From</div>
-                        <input id="fromValue" type="number" placeholder="Enter value" />
+                        <input id="fromValue" type="text" placeholder="Enter value" />
                         <div id="fromUnitButtons" class="mobile-unit-buttons"></div>
                       </div>
                       <div class="card">
@@ -102,16 +112,6 @@
                     </div>
                     <div style="display: flex; gap: 8px; margin-top: 10px">
                       <button onclick="swapUnits()" class="mobile-button">Swap</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mobile-conversion-col">
-                  <div class="card modes-card">
-                    <div class="">Modes:</div>
-                    <ol class="" id="modesList"></ol>
-                    <div class="muted" style="margin-top: 8px">
-                      Click a mode above to switch units.
                     </div>
                   </div>
                 </div>
@@ -148,7 +148,7 @@
                     <div style="margin-top: 12px;">
                       <label>Height</label>
                       <div class="mobile-height-input">
-                        <input id="heightVal" type="number" placeholder="Enter height" />
+                        <input id="heightVal" type="text" placeholder="Enter height" />
                         <div id="heightModeButtons" class="mobile-unit-buttons"></div>
                       </div>
                     </div>

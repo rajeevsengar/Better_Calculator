@@ -249,25 +249,36 @@ function handleMobileThemeChange() {
 }
 
 function forceNumericKeyboard() {
-    // Force numeric keyboard for all number inputs
+    // Force numeric keyboard for inputs that should be numbers
     const numericInputs = [
-        'fromValue', 'toValue', 'emiAmt', 'emiRate', 'emiMonths',
+        'emiAmt', 'emiRate', 'emiMonths',
         'sipAmount', 'sipReturn', 'sipYears', 'sipMonths',
         'lumpSumAmount', 'lumpSumReturn', 'lumpSumYears', 'lumpSumMonths',
         'deltaDays', 'deltaWeeks', 'deltaMonths', 'deltaYears'
     ];
     
+    // Special handling for inputs that need text type (Ft + Inches formatting)
+    const textInputs = ['fromValue', 'toValue', 'heightVal'];
+    
     numericInputs.forEach(id => {
         const input = document.getElementById(id);
         if (input) {
-            // Ensure type is number
+            // Ensure type is number for pure numeric inputs
             input.type = 'number';
-            
-            // Add mobile-specific attributes
             input.setAttribute('inputmode', 'numeric');
             input.setAttribute('pattern', '[0-9]*');
-            
             console.log(`Forced numeric keyboard for: ${id}`);
+        }
+    });
+    
+    // Text inputs need special handling - they can be text or number based on unit
+    textInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            // Start with text type to allow Ft + Inches formatting
+            input.type = 'text';
+            input.setAttribute('inputmode', 'decimal');
+            console.log(`Set text input for formatting: ${id}`);
         }
     });
 }
