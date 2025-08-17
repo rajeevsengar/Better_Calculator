@@ -17,6 +17,9 @@ function initializeMobile() {
     // Initialize theme switcher
     initializeMobileThemeSwitcher();
     
+    // Force numeric keyboard for all number inputs
+    forceNumericKeyboard();
+    
     // Initialize the first panel (conversion)
     showMobilePanel('conversion');
 }
@@ -243,6 +246,30 @@ function handleMobileThemeChange() {
             window.Investment.updateChartsForTheme();
         }
     }, 100);
+}
+
+function forceNumericKeyboard() {
+    // Force numeric keyboard for all number inputs
+    const numericInputs = [
+        'fromValue', 'toValue', 'emiAmt', 'emiRate', 'emiMonths',
+        'sipAmount', 'sipReturn', 'sipYears', 'sipMonths',
+        'lumpSumAmount', 'lumpSumReturn', 'lumpSumYears', 'lumpSumMonths',
+        'deltaDays', 'deltaWeeks', 'deltaMonths', 'deltaYears'
+    ];
+    
+    numericInputs.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            // Ensure type is number
+            input.type = 'number';
+            
+            // Add mobile-specific attributes
+            input.setAttribute('inputmode', 'numeric');
+            input.setAttribute('pattern', '[0-9]*');
+            
+            console.log(`Forced numeric keyboard for: ${id}`);
+        }
+    });
 }
 
 // Close function handled by desktop ribbon system

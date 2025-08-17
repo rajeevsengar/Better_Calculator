@@ -609,6 +609,29 @@
     margin: 0;
   }
 
+  /* Force numeric keyboard for specific input IDs that should be numbers */
+  .mobile-container input#fromValue,
+  .mobile-container input#toValue,
+  .mobile-container input#emiAmt,
+  .mobile-container input#emiRate,
+  .mobile-container input#emiMonths,
+  .mobile-container input#sipAmount,
+  .mobile-container input#sipReturn,
+  .mobile-container input#sipYears,
+  .mobile-container input#sipMonths,
+  .mobile-container input#lumpSumAmount,
+  .mobile-container input#lumpSumReturn,
+  .mobile-container input#lumpSumYears,
+  .mobile-container input#lumpSumMonths,
+  .mobile-container input#deltaDays,
+  .mobile-container input#deltaWeeks,
+  .mobile-container input#deltaMonths,
+  .mobile-container input#deltaYears {
+    -webkit-text-security: none;
+    -webkit-user-select: text;
+    -webkit-touch-callout: default;
+  }
+
   .mobile-container input:focus,
   .mobile-container select:focus {
     outline: none;
