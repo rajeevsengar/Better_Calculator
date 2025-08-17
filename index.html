@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pro Multi-Calculator</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/themes.css" />
+    <link rel="stylesheet" href="css/misc.css" />
+  </head>
+  <body>
+    <div class="page-container">
+      <header class="header1">
+        <div class="header-inner">
+          <img src="images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo" class="flag-icon">
+          <p style="color:black; font-family:Helvetica Neue">
+            Built with ❤️ in India.
+          </p>
+        </div>
+      </header>
+      <header class="header2">
+        <div class="header-inner">
+          <div class="brand">
+            <img id="siteLogo" src="images/site_logo.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo">
+            <div class="brand-text">
+              <h1>Calculator.net</h1>
+              <div class="muted tagline">Minimal - Fast - Powerful</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+  
+      <main class="content panel">
+        <div class="main-content-wrapper">
+          <div class="container">
+          <!-- Menu -->
+          <aside class="menu">
+            <div class="item active" data-panel="conversion">1 • Unit Converter</div>
+            <div class="item" data-panel="bmi">2 • BMI Calculator</div>
+            <div class="item" data-panel="date">3 • Date & Timezone Calculator</div>
+            <div class="item" data-panel="emi">4 • EMI Calculator</div>
+            <div class="item" data-panel="investment">5 • Investment Calculator</div>
+    
+            <div class="theme-switcher">
+              <div class="theme-label">Theme:</div>
+              <div class="theme-options">
+                <label class="theme-option" data-theme="default">
+                  <input type="radio" name="theme" value="default" checked />
+                  <span class="theme-color" style="background: #2196f3"></span>
+                </label>
+                <label class="theme-option" data-theme="green">
+                  <input type="radio" name="theme" value="green" />
+                  <span class="theme-color" style="background: #4caf50"></span>
+                </label>
+                <label class="theme-option" data-theme="purple">
+                  <input type="radio" name="theme" value="purple" />
+                  <span class="theme-color" style="background: #9c27b0"></span>
+                </label>
+                <label class="theme-option" data-theme="orange">
+                  <input type="radio" name="theme" value="orange" />
+                  <span class="theme-color" style="background: #ff9800"></span>
+                </label>
+
+              </div>
+            </div>
+    
+            <!-- Global ribbons -->
+            <div class="ribbons">
+              <div class="ribbon" data-type="tips">Tips</div>
+              <div class="ribbon" data-type="instructions">Instructions</div>
+              <div class="ribbon" data-type="examples">Examples</div>
+              <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
+            </div>
+            
+            <!-- False Easter Egg Popup -->
+            <div id="falseEasterEggPopup" class="false-easter-egg-popup" aria-hidden="true">
+              <div class="false-facts-header">
+                <h3>🥚 Easter Egg Found!</h3>
+                <button class="false-facts-close" onclick="closeFalseEasterEgg()">×</button>
+              </div>
+              <div class="false-facts-content">
+                <p>You really think it was that easy? 😏</p>
+                <p>This is just a decoy! The real easter egg is much more cleverly hidden...</p>
+                <p>Keep exploring! The actual secret is somewhere else on this page.</p>
+              </div>
+            </div>
+            
+            <!-- Site Facts Popup -->
+            <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
+              <div class="facts-header">
+                <h3>The Secret Story about me.</h3>
+                <button class="facts-close" onclick="closeSiteFacts()">×</button>
+              </div>
+              <div class="facts-content">
+                <div class="story-section">
+                  <p>Well, well, well... look who's curious enough to triple-click the logo! 🎉 You've just unlocked the secret story behind this website. Consider yourself part of an exclusive club now.</p>
+                  
+                  <p>Okay, I might be exaggerating a bit when I say "very limited coding knowledge" - but swear to God, I'm not a programmer! I'm just someone who gets frustrated easily when things don't work the way I want them to.</p>
+                  
+                  <p>Picture this: you’re trying to calculate your EMI, but every calculator online is missing something crucial. No prepayment options, no way to increase or decrease interest rates, no top-up options. Or you want to check your BMI with height or weight in specific units—but nope, not available anywhere! That was me, every single time. So I thought, "Fine, I’ll build it myself!" 💪</p>
+                  
+                  <p>Here's where it gets interesting - I teamed up with AI to turn my wild ideas into reality. I'd describe what I wanted, and the AI would help me build it. It's like having a super-smart coding buddy who never gets tired of my "what if we add this feature?" questions! 🤖</p>
+                  
+                  <p>Look, I'm not building this to get rich (though that would be nice, right?). I'm doing it because I genuinely believe everyone deserves access to powerful, user-friendly calculation tools. Plus, it's my way of saying "thank you" to the internet for all the free stuff I've used over the years.</p>
+                  
+                  <p>We've got BMI calculators that actually consider your age and gender with proper units, EMI calculators with beautiful charts and all the missing features like prepayment options and interest rate changes, investment projections that make sense, unit converters that don't make you want to pull your hair out, and so much more. Basically, everything I wished existed when I was frustrated with other calculators!</p>
+                  
+                  <p>By finding this easter egg, you've proven you're the kind of person who explores and discovers things. That's exactly the spirit this website was built with! Feel free to share this discovery with friends - let them know there's a hidden story waiting for them too. 🥚✨</p>
+                  
+                  <p><strong>Surprise! You actually read the whole story! 🎊</strong></p>
+                </div>
+              </div>
+            </div>
+          </aside>
+    
+            <!-- Unit Converter -->
+            <section id="conversion" class="active-section">
+              <div class="conversion-grid">
+                <!-- Left column -->
+                <div class="conversion-col">
+    
+                  <div class="card modes-card">
+    
+                    <!-- From/To selection UI -->
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 49% 49%;
+                        gap: 12px;
+                        align-items: start;
+                      "
+                    >
+                      <div class="card">
+                        <div style="font-weight: 600; font-size: 21px; margin-bottom: 6px">From</div>
+                        <input id="fromValue" placeholder="Enter value" />
+                        <div
+                          id="fromUnitButtons"
+                          style="
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 6px;
+                            margin-top: 8px;
+                          "
+                        ></div>
+                      </div>
+                      <div class="card">
+                        <div style="font-weight: 600; font-size: 21px; margin-bottom: 6px">To</div>
+                        <input id="toValue" placeholder="Result" readonly />
+                        <div
+                          id="toUnitButtons"
+                          style="
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 6px;
+                            margin-top: 8px;
+                          "
+                        ></div>
+                      </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px">
+                      <button onclick="swapUnits()">Swap</button>
+                    </div>
+                  </div>
+                </div>
+    
+                <!-- Right column -->
+                <div class="conversion-col">
+                    <div class="card modes-card">
+                      <div class="">Modes:</div>
+                      <ol class="" id="modesList"></ol>
+                      <div class="muted" style="margin-top: 8px">
+                        Click a mode above to switch units.
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </section>
+    
+            <!-- BMI Calculator-->
+            <section id="bmi">
+              <div class="conversion-grid">
+                <!-- Inputs and Speedometer chart -->
+                <div class="conversion-col">
+                  <!-- Age and Gender Inputs -->
+                  <div class="card modes-card">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                      <div>
+                        <label>Age</label>
+                        <input id="ageVal" type="number" min="0" max="120" placeholder="e.g. 25" />
+                      </div>
+                      <div>
+                        <label>Gender</label>
+                        <div id="genderButtons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;"></div>
+                      </div>
+                    </div>
+                  <!-- Weight Inputs and Buttons -->
+                  <div style="margin-top: 8px;">
+                    <label>Weight</label>
+                    <div style="display: flex; gap: 8px">
+                      <!-- Weight input -->
+                      <input id="weightVal" type="number" placeholder="e.g. 70" />
+                      <!-- Weight Unit Buttons -->
+                      <div
+                            id="weightUnitButtons"
+                            style="
+                              display: grid;
+                              grid-template-columns: repeat(3, 1fr);
+                              gap: 8px;
+                            "
+                          ></div>
+                      </div>
+                    </div>
+    
+                    <!-- Height Unit Input and Buttons -->
+                    <div style="margin-top: 8px;">
+                      <label>Height</label>
+                      <div style="display: flex; gap: 8px">
+                        <!-- Height input -->
+                        <input id="heightVal" placeholder="Enter height" />
+                        <!-- Height Unit Buttons -->
+                        <div
+                              id="heightModeButtons"
+                              style="
+                                display: grid;
+                                grid-template-columns: repeat(4, 1fr);
+                                gap: 8px;
+                              "
+                          ></div>
+                      </div>
+                    </div>
+    
+                    <!-- Calculate Buttons -->
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <button class="primary" onclick="computeBMI()">
+                        Calculate BMI
+                      </button>
+                      <button onclick="bmiReset()">Reset</button>
+                    </div>
+                  </div>
+                  
+                     <!-- Right Column - Speedometer Chart -->
+                   <div style="margin-top: 12px;" class="card modes-card">
+                    <div class="muted">BMI Categories</div>
+                    <canvas id="bmiSpeedometer" width="300" height="150"></canvas>
+                    <div id="speedometerLegend" style="margin-top: 12px; display: flex; justify-content: center;">
+                      <div style="display: grid; grid-template-columns: repeat(4, auto); gap: 12px; font-size: 12px;">
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 12px; height: 12px; background: #4CAF50; border-radius: 2px;"></div>
+                          <span>Underweight</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 12px; height: 12px; background: #2196F3; border-radius: 2px;"></div>
+                          <span>Normal</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 12px; height: 12px; background: #FF9800; border-radius: 2px;"></div>
+                          <span>Overweight</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                          <div style="width: 12px; height: 12px; background: #F44336; border-radius: 2px;"></div>
+                          <span>Obesity</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Result -->
+                <div class="conversion-col">
+                  <div class="card modes-card" style="display: flex; flex-direction: column; min-height: 300px;">
+                    <div class="muted">Result</div>
+                    <div
+                      id="bmiResultLarge"
+                      style="font-size: 34px; font-weight: 700; margin-top: 8px"
+                    >
+                      —
+                    </div>
+                    <div id="bmiCategory" class="muted" style="margin-top: 6px">
+                      Enter values to get BMI and category.
+                    </div>
+                    
+                      <!-- Additional BMI Information -->
+                     <div id="bmiAdditionalInfo" style="margin-top: 16px; display: none;">
+                       <div style="margin-bottom: 12px;">
+                         <div class="muted" style="font-size: 12px; margin-bottom: 4px;">Healthy BMI Range:</div>
+                         <div id="healthyBmiRange" style="font-weight: 600; color: var(--text-primary);"></div>
+                       </div>
+                       <div>
+                         <div class="muted" style="font-size: 12px; margin-bottom: 4px;">Healthy Weight for Height:</div>
+                         <div id="healthyWeightRange" style="font-weight: 600; color: var(--text-primary);"></div>
+                       </div>
+                       <!-- Dividing line -->
+                       <div style="border-top: 1px solid var(--border-color); margin-top: 16px; margin-bottom: 16px;"></div>
+                     </div>
+                     
+                     <!-- BMI Facts Section -->
+                     <div id="bmiFactsSection" style="margin-top: auto; display: none;">
+                       <div class="muted" style="font-size: 15px; margin-bottom: 8px;">💡 Did You Know?</div>
+                       <div id="bmiFactsContent" style="font-size: 16px; line-height: 1.4; color: var(--text-secondary);"></div>
+                     </div>
+                  </div>
+                </div>
+            </section>
+    
+            <!-- EMI Calculator-->
+            <section id="emi">
+              <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
+                <div>
+                  <div class="card">
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 16px;
+                        margin-bottom: 20px;
+                      "
+                    >
+                      <div>
+                        <label>Loan Amount</label>
+                        <input id="emiAmt" />
+                      </div>
+                      <div>
+                        <label>Annual Rate (%)</label>
+                        <input id="emiRate" />
+                      </div>
+                      <div>
+                        <label>Tenure (months)</label>
+                        <input id="emiMonths" />
+                      </div>
+                    </div>
+    
+                    <div style="margin-bottom: 20px">
+                      <label>Recalculation Mode</label>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(3, 1fr);
+                          gap: 16px;
+                          margin-top: 8px;
+                        "
+                      >
+                        <label style="display: flex; align-items: center; gap: 8px">
+                          <input
+                            type="radio"
+                            name="recalcMode"
+                            value="emi"
+                            checked
+                          />
+                          <span>Change EMI amount</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px">
+                          <input type="radio" name="recalcMode" value="tenure" />
+                          <span>Change tenure</span>
+                        </label>
+                      </div>
+                    </div>
+    
+                    <div style="display: flex; gap: 8px; margin-bottom: 20px">
+                      <button
+                        class="primary"
+                        onclick="generateAmortizationSchedule()"
+                      >
+                        Calculate / Build Schedule
+                      </button>
+                      <button onclick="clearEMI()">Clear</button>
+                    </div>
+                  </div>
+    
+                  <div class="card" style="margin-top: 20px">
+                    <h3 style="margin-top: 0; margin-bottom: 16px">
+                      Amortization Schedule
+                    </h3>
+                    <div class="instructions-box">
+                      <strong>Instructions:</strong>
+                      <ul>
+                        <li>
+                          <strong>Prepayment:</strong> Enter amount to reduce loan
+                          principal (reduces EMI/tenure)
+                        </li>
+                        <li>
+                          <strong>Top-up:</strong> Enter amount to increase loan
+                          principal (increases EMI/tenure)
+                        </li>
+                        <li>
+                          <strong>New Rate%:</strong> Enter new interest rate from
+                          that month onwards
+                        </li>
+                        <li>
+                          Click outside any edited cell or press Enter to
+                          recalculate
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      style="max-height: 400px; overflow: auto; margin-bottom: 20px"
+                    >
+                      <table id="amortTable" style="width: 100%">
+                        <thead>
+                          <tr>
+                            <th>Month</th>
+                            <th>EMI</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Prepayment</th>
+                            <th>Top-up</th>
+                            <th>New Rate%</th>
+                            <th>Outstanding</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </div>
+    
+                    <div style="text-align: center">
+                      <h4 style="margin-bottom: 16px">Payment Breakdown</h4>
+                      <div style="display: inline-block">
+                        <canvas id="emiPieChart" width="300" height="300"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+    
+            <!-- Investment Calculator -->
+            <section id="investment">
+              <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
+                <div>
+                  <!-- SIP Calculator -->
+                  <div class="card">
+                    <h3>SIP (Systematic Investment Plan) Calculator</h3>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 16px;
+                        margin-bottom: 20px;
+                      "
+                    >
+                      <div>
+                        <label>Monthly Investment Amount</label>
+                        <input
+                          id="sipAmount"
+                          type="number"
+                          placeholder="e.g., 5000"
+                        />
+                      </div>
+                      <div>
+                        <label>Expected Annual Return (%)</label>
+                        <input
+                          id="sipReturn"
+                          type="number"
+                          step="0.1"
+                          placeholder="e.g., 12"
+                        />
+                      </div>
+                      <div>
+                        <label>Investment Period (Years)</label>
+                        <input id="sipYears" type="number" placeholder="e.g., 10" />
+                      </div>
+                      <div>
+                        <label>Investment Period (Months)</label>
+                        <input id="sipMonths" type="number" placeholder="e.g., 6" />
+                      </div>
+                    </div>
+    
+                    <div style="display: flex; gap: 8px; margin-bottom: 20px">
+                      <button id="calculateSIPBtn" class="primary">
+                        Calculate SIP Returns
+                      </button>
+                      <button onclick="clearSIP()">Clear</button>
+                    </div>
+    
+                    <div id="sipResults" style="display: none">
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(2, 1fr);
+                          gap: 20px;
+                          margin-bottom: 20px;
+                        "
+                      >
+                        <div
+                          style="
+                            text-align: center;
+                            padding: 16px;
+                            background: var(--surface-color);
+                            border-radius: 8px;
+                          "
+                        >
+                          <h4
+                            style="margin: 0 0 8px 0; color: var(--primary-color)"
+                          >
+                            Total Investment
+                          </h4>
+                          <div
+                            id="totalInvestment"
+                            style="font-size: 24px; font-weight: bold"
+                          ></div>
+                        </div>
+                        <div
+                          style="
+                            text-align: center;
+                            padding: 16px;
+                            background: var(--surface-color);
+                            border-radius: 8px;
+                          "
+                        >
+                          <h4
+                            style="margin: 0 0 8px 0; color: var(--primary-color)"
+                          >
+                            Total Returns
+                          </h4>
+                          <div
+                            id="totalReturns"
+                            style="
+                              font-size: 24px;
+                              font-weight: bold;
+                              color: #4caf50;
+                            "
+                          ></div>
+                        </div>
+                      </div>
+    
+                      <div
+                        style="
+                          text-align: center;
+                          padding: 20px;
+                          background: var(--primary-color);
+                          border-radius: 8px;
+                          color: white;
+                        "
+                      >
+                        <h4 style="margin: 0 0 8px 0">Maturity Amount</h4>
+                        <div
+                          id="maturityAmount"
+                          style="font-size: 32px; font-weight: bold"
+                        ></div>
+                      </div>
+    
+                      <div style="margin-top: 20px">
+                        <h4>Year-wise Breakdown</h4>
+                        <div style="max-height: 300px; overflow: auto">
+                          <table id="sipTable" style="width: 100%">
+                            <thead>
+                              <tr>
+                                <th>Year</th>
+                                <th>Investment</th>
+                                <th>Returns</th>
+                                <th>Total Value</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <!-- Lump Sum Calculator -->
+                  <div class="card" style="margin-top: 20px">
+                    <h3>Lump Sum Investment Calculator</h3>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 16px;
+                        margin-bottom: 20px;
+                      "
+                    >
+                      <div>
+                        <label>Initial Investment Amount</label>
+                        <input
+                          id="lumpSumAmount"
+                          type="number"
+                          placeholder="e.g., 100000"
+                        />
+                      </div>
+                      <div>
+                        <label>Expected Annual Return (%)</label>
+                        <input
+                          id="lumpSumReturn"
+                          type="number"
+                          step="0.1"
+                          placeholder="e.g., 12"
+                        />
+                      </div>
+                      <div>
+                        <label>Investment Period (Years)</label>
+                        <input
+                          id="lumpSumYears"
+                          type="number"
+                          placeholder="e.g., 10"
+                        />
+                      </div>
+                      <div>
+                        <label>Investment Period (Months)</label>
+                        <input
+                          id="lumpSumMonths"
+                          type="number"
+                          placeholder="e.g., 6"
+                        />
+                      </div>
+                    </div>
+    
+                    <div style="display: flex; gap: 8px; margin-bottom: 20px">
+                      <button id="calculateLumpSumBtn" class="primary">
+                        Calculate Returns
+                      </button>
+                      <button onclick="clearLumpSum()">Clear</button>
+                    </div>
+    
+                    <div id="lumpSumResults" style="display: none">
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(2, 1fr);
+                          gap: 20px;
+                          margin-bottom: 20px;
+                        "
+                      >
+                        <div
+                          style="
+                            text-align: center;
+                            padding: 16px;
+                            background: var(--surface-color);
+                            border-radius: 8px;
+                          "
+                        >
+                          <h4
+                            style="margin: 0 0 8px 0; color: var(--primary-color)"
+                          >
+                            Initial Investment
+                          </h4>
+                          <div
+                            id="initialInvestment"
+                            style="font-size: 24px; font-weight: bold"
+                          ></div>
+                        </div>
+                        <div
+                          style="
+                            text-align: center;
+                            padding: 16px;
+                            background: var(--surface-color);
+                            border-radius: 8px;
+                          "
+                        >
+                          <h4
+                            style="margin: 0 0 8px 0; color: var(--primary-color)"
+                          >
+                            Total Returns
+                          </h4>
+                          <div
+                            id="lumpSumTotalReturns"
+                            style="
+                              font-size: 24px;
+                              font-weight: bold;
+                              color: #4caf50;
+                            "
+                          ></div>
+                        </div>
+                      </div>
+    
+                      <div
+                        style="
+                          text-align: center;
+                          padding: 20px;
+                          background: var(--primary-color);
+                          border-radius: 8px;
+                          color: white;
+                        "
+                      >
+                        <h4 style="margin: 0 0 8px 0">Final Amount</h4>
+                        <div
+                          id="finalAmount"
+                          style="font-size: 32px; font-weight: bold"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+    
+            <!-- Date & Timezone Calculator -->
+            <section id="date">
+              <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                  <!-- 1. Date Difference -->
+                  <div class="card">
+                    <label>Count Days</label>
+                    <div style="margin-bottom: 8px">
+                      <label>From</label>
+                      <input type="date" id="fromDate" />
+                    </div>
+                    <label>To</label>
+                    <input type="date" id="toDate" />
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <button class="primary" onclick="calculateDateDifference()">
+                        Compute Diff
+                      </button>
+                      <button onclick="clearDates()">Clear</button>
+                    </div>
+                  </div>
+                  <!-- 1.a. Display Date Difference Result -->
+                  <div id="dateResult" class="muted card result-box"></div>
+                  <!-- 2. Date Atithmetic -->
+                  <div class="card" style="margin-top: 12px">
+                    <label>Date Arithmetic</label>
+                    <input type="date" id="baseDate" />
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 8px;
+                        margin-top: 8px;
+                      "
+                    >
+                      <input type="number" id="deltaDays" placeholder="Days" />
+                      <input type="number" id="deltaWeeks" placeholder="Weeks" />
+                      <input type="number" id="deltaMonths" placeholder="Months" />
+                      <input type="number" id="deltaYears" placeholder="Years" />
+                    </div>
+                    <div
+                      style="
+                        display: flex;
+                        gap: 16px;
+                        align-items: center;
+                        margin-top: 8px;
+                      "
+                    >
+                      <label style="display: flex; align-items: center; gap: 6px"
+                        ><input type="radio" name="deltaSign" value="add" checked />
+                        Add</label
+                      >
+                      <label style="display: flex; align-items: center; gap: 6px"
+                        ><input type="radio" name="deltaSign" value="subtract" />
+                        Subtract</label
+                      >
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <button class="primary" onclick="addSubtractDays()">
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                  <!-- 2.a. Display Date Arithmatic Result -->
+                  <div id="dateMathRes" class="muted card result-box" style="margin-top: 8px"></div>
+                  <!-- 3. Timezone Converter -->
+                  <div class="card" style="margin-top: 12px">
+                    <label>Timezone Converter</label>
+                    <input type="datetime-local" id="tzInput" />
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <select id="tzFrom"></select>
+                      <select id="tzTo"></select>
+                    </div>
+                    <div style="display: flex; gap: 8px; margin-top: 8px">
+                      <button class="primary" onclick="convertTZ()">Convert</button>
+                      <button id="nowBtn">Now</button>
+                    </div>
+                  </div>
+                  <!-- 3.a. Display Timezone Result -->
+                  <div id="tzResult" class="muted card result-box" style="margin-top: 8px"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+  
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-main">
+            <p class="footer-tagline">
+              Not just another calculator website — it covers the missing features of others.
+            </p>
+            <p class="footer-highlight">
+              🏆 The most feature-rich 
+              <span id="emi-link" class="footer-link">EMI Calculator</span>
+              on the internet, our proud flagship.
+            </p>
+          </div>
+          <div class="footer-easter-egg" id="falseEasterEgg" style="cursor: pointer;" title="Click me if you dare...">
+            🥚 <em>This site contains a hidden easter egg. Good luck finding it!</em> 🥚
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="js/constants.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/emi-calculator.js"></script>
+    <script src="js/investment-calculator.js"></script>
+    <script src="js/unit-converter.js"></script>
+    <script src="js/date-calculator.js"></script>
+    <script src="js/bmi-facts-config.js"></script>
+    <script src="js/bmi-calculator.js"></script>
+    <script src="js/ribbons-config.js"></script>
+    <script src="js/responsive-redirect.js"></script>
+  </body>
+</html>

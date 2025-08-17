@@ -1,0 +1,260 @@
+/* Theme-specific color variables - these override the base variables in style.css */
+:root {
+  /* White theme as default */
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --accent-color: #60a5fa;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --input-border: #cbd5e1;
+  --button-hover: #f1f5f9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Green Theme */
+[data-theme="green"] {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --accent-color: #81c784;
+  --background-color: #1a1f1a;
+  --surface-color: #2d332d;
+  --card-background: #333933;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-color: #444944;
+  --input-background: #404440;
+  --input-border: #555955;
+  --button-hover: #388e3c;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Purple Theme */
+[data-theme="purple"] {
+  --primary-color: #9c27b0;
+  --primary-hover: #7b1fa2;
+  --accent-color: #ba68c8;
+  --background-color: #1a1a1f;
+  --surface-color: #2d2d33;
+  --card-background: #333339;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-color: #444449;
+  --input-background: #404049;
+  --input-border: #555959;
+  --button-hover: #7b1fa2;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Orange Theme */
+[data-theme="orange"] {
+  --primary-color: #ff9800;
+  --primary-hover: #f57c00;
+  --accent-color: #ffb74d;
+  --background-color: #1f1a1a;
+  --surface-color: #332d2d;
+  --card-background: #393333;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-color: #494444;
+  --input-background: #494040;
+  --input-border: #595555;
+  --button-hover: #f57c00;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Theme Switcher */
+.theme-switcher {
+  margin-top: 20px;
+  padding: 12px;
+  border-top: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-switcher::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  opacity: 0.6;
+}
+
+.theme-label {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.theme-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 4px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 40px;
+  position: relative;
+}
+
+.theme-option:hover {
+  transform: translateY(-1px) scale(1.05);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.theme-option input[type="radio"] {
+  display: none;
+}
+
+.theme-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-color::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  border-radius: 50%;
+}
+
+.theme-option:hover .theme-color {
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-option input[type="radio"]:checked + .theme-color {
+  border-color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.1);
+  animation: themePulse 2s ease-in-out infinite;
+}
+
+@keyframes themePulse {
+  0%, 100% {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6), 0 0 0 3px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.theme-option input[type="radio"]:checked + .theme-color::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Theme name labels - static colors for each theme */
+.theme-option::after {
+  content: attr(data-theme);
+  margin-top: 3px;
+  font-size: 8px;
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+/* Default theme name - always blue */
+.theme-option[data-theme="default"]::after {
+  color: #3b82f6;
+}
+
+/* Green theme name - always green */
+.theme-option[data-theme="green"]::after {
+  color: #4caf50;
+}
+
+/* Purple theme name - always purple */
+.theme-option[data-theme="purple"]::after {
+  color: #9c27b0;
+}
+
+/* Orange theme name - always orange */
+.theme-option[data-theme="orange"]::after {
+  color: #ff9800;
+}
+
+/* Hover and selected states use the same static colors */
+.theme-option:hover::after {
+  opacity: 1;
+}
+
+.theme-option input[type="radio"]:checked ~ ::after {
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-options {
+    gap: 6px;
+  }
+  
+  .theme-option {
+    min-width: 35px;
+    padding: 3px;
+  }
+  
+  .theme-color {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .theme-option::after {
+    font-size: 7px;
+  }
+}
