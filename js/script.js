@@ -62,7 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Export functions for global access
   window.setupRibbons = setupRibbons;
+  
+  // Initialize date calculator tabs
+  initializeDateTabs();
 });
+
+// Date Calculator Tab Functionality
+function initializeDateTabs() {
+  const tabButtons = document.querySelectorAll('.date-tabs .tab-button');
+  const tabContents = document.querySelectorAll('.date-tabs .tab-content');
+  
+  if (tabButtons.length === 0) return;
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.getAttribute('data-tab');
+      
+      // Remove active class from all buttons and contents
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      // Add active class to clicked button and corresponding content
+      button.classList.add('active');
+      const targetContent = document.getElementById(targetTab);
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
+}
 
 // Text content is now populated from util.js
 

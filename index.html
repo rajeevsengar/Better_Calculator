@@ -652,82 +652,99 @@
     
             <!-- Date & Timezone Calculator -->
             <section id="date">
-              <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
-                  <!-- 1. Date Difference -->
-                  <div class="card">
-                    <label>Count Days</label>
-                    <div style="margin-bottom: 8px">
-                      <label>From</label>
-                      <input type="date" id="fromDate" />
+              <div class="date-tabs">
+                <div class="tab-buttons">
+                  <button class="tab-button active" data-tab="count-days">Count Days</button>
+                  <button class="tab-button" data-tab="add-days">Add Days</button>
+                  <button class="tab-button" data-tab="timezone">Timezone</button>
+                </div>
+                
+                <!-- Count Days Tab -->
+                <div id="count-days" class="tab-content active">
+                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                    <div class="card">
+                      <label>Count Days</label>
+                      <div style="margin-bottom: 8px">
+                        <label>From</label>
+                        <input type="date" id="fromDate" />
+                      </div>
+                      <label>To</label>
+                      <input type="date" id="toDate" />
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button class="primary" onclick="calculateDateDifference()">
+                          Compute Diff
+                        </button>
+                        <button onclick="clearDates()">Clear</button>
+                      </div>
                     </div>
-                    <label>To</label>
-                    <input type="date" id="toDate" />
-                    <div style="display: flex; gap: 8px; margin-top: 8px">
-                      <button class="primary" onclick="calculateDateDifference()">
-                        Compute Diff
-                      </button>
-                      <button onclick="clearDates()">Clear</button>
-                    </div>
+                    <div id="dateResult" class="muted card result-box"></div>
                   </div>
-                  <!-- 1.a. Display Date Difference Result -->
-                  <div id="dateResult" class="muted card result-box"></div>
-                  <!-- 2. Date Atithmetic -->
-                  <div class="card" style="margin-top: 12px">
-                    <label>Date Arithmetic</label>
-                    <input type="date" id="baseDate" />
-                    <div
-                      style="
-                        display: grid;
-                        grid-template-columns: repeat(4, 1fr);
-                        gap: 8px;
-                        margin-top: 8px;
-                      "
-                    >
-                      <input type="number" id="deltaDays" placeholder="Days" />
-                      <input type="number" id="deltaWeeks" placeholder="Weeks" />
-                      <input type="number" id="deltaMonths" placeholder="Months" />
-                      <input type="number" id="deltaYears" placeholder="Years" />
-                    </div>
-                    <div
-                      style="
-                        display: flex;
-                        gap: 16px;
-                        align-items: center;
-                        margin-top: 8px;
-                      "
-                    >
-                      <label style="display: flex; align-items: center; gap: 6px"
-                        ><input type="radio" name="deltaSign" value="add" checked />
-                        Add</label
+                </div>
+                
+                <!-- Add Days Tab -->
+                <div id="add-days" class="tab-content">
+                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                    <div class="card">
+                      <label>Date Arithmetic</label>
+                      <input type="date" id="baseDate" />
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(4, 1fr);
+                          gap: 8px;
+                          margin-top: 8px;
+                        "
                       >
-                      <label style="display: flex; align-items: center; gap: 6px"
-                        ><input type="radio" name="deltaSign" value="subtract" />
-                        Subtract</label
+                        <input type="number" id="deltaDays" placeholder="Days" />
+                        <input type="number" id="deltaWeeks" placeholder="Weeks" />
+                        <input type="number" id="deltaMonths" placeholder="Months" />
+                        <input type="number" id="deltaYears" placeholder="Years" />
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          gap: 16px;
+                          align-items: center;
+                          margin-top: 8px;
+                        "
                       >
+                        <label style="display: flex; align-items: center; gap: 6px"
+                          ><input type="radio" name="deltaSign" value="add" checked />
+                          Add</label
+                        >
+                        <label style="display: flex; align-items: center; gap: 6px"
+                          ><input type="radio" name="deltaSign" value="subtract" />
+                          Subtract</label
+                        >
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button class="primary" onclick="addSubtractDays()">
+                          Apply
+                        </button>
+                      </div>
                     </div>
-                    <div style="display: flex; gap: 8px; margin-top: 8px">
-                      <button class="primary" onclick="addSubtractDays()">
-                        Apply
-                      </button>
-                    </div>
+                    <div id="dateMathRes" class="muted card result-box"></div>
                   </div>
-                  <!-- 2.a. Display Date Arithmatic Result -->
-                  <div id="dateMathRes" class="muted card result-box" style="margin-top: 8px"></div>
-                  <!-- 3. Timezone Converter -->
-                  <div class="card" style="margin-top: 12px">
-                    <label>Timezone Converter</label>
-                    <input type="datetime-local" id="tzInput" />
-                    <div style="display: flex; gap: 8px; margin-top: 8px">
-                      <select id="tzFrom"></select>
-                      <select id="tzTo"></select>
+                </div>
+                
+                <!-- Timezone Tab -->
+                <div id="timezone" class="tab-content">
+                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                    <div class="card">
+                      <label>Timezone Converter</label>
+                      <input type="datetime-local" id="tzInput" />
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <select id="tzFrom"></select>
+                        <select id="tzTo"></select>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button class="primary" onclick="convertTZ()">Convert</button>
+                        <button id="nowBtn">Now</button>
+                      </div>
                     </div>
-                    <div style="display: flex; gap: 8px; margin-top: 8px">
-                      <button class="primary" onclick="convertTZ()">Convert</button>
-                      <button id="nowBtn">Now</button>
-                    </div>
+                    <div id="tzResult" class="muted card result-box"></div>
                   </div>
-                  <!-- 3.a. Display Timezone Result -->
-                  <div id="tzResult" class="muted card result-box" style="margin-top: 8px"></div>
+                </div>
               </div>
             </section>
           </div>

@@ -442,73 +442,85 @@
 
             <!-- Date & Timezone Calculator -->
             <section id="date">
-              <div class="mobile-date-container">
-                <!-- Date Difference -->
-                                  <div class="card">
-                    <label>Count Days</label>
-                    <div style="margin-bottom: 8px">
-                      <label>From</label>
-                      <input type="date" id="fromDate" />
+              <div class="date-tabs">
+                <div class="tab-buttons">
+                  <button class="tab-button active" data-tab="count-days">Count Days</button>
+                  <button class="tab-button" data-tab="add-days">Add Days</button>
+                  <button class="tab-button" data-tab="timezone">Timezone</button>
+                </div>
+                
+                <!-- Count Days Tab -->
+                <div id="count-days" class="tab-content active">
+                  <div class="mobile-date-container">
+                    <div class="card">
+                      <label>Count Days</label>
+                      <div style="margin-bottom: 8px">
+                        <label>From</label>
+                        <input type="date" id="fromDate" />
+                      </div>
+                      <label>To</label>
+                      <input type="date" id="toDate" />
+                      <div class="mobile-button-row">
+                        <button class="primary mobile-button" onclick="calculateDateDifference()">
+                          Compute Diff
+                        </button>
+                        <button onclick="clearDates()" class="mobile-button">Clear</button>
+                      </div>
                     </div>
-                    <label>To</label>
-                    <input type="date" id="toDate" />
-                    <div class="mobile-button-row">
-                      <button class="primary mobile-button" onclick="calculateDateDifference()">
-                        Compute Diff
-                      </button>
-                      <button onclick="clearDates()" class="mobile-button">Clear</button>
-                    </div>
+                    <div id="dateResult" class="muted card result-box"></div>
                   </div>
-                  
-                  <!-- Date Difference Result -->
-                  <div id="dateResult" class="muted card result-box"></div>
-                  
-                  <!-- Date Arithmetic -->
-                  <div class="card" style="margin-top: 12px">
-                    <label>Date Arithmetic</label>
-                    <input type="date" id="baseDate" />
-                    <div class="mobile-date-inputs">
-                      <input type="number" id="deltaDays" placeholder="Days" />
-                      <input type="number" id="deltaWeeks" placeholder="Weeks" />
-                      <input type="number" id="deltaMonths" placeholder="Months" />
-                      <input type="number" id="deltaYears" placeholder="Years" />
+                </div>
+                
+                <!-- Add Days Tab -->
+                <div id="add-days" class="tab-content">
+                  <div class="mobile-date-container">
+                    <div class="card" style="margin-top: 12px">
+                      <label>Date Arithmetic</label>
+                      <input type="date" id="baseDate" />
+                      <div class="mobile-date-inputs">
+                        <input type="number" id="deltaDays" placeholder="Days" />
+                        <input type="number" id="deltaWeeks" placeholder="Weeks" />
+                        <input type="number" id="deltaMonths" placeholder="Months" />
+                        <input type="number" id="deltaYears" placeholder="Years" />
+                      </div>
+                      <div class="mobile-radio-row">
+                        <label class="mobile-radio-label">
+                          <input type="radio" name="deltaSign" value="add" checked />
+                          Add
+                        </label>
+                        <label class="mobile-radio-label">
+                          <input type="radio" name="deltaSign" value="subtract" />
+                          Subtract
+                        </label>
+                      </div>
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button class="primary mobile-button" onclick="addSubtractDays()">
+                          Apply
+                        </button>
+                      </div>
                     </div>
-                    <div class="mobile-radio-row">
-                      <label class="mobile-radio-label">
-                        <input type="radio" name="deltaSign" value="add" checked />
-                        Add
-                      </label>
-                      <label class="mobile-radio-label">
-                        <input type="radio" name="deltaSign" value="subtract" />
-                        Subtract
-                      </label>
-                    </div>
-                    <div style="display: flex; gap: 8px; margin-top: 8px">
-                      <button class="primary mobile-button" onclick="addSubtractDays()">
-                        Apply
-                      </button>
-                    </div>
+                    <div id="dateMathRes" class="muted card result-box" style="margin-top: 8px"></div>
                   </div>
-                  
-                  <!-- Date Math Result -->
-                  <div id="dateMathRes" class="muted card result-box" style="margin-top: 8px"></div>
-                  
-                  <!-- Timezone Converter -->
-                  <div class="card" style="margin-top: 12px">
-                    <label>Timezone Converter</label>
-                    <input type="datetime-local" id="tzInput" />
-                    <div class="mobile-timezone-selects">
-                      <select id="tzFrom"></select>
-                      <select id="tzTo"></select>
+                </div>
+                
+                <!-- Timezone Tab -->
+                <div id="timezone" class="tab-content">
+                  <div class="mobile-date-container">
+                    <div class="card" style="margin-top: 12px">
+                      <label>Timezone Converter</label>
+                      <input type="datetime-local" id="tzInput" />
+                      <div class="mobile-timezone-selects">
+                        <select id="tzFrom"></select>
+                        <select id="tzTo"></select>
+                      </div>
+                      <div class="mobile-button-row">
+                        <button class="primary mobile-button" onclick="convertTZ()">Convert</button>
+                        <button id="nowBtn" class="mobile-button">Now</button>
+                      </div>
                     </div>
-                    <div class="mobile-button-row">
-                      <button class="primary mobile-button" onclick="convertTZ()">Convert</button>
-                      <button id="nowBtn" class="mobile-button">Now</button>
-                    </div>
+                    <div id="tzResult" class="muted card result-box" style="margin-top: 8px"></div>
                   </div>
-                  
-                  <!-- Timezone Result -->
-                  <div id="tzResult" class="muted card result-box" style="margin-top: 8px"></div>
+                </div>
               </div>
             </section>
           </div>
