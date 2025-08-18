@@ -4,8 +4,9 @@
 window.TEXT_CONFIG = {
   // Header and branding
   header: {
+    title: "zerocalculator",
     builtWithLove: "Built with ❤️ in India.",
-    brandName: "Calculator.net",
+    brandName: "zerocalculator.net",
     tagline: "Minimal - Fast - Powerful",
     taglineSecond: "Imagined by Human, Designed by AI"
   },
@@ -37,7 +38,7 @@ window.TEXT_CONFIG = {
 
   // Unit Converter
   unitConverter: {
-    title: "Unit Types:",
+    title: "Unit Types",
     from: "From",
     to: "To",
     fromPlaceholder: "Enter value",

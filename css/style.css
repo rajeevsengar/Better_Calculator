@@ -87,7 +87,9 @@ header {
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-  font-family: "Helvetica Neue", Inter, sans-serif;
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  letter-spacing: -0.02em;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 .header2 .tagline {
   font-size: 1rem;
@@ -97,6 +99,9 @@ header {
   height: 1.5rem;
   line-height: 1.5rem;
   min-width: max-content;
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .tagline-line {
@@ -106,6 +111,9 @@ header {
   left: 0;
   line-height: 1.5rem;
   white-space: nowrap;
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .tagline-first {

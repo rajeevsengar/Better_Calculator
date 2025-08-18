@@ -39,32 +39,24 @@ function initializeMobileMenu() {
     
     if (menuToggle && menuOverlay && menuClose) {
         menuToggle.addEventListener('click', function() {
-            menuOverlay.classList.add('active');
-            menuToggle.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openMobileMenu();
         });
         
         menuClose.addEventListener('click', function() {
-            menuOverlay.classList.remove('active');
-            menuToggle.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            closeMobileMenu();
         });
         
         // Close menu when clicking outside
         menuOverlay.addEventListener('click', function(e) {
             if (e.target === menuOverlay) {
-                menuOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                closeMobileMenu();
             }
         });
         
         // Close menu on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && menuOverlay.classList.contains('active')) {
-                menuOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                closeMobileMenu();
             }
         });
     }
@@ -85,15 +77,42 @@ function initializeMobileNavigation() {
             showMobilePanel(targetPanel);
             
             // Close mobile menu
-            const menuOverlay = document.getElementById('mobileMenuOverlay');
-            const menuToggle = document.getElementById('mobileMenuToggle');
-            if (menuOverlay && menuToggle) {
-                menuOverlay.classList.remove('active');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            closeMobileMenu();
         });
     });
+}
+
+// Helper function to close mobile menu
+function closeMobileMenu() {
+    const menuOverlay = document.getElementById('mobileMenuOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    if (menuOverlay && menuToggle) {
+        menuOverlay.classList.remove('active');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Add a small delay to ensure smooth transition
+        setTimeout(() => {
+            if (!menuOverlay.classList.contains('active')) {
+                menuOverlay.style.display = 'none';
+            }
+        }, 300);
+    }
+}
+
+// Function to open mobile menu
+function openMobileMenu() {
+    const menuOverlay = document.getElementById('mobileMenuOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    if (menuOverlay && menuToggle) {
+        menuOverlay.style.display = 'block';
+        // Small delay to ensure display is set before adding active class
+        setTimeout(() => {
+            menuOverlay.classList.add('active');
+            menuToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }, 10);
+    }
 }
 
 function showMobilePanel(panelId) {
@@ -130,6 +149,9 @@ function initializePanelFunctionality(panelId) {
     if (window.setupRibbons && typeof window.setupRibbons === 'function') {
         window.setupRibbons(panelId);
     }
+    
+    // Ensure menu is closed after panel initialization
+    closeMobileMenu();
 }
 
 
@@ -217,6 +239,9 @@ function initializeMobileThemeSwitcher() {
                 document.body.style.transition = '';
             }, 300);
             
+            // Close mobile menu when theme is changed
+            closeMobileMenu();
+            
             // Handle theme-dependent updates
             handleMobileThemeChange();
         });
@@ -280,6 +305,28 @@ function forceNumericKeyboard() {
 
 // Text content is now populated from util.js
 
+// Additional event listeners to ensure menu closes in various scenarios
+document.addEventListener('click', function(e) {
+    // Close menu if clicking on any calculator input or button
+    if (e.target.closest('input') || e.target.closest('button') || e.target.closest('select')) {
+        const menuOverlay = document.getElementById('mobileMenuOverlay');
+        if (menuOverlay && menuOverlay.classList.contains('active')) {
+            // Don't close if clicking inside the menu itself
+            if (!e.target.closest('.mobile-menu-content')) {
+                closeMobileMenu();
+            }
+        }
+    }
+});
+
+// Close menu when window is resized (orientation change)
+window.addEventListener('resize', function() {
+    const menuOverlay = document.getElementById('mobileMenuOverlay');
+    if (menuOverlay && menuOverlay.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
 // Close function handled by desktop ribbon system
 
 
@@ -288,5 +335,7 @@ function forceNumericKeyboard() {
 window.mobileUtils = {
     initializeMobile,
     showMobilePanel,
-    adjustMobileLayout
+    adjustMobileLayout,
+    closeMobileMenu,
+    openMobileMenu
 }; 

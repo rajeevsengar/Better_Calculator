@@ -1,5 +1,12 @@
 /* Mobile-specific styles for Pro Multi-Calculator */
 
+/* Global Mobile Font Override */
+.mobile-container *,
+.mobile-header *,
+.mobile-brand-text * {
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+}
+
 /* Mobile breakpoint */
 @media (max-width: 768px) {
   /* Override desktop overflow hidden for mobile */
@@ -42,6 +49,10 @@
   .mobile-brand-text h1 {
     font-size: 1.5rem;
     margin: 0;
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
   }
 
   .mobile-brand-text .tagline {
@@ -53,10 +64,16 @@
     position: relative;
     overflow: visible;
     min-width: max-content;
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
   }
 
   .mobile-brand-text .tagline-line {
     line-height: 1.4rem;
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
   }
 
   /* Mobile Header 1 (Top Bar) - Mobile Styles */
@@ -764,10 +781,17 @@
 
   .mobile-brand-text h1 {
     font-size: 1.25rem;
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
   }
 
   .mobile-brand-text .tagline {
     font-size: 0.75rem;
+    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.01em !important;
   }
 
   .mobile-menu-content {

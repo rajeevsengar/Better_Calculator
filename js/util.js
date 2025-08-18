@@ -75,6 +75,11 @@ function getFtInFromInches(value) {
 function populateTextContent() {
   if (window.TEXT_CONFIG) {
     // Header and branding (Desktop)
+    const pageTitle = document.getElementById('pageTitle');
+    if (pageTitle) {
+      pageTitle.textContent = window.getText('header.title');
+    }
+    
     const builtWithLove = document.getElementById('builtWithLove');
     if (builtWithLove) {
       builtWithLove.textContent = window.getText('header.builtWithLove');
