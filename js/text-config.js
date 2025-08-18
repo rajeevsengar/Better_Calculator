@@ -182,9 +182,9 @@ window.TEXT_CONFIG = {
     falseEasterEgg: {
       title: "🥚 Easter Egg Found!",
       content: [
-        "You really think it was that easy? 😏",
-        "This is just a decoy! The real easter egg is much more cleverly hidden...",
-        "Keep exploring! The actual secret is somewhere else on this page."
+        "<p>You really think it was that easy? 😏</p>",
+        "<p>This is just a decoy! The real easter egg is much more cleverly hidden...</p>",
+        "<p>Keep exploring! The actual secret is somewhere else on this page.</p>"
       ]
     },
     siteFacts: {

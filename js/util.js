@@ -226,7 +226,7 @@ function populateTextContent() {
     if (siteFactsPopup) {
       const factsHeader = siteFactsPopup.querySelector('.facts-header h3');
       if (factsHeader) {
-        factsHeader.textContent = window.getText('easterEggs.siteFacts.title');
+        factsHeader.insertAdjacentHTML("beforeend", window.getText('easterEggs.siteFacts.title'));
       }
       
       const factsContent = siteFactsPopup.querySelector('.facts-content .story-section');
@@ -247,7 +247,7 @@ function populateTextContent() {
     if (falseEasterEggPopup) {
       const falseHeader = falseEasterEggPopup.querySelector('.false-facts-header h3');
       if (falseHeader) {
-        falseHeader.textContent = window.getText('easterEggs.falseEasterEgg.title');
+        falseHeader.insertAdjacentHTML("beforeend", window.getText('easterEggs.falseEasterEgg.title'));
       }
       
       const falseContent = falseEasterEggPopup.querySelector('.false-facts-content');
@@ -258,9 +258,7 @@ function populateTextContent() {
         // Add content from config
         const falseArray = window.getTextArray('easterEggs.falseEasterEgg.content');
         falseArray.forEach(content => {
-          const p = document.createElement('p');
-          p.textContent = content;
-          falseContent.appendChild(p);
+          falseContent.insertAdjacentHTML("beforeend", content);
         });
       }
     }
