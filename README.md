@@ -222,3 +222,7 @@ When contributing:
 ---
 
 **Note**: This system is designed so that most changes to the desktop version automatically work on mobile. The mobile-specific files only handle UI differences and touch interactions, while all calculator logic is shared. 
+
+
+To-Do
+1. Use alternate unit the px - in CSS like percent to have consistent UI accross resolution

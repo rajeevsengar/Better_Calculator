@@ -43,7 +43,7 @@ window.TEXT_CONFIG = {
     fromPlaceholder: "Enter value",
     toPlaceholder: "Result",
     swapButton: "Swap",
-    modesInstruction: "Click a mode above to switch units.",
+    modesInstruction: "Click a unit type above to switch units.",
     modes: {
       length: "Length",
       weight: "Weight",
@@ -189,16 +189,17 @@ window.TEXT_CONFIG = {
     },
     siteFacts: {
       title: "The Secret Story about me.",
-      content: [
-        "Well, well, well... look who's curious enough to triple-click the logo! 🎉 You've just unlocked the secret story behind this website. Consider yourself part of an exclusive club now.",
-        "Okay, I might be exaggerating a bit when I say \"very limited coding knowledge\" - but swear to God, I'm not a programmer! I'm just someone who gets frustrated easily when things don't work the way I want them to.",
-        "Picture this: you're trying to calculate your EMI, but every calculator online is missing something crucial. No prepayment options, no way to increase or decrease interest rates, no top-up options. Or you want to check your BMI with height or weight in specific units—but nope, not available anywhere! That was me, every single time. So I thought, \"Fine, I'll build it myself!\" 💪",
-        "Here's where it gets interesting - I teamed up with AI to turn my wild ideas into reality. I'd describe what I wanted, and the AI would help me build it. It's like having a super-smart coding buddy who never gets tired of my \"what if we add this feature?\" questions! 🤖",
-        "Look, I'm not building this to get rich (though that would be nice, right?). I'm doing it because I genuinely believe everyone deserves access to powerful, user-friendly calculation tools. Plus, it's my way of saying \"thank you\" to the internet for all the free stuff I've used over the years.",
-        "We've got BMI calculators that actually consider your age and gender with proper units, EMI calculators with beautiful charts and all the missing features like prepayment options and interest rate changes, investment projections that make sense, unit converters that don't make you want to pull your hair out, and so much more. Basically, everything I wished existed when I was frustrated with other calculators!",
-        "By finding this easter egg, you've proven you're the kind of person who explores and discovers things. That's exactly the spirit this website was built with! Feel free to share this discovery with friends - let them know there's a hidden story waiting for them too. 🥚✨",
-        "Surprise! You actually read the whole story! 🎊"
-      ]
+      content: 
+        [
+            "<p>Well, well, well... look who's curious enough to triple-click the logo! 🎉 You've just unlocked the secret story behind this website. Welcome to the exclusive club of explorers.</p>",
+            "<p>Now, confession time: I’m not really a programmer. I’ve dabbled here and there, but mostly I’m just someone who gets frustrated when tools don’t work the way I want them to. Every time I tried using online calculators, they were always missing something important. EMI calculators without prepayment options, no way to adjust interest rates, no top-ups. BMI tools that wouldn’t even let me pick the right units. It drove me nuts.</p>",
+            "<p>So I thought, *“Fine, I’ll build it myself.”* 💪 But here’s the twist—I didn’t do it alone. I teamed up with AI, describing the features I wanted, and together we turned ideas into reality. It’s like having a coding buddy who never gets tired of hearing me say, *“What if we add this?”* 🤖</p>",
+            "<p>And that’s how this site was born. Not to make money (though hey, I wouldn’t complain), but because I believe everyone deserves simple, powerful, and user-friendly tools. It’s also my way of giving back to the internet that’s given me so much over the years.</p>",
+            "<p>Now we’ve got BMI calculators that actually consider age and gender, EMI calculators with charts and smart prepayment options, investment projections that make sense, unit converters that don’t make you pull your hair out, and more. Basically, everything I wished existed when I was stuck with frustrating tools.</p>",
+            "<p>By finding this little Easter egg, you’ve shown the same curiosity this project was built with. So go ahead, share it with friends—let them know there’s a hidden story waiting for them too. 🥚✨</p>",
+            "<p>And hey… surprise! You actually read the whole story! 🎊 Since you were curious enough to find this Easter egg and stick around through my rambling, here’s a little <strong>reward</strong> just for you:</p>",
+            "<a href='https://github.com/rajeevsengar/Better_Calculator' target='_blank' class='github-btn'>🎁 View on GitHub</a>"
+          ]
     }
   }
 };

@@ -220,6 +220,50 @@ function populateTextContent() {
     if (footerEasterEgg) {
       footerEasterEgg.innerHTML = window.getText('footer.easterEgg');
     }
+    
+    // Site Facts Popup
+    const siteFactsPopup = document.getElementById('siteFactsPopup');
+    if (siteFactsPopup) {
+      const factsHeader = siteFactsPopup.querySelector('.facts-header h3');
+      if (factsHeader) {
+        factsHeader.textContent = window.getText('easterEggs.siteFacts.title');
+      }
+      
+      const factsContent = siteFactsPopup.querySelector('.facts-content .story-section');
+      if (factsContent) {
+        // Clear existing content
+        factsContent.innerHTML = '';
+        
+        // Add content from config
+        const factsArray = window.getTextArray('easterEggs.siteFacts.content');
+        factsArray.forEach(fact => {
+          factsContent.insertAdjacentHTML("beforeend", fact);
+        });
+      }
+    }
+    
+    // False Easter Egg Popup
+    const falseEasterEggPopup = document.getElementById('falseEasterEggPopup');
+    if (falseEasterEggPopup) {
+      const falseHeader = falseEasterEggPopup.querySelector('.false-facts-header h3');
+      if (falseHeader) {
+        falseHeader.textContent = window.getText('easterEggs.falseEasterEgg.title');
+      }
+      
+      const falseContent = falseEasterEggPopup.querySelector('.false-facts-content');
+      if (falseContent) {
+        // Clear existing content
+        falseContent.innerHTML = '';
+        
+        // Add content from config
+        const falseArray = window.getTextArray('easterEggs.falseEasterEgg.content');
+        falseArray.forEach(content => {
+          const p = document.createElement('p');
+          p.textContent = content;
+          falseContent.appendChild(p);
+        });
+      }
+    }
   } else {
     console.warn('TEXT_CONFIG not found - using default text');
   }
