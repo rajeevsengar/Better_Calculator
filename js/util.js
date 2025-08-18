@@ -234,32 +234,34 @@ window.formatFtInField = formatFtInField;
 window.getInchesFromFtIn = getInchesFromFtIn;
 window.getFtInFromInches = getFtInFromInches;
 
+let animateTime = 3000;
 // Function to animate tagline between two lines
 function animateTagline() {
   const taglines = document.querySelectorAll('.tagline');
+
   taglines.forEach(tagline => {
     // Start with first line visible
     tagline.classList.remove('animate');
-    
-    // After 1.5 seconds, animate to second line
+    // After animateTime, show second line
     setTimeout(() => {
       tagline.classList.add('animate');
-    }, 1500);
+    }, animateTime);
     
-    // After 3 seconds, animate back to first line
+    // After animateTime * 2, show first line
     setTimeout(() => {
       tagline.classList.remove('animate');
-    }, 3000);
+    }, animateTime * 2);
+
   });
 }
 
 // Auto-start tagline animation
 window.addEventListener('load', () => {
   // Start animation after a short delay
-  setTimeout(animateTagline, 500);
+  setTimeout(animateTagline, 100);
   
-  // Repeat animation every 6 seconds
-  setInterval(animateTagline, 6000);
+  // Repeat animation every cycle time + transition time (set in CSS)
+  setInterval(animateTagline, animateTime * 2 + 1000);
 });
 
 // Manual trigger for testing (can be called from console)

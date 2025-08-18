@@ -11,17 +11,27 @@
   </head>
   <body>
     <div class="page-container">
+      <!-- Mobile Header 1 (Top Bar) -->
+      <header class="mobile-header1">
+        <div class="mobile-header1-inner">
+          <img src="images/india-flag.png" alt="India Flag" class="flag-icon">
+          <p id="builtWithLove" style="color:black; font-family:Helvetica Neue">
+            Built with ❤️ in India.
+          </p>
+        </div>
+      </header>
+
       <!-- Mobile Header -->
       <header class="mobile-header">
         <div class="mobile-header-inner">
           <div class="mobile-brand">
             <img id="siteLogo" src="images/site_logo.png" alt="Logo">
             <div class="mobile-brand-text">
-              <h1>Calculator.net</h1>
-              <div class="muted tagline">
-              <div class="tagline-line tagline-first">Minimal - Fast - Powerful</div>
-              <div class="tagline-line tagline-second">Imagined by Human, Designed by AI</div>
-            </div>
+              <h1 id="brandName">Calculator.net</h1>
+              <div id="tagline" class="muted tagline">
+                <div class="tagline-line tagline-first">Minimal - Fast - Powerful</div>
+                <div class="tagline-line tagline-second">Imagined by Human, Designed by AI</div>
+              </div>
             </div>
           </div>
           <div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -501,20 +511,20 @@
         </div>
       </main>
 
-      <!-- Mobile Footer -->
-      <footer class="mobile-site-footer">
-        <div class="mobile-footer-content">
-          <div class="mobile-footer-main">
-            <p class="mobile-footer-tagline">
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-main">
+            <p class="footer-tagline">
               Not just another calculator website — it covers the missing features of others.
             </p>
-            <p class="mobile-footer-highlight">
+            <p class="footer-highlight">
               🏆 The most feature-rich 
               <span id="emi-link" class="mobile-footer-link">EMI Calculator</span>
               on the internet, our proud flagship.
             </p>
           </div>
-          <div class="mobile-footer-easter-egg" id="falseEasterEgg" style="cursor: pointer;" title="Click me if you dare...">
+          <div class="footer-easter-egg" id="falseEasterEgg" style="cursor: pointer;" title="Click me if you dare...">
             🥚 <em>This site contains a hidden easter egg. Good luck finding it!</em> 🥚
           </div>
         </div>
