@@ -1,4 +1,4 @@
-// Menu toggles
+// Menu toggles and common functionality
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,13 +6,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const isMobile = document.querySelector('.mobile-container') !== null;
   
   if (isMobile) {
-    // Mobile initialization - handled by mobile.js
+    // Mobile initialization - initialize common functionality
+    initializeCommonFunctionality();
+    // Mobile-specific initialization will be handled by mobile.js
     return;
   }
   
   // Desktop initialization
+  initializeDesktopFunctionality();
+});
+
+// Common functionality for both desktop and mobile
+function initializeCommonFunctionality() {
+  // Initialize theme switcher
+  initializeThemeSwitcher();
+  
+  // Populate text content from configuration
+  populateTextContent();
+  
+  // Initialize date calculator tabs
+  initializeDateTabs();
+  
+  // Initialize panel functionality
+  initializePanelSystem();
+}
+
+// Desktop-specific functionality
+function initializeDesktopFunctionality() {
   const menuItems = document.querySelectorAll('.menu .item');
-  const sections  = document.querySelectorAll('main.panel .container > section');
+  const sections = document.querySelectorAll('main.panel .container > section');
 
   const emiLink = document.getElementById('emi-link');
   if (emiLink) {
@@ -21,31 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  function showPanel(panelId) {
-    // highlight menu
-    menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
-  
-    // hide all sections
-    sections.forEach(s => s.classList.remove('active-section'));
-  
-    // show target
-    const target = document.getElementById(panelId);
-    if (!target) return;
-    target.classList.add('active-section');
-  
-    // init calculators lazily
-    switch (panelId) {
-      case 'emi':        window.EMI?.initializeEMICalculator?.(); break;
-      case 'investment': window.Investment?.initializeInvestmentCalculator?.(); break;
-      case 'conversion': window.UnitConverter?.initializeUnitConverter?.(); break;
-      case 'unit':       window.UnitConverter?.initializeUnitConverter?.(); break;
-      case 'date':       window.DateCalculator?.initializeDateCalculator?.(); break;
-      case 'bmi':        window.BMICalculator?.initializeBMICalculator?.(); break;
-    }
-  
-    setupRibbons(panelId);
-  }
-
   if (menuItems.length > 0) {
     menuItems.forEach(it => it.addEventListener('click', () => showPanel(it.dataset.panel)));
 
@@ -54,20 +51,66 @@ document.addEventListener('DOMContentLoaded', () => {
     if (initial) showPanel(initial.dataset.panel);
   }
 
-  // Initialize theme switcher
-  initializeThemeSwitcher();
-  
-  // Populate text content from configuration
-  populateTextContent();
+  // Initialize common functionality
+  initializeCommonFunctionality();
   
   // Export functions for global access
   window.setupRibbons = setupRibbons;
-  
-  // Initialize date calculator tabs
-  initializeDateTabs();
-});
+}
 
-// Date Calculator Tab Functionality
+// Unified panel system for both desktop and mobile
+function initializePanelSystem() {
+  // This will be called by both desktop and mobile systems
+  // Desktop uses showPanel, mobile uses showMobilePanel
+}
+
+// Unified panel switching function
+function showPanel(panelId) {
+  // Check if we're on mobile or desktop
+  const isMobile = document.querySelector('.mobile-container') !== null;
+  
+  if (isMobile) {
+    // Use mobile panel system
+    if (window.mobileUtils && window.mobileUtils.showMobilePanel) {
+      window.mobileUtils.showMobilePanel(panelId);
+    }
+    return;
+  }
+  
+  // Desktop panel system
+  const menuItems = document.querySelectorAll('.menu .item');
+  const sections = document.querySelectorAll('main.panel .container > section');
+  
+  // highlight menu
+  menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
+
+  // hide all sections
+  sections.forEach(s => s.classList.remove('active-section'));
+
+  // show target
+  const target = document.getElementById(panelId);
+  if (!target) return;
+  target.classList.add('active-section');
+
+  // init calculators lazily
+  initializePanelCalculators(panelId);
+
+  setupRibbons(panelId);
+}
+
+// Unified calculator initialization
+function initializePanelCalculators(panelId) {
+  switch (panelId) {
+    case 'emi':        window.EMI?.initializeEMICalculator?.(); break;
+    case 'investment': window.Investment?.initializeInvestmentCalculator?.(); break;
+    case 'conversion': window.UnitConverter?.initializeUnitConverter?.(); break;
+    case 'unit':       window.UnitConverter?.initializeUnitConverter?.(); break;
+    case 'date':       window.DateCalculator?.initializeDateCalculator?.(); break;
+    case 'bmi':        window.BMICalculator?.initializeBMICalculator?.(); break;
+  }
+}
+
+// Date Calculator Tab Functionality - works for both desktop and mobile
 function initializeDateTabs() {
   const tabButtons = document.querySelectorAll('.date-tabs .tab-button');
   const tabContents = document.querySelectorAll('.date-tabs .tab-content');

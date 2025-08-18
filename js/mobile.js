@@ -15,49 +15,14 @@ function initializeMobile() {
     // Initialize mobile-specific event listeners
     initializeMobileEventListeners();
     
-    // Initialize theme switcher
-    initializeMobileThemeSwitcher();
-    
     // Force numeric keyboard for all number inputs
     forceNumericKeyboard();
     
     // Initialize the first panel (conversion) - this will make elements visible
     showMobilePanel('conversion');
     
-    // Now populate text content after panel is shown and elements are visible
-    setTimeout(() => {
-        if (typeof populateTextContent === 'function') {
-            populateTextContent();
-        }
-    }, 100);
-    
-    // Initialize date calculator tabs
-    initializeMobileDateTabs();
-}
-
-// Mobile Date Calculator Tab Functionality
-function initializeMobileDateTabs() {
-    const tabButtons = document.querySelectorAll('.date-tabs .tab-button');
-    const tabContents = document.querySelectorAll('.date-tabs .tab-content');
-    
-    if (tabButtons.length === 0) return;
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetTab = button.getAttribute('data-tab');
-            
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked button and corresponding content
-            button.classList.add('active');
-            const targetContent = document.getElementById(targetTab);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-        });
-    });
+    // Common functionality is now handled by script.js
+    // No need to call populateTextContent or initializeDateTabs here
 }
 
 function initializeMobileMenu() {
@@ -157,20 +122,10 @@ function showMobilePanel(panelId) {
         targetPanel.classList.add('active-section');
         targetPanel.style.display = 'block';
         
-        // Initialize panel-specific functionality
-        initializePanelFunctionality(panelId);
-    }
-}
-
-function initializePanelFunctionality(panelId) {
-    // Initialize calculators when panels are shown
-    switch(panelId) {
-        case 'emi':        window.EMI?.initializeEMICalculator?.(); break;
-        case 'investment': window.Investment?.initializeInvestmentCalculator?.(); break;
-        case 'conversion': window.UnitConverter?.initializeUnitConverter?.(); break;
-        case 'unit':       window.UnitConverter?.initializeUnitConverter?.(); break;
-        case 'date':       window.DateCalculator?.initializeDateCalculator?.(); break;
-        case 'bmi':        window.BMICalculator?.initializeBMICalculator?.(); break;
+        // Initialize panel-specific functionality using unified function
+        if (typeof initializePanelCalculators === 'function') {
+            initializePanelCalculators(panelId);
+        }
     }
     
     // Initialize ribbons using the desktop system
@@ -238,64 +193,7 @@ function adjustMobileLayout() {
     }
 }
 
-// Ribbons are now handled by the existing desktop system
-// No need for mobile-specific ribbon code
-
-function initializeMobileThemeSwitcher() {
-    const themeRadios = document.querySelectorAll('input[name="theme"]');
-    
-    // Load saved theme from localStorage
-    const savedTheme = localStorage.getItem('selectedTheme') || 'default';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    // Set the correct radio button
-    const savedRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
-    if (savedRadio) {
-        savedRadio.checked = true;
-    }
-    
-    // Add event listeners for theme changes
-    themeRadios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            const selectedTheme = e.target.value;
-            document.documentElement.setAttribute('data-theme', selectedTheme);
-            localStorage.setItem('selectedTheme', selectedTheme);
-            
-            // Add a subtle animation effect
-            document.body.style.transition = 'all 0.3s ease';
-            setTimeout(() => {
-                document.body.style.transition = '';
-            }, 300);
-            
-            // Close mobile menu when theme is changed
-            closeMobileMenu();
-            
-            // Handle theme-dependent updates
-            handleMobileThemeChange();
-        });
-    });
-}
-
-function handleMobileThemeChange() {
-    // Small delay to ensure theme variables are updated
-    setTimeout(() => {
-        // Update BMI speedometer if BMI panel is active
-        if (window.redrawSpeedometerForTheme && typeof window.redrawSpeedometerForTheme === 'function') {
-            window.redrawSpeedometerForTheme();
-        }
-        
-        // Update EMI charts if EMI panel is active
-        if (window.EMI && typeof window.EMI.updateChartsForTheme === 'function') {
-            window.EMI.updateChartsForTheme();
-        }
-        
-        // Update investment charts if investment panel is active
-        if (window.Investment && typeof window.Investment.updateChartsForTheme === 'function') {
-            window.Investment.updateChartsForTheme();
-        }
-    }, 100);
-}
-
+// Force numeric keyboard for all number inputs
 function forceNumericKeyboard() {
     // Force numeric keyboard for inputs that should be numbers
     const numericInputs = [
@@ -331,8 +229,6 @@ function forceNumericKeyboard() {
     });
 }
 
-// Text content is now populated from util.js
-
 // Additional event listeners to ensure menu closes in various scenarios
 document.addEventListener('click', function(e) {
     // Close menu if clicking on any calculator input or button
@@ -354,10 +250,6 @@ window.addEventListener('resize', function() {
         closeMobileMenu();
     }
 });
-
-// Close function handled by desktop ribbon system
-
-
 
 // Export functions for use in other scripts
 window.mobileUtils = {
