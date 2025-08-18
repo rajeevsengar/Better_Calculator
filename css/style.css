@@ -186,15 +186,51 @@ header {
   margin-bottom: 12px;
 }
 
+.title-header {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-bottom: 2px solid var(--border-color);
+  text-align: left;
+  position: relative;
+}
+
+
 .modes-card {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+
+#modesList li {
+  list-style: none;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  scrollbar-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--surface-color);
+}
+#modesList li:hover {
+  background: var(--accent-color);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+}
+
 #modesList li.active-mode {
-  color: var(--accent-color);
-  font-weight: bold;
-  text-decoration: underline;
+  background: var(--primary-color);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+  transform: scale(1.02);
 }
 
 /* Conversion section grid (two equal-height columns) */

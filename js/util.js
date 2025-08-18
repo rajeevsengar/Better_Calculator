@@ -196,8 +196,8 @@ function populateTextContent() {
     
     // Unit Converter (Mobile)
     const unitTypesTitle = document.getElementById('unitTypesTitle');
-    if (unitTypesTitle) {
-      unitTypesTitle.textContent = window.getText('unitConverter.title');
+      if (unitTypesTitle) {
+        unitTypesTitle.insertAdjacentHTML("beforeend", window.getText('unitConverter.title'));
     }
     
     const mobileModesInstruction = document.getElementById('modesInstruction');

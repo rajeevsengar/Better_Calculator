@@ -100,10 +100,12 @@
             <section id="conversion" class="active-section" style="display: block;">
               <!-- Modes at the top in 3-column grid -->
               <div class="card modes-card" style="margin-bottom: 16px;">
-                <div style="font-weight: 600; font-size: 16px; margin-bottom: 12px; text-align: center;" id="unitTypesTitle">Unit Types:</div>
+                <div class="title-header" id="unitTypesTitle">
+                  <!-- Content will be populated dynamically from text-config.js -->
+                </div>
                 <div id="modesList" class="mobile-modes-grid"></div>
                 <div class="muted" style="margin-top: 8px; text-align: center; font-size: 14px;" id="modesInstruction">
-                  Click a mode above to switch units.
+                  <!-- Content will be populated dynamically from text-config.js -->
                 </div>
               </div>
 
@@ -113,12 +115,12 @@
                   <div class="card modes-card">
                     <div class="mobile-input-grid">
                       <div class="card">
-                        <div style="font-weight: 600; font-size: 18px; margin-bottom: 6px">From</div>
+                        <div class="title-header">From</div>
                         <input id="fromValue" type="text" placeholder="Enter value" />
                         <div id="fromUnitButtons" class="mobile-unit-buttons"></div>
                       </div>
                       <div class="card">
-                        <div style="font-weight: 600; font-size: 18px; margin-bottom: 6px">To</div>
+                        <div class="title-header">To</div>
                         <input id="toValue" placeholder="Result" readonly />
                         <div id="toUnitButtons" class="mobile-unit-buttons"></div>
                       </div>

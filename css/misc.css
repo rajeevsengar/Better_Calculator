@@ -691,6 +691,7 @@
 .chip:hover {
   background: var(--accent-color);
   color: var(--text-primary);
+  border-color: var(--primary-color);
 }
 
 .chip.selected {

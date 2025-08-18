@@ -275,11 +275,6 @@
     border-color: var(--primary-color);
   }
 
-  .mobile-modes-grid li.active-mode {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-  }
 
   /* Ribbon popup uses desktop system - no mobile overrides needed */
 

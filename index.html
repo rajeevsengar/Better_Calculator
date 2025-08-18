@@ -97,7 +97,7 @@
                       "
                     >
                       <div class="card">
-                        <div style="font-weight: 600; font-size: 21px; margin-bottom: 6px">From</div>
+                        <div class="title-header">From</div>
                         <input id="fromValue" placeholder="Enter value" />
                         <div
                           id="fromUnitButtons"
@@ -110,7 +110,7 @@
                         ></div>
                       </div>
                       <div class="card">
-                        <div style="font-weight: 600; font-size: 21px; margin-bottom: 6px">To</div>
+                        <div class="title-header">To</div>
                         <input id="toValue" placeholder="Result" readonly />
                         <div
                           id="toUnitButtons"
@@ -132,10 +132,10 @@
                 <!-- Right column -->
                 <div class="conversion-col">
                     <div class="card modes-card">
-                      <div id="unitTypesTitle">Modes:</div>
-                      <ol class="" id="modesList"></ol>
+                      <div id="unitTypesTitle" class="title-header"></div>
+                      <div class="" id="modesList"></div>
                       <div class="muted" style="margin-top: 8px">
-                        Click a mode above to switch units.
+                        <!-- Content will be populated dynamically from text-config.js -->
                       </div>
                     </div>
                 </div>
