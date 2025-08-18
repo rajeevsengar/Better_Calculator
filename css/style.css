@@ -233,6 +233,14 @@ header {
   transform: scale(1.02);
 }
 
+/* BMI Result */
+.bmi-result {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 8px;
+  text-align: left;
+}
+
 /* Conversion section grid (two equal-height columns) */
 .conversion-grid {
   display: grid;

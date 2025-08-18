@@ -181,34 +181,34 @@
                   <div class="card modes-card" style="margin-top: 12px;">
                     <div class="muted">BMI Categories</div>
                     <canvas id="bmiSpeedometer" width="280" height="140"></canvas>
-                    <div id="speedometerLegend" class="mobile-legend">
-                      <div class="mobile-legend-grid">
-                        <div class="legend-item">
-                          <div class="legend-color" style="background: #4CAF50;"></div>
-                          <span>Underweight</span>
-                        </div>
-                        <div class="legend-item">
-                          <div class="legend-color" style="background: #2196F3;"></div>
-                          <span>Normal</span>
-                        </div>
-                        <div class="legend-item">
-                          <div class="legend-color" style="background: #FF9800;"></div>
-                          <span>Overweight</span>
-                        </div>
-                        <div class="legend-item">
-                          <div class="legend-color" style="background: #F44336;"></div>
-                          <span>Obesity</span>
+                    <div id="speedometerLegend" style="margin-top: 12px; display: flex; justify-content: center;">
+                        <div style="display: grid; grid-template-columns: repeat(4, auto); gap: 12px; font-size: 12px;">
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="width: 12px; height: 12px; background: #4CAF50; border-radius: 2px;"></div>
+                            <span>Underweight</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="width: 12px; height: 12px; background: #2196F3; border-radius: 2px;"></div>
+                            <span>Normal</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="width: 12px; height: 12px; background: #FF9800; border-radius: 2px;"></div>
+                            <span>Overweight</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 6px;">
+                            <div style="width: 12px; height: 12px; background: #F44336; border-radius: 2px;"></div>
+                            <span>Obesity</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </div>
                 </div>
                 
                 <!-- Result -->
                 <div class="mobile-conversion-col">
                   <div class="card modes-card">
-                    <div class="muted">Result</div>
-                    <div id="bmiResultLarge" class="mobile-bmi-result">
+                    <div class="title-header">Result</div>
+                    <div id="bmiResultLarge" class="bmi-result">
                       —
                     </div>
                     <div id="bmiCategory" class="muted">

@@ -426,38 +426,6 @@
     background: var(--primary-color-dark, #1976d2);
   }
 
-  /* Mobile BMI Result */
-  .mobile-bmi-result {
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: 8px;
-    text-align: center;
-  }
-
-  /* Mobile Legend */
-  .mobile-legend {
-    margin-top: 12px;
-  }
-
-  .mobile-legend-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-    font-size: 11px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .legend-color {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-  }
-
   /* Mobile EMI Container */
   .mobile-emi-container {
     display: flex;
