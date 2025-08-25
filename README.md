@@ -4,7 +4,7 @@ A feature-rich calculator website with automatic responsive design that adapts t
 
 ## 🚀 Features
 
-- **5 Powerful Calculators**: Unit Converter, BMI Calculator, EMI Calculator, Investment Calculator, Date & Timezone Calculator
+- **6 Powerful Calculators**: Unit Converter, BMI Calculator, Date Calculator, Time Calculator, EMI Calculator, Investment Calculator
 - **Responsive Design**: Automatically detects device type and redirects to appropriate version
 - **Unified Codebase**: Changes to desktop automatically reflect on mobile
 - **Touch-Friendly Mobile**: Optimized for mobile devices with swipe gestures and touch-friendly UI

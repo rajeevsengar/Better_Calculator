@@ -174,10 +174,7 @@ function initializeMobileEventListeners() {
         }
     });
     
-    // Debug ribbon system
-    console.log('Mobile event listeners initialized');
-    console.log('Ribbons found:', document.querySelectorAll('.ribbon').length);
-    console.log('Ribbon popup found:', document.getElementById('ribbonPopup'));
+      // Initialize ribbon system
 }
 
 function adjustMobileLayout() {
@@ -213,7 +210,7 @@ function forceNumericKeyboard() {
             input.type = 'number';
             input.setAttribute('inputmode', 'numeric');
             input.setAttribute('pattern', '[0-9]*');
-            console.log(`Forced numeric keyboard for: ${id}`);
+        
         }
     });
     
@@ -224,7 +221,7 @@ function forceNumericKeyboard() {
             // Start with text type to allow Ft + Inches formatting
             input.type = 'text';
             input.setAttribute('inputmode', 'decimal');
-            console.log(`Set text input for formatting: ${id}`);
+        
         }
     });
 }

@@ -1,0 +1,162 @@
+Create a comprehensive test file for the [COMPONENT_NAME] web component with the following structure and features:
+
+### 🎯 **File Structure:**
+- **Title**: [COMPONENT_NAME] Component Test
+- **Grid Layout**: Responsive CSS Grid with auto-fit columns (minmax 350px)
+- **Component Cards**: Clean white cards with shadows and borders
+- **Theme Controls**: 4 theme buttons (Default, Green, Purple, Orange)
+- **Debug Panel**: Dark-themed log panel with color-coded messages
+
+### 🎨 **Design Requirements:**
+- **Modern UI**: Apple-style system fonts, clean colors (#f8fafc background)
+- **Responsive**: Works on all screen sizes with proper breakpoints
+- **Professional**: Subtle shadows, rounded corners, proper spacing
+- **Color-coded**: Success (green), Error (red), Info (blue), Warning (orange)
+
+### 🔧 **Component Display:**
+Create 6+ component variants showing different configurations:
+1. **Basic** - Minimal configuration
+2. **With Features** - Key features enabled
+3. **With Labels** - Label + component
+4. **With Values** - Pre-filled data
+5. **Small Size** - Compact version
+6. **Large Size** - Larger version
+
+### �� **Grid Layout CSS:**
+```css
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.component-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+```
+
+### ��️ **Theme Controls:**
+```css
+.theme-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.theme-btn.green { background: #10b981; }
+.theme-btn.purple { background: #8b5cf6; }
+.theme-btn.orange { background: #f59e0b; }
+```
+
+### 📊 **Debug Panel:**
+```css
+.debug-panel {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 14px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+```
+
+### ⚡ **JavaScript Features:**
+- **Simple logging** with timestamps and color-coded types
+- **Component loading** with error handling
+- **Event listeners** for component events
+- **Theme switching** via document.documentElement.setAttribute('data-theme', theme)
+- **Auto-scroll** debug panel to latest messages
+
+### �� **Required Scripts:**
+```html
+<!-- Include main theme system -->
+<script src="./js/script.js"></script>
+
+<!-- Component-specific script -->
+<script src="./web-components/[component-name]/[component-name].js"></script>
+```
+
+### 📋 **Template Structure:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[COMPONENT_NAME] Component Test</title>
+    <style>
+        /* CSS here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>[COMPONENT_NAME] Component Test</h1>
+        
+        <!-- Theme Controls -->
+        <div class="theme-controls">
+            <h2>Theme Controls</h2>
+            <div class="theme-buttons">
+                <button class="theme-btn" onclick="setTheme('default')">Default</button>
+                <button class="theme-btn green" onclick="setTheme('green')">Green</button>
+                <button class="theme-btn purple" onclick="setTheme('purple')">Purple</button>
+                <button class="theme-btn orange" onclick="setTheme('orange')">Orange</button>
+            </div>
+        </div>
+        
+        <!-- Component Grid -->
+        <div class="grid">
+            <!-- Component variants here -->
+        </div>
+        
+        <!-- Debug Panel -->
+        <div class="debug-panel">
+            <h2>Debug Log</h2>
+            <div id="debugLog">
+                <div class="log-entry">
+                    <span class="timestamp">Ready</span>
+                    <span class="message">Page loaded, waiting for component...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="./js/script.js"></script>
+    <script>
+        // JavaScript here
+    </script>
+</body>
+</html>
+```
+
+### �� **Key Functions to Include:**
+```javascript
+function log(message, type = 'info') { /* logging logic */ }
+function setTheme(theme) { /* theme switching logic */ }
+function loadComponent() { /* component loading logic */ }
+function checkComponent() { /* component readiness check */ }
+function setupEventListeners() { /* event setup logic */ }
+```
+
+### ✨ **Features to Always Include:**
+- Responsive grid layout
+- Theme switching with 4 color options
+- Component variant showcase
+- Real-time debug logging
+- Error handling and fallbacks
+- Clean, professional styling
+- Mobile-friendly design
+
+This template creates a professional, reusable test environment for any web component with consistent styling, proper theme integration, and comprehensive debugging capabilities.

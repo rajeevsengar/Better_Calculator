@@ -8,10 +8,7 @@
 window.EMI = window.EMI || {};
 
 // Toggle this to true while developing to see internal logs
-const DEBUG = false;
-function logDebug(...args) {
-  if (DEBUG) console.log(...args);
-}
+
 
 // =============================================================================
 // DOM ELEMENT REFERENCES
@@ -308,18 +305,15 @@ function generateAmortizationSchedule() {
     // Handle interest rate change if any
     if (monthEvent.newInterestRate !== null && 
         monthEvent.newInterestRate !== currentAnnualInterestRate) {
-      logDebug(`Month ${currentMonthIndex}: Interest rate changing from ${currentAnnualInterestRate}% to ${monthEvent.newInterestRate}%`);
       currentAnnualInterestRate = monthEvent.newInterestRate;
       currentMonthlyInterestRate = convertAnnualToMonthlyRate(currentAnnualInterestRate);
 
       // Recalculate EMI or tenure based on mode
       if (recalculationMode === "emi") {
         currentEMIAmount = recalculateEMI(currentPrincipalBalance, currentAnnualInterestRate, monthsRemaining);
-        logDebug(`Month ${currentMonthIndex}: New EMI after rate change: ${currentEMIAmount}`);
       } else {
         currentLoanTenure = calculateNewTenure(currentPrincipalBalance, currentEMIAmount, currentMonthlyInterestRate);
         monthsRemaining = currentLoanTenure;
-        logDebug(`Month ${currentMonthIndex}: New tenure after rate change: ${currentLoanTenure}`);
       }
     }
 
@@ -328,27 +322,27 @@ function generateAmortizationSchedule() {
 
     // Apply prepayment or topup events BEFORE calculating principal repayment
     if (monthEvent.prepaymentAmount > 0) {
-      logDebug(`Month ${currentMonthIndex}: Applying prepayment of ${monthEvent.prepaymentAmount}`);
+
       currentPrincipalBalance = Math.max(0, currentPrincipalBalance - monthEvent.prepaymentAmount);
       // Recalculate EMI or tenure based on mode
       if (recalculationMode === "emi") {
         currentEMIAmount = recalculateEMI(currentPrincipalBalance, currentAnnualInterestRate, monthsRemaining);
-        logDebug(`Month ${currentMonthIndex}: New EMI after prepayment: ${currentEMIAmount}`);
+
       } else {
         currentLoanTenure = calculateNewTenure(currentPrincipalBalance, currentEMIAmount, currentMonthlyInterestRate);
         monthsRemaining = currentLoanTenure;
-        logDebug(`Month ${currentMonthIndex}: New tenure after prepayment: ${currentLoanTenure}`);
+
       }
     } else if (monthEvent.topupAmount > 0) {
-      logDebug(`Month ${currentMonthIndex}: Applying topup of ${monthEvent.topupAmount}`);
+
       currentPrincipalBalance = currentPrincipalBalance + monthEvent.topupAmount;
       if (recalculationMode === "emi") {
         currentEMIAmount = recalculateEMI(currentPrincipalBalance, currentAnnualInterestRate, monthsRemaining);
-        logDebug(`Month ${currentMonthIndex}: New EMI after topup: ${currentEMIAmount}`);
+
       } else {
         currentLoanTenure = calculateNewTenure(currentPrincipalBalance, currentEMIAmount, currentMonthlyInterestRate);
         monthsRemaining = currentLoanTenure;
-        logDebug(`Month ${currentMonthIndex}: New tenure after topup: ${currentLoanTenure}`);
+
       }
     }
 

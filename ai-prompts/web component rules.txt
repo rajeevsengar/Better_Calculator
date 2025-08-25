@@ -1,0 +1,347 @@
+Create a web component following these strict rules and patterns:
+
+## 📁 FILE STRUCTURE
+- Create a folder: `web-components/[component-name]/`
+- Include: `[component-name].js` and `[component-name].css`
+- NO separate HTML template files - HTML goes inline in JavaScript render() method
+
+## 🔧 JAVASCRIPT STRUCTURE (component-name.js)
+
+### 1. CLASS ORGANIZATION (Use clear section headers)
+```javascript
+class ComponentName extends HTMLElement {
+    // ============================================================================
+    // CONSTRUCTOR & INITIALIZATION
+    // ============================================================================
+    
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this._initializeAttributes();
+    }
+
+    _initializeAttributes() {
+        // Get all attributes with defaults
+        this._size = this.getAttribute('size') || 'default';
+        this._disabled = this.hasAttribute('disabled');
+        // ... other attributes
+    }
+
+    connectedCallback() {
+        this.render();
+        this._setupEventListeners();
+        this._setupThemeListener();
+    }
+
+    // ============================================================================
+    // RENDERING & DOM SETUP
+    // ============================================================================
+    
+    render() {
+        // HTML structure goes here - NO external templates
+        this.shadowRoot.innerHTML = `
+            <link rel="stylesheet" href="web-components/[component-name]/[component-name].css">
+            <div class="component-container">
+                <!-- HTML structure -->
+            </div>
+        `;
+    }
+
+    // ============================================================================
+    // INTERNAL EVENT HANDLING
+    // ============================================================================
+    
+    _setupEventListeners() {
+        // All event listeners go here
+        // Use _ prefix for internal methods
+    }
+
+    _setupThemeListener() {
+        // Listen for theme change events from parent document
+        document.addEventListener('themeChanged', (event) => {
+            const newTheme = event.detail.theme;
+            this.updateTheme(newTheme);
+        });
+    }
+
+    // ============================================================================
+    // PUBLIC API METHODS - Can be called from external JavaScript
+    // ============================================================================
+    
+    /**
+     * Method description
+     * @param {type} paramName - Parameter description
+     * @returns {type} Return value description
+     */
+    publicMethod() {
+        // Implementation
+    }
+
+    /**
+     * Update the component theme
+     * @param {string} theme - Theme name (green, purple, orange, default)
+     */
+    updateTheme(theme) {
+        this.setAttribute('data-theme', theme);
+        // DO NOT dispatch themeChanged events - only listen to them
+    }
+
+    // ============================================================================
+    // GETTER & SETTER METHODS - External access to component values
+    // ============================================================================
+    
+    get value() { /* implementation */ }
+    set value(newValue) { /* implementation */ }
+
+    // ============================================================================
+    // ELEMENT ACCESS METHODS - Get references to internal elements
+    // ============================================================================
+    
+    getElementName() {
+        return this.shadowRoot.getElementById('elementId');
+    }
+}
+
+// ============================================================================
+// COMPONENT REGISTRATION
+// ============================================================================
+
+customElements.define('component-name', ComponentName);
+```
+
+### 2. NAMING CONVENTIONS
+- **Public methods**: `setValue()`, `getElement()` - can be called externally
+- **Internal methods**: `_setupEvents()`, `_handleClick()` - prefixed with underscore
+- **Private properties**: `_value`, `_disabled` - prefixed with underscore
+- **Element IDs**: Use descriptive IDs like `dateInput`, `quickLink`
+- **CSS Classes**: Use consistent naming pattern: `[component-name]-field` (e.g., `.date-input-field`, `.time-input`, `.searchable-select-field`)
+
+### 3. ATTRIBUTE HANDLING
+- Always provide sensible defaults
+- Use `hasAttribute()` for boolean attributes
+- Store attributes in private properties during initialization
+
+### 4. EVENT DISPATCHING
+- Use `CustomEvent` with `bubbles: true` and `composed: true`
+- Create helper methods like `_dispatchChangeEvent()`
+- Include relevant data in event detail
+
+## 🎨 CSS STRUCTURE (component-name.css)
+
+### 1. CSS ORGANIZATION
+```css
+/* Component Name Web Component Styles */
+
+/* Import theme CSS */
+@import url('../../css/themes.css');
+@import url('../../css/style.css');
+
+/* Component Container */
+.component-container {
+    /* Base styles */
+}
+
+/* Size variants */
+.component-container.size-small { /* styles */ }
+.component-container.size-large { /* styles */ }
+
+/* Interactive elements */
+.component-element:hover { /* styles */ }
+.component-element:focus { /* styles */ }
+
+/* CSS Custom Properties for theming */
+:host {
+    /* Use CSS custom properties from parent document if available, fallback to defaults */
+    --primary-color: var(--primary-color, #3b82f6);
+    --primary-hover: var(--primary-hover, #2563eb);
+    --input-border: var(--input-border, #cbd5e1);
+    --input-background: var(--input-background, #ffffff);
+    --text-primary: var(--text-primary, #1e293b);
+    --text-secondary: var(--text-secondary, #475569);
+    --card-background: var(--card-background, #ffffff);
+    --border-color: var(--border-color, #e2e8f0);
+    --shadow-color: var(--shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+/* Theme-specific overrides to ensure theme colors work */
+:host([data-theme="green"]) {
+    --primary-color: #4caf50;
+    --primary-hover: #388e3c;
+}
+
+:host([data-theme="purple"]) {
+    --primary-color: #9c27b0;
+    --primary-hover: #7b1fa2;
+}
+
+:host([data-theme="orange"]) {
+    --primary-color: #ff9800;
+    --primary-hover: #f57c00;
+}
+```
+
+### 2. THEME INTEGRATION RULES
+- ALWAYS import `themes.css` and `style.css`
+- Use `var(--variable-name, fallback)` for all theme colors
+- Include `:host([data-theme="..."])` overrides for reliability
+- NO hardcoded colors - everything must be themeable
+
+### 3. CSS BEST PRACTICES (Learned from Development)
+- **Avoid complex CSS variables** - Use simple, direct values for spacing, sizing
+- **Keep CSS structure simple** - Match existing component patterns exactly
+- **No excessive padding/margin resets** - Let browser defaults work
+- **Use `!important` sparingly** - Only for critical overrides like `background: transparent`
+- **Match existing patterns** - Copy CSS structure from working components like date-input
+- **Avoid complex selectors** - Keep CSS rules simple and maintainable
+- **Field naming convention** - Always use `.[component-name]-field` for main input elements
+- **Standard field styling** - Copy the exact CSS structure from `.date-input-field` for all input fields
+
+### 4. SIZING & SPACING
+- Use CSS custom properties for consistent spacing
+- Provide size variants (small, default, large, full)
+- NO margins on container - spacing handled by parent
+- Use `gap` and `padding` for internal spacing
+
+### 5. CSS FIELD NAMING & STYLING CONVENTION
+- **Main input field class**: Always use `.[component-name]-field` (e.g., `.date-input-field`, `.searchable-select-field`)
+- **Field styling pattern**: Copy the exact CSS structure from `.date-input-field`:
+```css
+.[component-name]-field {
+    padding: 12px 16px;
+    border: 2px solid var(--input-border, #cbd5e1);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    background-color: var(--input-background, #ffffff);
+    color: var(--text-primary, #1e293b);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Size variants for field */
+.[component-name]-field.size-small {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.[component-name]-field.size-large {
+    padding: 16px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.[component-name]-field:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+.[component-name]-field:focus {
+    outline: none;
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+```
+- **Consistent styling**: All input fields must use this exact pattern for visual consistency
+- **No custom field styles**: Do not create custom field styling - always use this standard pattern
+
+## �� STRICT DON'TS
+
+### JavaScript:
+- ❌ NO external HTML template files
+- ❌ NO inline styles in HTML
+- ❌ NO complex visibility management methods
+- ❌ NO unused or overly complex methods
+- ❌ NO timezone or complex dropdown logic (unless specifically needed)
+
+### CSS:
+- ❌ NO hardcoded colors
+- ❌ NO margins on component containers
+- ❌ NO complex animations or transitions (unless specifically needed)
+- ❌ NO external CSS dependencies beyond themes.css and style.css
+- ❌ NO custom field styling - must use standard `.[component-name]-field` pattern
+- ❌ NO inconsistent naming - must follow `[component-name]-field` convention
+
+### Architecture:
+- ❌ NO external template loading
+- ❌ NO complex state management
+- ❌ NO unnecessary abstraction layers
+
+## ✅ MUST HAVES
+
+### JavaScript:
+- ✅ Shadow DOM with `mode: 'open'`
+- ✅ Theme change event listener
+- ✅ Clear method organization with section headers
+- ✅ JSDoc comments for all public methods
+- ✅ Proper error handling
+- ✅ Clean, readable code structure
+
+### CSS:
+- ✅ Theme integration with CSS custom properties
+- ✅ Size variants support
+- ✅ Hover and focus states
+- ✅ Responsive design considerations
+- ✅ Accessibility features (focus-visible, aria-*)
+
+### Integration:
+- ✅ Self-contained component (no external dependencies)
+- ✅ Event-based theme system integration
+- ✅ Clean public API for external use
+- ✅ Consistent with existing component patterns
+
+### Theme System Integration:
+- ✅ **Listen only** - Components listen to `themeChanged` events, don't dispatch them
+- ✅ **Document-level events** - Theme changes come from `document.documentElement.setAttribute('data-theme')`
+- ✅ **Automatic updates** - Components automatically sync when themes change
+- ✅ **No manual syncing** - Theme system handles all component updates automatically
+
+## 📝 USAGE EXAMPLE
+```html
+<!-- In your HTML -->
+<component-name 
+    size="large" 
+    label="Component Label" 
+    show-label>
+</component-name>
+
+<!-- JavaScript usage -->
+<script>
+const component = document.querySelector('component-name');
+component.setValue('new value');
+component.setDisabled(true);
+component.updateTheme('green');
+</script>
+```
+
+## 🎯 COMPONENT GOALS
+- **Single Responsibility**: Do one thing well
+- **Self-Contained**: Works anywhere without external dependencies
+- **Themeable**: Automatically works with your theme system
+- **Accessible**: Proper ARIA attributes and keyboard navigation
+- **Maintainable**: Clean, organized, well-documented code
+- **Reusable**: Can be dropped into any project and work immediately
+
+## 🧪 TESTING & INTEGRATION
+
+### Test File Creation:
+- **Use grid layout** - Responsive CSS Grid with auto-fit columns
+- **Component variants** - Show all size and feature combinations
+- **Theme testing** - Include theme switcher buttons
+- **Debug panel** - Real-time logging for events and status
+- **Clean styling** - Professional appearance matching your app
+
+### Integration Steps:
+1. **Add component script** to main HTML file
+2. **Create test tab** in existing calculator sections
+3. **Test theme switching** - Ensure colors update automatically
+4. **Test all variants** - Size, features, and configurations
+5. **Verify event handling** - Component responds to external changes
+
+### Common Issues & Solutions:
+- **Theme not updating**: Ensure component listens to `themeChanged` events
+- **CSS conflicts**: Match existing component patterns exactly
+- **Quick link spacing**: Use simple `gap: 8px` like date-input
+- **Background issues**: Use `background: transparent !important` for links
+- **Left margin problems**: Let browser defaults work, avoid excessive resets

@@ -106,33 +106,50 @@ function initializePanelCalculators(panelId) {
     case 'conversion': window.UnitConverter?.initializeUnitConverter?.(); break;
     case 'unit':       window.UnitConverter?.initializeUnitConverter?.(); break;
     case 'date':       window.DateCalculator?.initializeDateCalculator?.(); break;
+    case 'time':       window.DateCalculator?.initializeDateCalculator?.(); break;
     case 'bmi':        window.BMICalculator?.initializeBMICalculator?.(); break;
   }
 }
 
 // Date Calculator Tab Functionality - works for both desktop and mobile
 function initializeDateTabs() {
-  const tabButtons = document.querySelectorAll('.date-tabs .tab-button');
-  const tabContents = document.querySelectorAll('.date-tabs .tab-content');
+  // Initialize date calculator tabs
+  initializeCalculatorTabs('.date-tabs');
   
-  if (tabButtons.length === 0) return;
+  // Initialize time calculator tabs
+  initializeCalculatorTabs('.time-tabs');
+}
+
+// Generic calculator tab initialization function
+function initializeCalculatorTabs(selector) {
+  const tabButtons = document.querySelectorAll(`${selector} .tab-button`);
+  const tabContents = document.querySelectorAll(`${selector} .tab-content`);
   
-  tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const targetTab = button.getAttribute('data-tab');
-      
-      // Remove active class from all buttons and contents
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-      tabContents.forEach(content => content.classList.remove('active'));
-      
-      // Add active class to clicked button and corresponding content
-      button.classList.add('active');
-      const targetContent = document.getElementById(targetTab);
-      if (targetContent) {
-        targetContent.classList.add('active');
-      }
+  if (tabButtons.length > 0) {
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+        
+        // Find the parent calculator container
+        const parentContainer = button.closest(selector);
+        if (!parentContainer) return;
+        
+        // Remove active class from all tab buttons and contents in this container
+        const parentTabButtons = parentContainer.querySelectorAll('.tab-button');
+        const parentTabContents = parentContainer.querySelectorAll('.tab-content');
+        
+        parentTabButtons.forEach(btn => btn.classList.remove('active'));
+        parentTabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked tab button and corresponding content
+        button.classList.add('active');
+        const targetContent = document.getElementById(targetTab);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
     });
-  });
+  }
 }
 
 // Text content is now populated from util.js
@@ -335,20 +352,13 @@ function setupSiteLogoEasterEgg() {
                    document.querySelector('.header2 img[src*="site_logo"]') ||
                    document.querySelector('img[src*="site_logo"]');
   
-  console.log('Looking for logo:', siteLogo); // Debug log
-  
   if (!siteLogo) {
-    console.log('Logo not found! Trying alternative approach...'); // Debug log
-    
     // Try to find it after a longer delay
     setTimeout(function() {
       const delayedLogo = document.getElementById('siteLogo') || 
                           document.querySelector('.header2 .brand img');
       if (delayedLogo) {
-        console.log('Logo found on delayed attempt:', delayedLogo);
         setupLogoEventListeners(delayedLogo);
-      } else {
-        console.log('Logo still not found after delay');
       }
     }, 2000);
     
@@ -376,36 +386,26 @@ function setupLogoEventListeners(siteLogo) {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('Logo clicked! Count:', logoClickCount + 1); // Debug log
-    
     logoClickCount++;
     
     if (logoClickCount === 1) {
       logoClickTimer = setTimeout(() => {
-        console.log('Click timeout - resetting count'); // Debug log
         logoClickCount = 0;
       }, 500);
     } else if (logoClickCount === 3) {
       clearTimeout(logoClickTimer);
       logoClickCount = 0;
-      console.log('Triple-click detected! Opening facts...'); // Debug log
       showSiteFacts();
     }
   });
-  
-  console.log('Logo easter egg setup complete!'); // Debug log
 }
 
 function showSiteFacts() {
   const popup = document.getElementById('siteFactsPopup');
-  console.log('Showing facts popup:', popup); // Debug log
   
   if (popup) {
     popup.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    console.log('Facts popup should now be visible'); // Debug log
-  } else {
-    console.log('Facts popup not found!'); // Debug log
   }
 }
 
@@ -434,13 +434,11 @@ document.addEventListener('keydown', function(e) {
 
 // Initialize site logo easter egg when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, setting up logo easter egg...'); // Debug log
   setupSiteLogoEasterEgg();
 });
 
 // Also try to set it up after a short delay in case DOM isn't fully ready
 setTimeout(function() {
-  console.log('Delayed setup attempt...'); // Debug log
   setupSiteLogoEasterEgg();
 }, 1000);
 
@@ -453,10 +451,8 @@ function setupFalseEasterEgg() {
   const isMobile = document.querySelector('.mobile-container') !== null;
   
   const falseEasterEgg = document.getElementById('falseEasterEgg');
-  console.log('Setting up false easter egg:', falseEasterEgg); // Debug log
   
   if (!falseEasterEgg) {
-    console.log('False easter egg element not found!'); // Debug log
     return;
   }
   
@@ -467,41 +463,31 @@ function setupFalseEasterEgg() {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('False easter egg clicked! Count:', falseEasterEggClickCount + 1); // Debug log
-    
     falseEasterEggClickCount++;
     
     if (falseEasterEggClickCount === 1) {
       falseEasterEggTimer = setTimeout(() => {
-        console.log('False easter egg timeout - resetting count'); // Debug log
         falseEasterEggClickCount = 0;
       }, 500);
     } else if (falseEasterEggClickCount === 2) {
       clearTimeout(falseEasterEggTimer);
       falseEasterEggClickCount = 0;
-      console.log('Double-click detected! Showing false easter egg...'); // Debug log
       showFalseEasterEgg();
     }
   });
   
   // Also try mousedown for better detection
   falseEasterEgg.addEventListener('mousedown', function(e) {
-    console.log('False easter egg mousedown detected'); // Debug log
+    // Mousedown event handler
   });
-  
-  console.log('False easter egg setup complete!'); // Debug log
 }
 
 function showFalseEasterEgg() {
   const popup = document.getElementById('falseEasterEggPopup');
-  console.log('Showing false easter egg popup:', popup); // Debug log
   
   if (popup) {
     popup.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    console.log('False easter egg popup should now be visible'); // Debug log
-  } else {
-    console.log('False easter egg popup not found!'); // Debug log
   }
 }
 
@@ -530,12 +516,62 @@ document.addEventListener('keydown', function(e) {
 
 // Initialize false easter egg when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, setting up false easter egg...'); // Debug log
   setupFalseEasterEgg();
 });
 
 // Also try to set it up after a short delay in case DOM isn't fully ready
 setTimeout(function() {
-  console.log('Delayed false easter egg setup attempt...'); // Debug log
   setupFalseEasterEgg();
 }, 1000);
+
+// ============================================================================
+// EVENT-BASED WEB COMPONENT THEME SYNCHRONIZATION SYSTEM
+// ============================================================================
+// This system fires events when themes change, allowing web components to
+// listen and update themselves automatically - no manual syncing needed!
+
+// Function to fire theme change events that web components can listen to
+function fireThemeChangeEvent(theme) {
+  // Create a custom event that bubbles up through the DOM
+  const themeEvent = new CustomEvent('themeChanged', {
+    detail: { theme: theme },
+    bubbles: true,      // Event bubbles up through parent elements
+    composed: true      // Event can cross shadow DOM boundaries
+  });
+  
+  // Dispatch from document.documentElement so it bubbles up everywhere
+  document.documentElement.dispatchEvent(themeEvent);
+}
+
+// Function to initialize the event-based theme synchronization system
+function initializeUniversalThemeSync() {
+  // Watch for theme changes on the document element
+  const themeObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+        // Theme changed - fire event instead of manually syncing
+        const newTheme = document.documentElement.getAttribute('data-theme') || 'default';
+        fireThemeChangeEvent(newTheme);
+      }
+    });
+  });
+  
+  // Start observing theme changes
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  });
+  
+  // Fire initial theme event so components know the current theme
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
+  fireThemeChangeEvent(currentTheme);
+}
+
+// Initialize the universal theme sync system when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Small delay to ensure all web components are registered
+  setTimeout(initializeUniversalThemeSync, 100);
+});
+
+// Also try to initialize after a longer delay for components that load later
+setTimeout(initializeUniversalThemeSync, 1000);

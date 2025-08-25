@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,13 +11,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/themes.css" />
     <link rel="stylesheet" href="css/misc.css" />
+
   </head>
+
   <body>
     <div class="page-container">
       <!-- Header -->
       <header class="header1">
         <div class="header-inner">
-          <img src="images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo" class="flag-icon">
+        <img src="images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo"
+          class="flag-icon">
           <p id="builtWithLove" style="color:black; font-family:Helvetica Neue">
           </p>
         </div>
@@ -44,9 +48,10 @@
           <aside class="menu">
             <div class="item active" data-panel="conversion">1 • Unit Converter</div>
             <div class="item" data-panel="bmi">2 • BMI Calculator</div>
-            <div class="item" data-panel="date">3 • Date & Timezone Calculator</div>
-            <div class="item" data-panel="emi">4 • EMI Calculator</div>
-            <div class="item" data-panel="investment">5 • Investment Calculator</div>
+            <div class="item" data-panel="date">3 • Date Calculator</div>
+            <div class="item" data-panel="time">4 • Time Calculator</div>
+            <div class="item" data-panel="emi">5 • EMI Calculator</div>
+            <div class="item" data-panel="investment">6 • Investment Calculator</div>
     
             <div class="theme-switcher">
               <div id="themeLabel" class="theme-label">Theme:</div>
@@ -90,39 +95,31 @@
                   <div class="card modes-card">
     
                     <!-- From/To selection UI -->
-                    <div
-                      style="
+                  <div style="
                         display: grid;
                         grid-template-columns: 49% 49%;
                         gap: 12px;
                         align-items: start;
-                      "
-                    >
+                      ">
                       <div class="card">
                         <div class="title-header">From</div>
                         <input id="fromValue" placeholder="Enter value" />
-                        <div
-                          id="fromUnitButtons"
-                          style="
+                      <div id="fromUnitButtons" style="
                             display: flex;
                             flex-wrap: wrap;
                             gap: 6px;
                             margin-top: 8px;
-                          "
-                        ></div>
+                          "></div>
                       </div>
                       <div class="card">
                         <div class="title-header">To</div>
                         <input id="toValue" placeholder="Result" readonly />
-                        <div
-                          id="toUnitButtons"
-                          style="
+                      <div id="toUnitButtons" style="
                             display: flex;
                             flex-wrap: wrap;
                             gap: 6px;
                             margin-top: 8px;
-                          "
-                        ></div>
+                          "></div>
                       </div>
                     </div>
                     <div style="display: flex; gap: 8px; margin-top: 10px">
@@ -158,7 +155,8 @@
                       </div>
                       <div>
                         <label>Gender</label>
-                        <div id="genderButtons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;"></div>
+                      <div id="genderButtons"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;"></div>
                       </div>
                     </div>
                   <!-- Weight Inputs and Buttons -->
@@ -168,14 +166,11 @@
                       <!-- Weight input -->
                       <input id="weightVal" type="number" placeholder="e.g. 70" />
                       <!-- Weight Unit Buttons -->
-                      <div
-                            id="weightUnitButtons"
-                            style="
+                      <div id="weightUnitButtons" style="
                               display: grid;
                               grid-template-columns: repeat(3, 1fr);
                               gap: 8px;
-                            "
-                          ></div>
+                            "></div>
                       </div>
                     </div>
     
@@ -186,14 +181,11 @@
                         <!-- Height input -->
                         <input id="heightVal" placeholder="Enter height" />
                         <!-- Height Unit Buttons -->
-                        <div
-                              id="heightModeButtons"
-                              style="
+                      <div id="heightModeButtons" style="
                                 display: grid;
                                 grid-template-columns: repeat(4, 1fr);
                                 gap: 8px;
-                              "
-                          ></div>
+                              "></div>
                       </div>
                     </div>
     
@@ -237,10 +229,7 @@
                 <div class="conversion-col">
                   <div class="card modes-card">
                     <div class="title-header">Result</div>
-                    <div
-                      id="bmiResultLarge"
-                      class="bmi-result"
-                    >
+                  <div id="bmiResultLarge" class="bmi-result">
                       —
                     </div>
                     <div id="bmiCategory" class="muted" style="margin-top: 6px">
@@ -258,13 +247,15 @@
                          <div id="healthyWeightRange" style="font-weight: 600; color: var(--text-primary);"></div>
                        </div>
                        <!-- Dividing line -->
-                       <div style="border-top: 1px solid var(--border-color); margin-top: 16px; margin-bottom: 16px;"></div>
+                    <div style="border-top: 1px solid var(--border-color); margin-top: 16px; margin-bottom: 16px;">
+                    </div>
                      </div>
                      
                      <!-- BMI Facts Section -->
                      <div id="bmiFactsSection" style="margin-top: auto; display: none;">
                        <div class="muted" style="font-size: 15px; margin-bottom: 8px;">💡 Did You Know?</div>
-                       <div id="bmiFactsContent" style="font-size: 16px; line-height: 1.4; color: var(--text-secondary);"></div>
+                    <div id="bmiFactsContent" style="font-size: 16px; line-height: 1.4; color: var(--text-secondary);">
+                    </div>
                      </div>
                   </div>
                 </div>
@@ -275,14 +266,12 @@
               <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
                 <div>
                   <div class="card">
-                    <div
-                      style="
+                  <div style="
                         display: grid;
                         grid-template-columns: repeat(3, 1fr);
                         gap: 16px;
                         margin-bottom: 20px;
-                      "
-                    >
+                      ">
                       <div>
                         <label>Loan Amount</label>
                         <input id="emiAmt" />
@@ -299,21 +288,14 @@
     
                     <div style="margin-bottom: 20px">
                       <label>Recalculation Mode</label>
-                      <div
-                        style="
+                    <div style="
                           display: grid;
                           grid-template-columns: repeat(3, 1fr);
                           gap: 16px;
                           margin-top: 8px;
-                        "
-                      >
+                        ">
                         <label style="display: flex; align-items: center; gap: 8px">
-                          <input
-                            type="radio"
-                            name="recalcMode"
-                            value="emi"
-                            checked
-                          />
+                        <input type="radio" name="recalcMode" value="emi" checked />
                           <span>Change EMI amount</span>
                         </label>
                         <label style="display: flex; align-items: center; gap: 8px">
@@ -324,10 +306,7 @@
                     </div>
     
                     <div style="display: flex; gap: 8px; margin-bottom: 20px">
-                      <button
-                        class="primary"
-                        onclick="generateAmortizationSchedule()"
-                      >
+                    <button class="primary" onclick="generateAmortizationSchedule()">
                         Calculate / Build Schedule
                       </button>
                       <button onclick="clearEMI()">Clear</button>
@@ -359,9 +338,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div
-                      style="max-height: 400px; overflow: auto; margin-bottom: 20px"
-                    >
+                  <div style="max-height: 400px; overflow: auto; margin-bottom: 20px">
                       <table id="amortTable" style="width: 100%">
                         <thead>
                           <tr>
@@ -397,30 +374,19 @@
                   <!-- SIP Calculator -->
                   <div class="card">
                     <h3>SIP (Systematic Investment Plan) Calculator</h3>
-                    <div
-                      style="
+                  <div style="
                         display: grid;
                         grid-template-columns: repeat(2, 1fr);
                         gap: 16px;
                         margin-bottom: 20px;
-                      "
-                    >
+                      ">
                       <div>
                         <label>Monthly Investment Amount</label>
-                        <input
-                          id="sipAmount"
-                          type="number"
-                          placeholder="e.g., 5000"
-                        />
+                      <input id="sipAmount" type="number" placeholder="e.g., 5000" />
                       </div>
                       <div>
                         <label>Expected Annual Return (%)</label>
-                        <input
-                          id="sipReturn"
-                          type="number"
-                          step="0.1"
-                          placeholder="e.g., 12"
-                        />
+                      <input id="sipReturn" type="number" step="0.1" placeholder="e.g., 12" />
                       </div>
                       <div>
                         <label>Investment Period (Years)</label>
@@ -440,70 +406,49 @@
                     </div>
     
                     <div id="sipResults" style="display: none">
-                      <div
-                        style="
+                    <div style="
                           display: grid;
                           grid-template-columns: repeat(2, 1fr);
                           gap: 20px;
                           margin-bottom: 20px;
-                        "
-                      >
-                        <div
-                          style="
+                        ">
+                      <div style="
                             text-align: center;
                             padding: 16px;
                             background: var(--surface-color);
                             border-radius: 8px;
-                          "
-                        >
-                          <h4
-                            style="margin: 0 0 8px 0; color: var(--primary-color)"
-                          >
+                          ">
+                        <h4 style="margin: 0 0 8px 0; color: var(--primary-color)">
                             Total Investment
                           </h4>
-                          <div
-                            id="totalInvestment"
-                            style="font-size: 24px; font-weight: bold"
-                          ></div>
+                        <div id="totalInvestment" style="font-size: 24px; font-weight: bold"></div>
                         </div>
-                        <div
-                          style="
+                      <div style="
                             text-align: center;
                             padding: 16px;
                             background: var(--surface-color);
                             border-radius: 8px;
-                          "
-                        >
-                          <h4
-                            style="margin: 0 0 8px 0; color: var(--primary-color)"
-                          >
+                          ">
+                        <h4 style="margin: 0 0 8px 0; color: var(--primary-color)">
                             Total Returns
                           </h4>
-                          <div
-                            id="totalReturns"
-                            style="
+                        <div id="totalReturns" style="
                               font-size: 24px;
                               font-weight: bold;
                               color: #4caf50;
-                            "
-                          ></div>
+                            "></div>
                         </div>
                       </div>
     
-                      <div
-                        style="
+                    <div style="
                           text-align: center;
                           padding: 20px;
                           background: var(--primary-color);
                           border-radius: 8px;
                           color: white;
-                        "
-                      >
+                        ">
                         <h4 style="margin: 0 0 8px 0">Maturity Amount</h4>
-                        <div
-                          id="maturityAmount"
-                          style="font-size: 32px; font-weight: bold"
-                        ></div>
+                      <div id="maturityAmount" style="font-size: 32px; font-weight: bold"></div>
                       </div>
     
                       <div style="margin-top: 20px">
@@ -528,46 +473,27 @@
                   <!-- Lump Sum Calculator -->
                   <div class="card" style="margin-top: 20px">
                     <h3>Lump Sum Investment Calculator</h3>
-                    <div
-                      style="
+                  <div style="
                         display: grid;
                         grid-template-columns: repeat(2, 1fr);
                         gap: 16px;
                         margin-bottom: 20px;
-                      "
-                    >
+                      ">
                       <div>
                         <label>Initial Investment Amount</label>
-                        <input
-                          id="lumpSumAmount"
-                          type="number"
-                          placeholder="e.g., 100000"
-                        />
+                      <input id="lumpSumAmount" type="number" placeholder="e.g., 100000" />
                       </div>
                       <div>
                         <label>Expected Annual Return (%)</label>
-                        <input
-                          id="lumpSumReturn"
-                          type="number"
-                          step="0.1"
-                          placeholder="e.g., 12"
-                        />
+                      <input id="lumpSumReturn" type="number" step="0.1" placeholder="e.g., 12" />
                       </div>
                       <div>
                         <label>Investment Period (Years)</label>
-                        <input
-                          id="lumpSumYears"
-                          type="number"
-                          placeholder="e.g., 10"
-                        />
+                      <input id="lumpSumYears" type="number" placeholder="e.g., 10" />
                       </div>
                       <div>
                         <label>Investment Period (Months)</label>
-                        <input
-                          id="lumpSumMonths"
-                          type="number"
-                          placeholder="e.g., 6"
-                        />
+                      <input id="lumpSumMonths" type="number" placeholder="e.g., 6" />
                       </div>
                     </div>
     
@@ -579,70 +505,49 @@
                     </div>
     
                     <div id="lumpSumResults" style="display: none">
-                      <div
-                        style="
+                    <div style="
                           display: grid;
                           grid-template-columns: repeat(2, 1fr);
                           gap: 20px;
                           margin-bottom: 20px;
-                        "
-                      >
-                        <div
-                          style="
+                        ">
+                      <div style="
                             text-align: center;
                             padding: 16px;
                             background: var(--surface-color);
                             border-radius: 8px;
-                          "
-                        >
-                          <h4
-                            style="margin: 0 0 8px 0; color: var(--primary-color)"
-                          >
+                          ">
+                        <h4 style="margin: 0 0 8px 0; color: var(--primary-color)">
                             Initial Investment
                           </h4>
-                          <div
-                            id="initialInvestment"
-                            style="font-size: 24px; font-weight: bold"
-                          ></div>
+                        <div id="initialInvestment" style="font-size: 24px; font-weight: bold"></div>
                         </div>
-                        <div
-                          style="
+                      <div style="
                             text-align: center;
                             padding: 16px;
                             background: var(--surface-color);
                             border-radius: 8px;
-                          "
-                        >
-                          <h4
-                            style="margin: 0 0 8px 0; color: var(--primary-color)"
-                          >
+                          ">
+                        <h4 style="margin: 0 0 8px 0; color: var(--primary-color)">
                             Total Returns
                           </h4>
-                          <div
-                            id="lumpSumTotalReturns"
-                            style="
+                        <div id="lumpSumTotalReturns" style="
                               font-size: 24px;
                               font-weight: bold;
                               color: #4caf50;
-                            "
-                          ></div>
+                            "></div>
                         </div>
                       </div>
     
-                      <div
-                        style="
+                    <div style="
                           text-align: center;
                           padding: 20px;
                           background: var(--primary-color);
                           border-radius: 8px;
                           color: white;
-                        "
-                      >
+                        ">
                         <h4 style="margin: 0 0 8px 0">Final Amount</h4>
-                        <div
-                          id="finalAmount"
-                          style="font-size: 32px; font-weight: bold"
-                        ></div>
+                      <div id="finalAmount" style="font-size: 32px; font-weight: bold"></div>
                       </div>
                     </div>
                   </div>
@@ -650,99 +555,278 @@
               </div>
             </section>
     
-            <!-- Date & Timezone Calculator -->
+            <!-- Date Calculator -->
             <section id="date">
               <div class="date-tabs">
                 <div class="tab-buttons">
                   <button class="tab-button active" data-tab="count-days">Count Days</button>
                   <button class="tab-button" data-tab="add-days">Add Days</button>
-                  <button class="tab-button" data-tab="timezone">Timezone</button>
                 </div>
                 
                 <!-- Count Days Tab -->
                 <div id="count-days" class="tab-content active">
-                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
-                    <div class="card">
-                      <label>Count Days</label>
-                      <div style="margin-bottom: 8px">
-                        <label>From</label>
-                        <input type="date" id="fromDate" />
-                      </div>
-                      <label>To</label>
-                      <input type="date" id="toDate" />
-                      <div style="display: flex; gap: 8px; margin-top: 8px">
-                        <button class="primary" onclick="calculateDateDifference()">
-                          Compute Diff
-                        </button>
-                        <button onclick="clearDates()">Clear</button>
+                  <!-- Enhanced Mode Toggle -->
+                  <div id="toggle-slider-enhanced" style="cursor: pointer;" class="enhanced-toggle">
+                    <div class="toggle-container">
+                      <label class="toggle-label">Enhanced Mode</label>
+                      <div class="toggle-switch">
+                        <input type="checkbox" id="enhancedToggle" />
+                        <span class="toggle-slider"></span>
                       </div>
                     </div>
+                  </div>
+                  <!-- From and To Sections Side by Side -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px;">
+                    <!-- From Section -->
+                    <div class="card">
+                      <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">Start Date</h4>
+                      <date-input id="fromDate" label="From Date" size="full" show-label show-quick-links></date-input>
+                      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <time-input id="fromTime" label="From Time" size="full" show-label show-quick-links style="display: none;"></time-input>
+                        <timezone-input id="fromTimezone" label="From Timezone" size="full" show-label style="display: none; margin-top: 8px;"></timezone-input>
+                      </div>
+                    </div>
+                    
+                    <!-- To Section -->
+                    <div class="card">
+                      <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">End Date</h4>
+                      <date-input id="toDate" label="To Date" size="full" show-label show-quick-links></date-input>
+                      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                        <time-input id="toTime" label="To Time" size="full" show-label show-quick-links style="display: none;"></time-input>
+                        <timezone-input id="toTimezone" label="To Timezone" size="full" show-label style="display: none; margin-top: 8px;"></timezone-input>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Add 1 day to end date section -->
+                  <div id="includeEndDateDiv" class="card">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                      Include end date in calculation (1 day is added)
+                      <input type="checkbox" id="includeEndDate" />
+                    </label>
+                  </div>
+                  <!-- Compute Difference Button -->
+                  <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 16px;">
+                    <button class="primary" onclick="countDays()">
+                      Compute Difference
+                    </button>
+                    <button onclick="clearDates()">Clear</button>
+                  </div>
+                  <!-- Result Section at Bottom -->
+                  <div id="dateResultContainer" style="display: none; margin-top: 16px;">
                     <div id="dateResult" class="muted card result-box"></div>
                   </div>
                 </div>
-                
                 <!-- Add Days Tab -->
                 <div id="add-days" class="tab-content">
+                    <!-- Enhanced Mode Toggle -->
+                      <div class="enhanced-toggle" style="cursor: pointer;" id="toggle-slider-add-days">
+                        <div class="toggle-container">
+                          <label class="toggle-label">Show Time Inputs</label>
+                          <div class="toggle-switch">
+                            <input type="checkbox" id="addDaysEnhancedToggle" />
+                            <span class="toggle-slider"></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Date Arithmetic -->
+                      <div class="card" style="display: grid; grid-template-columns: 100%; align-items: stretch;">
+                        <!-- Date Input -->
+                        <label>Date Arithmetic</label>
+                        <div style="display: grid; grid-template-columns: 35% 13% 52%; align-items: start; margin-top: 8px;">
+                          <!-- 1st Column: Date and Time Inputs -->
+                          <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <date-input size="full" id="baseDate" label="Base Date" show-label show-quick-links></date-input>
+                          </div>
+                          
+                          <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+                              <div style="width: 8px; height: 1px; background: linear-gradient(to right, transparent, var(--primary-color, #3b82f6));"></div>
+                              <label id="dateArithmeticLabel" class="input-label" style="font-weight: 600; color: var(--primary-color, #3b82f6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Add</label>
+                              <div style="width: 8px; height: 1px; background: linear-gradient(to left, transparent, var(--primary-color, #3b82f6));"></div>
+                            </div>
+                          </div>
+
+                          <!-- 2nd Column: Date Delta Fields -->
+                          <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="
+                                  display: grid;
+                                  grid-template-columns: repeat(4, 1fr);
+                                  gap: 8px;
+                                ">
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaDays">Days</label>
+                                <input class="input-field" type="number" id="deltaDays" placeholder="Days" />
+                              </div>
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaWeeks">Weeks</label>
+                                <input class="input-field" type="number" id="deltaWeeks" placeholder="Weeks" />
+                              </div>
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaMonths">Months</label>
+                                <input class="input-field" type="number" id="deltaMonths" placeholder="Months" />
+                              </div>
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaYears">Years</label>
+                                <input class="input-field" type="number" id="deltaYears" placeholder="Years" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Time Arithmetic -->
+                      <div id="timeArithmeticCard" class="card" style="display: grid; grid-template-columns: 100%; align-items: start; margin-top: 16px;">
+                        <label>Time Arithmetic</label>
+
+                        <div style="display: grid; grid-template-columns: 40% 13% 47%; align-items: start; margin-top: 8px;">
+
+                          <!-- 1st Column: Time Input -->
+                          <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <time-input size="full" id="baseTime" label="Base Time" show-label show-quick-links></time-input>
+                          </div>
+
+                          <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+                              <div style="width: 8px; height: 1px; background: linear-gradient(to right, transparent, var(--primary-color, #3b82f6));"></div>
+                              <label id="timeArithmeticLabel" class="input-label" style="font-weight: 600; color: var(--primary-color, #3b82f6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Add</label>
+                              <div style="width: 8px; height: 1px; background: linear-gradient(to left, transparent, var(--primary-color, #3b82f6));"></div>
+                            </div>
+                          </div>
+
+                          <!-- 2nd Column: Time Delta Fields -->
+                          <div style="display: flex; flex-direction: column; gap: 12px; padding-right: 8px;">
+                            <div style="
+                                  display: grid;
+                                  grid-template-columns: repeat(3, 1fr);
+                                  gap: 8px;
+                                ">
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaHours">Hours</label>
+                                <input class="input-field" type="number" id="deltaHours" placeholder="Hours" />
+                              </div>
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaMinutes">Minutes</label>
+                                <input class="input-field" type="number" id="deltaMinutes" placeholder="Minutes" />
+                              </div>
+                              <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaSeconds">Seconds</label>
+                                <input class="input-field" type="number" id="deltaSeconds" placeholder="Seconds" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <!-- Operation -->
+                      <div class="card" style="margin-top: 16px; width: 50%;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Operation</label>
+                        <div id="deltaSignChips" style="display: grid; grid-template-columns: 20% 20%; gap: 12px;">
+                          <button class="chip selected" data-value="add">Add</button>
+                          <button class="chip" data-value="subtract">Subtract</button>
+                        </div>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="card" style="margin-top: 16px;">
+                        <div style="display: flex; gap: 8px;">
+                          <button class="primary" onclick="addSubtractDays()">
+                            Apply
+                          </button>
+                          <button onclick="clearAddDays()">
+                            Clear
+                          </button>
+                        </div>
+                      </div>
+
+                    <!-- Result Section -->
+                    <div id="dateResultContainer1" style="display: none; margin-top: 16px;">
+                      <div id="dateMathRes" class="muted card result-box"></div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Time Calculator -->
+            <section id="time">
+              <div class="time-tabs">
+                <div class="tab-buttons">
+                  <button class="tab-button active" data-tab="timezone">Timezone</button>
+                  <button class="tab-button" data-tab="count-time">Count Time</button>
+                  <button class="tab-button" data-tab="add-time">Add Time</button>
+                </div>
+                
+                <!-- Timezone Tab -->
+                <div id="timezone" class="tab-content active">
+                  <div style="display: grid; grid-template-columns: 50% 50%; gap: 12px; align-items: stretch;">
+                    <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                      <timezone-input id="fromTimezone_tzConverter" default="now" size="full"></timezone-input>
+                      <time-input id="fromTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                      <date-input id="fromDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                    </div>
+                    <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                      <timezone-input id="toTimezone_tzConverter" default="now" size="full"></timezone-input>
+                      <time-input id="toTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                      <date-input id="toDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                    </div>
+                  </div>
+                  <!-- <div id="tzResult" class="muted card result-box"></div> -->
+                </div>
+                
+                <!-- Count Time Tab -->
+                <div id="count-time" class="tab-content">
                   <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
                     <div class="card">
-                      <label>Date Arithmetic</label>
-                      <input type="date" id="baseDate" />
-                      <div
-                        style="
+                    <time-input id="fromTimeOnly" label="From Time" show-label show-quick-links></time-input>
+                    <time-input id="toTimeOnly" label="To Time" show-label show-quick-links></time-input>
+                      <div style="display: flex; gap: 8px; margin-top: 8px">
+                        <button class="primary" onclick="calculateTimeDifference()">
+                          Compute Diff
+                        </button>
+                        <button onclick="clearTime()">Clear</button>
+                      </div>
+                    </div>
+                    <div id="timeResult" class="muted card result-box"></div>
+                  </div>
+                </div>
+                
+                <!-- Add Time Tab -->
+                <div id="add-time" class="tab-content">
+                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                    <div class="card">
+                      <label>Add/Subtract Time</label>
+                    <time-input id="baseTime" label="Base Time" show-label show-quick-links></time-input>
+                    <div style="
                           display: grid;
-                          grid-template-columns: repeat(4, 1fr);
+                          grid-template-columns: repeat(3, 1fr);
                           gap: 8px;
                           margin-top: 8px;
-                        "
-                      >
-                        <input type="number" id="deltaDays" placeholder="Days" />
-                        <input type="number" id="deltaWeeks" placeholder="Weeks" />
-                        <input type="number" id="deltaMonths" placeholder="Months" />
-                        <input type="number" id="deltaYears" placeholder="Years" />
+                        ">
+                        <input type="number" id="deltaHours" placeholder="Hours" />
+                        <input type="number" id="deltaMinutes" placeholder="Minutes" />
+                        <input type="number" id="deltaSeconds" placeholder="Seconds" />
                       </div>
-                      <div
-                        style="
+                    <div style="
                           display: flex;
                           gap: 16px;
                           align-items: center;
                           margin-top: 8px;
-                        "
-                      >
-                        <label style="display: flex; align-items: center; gap: 6px"
-                          ><input type="radio" name="deltaSign" value="add" checked />
-                          Add</label
-                        >
-                        <label style="display: flex; align-items: center; gap: 6px"
-                          ><input type="radio" name="deltaSign" value="subtract" />
-                          Subtract</label
-                        >
+                        ">
+                      <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
+                          name="timeDeltaSign" value="add" checked />
+                        Add</label>
+                      <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
+                          name="timeDeltaSign" value="subtract" />
+                        Subtract</label>
                       </div>
                       <div style="display: flex; gap: 8px; margin-top: 8px">
-                        <button class="primary" onclick="addSubtractDays()">
+                        <button class="primary" onclick="addSubtractTime()">
                           Apply
                         </button>
                       </div>
                     </div>
-                    <div id="dateMathRes" class="muted card result-box"></div>
-                  </div>
-                </div>
-                
-                <!-- Timezone Tab -->
-                <div id="timezone" class="tab-content">
-                  <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
-                    <div class="card">
-                      <label>Timezone Converter</label>
-                      <input type="datetime-local" id="tzInput" />
-                      <div style="display: flex; gap: 8px; margin-top: 8px">
-                        <select id="tzFrom"></select>
-                        <select id="tzTo"></select>
-                      </div>
-                      <div style="display: flex; gap: 8px; margin-top: 8px">
-                        <button class="primary" onclick="convertTZ()">Convert</button>
-                        <button id="nowBtn">Now</button>
-                      </div>
-                    </div>
-                    <div id="tzResult" class="muted card result-box"></div>
+                  <div id="timeMathRes" class="muted card result-box"> </div>
                   </div>
                 </div>
               </div>
@@ -802,9 +886,18 @@
     <script src="js/investment-calculator.js"></script>
     <script src="js/unit-converter.js"></script>
     <script src="js/date-calculator.js"></script>
+    <script src="js/time-calculator.js"></script>
+    <script type="module" src="web-components/timezone-input/timezone-input.js"></script>
     <script src="js/bmi-facts-config.js"></script>
     <script src="js/bmi-calculator.js"></script>
     <script src="js/ribbons-config.js"></script>
     <script src="js/responsive-redirect.js"></script>
+    <script src="js/date-time-picker.js"></script>
+    <script src="web-components/time-input/time-input.js"></script>
+    <script src="web-components/date-input/date-input.js"></script>
+    <script src="web-components/searchable-select/searchable-select.js"></script>
+    
+
   </body>
+
 </html>

@@ -114,7 +114,15 @@ function populateTextContent() {
     
     // Menu items (Desktop)
     const menuItems = document.querySelectorAll('.menu .item');
-    if (menuItems.length >= 5) {
+    if (menuItems.length >= 6) {
+      menuItems[0].textContent = window.getText('menu.unitConverter');
+      menuItems[1].textContent = window.getText('menu.bmiCalculator');
+      menuItems[2].textContent = window.getText('menu.dateCalculator');
+      menuItems[3].textContent = window.getText('menu.timeCalculator');
+      menuItems[4].textContent = window.getText('menu.emiCalculator');
+      menuItems[5].textContent = window.getText('menu.investmentCalculator');
+    } else if (menuItems.length >= 5) {
+      // Backward compatibility (older layout without time calculator)
       menuItems[0].textContent = window.getText('menu.unitConverter');
       menuItems[1].textContent = window.getText('menu.bmiCalculator');
       menuItems[2].textContent = window.getText('menu.dateCalculator');
@@ -124,7 +132,22 @@ function populateTextContent() {
     
     // Menu items (Mobile)
     const mobileMenuItems = document.querySelectorAll('.mobile-item');
-    if (mobileMenuItems.length >= 5) {
+    if (mobileMenuItems.length >= 6) {
+      const unitText = window.getText('menu.unitConverter').split('• ')[1];
+      const bmiText = window.getText('menu.bmiCalculator').split('• ')[1];
+      const dateText = window.getText('menu.dateCalculator').split('• ')[1];
+      const timeText = window.getText('menu.timeCalculator').split('• ')[1];
+      const emiText = window.getText('menu.emiCalculator').split('• ')[1];
+      const investmentText = window.getText('menu.investmentCalculator').split('• ')[1];
+      
+      mobileMenuItems[0].textContent = `1 • ${unitText}`;
+      mobileMenuItems[1].textContent = `2 • ${bmiText}`;
+      mobileMenuItems[2].textContent = `3 • ${dateText}`;
+      mobileMenuItems[3].textContent = `4 • ${timeText}`;
+      mobileMenuItems[4].textContent = `5 • ${emiText}`;
+      mobileMenuItems[5].textContent = `6 • ${investmentText}`;
+    } else if (mobileMenuItems.length >= 5) {
+      // Backward compatibility (older layout without time calculator)
       const unitText = window.getText('menu.unitConverter').split('• ')[1];
       const bmiText = window.getText('menu.bmiCalculator').split('• ')[1];
       const dateText = window.getText('menu.dateCalculator').split('• ')[1];
@@ -226,6 +249,12 @@ function populateTextContent() {
       footerEasterEgg.innerHTML = window.getText('footer.easterEgg');
     }
     
+    // Enhanced Mode Toggle (Desktop and Mobile)
+    const enhancedToggleLabel = document.querySelector('.enhanced-toggle .toggle-label');
+    if (enhancedToggleLabel) {
+      enhancedToggleLabel.textContent = window.getText('date.enhancedMode');
+    }
+    
     // Site Facts Popup
     const siteFactsPopup = document.getElementById('siteFactsPopup');
     if (siteFactsPopup) {
@@ -268,11 +297,11 @@ function populateTextContent() {
       }
     }
   } else {
-    console.warn('TEXT_CONFIG not found - using default text');
+
   }
 }
 
-// Expose functions globally so they can be used by other scripts
+// Export globally
 window.populateTextContent = populateTextContent;
 window.convertUnit = convertUnit;
 window.buildUnitChips = buildUnitChips;
@@ -311,7 +340,7 @@ window.addEventListener('load', () => {
   setInterval(animateTagline, animateTime * 2 + 1000);
 });
 
-// Manual trigger for testing (can be called from console)
+  // Manual trigger for theme synchronization
 window.triggerTaglineAnimation = animateTagline;
 
 function convertUnit(valueToConvert, mode, fromUnit, toUnit) {
@@ -346,3 +375,28 @@ function convertUnit(valueToConvert, mode, fromUnit, toUnit) {
     return Number.isFinite(result) ? String(parseFloat(result.toFixed(4))) : "";
   }
 }
+
+// Timezone functions moved to timezone-utils.js
+
+// Helper function to get text by path (e.g., "unitConverter.from" returns "From")
+window.getText = function(path) {
+  const keys = path.split('.');
+  let value = window.TEXT_CONFIG;
+  
+  for (const key of keys) {
+    if (value && typeof value === 'object' && key in value) {
+      value = value[key];
+    } else {
+  
+      return path; // Return the path as fallback
+    }
+  }
+  
+  return value;
+};
+
+// Helper function to get text array by path
+window.getTextArray = function(path) {
+  const value = window.getText(path);
+  return Array.isArray(value) ? value : [value];
+};

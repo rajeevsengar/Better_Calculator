@@ -1,0 +1,183 @@
+/* Date Input Web Component Styles */
+
+/* Import theme CSS */
+@import url('../../css/themes.css');
+@import url('../../css/style.css');
+
+/* Component Container */
+.date-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 300px;
+    margin:0;
+}
+
+/* Size variants */
+.date-input-container.size-small {
+    max-width: 200px;
+    margin: 0;  /* No margin - spacing handled by parent */
+}
+
+.date-input-container.size-large {
+    max-width: 400px;
+    margin: 0;  /* No margin - spacing handled by parent */
+}
+
+.date-input-container.size-full {
+    max-width: 100%;
+    margin: 0;  /* No margin - spacing handled by parent */
+}
+
+/* Label styling */
+.date-input-label {
+    font-size: 13px;
+    color: var(--text-secondary, #475569);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+/* Date Input Field */
+.date-input-field {
+    padding: 12px 16px;
+    border: 2px solid var(--input-border, #cbd5e1);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    background-color: var(--input-background, #ffffff);
+    color: var(--text-primary, #1e293b);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Size variants for input field */
+.date-input-field.size-small {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.date-input-field.size-large {
+    padding: 16px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.date-input-field:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+.date-input-field:focus {
+    outline: none;
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.date-input-field::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+    transition: all 0.3s ease;
+}
+
+.date-input-field::-webkit-calendar-picker-indicator:hover {
+    filter: invert(0.3);
+}
+
+/* Quick Links Container */
+.quick-links {
+    display: flex;
+    gap: 8px;
+}
+
+/* Quick Link Styling */
+.quick-link {
+    padding-bottom: 8px;
+    background: none;
+    color: var(--primary-color, #3b82f6);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    min-width: fit-content;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    display: inline-block;
+    outline: none;
+    text-decoration-skip-ink: none;
+}
+
+.quick-link:hover {
+    color: var(--primary-hover, #2563eb);
+    text-decoration-thickness: 2px;
+    transform: translateY(-1px);
+}
+
+.quick-link:active {
+    transform: translateY(0);
+}
+
+.quick-link:focus {
+    outline: none;
+    border: none;
+}
+
+.quick-link:focus-visible {
+    outline: none;
+    border: none;
+}
+
+/* Size variants for quick link */
+.quick-link.size-small {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.quick-link.size-large {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Focus effects using theme colors */
+.date-input-field:focus {
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
+}
+
+/* CSS Custom Properties for theming - inherit from parent document */
+:host {
+    /* Use CSS custom properties from parent document if available, fallback to defaults */
+    --primary-color: var(--primary-color, #3b82f6);
+    --primary-hover: var(--primary-hover, #2563eb);
+    --input-border: var(--input-border, #cbd5e1);
+    --input-background: var(--input-background, #ffffff);
+    --text-primary: var(--text-primary, #1e293b);
+    --text-secondary: var(--text-secondary, #475569);
+    --card-background: var(--card-background, #ffffff);
+    --border-color: var(--border-color, #e2e8f0);
+    --shadow-color: var(--shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+/* Theme-specific overrides to ensure theme colors work */
+:host([data-theme="green"]) {
+    --primary-color: #4caf50;
+    --primary-hover: #388e3c;
+}
+
+:host([data-theme="purple"]) {
+    --primary-color: #9c27b0;
+    --primary-hover: #7b1fa2;
+}
+
+:host([data-theme="orange"]) {
+    --primary-color: #ff9800;
+    --primary-hover: #f57c00;
+} 

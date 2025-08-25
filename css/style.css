@@ -301,12 +301,49 @@ h1, h2, h3, h4, h5, h6 {
 .col { flex: 1; }
 
 /* FORMS */
-label {
+/* label {
   font-size: 13px;
   color: var(--text-secondary);
   display: block;
   margin-bottom: 6px;
+} */
+/* Label styling */
+.input-label {
+  font-size: 13px;
+  color: var(--text-secondary, #475569);
+  display: block;
+  margin-bottom: 14px !important;
+  font-weight: 500;
 }
+
+/* Date Input Field */
+.input-field {
+  padding: 12px 16px;
+  border: 2px solid var(--input-border, #cbd5e1);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+  background-color: var(--input-background, #ffffff);
+  color: var(--text-primary, #1e293b);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Size variants for input field */
+.input-field.size-small {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.input-field.size-large {
+  padding: 16px 20px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
 input,
 select,
 button,
@@ -390,8 +427,9 @@ tr:hover {
   height: 220px;
 }
 
-/* Date Calculator Tabs */
-.date-tabs {
+/* Date & Time Calculator Tabs */
+.date-tabs,
+.time-tabs {
   width: 100%;
 }
 
@@ -435,4 +473,205 @@ tr:hover {
 
 .tab-content.active {
   display: block;
+}
+
+/* Enhanced Toggle Styles */
+.enhanced-toggle {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* Quick Link Styles */
+.quick-links {
+  font-size: 12px;
+}
+
+.quick-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.quick-link:hover {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.toggle-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+  cursor: pointer;
+  flex: 1;
+}
+
+.toggle-switch {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: var(--border-color);
+  border-radius: 13px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.toggle-slider:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-slider {
+  background: var(--primary-color);
+}
+
+.toggle-switch input[type="checkbox"]:checked + .toggle-slider:before {
+  transform: translateX(22px);
+}
+
+/* Mobile-specific enhanced toggle adjustments */
+@media (max-width: 768px) {
+  .enhanced-toggle {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-label {
+    gap: 24px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  .toggle-slider {
+    width: 52px;
+    height: 28px;
+  }
+  
+  .toggle-slider:before {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .toggle-switch input[type="checkbox"]:checked + .toggle-slider:before {
+    transform: translateX(24px);
+  }
+}
+
+/* Enhanced Input Styles */
+.enhanced-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.enhanced-inputs input[type="time"],
+.enhanced-inputs select {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.enhanced-inputs input[type="time"] {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.enhanced-inputs select {
+  cursor: pointer;
+}
+
+/* Timezone components now use timezone-input.css */
+
+/* Result Display Styles */
+.result-detail {
+  margin: 8px 0;
+  padding: 8px;
+  background: var(--card-bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.result-alternatives {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--hover-bg);
+  border-radius: 8px;
+}
+
+.result-alternatives h4 {
+  margin: 0 0 8px 0;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.result-alternatives ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.result-alternatives li {
+  margin: 4px 0;
+  color: var(--text-color);
+}
+
+/* Web Component Test Styles */
+.output-box {
+  margin-top: 12px;
+  padding: 8px;
+  background: var(--surface-color);
+  border-radius: 6px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.event-output {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.size-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

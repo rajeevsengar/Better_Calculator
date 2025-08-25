@@ -15,9 +15,10 @@ window.TEXT_CONFIG = {
   menu: {
     unitConverter: "1 • Unit Converter",
     bmiCalculator: "2 • BMI Calculator", 
-    dateCalculator: "3 • Date & Timezone Calculator",
-    emiCalculator: "4 • EMI Calculator",
-    investmentCalculator: "5 • Investment Calculator"
+    dateCalculator: "3 • Date Calculator",
+    timeCalculator: "4 • Time Calculator",
+    emiCalculator: "5 • EMI Calculator",
+    investmentCalculator: "6 • Investment Calculator"
   },
 
   // Theme switcher
@@ -154,7 +155,7 @@ window.TEXT_CONFIG = {
     countDays: "Count Days",
     from: "From",
     to: "To",
-    computeDiff: "Compute Diff",
+    computeDiff: "Compute Difference",
     clear: "Clear",
     dateArithmetic: "Date Arithmetic",
     days: "Days",
@@ -166,7 +167,32 @@ window.TEXT_CONFIG = {
     apply: "Apply",
     timezoneConverter: "Timezone Converter",
     convert: "Convert",
-    now: "Now"
+    now: "Now",
+    enhancedMode: "Consider Time",
+    localTime: "Local Time",
+    fromAndIncluding: "From and including:",
+    toButNotIncluding: "To, but not including:",
+    result: "Result:",
+    duration: "The duration is",
+    or: "Or",
+    alternativeTimeUnits: "Alternative time units",
+    canBeConverted: "can be converted to one of these units:",
+    seconds: "seconds",
+    minutes: "minutes",
+    hours: "hours",
+    days: "days",
+    weeksAndDays: "weeks and",
+    percentOfYear: "% of a common year (365 days)",
+    percentOfDay: "% of a 24 hour day",
+    excludingEndDate: "excluding the end date",
+    time: "time",
+    and: "and",
+    fromTime: "From Time",
+    toTime: "To Time",
+    addSubtractTime: "Add/Subtract Time",
+    hours: "Hours",
+    minutes: "Minutes",
+    seconds: "Seconds"
   },
 
   // Footer
@@ -214,7 +240,7 @@ window.getText = function(path) {
     if (value && typeof value === 'object' && key in value) {
       value = value[key];
     } else {
-      console.warn(`Text path not found: ${path}`);
+  
       return path; // Return the path as fallback
     }
   }

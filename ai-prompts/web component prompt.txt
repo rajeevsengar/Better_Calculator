@@ -1,0 +1,3 @@
+create new web component for time input that will have now | start of a day | noon quick links. Use rules defined in this rules txt
+
+create sepearte html that will test this web component.

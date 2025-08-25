@@ -7,6 +7,25 @@
   font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
 }
 
+/* Mobile-specific time input styles */
+.mobile-time-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Mobile timezone converter columns */
+.mobile-timezone-column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-background);
+}
+
 /* Mobile breakpoint */
 @media (max-width: 768px) {
   /* Override desktop overflow hidden for mobile */
@@ -819,3 +838,70 @@
     grid-template-columns: 1fr;
   }
 } 
+
+/* Mobile-specific enhanced toggle adjustments */
+@media (max-width: 768px) {
+  .enhanced-toggle {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-label {
+    gap: 24px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  
+  .toggle-slider {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background: var(--border-color);
+    border-radius: 14px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    display: block;
+  }
+  
+  .toggle-slider:before {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .toggle-switch input[type="checkbox"]:checked + .toggle-slider:before {
+    transform: translateX(24px);
+  }
+} 
+
+/* Enhanced Input Styles */
+.enhanced-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.enhanced-inputs input[type="time"],
+.enhanced-inputs select {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.enhanced-inputs input[type="time"] {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.enhanced-inputs select {
+  cursor: pointer;
+}
+
+/* Timezone components now use timezone-input.css */ 

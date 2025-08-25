@@ -1,0 +1,178 @@
+/* Time Input Web Component Styles */
+
+/* Import theme CSS */
+@import url('../../css/themes.css');
+@import url('../../css/style.css');
+
+/* Component Container */
+.time-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 300px;
+    margin: 0;
+}
+
+/* Size variants */
+.time-input-container.size-small {
+    max-width: 200px;
+    margin: 0;
+}
+
+.time-input-container.size-large {
+    max-width: 400px;
+    margin: 0;
+}
+
+.time-input-container.size-full {
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Label styling */
+.time-label {
+    font-size: 13px;
+    color: var(--text-secondary, #475569);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+/* Time Input Field */
+.time-input {
+    border: 2px solid var(--input-border, #cbd5e1);
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    background-color: var(--input-background, #ffffff);
+    color: var(--text-primary, #1e293b);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Size variants for input field */
+.time-input.size-small {
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.time-input.size-large {
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.time-input:hover {
+    border-color: var(--primary-color, #3b82f6);
+}
+
+.time-input:focus {
+    outline: none;
+    border-color: var(--primary-color, #3b82f6);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.time-input:disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Quick Links Container */
+.quick-links {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+/* Quick Link Styling */
+.quick-link {
+    padding-left: 0;
+    padding-right: 8px;
+    background: none;
+    color: var(--primary-color, #3b82f6);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+    width: fit-content;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    display: inline-block;
+    outline: none;
+    text-decoration-skip-ink: none;
+    text-align: left;
+}
+
+
+
+.quick-link:hover {
+    color: var(--primary-hover, #2563eb);
+    text-decoration-thickness: 2px;
+    transform: translateY(-1px);
+    background: none;
+}
+
+.quick-link:active {
+    transform: translateY(0);
+}
+
+.quick-link:focus {
+    outline: none;
+    border: none;
+}
+
+.quick-link:focus-visible {
+    outline: none;
+    border: none;
+}
+
+/* Size variants for quick link */
+.quick-link.size-small {
+    padding: 3px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.quick-link.size-large {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+/* Focus effects using theme colors */
+.time-input:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* CSS Custom Properties for theming - inherit from parent document */
+:host {
+    /* Use CSS custom properties from parent document if available, fallback to defaults */
+    --primary-color: var(--primary-color, #3b82f6);
+    --primary-hover: var(--primary-hover, #2563eb);
+    --input-border: var(--input-border, #cbd5e1);
+    --input-background: var(--input-background, #ffffff);
+    --text-primary: var(--text-primary, #1e293b);
+    --text-secondary: var(--text-secondary, #475569);
+    --card-background: var(--card-background, #ffffff);
+    --border-color: var(--border-color, #e2e8f0);
+    --shadow-color: var(--shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+/* Theme-specific overrides to ensure theme colors work */
+:host([data-theme="green"]) {
+    --primary-color: #4caf50;
+    --primary-hover: #388e3c;
+}
+
+:host([data-theme="purple"]) {
+    --primary-color: #9c27b0;
+    --primary-hover: #7b1fa2;
+}
+
+:host([data-theme="orange"]) {
+    --primary-color: #ff9800;
+    --primary-hover: #f57c00;
+} 
