@@ -29,7 +29,7 @@ class DateInput extends HTMLElement {
         this._setupEventListeners();
         this._setupThemeListener();
         if (this._default) {
-            this._setDefaultValue();
+            this._setDefaultValue(this._default);
         }
     }
 

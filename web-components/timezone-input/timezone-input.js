@@ -42,7 +42,7 @@ class TimezoneInput extends HTMLElement {
                     const offsetMinutes = timezoneInfo.offsetMinutes;
 
                     const label = `${timezone.replace(/_/g, " ")}${offset ? ` (${offset})` : ''}`;
-                    const secondaryLabel = `${code || ''}${country ? ` (${country})` : ''}`;
+                    const secondaryLabel = `${country || ''}${code ? ` (${code})` : ''}`;
 
                     // for debugging
                     if(country == '' || country == null || country == undefined){

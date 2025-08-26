@@ -47,48 +47,11 @@ class DateCalculator {
   }
 
   setDefaultValues() {
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 1);
-
-    if (this.baseDateInput) this.baseDateInput.value = today.toISOString().split("T")[0];
-    if (this.baseTimeInput) this.baseTimeInput.value = this.baseTimeInput.getStartOfDay();
-    
-    // Hide time arithmetic section by default
-    this.hideTimeArithmeticSection();
-    
-    // Set default values for web components
-    if (this.fromDateInput) {
-      this.fromDateInput.value = yesterday.toISOString().split("T")[0];
-    }
-    
-    if (this.fromTimeInput) {
-      this.fromTimeInput.value = today.toTimeString().slice(0, 5);
-      // Hide time input by default (toggle is OFF)
-      this.fromTimeInput.style.display = "none";
-    }
-    
-    if (this.fromTimezoneInput) {
-      this.fromTimezoneInput.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      // Hide timezone input by default (toggle is OFF)
-      this.fromTimezoneInput.style.display = "none";
-    }
-    
-    if (this.toDateInput) {
-      this.toDateInput.value = today.toISOString().split("T")[0];
-    }
-    
-    if (this.toTimeInput) {
-      this.toTimeInput.value = today.toTimeString().slice(0, 5);
-      // Hide time input by default (toggle is OFF)
-      this.toTimeInput.style.display = "none";
-    }
-    
-    if (this.toTimezoneInput) {
-      this.toTimezoneInput.value = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      // Hide timezone input by default (toggle is OFF)
-      this.toTimezoneInput.style.display = "none";
-    }
+     // Hide time arithmetic section by default
+     const timeArithmeticCard = document.getElementById('timeArithmeticCard'); // Time Arithmetic card
+     if (timeArithmeticCard) {
+       timeArithmeticCard.style.display = "none";
+     }
   }
 
   bindEvents() {
@@ -202,14 +165,6 @@ class DateCalculator {
     const timeArithmeticCard = document.getElementById('timeArithmeticCard'); // Time Arithmetic card
     if (timeArithmeticCard) {
       timeArithmeticCard.style.display = isEnhanced ? "block" : "none";
-    }
-  }
-
-  hideTimeArithmeticSection() {
-    // Hide time arithmetic section by default
-    const timeArithmeticCard = document.getElementById('timeArithmeticCard'); // Time Arithmetic card
-    if (timeArithmeticCard) {
-      timeArithmeticCard.style.display = "none";
     }
   }
 

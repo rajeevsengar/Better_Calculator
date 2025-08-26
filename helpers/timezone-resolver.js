@@ -1,5 +1,4 @@
 // timezone-resolver.js
-// Utility for timezone lookups and metadata
 
 // Timezone to country and code mapping
 const TZ_COUNTRY_MAP = {

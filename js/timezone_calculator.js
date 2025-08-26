@@ -1,7 +1,7 @@
 // Time Calculator - Simple Timezone Converter Implementation
 "use strict";
 
-class TimezoneCalculator {
+class TimeCalculator {
   constructor() {
     this.initializeElements();
     this.bindEvents();
@@ -22,7 +22,7 @@ class TimezoneCalculator {
   bindEvents() {
     // Listen for changes in left column
     if (this.fromTimezone) {
-      this.fromTimezone.addEventListener('change', () => this.convertFromLeftToRight());
+      this.fromTimezone.addEventListener('change', () => this.convertFromRightToLeft());
     }
     if (this.fromTime) {
       this.fromTime.addEventListener('timeChanged', () => this.convertFromLeftToRight());
@@ -33,7 +33,7 @@ class TimezoneCalculator {
 
     // Listen for changes in right column
     if (this.toTimezone) {
-      this.toTimezone.addEventListener('change', () => this.convertFromRightToLeft());
+      this.toTimezone.addEventListener('change', () => this.convertFromLeftToRight());
     }
     if (this.toTime) {
       this.toTime.addEventListener('timeChanged', () => this.convertFromRightToLeft());
@@ -75,7 +75,6 @@ class TimezoneCalculator {
 
   convertDateTime(dateStr, timeStr, fromTz, toTz) {
     if (!fromTz || !toTz || !dateStr || !timeStr) return null;
-    debugger
     try {
       // Parse date and time
       const [year, month, day] = dateStr.split('-').map(n => parseInt(n, 10));
@@ -145,5 +144,5 @@ class TimezoneCalculator {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.timezoneCalculator = new TimezoneCalculator();
+  window.timeCalculator = new TimeCalculator();
 }); 

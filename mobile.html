@@ -470,22 +470,22 @@
                         <!-- From Section -->
                         <div style="border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; padding: 16px; background: var(--card-background, #ffffff);">
                           <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">Start Date</h4>
-                          <date-input id="fromDate" label="From Date" show-label show-quick-links></date-input>
+                          <date-input id="fromDate" label="From Date" show-label show-quick-links default="now"></date-input>
 
                           <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                            <time-input id="fromTime" label="From Time" show-label show-quick-links style="display: none;"></time-input>
-                            <timezone-input id="fromTimezone" label="From Timezone" show-label style="display: none; margin-top: 8px;"></timezone-input>
+                            <time-input id="fromTime" label="From Time" show-label show-quick-links default="now" style="display: none;"></time-input>
+                            <timezone-input id="fromTimezone" label="From Timezone" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
                           </div>
                         </div>
                         
                         <!-- To Section -->
                         <div style="border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; padding: 16px; background: var(--card-background, #ffffff);">
                           <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">End Date</h4>
-                          <date-input id="toDate" label="To Date" show-label show-quick-links></date-input>
+                          <date-input id="toDate" label="To Date" show-label show-quick-links default="now"></date-input>
 
                           <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                            <time-input id="toTime" label="To Time" show-label show-quick-links style="display: none;"></time-input>
-                            <timezone-input id="toTimezone" label="To Timezone" show-label style="display: none; margin-top: 8px;"></timezone-input>
+                            <time-input id="toTime" label="To Time" show-label show-quick-links default="now" style="display: none;"></time-input>
+                            <timezone-input id="toTimezone" label="To Timezone" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
                           </div>
                         </div>
                       </div>
@@ -529,7 +529,7 @@
                       <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
                         <!-- Date Input -->
                         <div>
-                          <date-input size="full" id="baseDate" label="Base Date" show-label show-quick-links></date-input>
+                          <date-input size="full" id="baseDate" label="Base Date" show-label show-quick-links default="now"></date-input>
                         </div>
                         
                         <!-- Operation Label -->
@@ -567,7 +567,7 @@
                       <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
                         <!-- Time Input -->
                         <div>
-                          <time-input size="full" id="baseTime" label="Base Time" show-label show-quick-links></time-input>
+                          <time-input size="full" id="baseTime" label="Base Time" show-label show-quick-links default="now"></time-input>
                         </div>
                         
                         <!-- Operation Label -->
@@ -663,8 +663,8 @@
                   <div class="mobile-date-container">
                     <div class="card">
                       <label>Count Time</label>
-                                          <time-input id="fromTimeOnly" label="From Time" show-label show-quick-links></time-input>
-                    <time-input id="toTimeOnly" label="To Time" show-label show-quick-links></time-input>
+                      <time-input id="fromTimeOnly" label="From Time" show-label show-quick-links default="now"></time-input>
+                      <time-input id="toTimeOnly" label="To Time" show-label show-quick-links default="now"></time-input>
                       <div class="mobile-button-row">
                         <button class="primary mobile-button" onclick="calculateTimeDifference()">
                           Compute Difference
@@ -680,8 +680,8 @@
                 <div id="add-time" class="tab-content">
                   <div class="mobile-date-container">
                     <div class="card">
-                                          <label>Add/Subtract Time</label>
-                    <time-input id="baseTime" label="Base Time" show-label show-quick-links></time-input>
+                    <label>Add/Subtract Time</label>
+                    <time-input id="baseTime" label="Base Time" show-label show-quick-links default="now"></time-input>
                       <div class="mobile-time-inputs">
                         <input type="number" id="deltaHours" placeholder="Hours" />
                         <input type="number" id="deltaMinutes" placeholder="Minutes" />
@@ -764,15 +764,14 @@
     <script src="js/emi-calculator.js"></script>
     <script src="js/investment-calculator.js"></script>
     <script src="js/unit-converter.js"></script>
-
     <script src="js/date-calculator.js"></script>
     <script src="js/time-calculator.js"></script>
+    <script src="js/timezone_calculator.js"></script>
     <script src="js/bmi-facts-config.js"></script>
     <script src="js/bmi-calculator.js"></script>
     <script src="js/ribbons-config.js"></script>
     <script src="js/mobile.js"></script>
     <script src="js/responsive-redirect.js"></script>
-    <script src="js/date-time-picker.js"></script>
     <script src="web-components/searchable-select/searchable-select.js"></script>
     <script src="web-components/date-input/date-input.js"></script>
     <script src="web-components/time-input/time-input.js"></script>
