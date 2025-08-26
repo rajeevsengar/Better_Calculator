@@ -82,10 +82,10 @@ Create 6+ component variants showing different configurations:
 ### �� **Required Scripts:**
 ```html
 <!-- Include main theme system -->
-<script src="./js/script.js"></script>
+<script src="./helpers/script.js"></script>
 
 <!-- Component-specific script -->
-<script src="./web-components/[component-name]/[component-name].js"></script>
+<script src="./components/[component-name]/[component-name].js"></script>
 ```
 
 ### 📋 **Template Structure:**
@@ -133,7 +133,7 @@ Create 6+ component variants showing different configurations:
     </div>
     
     <!-- Scripts -->
-    <script src="./js/script.js"></script>
+    <script src="./helpers/script.js"></script>
     <script>
         // JavaScript here
     </script>

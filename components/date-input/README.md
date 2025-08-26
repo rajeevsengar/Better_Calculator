@@ -274,17 +274,17 @@ The component automatically adapts to different screen sizes:
 
 ### Option 1: Direct Include
 ```html
-<script src="web-components/date-input/date-input.js"></script>
+<script src="components/date-input/date-input.js"></script>
 ```
 
 ### Option 2: Module Import
 ```javascript
-import './web-components/date-input/date-input.js';
+import './components/date-input/date-input.js';
 ```
 
 ### Option 3: CDN (if hosted)
 ```html
-<script src="https://your-domain.com/web-components/date-input/date-input.js"></script>
+<script src="https://your-domain.com/components/date-input/date-input.js"></script>
 ```
 
 ## 🔧 Event-Based Theme System
@@ -296,7 +296,7 @@ The web component automatically works with the event-based theme synchronization
 The web component follows a clean separation of concerns:
 
 ```
-web-components/date-input/
+components/date-input/
 ├── date-input.js      # Component logic and behavior
 ├── date-input.css     # All styling and theme integration
 └── README.md          # Documentation

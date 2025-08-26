@@ -100,5 +100,5 @@ The component automatically integrates with your theme system and supports:
 
 ## Dependencies
 
-- `../../css/themes.css` - Theme system integration
-- `../../css/style.css` - Base styling variables 
+- `../../assets/css/themes.css` - Theme system integration
+- `../../assets/css/style.css` - Base styling variables 

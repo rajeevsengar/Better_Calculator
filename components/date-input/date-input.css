@@ -1,36 +1,36 @@
-/* Time Input Web Component Styles */
+/* Date Input Web Component Styles */
 
 /* Import theme CSS */
-@import url('../../css/themes.css');
-@import url('../../css/style.css');
+@import url('../../assets/css/themes.css');
+@import url('../../assets/css/style.css');
 
 /* Component Container */
-.time-input-container {
+.date-input-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
     max-width: 300px;
-    margin: 0;
+    margin:0;
 }
 
 /* Size variants */
-.time-input-container.size-small {
+.date-input-container.size-small {
     max-width: 200px;
-    margin: 0;
+    margin: 0;  /* No margin - spacing handled by parent */
 }
 
-.time-input-container.size-large {
+.date-input-container.size-large {
     max-width: 400px;
-    margin: 0;
+    margin: 0;  /* No margin - spacing handled by parent */
 }
 
-.time-input-container.size-full {
+.date-input-container.size-full {
     max-width: 100%;
-    margin: 0;
+    margin: 0;  /* No margin - spacing handled by parent */
 }
 
 /* Label styling */
-.time-label {
+.date-input-label {
     font-size: 13px;
     color: var(--text-secondary, #475569);
     display: block;
@@ -38,8 +38,9 @@
     font-weight: 500;
 }
 
-/* Time Input Field */
-.time-input {
+/* Date Input Field */
+.date-input-field {
+    padding: 12px 16px;
     border: 2px solid var(--input-border, #cbd5e1);
     border-radius: 8px;
     font-size: 16px;
@@ -48,46 +49,52 @@
     color: var(--text-primary, #1e293b);
     transition: all 0.3s ease;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Size variants for input field */
-.time-input.size-small {
+.date-input-field.size-small {
+    padding: 8px 12px;
     font-size: 14px;
     border-radius: 6px;
 }
 
-.time-input.size-large {
+.date-input-field.size-large {
+    padding: 16px 20px;
     font-size: 18px;
     border-radius: 10px;
 }
 
-.time-input:hover {
+.date-input-field:hover {
     border-color: var(--primary-color, #3b82f6);
 }
 
-.time-input:focus {
+.date-input-field:focus {
     outline: none;
     border-color: var(--primary-color, #3b82f6);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.time-input:disabled {
-    background-color: #f3f4f6;
-    color: #9ca3af;
-    cursor: not-allowed;
+.date-input-field::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+    transition: all 0.3s ease;
+}
+
+.date-input-field::-webkit-calendar-picker-indicator:hover {
+    filter: invert(0.3);
 }
 
 /* Quick Links Container */
 .quick-links {
     display: flex;
     gap: 8px;
-    justify-content: flex-start;
 }
 
 /* Quick Link Styling */
 .quick-link {
-    padding-left: 0;
-    padding-right: 8px;
+    padding-bottom: 8px;
     background: none;
     color: var(--primary-color, #3b82f6);
     border: none;
@@ -97,22 +104,18 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
-    width: fit-content;
+    min-width: fit-content;
     text-decoration: underline;
     text-underline-offset: 2px;
     display: inline-block;
     outline: none;
     text-decoration-skip-ink: none;
-    text-align: left;
 }
-
-
 
 .quick-link:hover {
     color: var(--primary-hover, #2563eb);
     text-decoration-thickness: 2px;
     transform: translateY(-1px);
-    background: none;
 }
 
 .quick-link:active {
@@ -131,20 +134,22 @@
 
 /* Size variants for quick link */
 .quick-link.size-small {
-    padding: 3px 6px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-size: 12px;
     border-radius: 4px;
 }
 
 .quick-link.size-large {
-    padding: 5px 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     font-size: 16px;
     border-radius: 8px;
 }
 
 /* Focus effects using theme colors */
-.time-input:focus {
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.date-input-field:focus {
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
 }
 
 /* CSS Custom Properties for theming - inherit from parent document */

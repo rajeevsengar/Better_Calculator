@@ -42,7 +42,7 @@ Calculator/
 │   ├── mobile.js      # Mobile-specific logic
 │   ├── responsive-redirect.js  # Auto-redirect logic
 │   └── [calculator-specific files]
-└── images/            # Shared images
+└── assets/images/            # Shared images
 ```
 
 ### Key Principles
@@ -117,9 +117,9 @@ function initializeMobileNewCalculator() {
 
 ### Modifying Layouts
 
-- **Desktop**: Modify `index.html` and `css/style.css`
-- **Mobile**: Modify `mobile.html` and `css/mobile.css`
-- **Shared**: Modify JavaScript files and `css/themes.css`
+- **Desktop**: Modify `index.html` and `assets/css/style.css`
+- **Mobile**: Modify `mobile.html` and `assets/css/mobile.css`
+- **Shared**: Modify JavaScript files and `assets/css/themes.css`
 
 ## 📱 Mobile-Specific Features
 

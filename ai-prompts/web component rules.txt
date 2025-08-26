@@ -1,7 +1,7 @@
 Create a web component following these strict rules and patterns:
 
 ## 📁 FILE STRUCTURE
-- Create a folder: `web-components/[component-name]/`
+- Create a folder: `components/[component-name]/`
 - Include: `[component-name].js` and `[component-name].css`
 - NO separate HTML template files - HTML goes inline in JavaScript render() method
 
@@ -40,7 +40,7 @@ class ComponentName extends HTMLElement {
     render() {
         // HTML structure goes here - NO external templates
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="web-components/[component-name]/[component-name].css">
+            <link rel="stylesheet" href="components/[component-name]/[component-name].css">
             <div class="component-container">
                 <!-- HTML structure -->
             </div>
@@ -133,8 +133,8 @@ customElements.define('component-name', ComponentName);
 /* Component Name Web Component Styles */
 
 /* Import theme CSS */
-@import url('../../css/themes.css');
-@import url('../../css/style.css');
+@import url('../../assets/css/themes.css');
+@import url('../../assets/css/style.css');
 
 /* Component Container */
 .component-container {

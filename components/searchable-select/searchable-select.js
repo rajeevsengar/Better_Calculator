@@ -51,7 +51,7 @@ class SearchableSelect extends HTMLElement {
     
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="web-components/searchable-select/searchable-select.css">
+            <link rel="stylesheet" href="components/searchable-select/searchable-select.css">
             <div class="component-container size-${this._size}">
                 ${this._showLabel ? `<label class="searchable-input-label">${this._label}</label>` : ''}
                 <div class="select-wrapper">
