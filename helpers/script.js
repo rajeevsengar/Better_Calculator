@@ -345,7 +345,8 @@ function initializeResponsiveNavigation() {
 
 // Handle responsive layout changes
 function handleResponsiveLayout() {
-  const isMobile = window.innerWidth <= 768;
+  // Check if we're on mobile - use media query instead of DOM element
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
   // Update body class for CSS targeting
   document.body.classList.toggle('mobile-layout', isMobile);
@@ -481,8 +482,8 @@ function setupRibbons(panelId) {
     return;
   }
   
-  // Check if we're on mobile
-  const isMobile = document.querySelector('.mobile-container') !== null;
+  // Check if we're on mobile - use media query instead of DOM element
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   const getContent = (type) => {
     const panelMap = (window.RIBBONS_CONTENT && window.RIBBONS_CONTENT[panelId]) || {};
@@ -582,8 +583,8 @@ function setupRibbons(panelId) {
 
 // Theme switcher functionality
 function initializeThemeSwitcher() {
-  // Check if we're on mobile
-  const isMobile = document.querySelector('.mobile-container') !== null;
+  // Check if we're on mobile - use media query instead of DOM element
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
   const themeRadios = document.querySelectorAll('input[name="theme"]');
   
@@ -665,8 +666,8 @@ let logoClickCount = 0;
 let logoClickTimer = null;
 
 function setupSiteLogoEasterEgg() {
-  // Check if we're on mobile
-  const isMobile = document.querySelector('.mobile-container') !== null;
+  // Check if we're on mobile - use media query instead of DOM element
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
   // Try multiple selectors to find the logo, with ID being the most reliable
   const siteLogo = document.getElementById('siteLogo') ||
@@ -769,8 +770,8 @@ let falseEasterEggClickCount = 0;
 let falseEasterEggTimer = null;
 
 function setupFalseEasterEgg() {
-  // Check if we're on mobile
-  const isMobile = document.querySelector('.mobile-container') !== null;
+  // Check if we're on mobile - use media query instead of DOM element
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
   const falseEasterEgg = document.getElementById('falseEasterEgg');
   
