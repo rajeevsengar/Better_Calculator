@@ -39,7 +39,7 @@ class DateInput extends HTMLElement {
     
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="components/date-input/date-input.css">
+            <link rel="stylesheet" href="/components/date-input/date-input.css">
             <div class="date-input-container size-${this._size}">
                 ${this._showLabel && this._label ? `<label class="date-input-label">${this._label}</label>` : ''}
                 <input type="date" class="date-input-field size-${this._size}" id="dateInput" ${this._disabled ? 'disabled' : ''} ${this._dateValue ? `value="${this._dateValue}"` : ''}>

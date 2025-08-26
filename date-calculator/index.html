@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Date Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/themes.css" />
+    <link rel="stylesheet" href="../assets/css/misc.css" />
+    <link rel="stylesheet" href="../assets/css/mobile.css" />
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header1">
+            <div class="header-inner">
+                <img src="../assets/images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo" class="flag-icon">
+                <p id="builtWithLove" style="color:black; font-family:Helvetica Neue"></p>
+            </div>
+        </header>
+        
+        <!-- Responsive Header - Shows different content based on screen size -->
+        <header class="header2 mobile-header">
+            <div class="header-inner mobile-header-inner">
+                <div class="brand mobile-brand">
+                    <img id="siteLogo" src="../assets/images/site_logo.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo">
+                    <div class="brand-text mobile-brand-text">
+                        <h1 id="brandName"></h1>
+                        <div id="tagline" class="muted tagline">
+                            <div class="tagline-line tagline-first"></div>
+                            <div class="tagline-line tagline-second"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Toggle - Only visible on mobile -->
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Menu Overlay - Only visible on mobile -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-header">
+                    <h3>Menu</h3>
+                    <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+                </div>
+                
+                <!-- Menu Items -->
+                <div class="mobile-menu-items">
+                    <div class="mobile-item" data-panel="conversion">1 • Unit Converter</div>
+                    <div class="mobile-item" data-panel="bmi">2 • BMI Calculator</div>
+                    <div class="mobile-item active" data-panel="date">3 • Date Calculator</div>
+                    <div class="mobile-item" data-panel="time">4 • Time Calculator</div>
+                    <div class="mobile-item" data-panel="emi">5 • EMI Calculator</div>
+                    <div class="mobile-item" data-panel="investment">6 • Investment Calculator</div>
+                </div>
+
+                <!-- Theme Switcher -->
+                <div class="mobile-theme-switcher">
+                    <div class="theme-label">Theme:</div>
+                    <div class="theme-options">
+                        <label class="theme-option" data-theme="default">
+                            <input type="radio" name="theme" value="default" checked />
+                            <span class="theme-color" style="background: #2196f3"></span>
+                        </label>
+                        <label class="theme-option" data-theme="green">
+                            <input type="radio" name="theme" value="green" />
+                            <span class="theme-color" style="background: #4caf50"></span>
+                        </label>
+                        <label class="theme-option" data-theme="purple">
+                            <input type="radio" name="theme" value="purple" />
+                            <span class="theme-color" style="background: #9c27b0"></span>
+                        </label>
+                        <label class="theme-option" data-theme="orange">
+                            <input type="radio" name="theme" value="orange" />
+                            <span class="theme-color" style="background: #ff9800"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Global ribbons -->
+                <div class="ribbons">
+                    <div class="ribbon" data-type="tips">Tips</div>
+                    <div class="ribbon" data-type="instructions">Instructions</div>
+                    <div class="ribbon" data-type="examples">Examples</div>
+                    <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+
+        <main class="content panel">
+            <div class="main-content-wrapper">
+                <div class="container">
+                    <!-- Menu - Hidden on mobile, shown on desktop -->
+                    <aside class="menu">
+                        <div class="item" data-panel="conversion">1 • Unit Converter</div>
+                        <div class="item" data-panel="bmi">2 • BMI Calculator</div>
+                        <div class="item active" data-panel="date">3 • Date Calculator</div>
+                        <div class="item" data-panel="time">4 • Time Calculator</div>
+                        <div class="item" data-panel="emi">5 • EMI Calculator</div>
+                        <div class="item" data-panel="investment">6 • Investment Calculator</div>
+                
+                        <div class="theme-switcher">
+                            <div id="themeLabel" class="theme-label">Theme:</div>
+                            <div class="theme-options">
+                                <label class="theme-option" data-theme="default">
+                                    <input type="radio" name="theme" value="default" checked />
+                                    <span class="theme-color" style="background: #2196f3"></span>
+                                </label>
+                                <label class="theme-option" data-theme="green">
+                                    <input type="radio" name="theme" value="green" />
+                                    <span class="theme-color" style="background: #4caf50"></span>
+                                </label>
+                                <label class="theme-option" data-theme="purple">
+                                    <input type="radio" name="theme" value="purple" />
+                                    <span class="theme-color" style="background: #9c27b0"></span>
+                                </label>
+                                <label class="theme-option" data-theme="orange">
+                                    <input type="radio" name="theme" value="orange" />
+                                    <span class="theme-color" style="background: #ff9800"></span>
+                                </label>
+                            </div>
+                        </div>
+                
+                        <!-- Global ribbons -->
+                        <div class="ribbons">
+                            <div id="ribbonTips" class="ribbon" data-type="tips">Tips</div>
+                            <div id="ribbonInstructions" class="ribbon" data-type="instructions">Instructions</div>
+                            <div id="ribbonExamples" class="ribbon" data-type="examples">Examples</div>
+                            <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
+                        </div>
+                    </aside>
+
+                    <!-- Date Calculator Section -->
+                    <section id="date" class="active-section">
+                        <div class="date-tabs">
+                            <div class="tab-buttons">
+                                <button class="tab-button active" data-tab="count-days">Count Days</button>
+                                <button class="tab-button" data-tab="add-days">Add Days</button>
+                            </div>
+                            
+                            <!-- Count Days Tab -->
+                            <div id="count-days" class="tab-content active">
+                                <!-- Enhanced Mode Toggle -->
+                                <div id="toggle-slider-enhanced" style="cursor: pointer;" class="enhanced-toggle">
+                                    <div class="toggle-container">
+                                        <label class="toggle-label">Enhanced Mode</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="enhancedToggle" />
+                                            <span class="toggle-slider"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- From and To Sections Side by Side -->
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px;">
+                                    <!-- From Section -->
+                                    <div class="card">
+                                        <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">Start Date</h4>
+                                        <date-input id="fromDate" label="From Date" size="full" show-label show-quick-links default="now"></date-input>
+                                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                            <time-input id="fromTime" label="From Time" size="full" show-label show-quick-links default="now" style="display: none;"></time-input>
+                                            <timezone-input id="fromTimezone" label="From Timezone" size="full" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- To Section -->
+                                    <div class="card">
+                                        <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">End Date</h4>
+                                        <date-input id="toDate" label="To Date" size="full" show-label show-quick-links default="now"></date-input>
+                                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                            <time-input id="toTime" label="To Time" size="full" show-label show-quick-links default="now" style="display: none;"></time-input>
+                                            <timezone-input id="toTimezone" label="To Timezone" size="full" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add 1 day to end date section -->
+                                <div id="includeEndDateDiv" class="card">
+                                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                                        Include end date in calculation (1 day is added)
+                                        <input type="checkbox" id="includeEndDate" />
+                                    </label>
+                                </div>
+                                <!-- Compute Difference Button -->
+                                <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 16px;">
+                                    <button class="primary" onclick="countDays()">
+                                        Compute Difference
+                                    </button>
+                                    <button onclick="clearDates()">Clear</button>
+                                </div>
+                                <!-- Result Section at Bottom -->
+                                <div id="dateResultContainer" style="display: none; margin-top: 16px;">
+                                    <div id="dateResult" class="muted card result-box"></div>
+                                </div>
+                            </div>
+                            <!-- Add Days Tab -->
+                            <div id="add-days" class="tab-content">
+                                <!-- Enhanced Mode Toggle -->
+                                <div class="enhanced-toggle" style="cursor: pointer;" id="toggle-slider-add-days">
+                                    <div class="toggle-container">
+                                        <label class="toggle-label">Show Time Inputs</label>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="addDaysEnhancedToggle" />
+                                            <span class="toggle-slider"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Date Arithmetic -->
+                                <div class="card" style="display: grid; grid-template-columns: 100%; align-items: stretch;">
+                                    <!-- Date Input -->
+                                    <label>Date Arithmetic</label>
+                                    <div style="display: grid; grid-template-columns: 35% 13% 52%; align-items: start; margin-top: 8px;">
+                                        <!-- 1st Column: Date and Time Inputs -->
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <date-input size="full" id="baseDate" label="Base Date" show-label show-quick-links default="now"></date-input>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                            <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+                                                <div style="width: 8px; height: 1px; background: linear-gradient(to right, transparent, var(--primary-color, #3b82f6));"></div>
+                                                <label id="dateArithmeticLabel" class="input-label" style="font-weight: 600; color: var(--primary-color, #3b82f6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Add</label>
+                                                <div style="width: 8px; height: 1px; background: linear-gradient(to left, transparent, var(--primary-color, #3b82f6));"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 2nd Column: Date Delta Fields -->
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <div style="
+                                                display: grid;
+                                                grid-template-columns: repeat(4, 1fr);
+                                                gap: 8px;
+                                            ">
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaDays">Days</label>
+                                                    <input class="input-field" type="number" id="deltaDays" placeholder="Days" />
+                                                </div>
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaWeeks">Weeks</label>
+                                                    <input class="input-field" type="number" id="deltaWeeks" placeholder="Weeks" />
+                                                </div>
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaMonths">Months</label>
+                                                    <input class="input-field" type="number" id="deltaMonths" placeholder="Months" />
+                                                </div>
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaYears">Years</label>
+                                                    <input class="input-field" type="number" id="deltaYears" placeholder="Years" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Time Arithmetic -->
+                                <div id="timeArithmeticCard" class="card" style="display: grid; grid-template-columns: 100%; align-items: start; margin-top: 16px;">
+                                    <label>Time Arithmetic</label>
+
+                                    <div style="display: grid; grid-template-columns: 40% 13% 47%; align-items: start; margin-top: 8px;">
+
+                                        <!-- 1st Column: Time Input -->
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <time-input size="full" id="baseTime" label="Base Time" show-label show-quick-links default="now"></time-input>
+                                        </div>
+
+                                        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                            <div style="display: flex; align-items: center; justify-content: center; gap: 4px;">
+                                                <div style="width: 8px; height: 1px; background: linear-gradient(to right, transparent, var(--primary-color, #3b82f6));"></div>
+                                                <label id="timeArithmeticLabel" class="input-label" style="font-weight: 600; color: var(--primary-color, #3b82f6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Add</label>
+                                                <div style="width: 8px; height: 1px; background: linear-gradient(to left, transparent, var(--primary-color, #3b82f6));"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 2nd Column: Time Delta Fields -->
+                                        <div style="display: flex; flex-direction: column; gap: 12px; padding-right: 8px;">
+                                            <div style="
+                                                display: grid;
+                                                grid-template-columns: repeat(3, 1fr);
+                                                gap: 8px;
+                                            ">
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaHours">Hours</label>
+                                                    <input class="input-field" type="number" id="deltaHours" placeholder="Hours" />
+                                                </div>
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaMinutes">Minutes</label>
+                                                    <input class="input-field" type="number" id="deltaMinutes" placeholder="Minutes" />
+                                                </div>
+                                                <div>
+                                                    <label style="margin-bottom: 12px;" class="input-label" for="deltaSeconds">Seconds</label>
+                                                    <input class="input-field" type="number" id="deltaSeconds" placeholder="Seconds" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Operation -->
+                                <div class="card" style="margin-top: 16px; width: 50%;">
+                                    <label style="display: block; margin-bottom: 8px; font-weight: 500;">Operation</label>
+                                    <div id="deltaSignChips" style="display: grid; grid-template-columns: 20% 20%; gap: 12px;">
+                                        <button class="chip selected" data-value="add">Add</button>
+                                        <button class="chip" data-value="subtract">Subtract</button>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="card" style="margin-top: 16px;">
+                                    <div style="display: flex; gap: 8px;">
+                                        <button class="primary" onclick="addSubtractDays()">
+                                            Apply
+                                        </button>
+                                        <button onclick="clearAddDays()">
+                                            Clear
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Result Section -->
+                                <div id="dateResultContainer1" style="display: none; margin-top: 16px;">
+                                    <div id="dateMathRes" class="muted card result-box"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <p class="footer-tagline">
+                        Not just another calculator website — it covers the missing features of others.
+                    </p>
+                    <p class="footer-highlight">
+                        🏆 The most feature-rich 
+                        <span id="emi-link" class="footer-link">EMI Calculator</span>
+                        on the internet, our proud flagship.
+                    </p>
+                </div>
+                <div class="footer-easter-egg" id="falseEasterEgg" style="cursor: pointer;" title="Click me if you dare...">
+                    🥚 <em>This site contains a hidden easter egg. Good luck finding it!</em> 🥚
+                </div>
+            </div>
+        </footer>
+
+        <!-- False Easter Egg Popup -->
+        <div id="falseEasterEggPopup" class="false-easter-egg-popup" aria-hidden="true">
+            <div class="false-facts-header">
+                <h3></h3>
+                <button class="false-facts-close" onclick="closeFalseEasterEgg()">×</button>
+            </div>
+            <div class="false-facts-content"></div>
+        </div>
+        
+        <!-- Site Facts Popup -->
+        <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
+            <div class="facts-header">
+                <h3></h3>
+                <button class="facts-close" onclick="closeSiteFacts()">×</button>
+            </div>
+            <div class="facts-content">
+                <div class="story-section">
+                    <!-- Content will be populated dynamically from text-config.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../helpers/constants.js"></script>
+    <script src="../helpers/text-config.js"></script>
+    <script src="../helpers/util.js"></script>
+    <script src="../helpers/ribbons-config.js"></script>
+    <script src="../helpers/bmi-facts-config.js"></script>
+    
+    <!-- Calculator Scripts -->
+    <script src="../date-calculator/date-calculator.js"></script>
+    
+    <!-- Web Components -->
+    <script src="../components/date-input/date-input.js"></script>
+    <script src="../components/time-input/time-input.js"></script>
+    <script src="../components/searchable-select/searchable-select.js"></script>
+    <script type="module" src="../components/timezone-input/timezone-input.js"></script>
+    
+    <!-- Main Script (load last) -->
+    <script src="../helpers/script.js"></script>
+</body>
+</html> 

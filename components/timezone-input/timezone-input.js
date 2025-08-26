@@ -86,7 +86,7 @@ class TimezoneInput extends HTMLElement {
     
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="components/searchable-select/searchable-select.css">
+            <link rel="stylesheet" href="/components/searchable-select/searchable-select.css">
             <div class="component-container size-${this._size}">
                 ${this._showLabel ? `<label class="component-label">${this._label}</label>` : ''}
                 <searchable-select
