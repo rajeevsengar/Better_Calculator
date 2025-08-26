@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/themes.css" />
     <link rel="stylesheet" href="assets/css/misc.css" />
+    <link rel="stylesheet" href="assets/css/mobile.css" />
   </head>
-
-  
 
   <body>
     <div class="page-container">
@@ -26,11 +25,13 @@
           </p>
         </div>
       </header>
-      <header class="header2">
-        <div class="header-inner">
-          <div class="brand">
+      
+      <!-- Responsive Header - Shows different content based on screen size -->
+      <header class="header2 mobile-header">
+        <div class="header-inner mobile-header-inner">
+          <div class="brand mobile-brand">
             <img id="siteLogo" src="assets/images/site_logo.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo">
-            <div class="brand-text">
+            <div class="brand-text mobile-brand-text">
               <h1 id="brandName"></h1>
               <div id="tagline" class="muted tagline">
                 <div class="tagline-line tagline-first"></div>
@@ -38,14 +39,71 @@
               </div>
             </div>
           </div>
+          
+          <!-- Mobile Menu Toggle - Only visible on mobile -->
+          <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </header>
 
-  
+      <!-- Mobile Menu Overlay - Only visible on mobile -->
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-content">
+          <div class="mobile-menu-header">
+            <h3>Menu</h3>
+            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
+          </div>
+          
+          <!-- Menu Items -->
+          <div class="mobile-menu-items">
+            <div class="mobile-item active" data-panel="conversion">1 • Unit Converter</div>
+            <div class="mobile-item" data-panel="bmi">2 • BMI Calculator</div>
+            <div class="mobile-item" data-panel="date">3 • Date Calculator</div>
+            <div class="mobile-item" data-panel="time">4 • Time Calculator</div>
+            <div class="mobile-item" data-panel="emi">5 • EMI Calculator</div>
+            <div class="mobile-item" data-panel="investment">6 • Investment Calculator</div>
+          </div>
+
+          <!-- Theme Switcher -->
+          <div class="mobile-theme-switcher">
+            <div class="theme-label">Theme:</div>
+            <div class="theme-options">
+              <label class="theme-option" data-theme="default">
+                <input type="radio" name="theme" value="default" checked />
+                <span class="theme-color" style="background: #2196f3"></span>
+              </label>
+              <label class="theme-option" data-theme="green">
+                <input type="radio" name="theme" value="green" />
+                <span class="theme-color" style="background: #4caf50"></span>
+              </label>
+              <label class="theme-option" data-theme="purple">
+                <input type="radio" name="theme" value="purple" />
+                <span class="theme-color" style="background: #9c27b0"></span>
+              </label>
+              <label class="theme-option" data-theme="orange">
+                <input type="radio" name="theme" value="orange" />
+                <span class="theme-color" style="background: #ff9800"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Global ribbons -->
+          <div class="ribbons">
+            <div class="ribbon" data-type="tips">Tips</div>
+            <div class="ribbon" data-type="instructions">Instructions</div>
+            <div class="ribbon" data-type="examples">Examples</div>
+            <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
       <main class="content panel">
         <div class="main-content-wrapper">
           <div class="container">
-          <!-- Menu -->
+          <!-- Menu - Hidden on mobile, shown on desktop -->
           <aside class="menu">
             <div class="item active" data-panel="conversion">1 • Unit Converter</div>
             <div class="item" data-panel="bmi">2 • BMI Calculator</div>
@@ -881,23 +939,27 @@
 
     <script src="helpers/constants.js"></script>
     <script src="helpers/text-config.js"></script>
-    <script src="helpers/script.js"></script>
     <script src="helpers/util.js"></script>
-    <script src="emi-calculator/emi-calculator.js"></script>
-    <script src="investment-calculator/investment-calculator.js"></script>
+    <script src="helpers/ribbons-config.js"></script>
+    <script src="helpers/bmi-facts-config.js"></script>
+    
+    <!-- Calculator Scripts -->
     <script src="unit-converter/unit-converter.js"></script>
+    <script src="bmi-calculator/bmi-calculator.js"></script>
     <script src="date-calculator/date-calculator.js"></script>
     <script src="time-calculator/time-calculator.js"></script>
+    <script src="emi-calculator/emi-calculator.js"></script>
+    <script src="investment-calculator/investment-calculator.js"></script>
     <script src="timezone_calculator/timezone_calculator.js"></script>
-    <script type="module" src="components/timezone-input/timezone-input.js"></script>
-    <script src="helpers/bmi-facts-config.js"></script>
-    <script src="bmi-calculator/bmi-calculator.js"></script>
-    <script src="helpers/ribbons-config.js"></script>
-    <script src="helpers/responsive-redirect.js"></script>
-    <script src="components/time-input/time-input.js"></script>
-    <script src="components/date-input/date-input.js"></script>
-    <script src="components/searchable-select/searchable-select.js"></script>
     
+    <!-- Web Components -->
+    <script src="components/date-input/date-input.js"></script>
+    <script src="components/time-input/time-input.js"></script>
+    <script src="components/searchable-select/searchable-select.js"></script>
+    <script type="module" src="components/timezone-input/timezone-input.js"></script>
+    
+    <!-- Main Script (load last) -->
+    <script src="helpers/script.js"></script>
 
   </body>
 

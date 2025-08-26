@@ -730,6 +730,126 @@ class DateCalculator {
     }
   }
 
+  /* Time Calculator Methods */
+  calculateTimeDifference() {
+    if (!this.fromTimeInput || !this.toTimeInput) {
+      console.error('Time inputs not found');
+      return;
+    }
+
+    const fromTime = this.fromTimeInput.value;
+    const toTime = this.toTimeInput.value;
+
+    if (!fromTime || !toTime) {
+      alert('Please enter both start and end times');
+      return;
+    }
+
+    const fromDate = new Date(`2000-01-01T${fromTime}`);
+    const toDate = new Date(`2000-01-01T${toTime}`);
+
+    // Handle case where end time is before start time (next day)
+    if (toDate < fromDate) {
+      toDate.setDate(toDate.getDate() + 1);
+    }
+
+    const diffMs = toDate - fromDate;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    const resultDiv = document.getElementById('timeResult');
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <h3>Time Difference</h3>
+          <div style="font-size: 24px; font-weight: bold; color: var(--primary-color); margin: 20px 0;">
+            ${diffHours.toString().padStart(2, '0')}:${diffMinutes.toString().padStart(2, '0')}:${diffSeconds.toString().padStart(2, '0')}
+          </div>
+          <div style="color: var(--text-secondary);">
+            ${diffHours} hours, ${diffMinutes} minutes, ${diffSeconds} seconds
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  addSubtractTime() {
+    if (!this.baseTimeInput) {
+      console.error('Base time input not found');
+      return;
+    }
+
+    const baseTime = this.baseTimeInput.value;
+    if (!baseTime) {
+      alert('Please enter a base time');
+      return;
+    }
+
+    // Get delta values
+    const hours = parseInt(this.deltaHoursInput?.value || 0);
+    const minutes = parseInt(this.deltaMinutesInput?.value || 0);
+    const seconds = parseInt(this.deltaSecondsInput?.value || 0);
+
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+      alert('Please enter at least one time delta value');
+      return;
+    }
+
+    // Get operation (add/subtract)
+    const operation = document.querySelector('input[name="timeDeltaSign"]:checked')?.value || 'add';
+
+    // Create base date object
+    const baseDate = new Date(`2000-01-01T${baseTime}`);
+    
+    // Calculate new time
+    if (operation === 'add') {
+      baseDate.setHours(baseDate.getHours() + hours);
+      baseDate.setMinutes(baseDate.getMinutes() + minutes);
+      baseDate.setSeconds(baseDate.getSeconds() + seconds);
+    } else {
+      baseDate.setHours(baseDate.getHours() - hours);
+      baseDate.setMinutes(baseDate.getMinutes() - minutes);
+      baseDate.setSeconds(baseDate.getSeconds() - seconds);
+    }
+
+    // Format result
+    const resultTime = baseDate.toTimeString().slice(0, 8);
+    
+    const resultDiv = document.getElementById('timeMathRes');
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <h3>Result</h3>
+          <div style="font-size: 24px; font-weight: bold; color: var(--primary-color); margin: 20px 0;">
+            ${resultTime}
+          </div>
+          <div style="color: var(--text-secondary);">
+            ${operation === 'add' ? 'Added' : 'Subtracted'}: ${hours}h ${minutes}m ${seconds}s
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  clearTime() {
+    if (this.baseTimeInput) {
+      this.baseTimeInput.value = new Date().toTimeString().slice(0, 5);
+    }
+    
+    if (this.deltaHoursInput) this.deltaHoursInput.value = '';
+    if (this.deltaMinutesInput) this.deltaMinutesInput.value = '';
+    if (this.deltaSecondsInput) this.deltaSecondsInput.value = '';
+    
+    // Reset to add operation
+    const addRadio = document.querySelector('input[name="timeDeltaSign"][value="add"]');
+    if (addRadio) addRadio.checked = true;
+    
+    // Clear result
+    const resultDiv = document.getElementById('timeMathRes');
+    if (resultDiv) resultDiv.textContent = '';
+  }
+
   // Static method for initialization
   static initializeDateCalculator() {
     if (!window.dateCalculator) {
@@ -750,3 +870,8 @@ window.clearAddDays = () => window.dateCalculator.clearAddDays();
 window.clearDates = () => window.dateCalculator.clearDates();
 window.countDays = () => window.dateCalculator.countDays();
 window.calculateDateDifference = () => window.dateCalculator.countDays();
+
+// Time calculator functions
+window.calculateTimeDifference = () => window.dateCalculator.calculateTimeDifference();
+window.addSubtractTime = () => window.dateCalculator.addSubtractTime();
+window.clearTime = () => window.dateCalculator.clearTime();

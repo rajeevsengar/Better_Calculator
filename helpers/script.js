@@ -1,23 +1,19 @@
-// Menu toggles and common functionality
+// Unified responsive functionality for Pro Multi-Calculator
 // script.js
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if we're on mobile or desktop
-  const isMobile = document.querySelector('.mobile-container') !== null;
-  
-  if (isMobile) {
-    // Mobile initialization - initialize common functionality
-    initializeCommonFunctionality();
-    // Mobile-specific initialization will be handled by mobile.js
-    return;
-  }
-  
-  // Desktop initialization
-  initializeDesktopFunctionality();
+  console.log('DOM Content Loaded - Initializing responsive functionality');
+  // Initialize unified responsive functionality
+  initializeResponsiveFunctionality();
 });
 
-// Common functionality for both desktop and mobile
-function initializeCommonFunctionality() {
+// Unified responsive functionality for both mobile and desktop
+function initializeResponsiveFunctionality() {
+  console.log('Initializing responsive functionality...');
+  
+  // Verify calculator scripts are loaded
+  verifyCalculatorScripts();
+  
   // Initialize theme switcher
   initializeThemeSwitcher();
   
@@ -29,86 +25,409 @@ function initializeCommonFunctionality() {
   
   // Initialize panel functionality
   initializePanelSystem();
-}
-
-// Desktop-specific functionality
-function initializeDesktopFunctionality() {
-  const menuItems = document.querySelectorAll('.menu .item');
-  const sections = document.querySelectorAll('main.panel .container > section');
-
-  const emiLink = document.getElementById('emi-link');
-  if (emiLink) {
-    emiLink.addEventListener('click', () => {
-      showPanel('emi');
-    });
-  }
   
-  if (menuItems.length > 0) {
-    menuItems.forEach(it => it.addEventListener('click', () => showPanel(it.dataset.panel)));
-
-    // ensure initial state matches the .menu .item.active in HTML (or first item)
-    const initial = document.querySelector('.menu .item.active') || menuItems[0];
-    if (initial) showPanel(initial.dataset.panel);
-  }
-
-  // Initialize common functionality
-  initializeCommonFunctionality();
+  // Initialize mobile menu (if on mobile)
+  initializeMobileMenu();
+  
+  // Initialize responsive navigation
+  initializeResponsiveNavigation();
   
   // Export functions for global access
   window.setupRibbons = setupRibbons;
+  
+  console.log('Responsive functionality initialized successfully');
 }
 
-// Unified panel system for both desktop and mobile
+// Verify that all calculator scripts are loaded
+function verifyCalculatorScripts() {
+  console.log('Verifying calculator scripts...');
+  
+  const calculators = {
+    'UnitConverter': window.UnitConverter,
+    'BMICalculator': window.BMICalculator,
+    'EMI': window.EMI,
+    'Investment': window.Investment,
+    'DateCalculator': window.DateCalculator || window.dateCalculator
+  };
+  
+  Object.entries(calculators).forEach(([name, calculator]) => {
+    if (calculator) {
+      console.log(`✅ ${name} loaded successfully`);
+    } else {
+      console.error(`❌ ${name} NOT loaded`);
+    }
+  });
+}
+
+// Unified panel system
 function initializePanelSystem() {
-  // This will be called by both desktop and mobile systems
-  // Desktop uses showPanel, mobile uses showMobilePanel
+  console.log('Initializing panel system...');
+  const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
+  const sections = document.querySelectorAll('main.panel .container > section');
+
+  console.log('Found menu items:', menuItems.length);
+  console.log('Found sections:', sections.length);
+
+  if (menuItems.length > 0) {
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        console.log('Menu item clicked:', item.dataset.panel);
+        showPanel(item.dataset.panel);
+      });
+    });
+
+    // Ensure initial state matches the active menu item
+    const initial = document.querySelector('.menu .item.active, .mobile-item.active') || menuItems[0];
+    if (initial) {
+      console.log('Setting initial panel:', initial.dataset.panel);
+      showPanel(initial.dataset.panel);
+    }
+  }
 }
 
 // Unified panel switching function
 function showPanel(panelId) {
-  // Check if we're on mobile or desktop
-  const isMobile = document.querySelector('.mobile-container') !== null;
+  console.log('Showing panel:', panelId);
   
-  if (isMobile) {
-    // Use mobile panel system
-    if (window.mobileUtils && window.mobileUtils.showMobilePanel) {
-      window.mobileUtils.showMobilePanel(panelId);
-    }
+  const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
+  const sections = document.querySelectorAll('main.panel .container > section');
+  
+  console.log('Found sections:', sections.length);
+  sections.forEach((section, index) => {
+    console.log(`Section ${index}:`, section.id, 'classes:', section.className);
+  });
+  
+  // Highlight menu items
+  menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
+
+  // Hide all sections
+  sections.forEach(s => {
+    console.log(`Hiding section: ${s.id}`);
+    s.classList.remove('active-section');
+  });
+
+  // Show target section
+  const target = document.getElementById(panelId);
+  if (!target) {
+    console.error('Panel not found:', panelId);
     return;
   }
   
-  // Desktop panel system
-  const menuItems = document.querySelectorAll('.menu .item');
-  const sections = document.querySelectorAll('main.panel .container > section');
-  
-  // highlight menu
-  menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
-
-  // hide all sections
-  sections.forEach(s => s.classList.remove('active-section'));
-
-  // show target
-  const target = document.getElementById(panelId);
-  if (!target) return;
+  console.log(`Showing target section: ${panelId}`);
   target.classList.add('active-section');
 
-  // init calculators lazily
+  // Check if section is now visible
+  setTimeout(() => {
+    const isVisible = target.classList.contains('active-section');
+    const computedStyle = window.getComputedStyle(target);
+    console.log(`Section ${panelId} visibility:`, {
+      hasActiveClass: isVisible,
+      display: computedStyle.display,
+      opacity: computedStyle.opacity,
+      visibility: computedStyle.visibility
+    });
+  }, 100);
+
+  // Initialize calculators lazily
+  console.log('Initializing calculators for panel:', panelId);
   initializePanelCalculators(panelId);
 
+  // Setup ribbons
   setupRibbons(panelId);
+  
+  // Close mobile menu if open
+  closeMobileMenu();
 }
 
 // Unified calculator initialization
 function initializePanelCalculators(panelId) {
+  console.log('Initializing calculators for panel:', panelId);
+  
   switch (panelId) {
-    case 'emi':        window.EMI?.initializeEMICalculator?.(); break;
-    case 'investment': window.Investment?.initializeInvestmentCalculator?.(); break;
-    case 'conversion': window.UnitConverter?.initializeUnitConverter?.(); break;
-    case 'unit':       window.UnitConverter?.initializeUnitConverter?.(); break;
-    case 'date':       window.DateCalculator?.initializeDateCalculator?.(); break;
-    case 'time':       window.DateCalculator?.initializeDateCalculator?.(); break;
-    case 'bmi':        window.BMICalculator?.initializeBMICalculator?.(); break;
+    case 'emi':
+      console.log('Initializing EMI calculator...');
+      if (window.EMI && window.EMI.initializeEMICalculator) {
+        window.EMI.initializeEMICalculator();
+        console.log('EMI calculator initialized successfully');
+      } else {
+        console.error('EMI calculator not found or initializeEMICalculator not available');
+      }
+      break;
+      
+    case 'investment':
+      console.log('Initializing Investment calculator...');
+      if (window.Investment && window.Investment.initializeInvestmentCalculator) {
+        window.Investment.initializeInvestmentCalculator();
+        console.log('Investment calculator initialized successfully');
+      } else {
+        console.error('Investment calculator not found or initializeInvestmentCalculator not available');
+      }
+      break;
+      
+    case 'conversion':
+      console.log('Initializing Unit Converter...');
+      if (window.UnitConverter && window.UnitConverter.initializeUnitConverter) {
+        window.UnitConverter.initializeUnitConverter();
+        console.log('Unit Converter initialized successfully');
+      } else {
+        console.error('Unit Converter not found or initializeUnitConverter not available');
+      }
+      break;
+      
+    case 'unit':
+      console.log('Initializing Unit Converter...');
+      if (window.UnitConverter && window.UnitConverter.initializeUnitConverter) {
+        window.UnitConverter.initializeUnitConverter();
+        console.log('Unit Converter initialized successfully');
+      } else {
+        console.error('Unit Converter not found or initializeUnitConverter not available');
+      }
+      break;
+      
+    case 'date':
+      console.log('Initializing Date Calculator...');
+      if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
+        window.DateCalculator.initializeDateCalculator();
+        console.log('Date Calculator initialized successfully');
+      } else if (window.dateCalculator) {
+        // Alternative: check if instance already exists
+        console.log('Date Calculator instance already exists');
+      } else {
+        console.error('Date Calculator not found or initializeDateCalculator not available');
+      }
+      break;
+      
+    case 'time':
+      console.log('Initializing Time Calculator...');
+      if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
+        window.DateCalculator.initializeDateCalculator();
+        console.log('Time Calculator initialized successfully');
+      } else if (window.dateCalculator) {
+        // Alternative: check if instance already exists
+        console.log('Time Calculator instance already exists');
+      } else {
+        console.error('Time Calculator not found or initializeDateCalculator not available');
+      }
+      break;
+      
+    case 'bmi':
+      console.log('Initializing BMI Calculator...');
+      if (window.BMICalculator && window.BMICalculator.initializeBMICalculator) {
+        window.BMICalculator.initializeBMICalculator();
+        
+        // Initialize speedometer after a short delay to ensure DOM is ready
+        setTimeout(() => {
+          if (window.BMICalculator && window.BMICalculator.updateSpeedometer) {
+            console.log('Initializing BMI speedometer...');
+            // Use safe update if available, otherwise use regular update
+            if (window.BMICalculator.safeUpdateSpeedometer) {
+              window.BMICalculator.safeUpdateSpeedometer(0);
+            }
+            // Removed the fallback call that was causing the error
+          }
+        }, 100);
+        
+        console.log('BMI Calculator initialized successfully');
+      } else {
+        console.error('BMI Calculator not found or initializeBMICalculator not available');
+      }
+      break;
+      
+    default:
+      console.log('No calculator initialization for panel:', panelId);
   }
+}
+
+// Mobile menu functionality
+function initializeMobileMenu() {
+  console.log('Initializing mobile menu...');
+  
+  const menuToggle = document.getElementById('mobileMenuToggle');
+  const menuOverlay = document.getElementById('mobileMenuOverlay');
+  const menuClose = document.getElementById('mobileMenuClose');
+  
+  console.log('Mobile menu elements found:', {
+    toggle: !!menuToggle,
+    overlay: !!menuOverlay,
+    close: !!menuClose
+  });
+  
+  if (menuToggle && menuOverlay && menuClose) {
+    menuToggle.addEventListener('click', () => {
+      console.log('Mobile menu toggle clicked');
+      openMobileMenu();
+    });
+    
+    menuClose.addEventListener('click', () => {
+      console.log('Mobile menu close clicked');
+      closeMobileMenu();
+    });
+    
+    // Close menu when clicking outside
+    menuOverlay.addEventListener('click', (e) => {
+      if (e.target === menuOverlay) {
+        console.log('Closing mobile menu - clicked outside');
+        closeMobileMenu();
+      }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOverlay.classList.contains('active')) {
+        console.log('Closing mobile menu - escape key');
+        closeMobileMenu();
+      }
+    });
+    
+    console.log('Mobile menu initialized successfully');
+  } else {
+    console.error('Mobile menu elements not found');
+  }
+}
+
+// Open mobile menu
+function openMobileMenu() {
+  console.log('Opening mobile menu...');
+  
+  const menuOverlay = document.getElementById('mobileMenuOverlay');
+  const menuToggle = document.getElementById('mobileMenuToggle');
+  
+  if (menuOverlay && menuToggle) {
+    menuOverlay.style.display = 'block';
+    menuOverlay.classList.add('active');
+    menuToggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    console.log('Mobile menu opened successfully');
+  } else {
+    console.error('Failed to open mobile menu - elements not found');
+  }
+}
+
+// Close mobile menu
+function closeMobileMenu() {
+  console.log('Closing mobile menu...');
+  
+  const menuOverlay = document.getElementById('mobileMenuOverlay');
+  const menuToggle = document.getElementById('mobileMenuToggle');
+  
+  if (menuOverlay && menuToggle) {
+    menuOverlay.classList.remove('active');
+    menuToggle.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    // Add a small delay to ensure smooth transition
+    setTimeout(() => {
+      if (!menuOverlay.classList.contains('active')) {
+        menuOverlay.style.display = 'none';
+        console.log('Mobile menu closed successfully');
+      }
+    }, 300);
+  } else {
+    console.error('Failed to close mobile menu - elements not found');
+  }
+}
+
+// Initialize responsive navigation
+function initializeResponsiveNavigation() {
+  // Handle window resize for responsive behavior
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      handleResponsiveLayout();
+    }, 250);
+  });
+  
+  // Initial responsive layout check
+  handleResponsiveLayout();
+}
+
+// Handle responsive layout changes
+function handleResponsiveLayout() {
+  const isMobile = window.innerWidth <= 768;
+  
+  // Update body class for CSS targeting
+  document.body.classList.toggle('mobile-layout', isMobile);
+  document.body.classList.toggle('desktop-layout', !isMobile);
+  
+  // Debug grid layout on mobile
+  if (isMobile) {
+    debugGridLayout();
+    // Force mobile layout to ensure it's applied
+    setTimeout(() => forceMobileLayout(), 100);
+  }
+  
+  // Close mobile menu if switching to desktop
+  if (!isMobile) {
+    closeMobileMenu();
+  }
+}
+
+// Debug function to check grid layout
+function debugGridLayout() {
+  console.log('=== Mobile Grid Layout Debug ===');
+  
+  const container = document.querySelector('.container');
+  if (container) {
+    const computedStyle = window.getComputedStyle(container);
+    console.log('Container grid:', {
+      display: computedStyle.display,
+      gridTemplateColumns: computedStyle.gridTemplateColumns,
+      width: computedStyle.width,
+      maxWidth: computedStyle.maxWidth
+    });
+  }
+  
+  const conversionGrids = document.querySelectorAll('.conversion-grid');
+  conversionGrids.forEach((grid, index) => {
+    const computedStyle = window.getComputedStyle(grid);
+    console.log(`Conversion grid ${index}:`, {
+      display: computedStyle.display,
+      gridTemplateColumns: computedStyle.gridTemplateColumns,
+      width: computedStyle.width
+    });
+  });
+  
+  const conversionCols = document.querySelectorAll('.conversion-col');
+  conversionCols.forEach((col, index) => {
+    const computedStyle = window.getComputedStyle(col);
+    console.log(`Conversion col ${index}:`, {
+      display: computedStyle.display,
+      gridColumn: computedStyle.gridColumn,
+      width: computedStyle.width
+    });
+  });
+  
+  console.log('=== End Debug ===');
+}
+
+// Force mobile layout when CSS isn't sufficient
+function forceMobileLayout() {
+  console.log('Forcing mobile layout...');
+  
+  const container = document.querySelector('.container');
+  if (container) {
+    container.style.gridTemplateColumns = '1fr';
+    container.style.gap = '16px';
+    container.style.maxWidth = '100%';
+    container.style.padding = '0 16px';
+  }
+  
+  const conversionGrids = document.querySelectorAll('.conversion-grid');
+  conversionGrids.forEach(grid => {
+    grid.style.gridTemplateColumns = '1fr';
+    grid.style.gap = '16px';
+  });
+  
+  const conversionCols = document.querySelectorAll('.conversion-col');
+  conversionCols.forEach(col => {
+    col.style.gridColumn = '1';
+    col.style.width = '100%';
+    col.style.minWidth = '0';
+  });
+  
+  console.log('Mobile layout forced');
 }
 
 // Date Calculator Tab Functionality - works for both desktop and mobile
@@ -306,9 +625,12 @@ function initializeThemeSwitcher() {
 function handleThemeChange() {
   // Small delay to ensure theme variables are updated
   setTimeout(() => {
-    // Update BMI speedometer if BMI panel is active
+    // Update BMI speedometer only if BMI panel is active
+    const bmiPanel = document.getElementById('bmi');
+    if (bmiPanel && bmiPanel.classList.contains('active-section')) {
     if (window.redrawSpeedometerForTheme && typeof window.redrawSpeedometerForTheme === 'function') {
       window.redrawSpeedometerForTheme();
+      }
     }
     
     // Update EMI charts if EMI panel is active

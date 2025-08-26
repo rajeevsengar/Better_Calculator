@@ -52,17 +52,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    gap: 16px;
   }
 
   .mobile-brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
+    min-width: 0; /* Allow shrinking */
   }
 
   .mobile-brand img {
     height: 40px;
     width: auto;
+    flex-shrink: 0; /* Prevent logo from shrinking */
+  }
+
+  .mobile-brand-text {
+    flex: 1;
+    min-width: 0; /* Allow shrinking */
   }
 
   .mobile-brand-text h1 {
@@ -72,6 +82,9 @@
     font-weight: 700 !important;
     letter-spacing: -0.02em !important;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .mobile-brand-text .tagline {
@@ -81,8 +94,10 @@
     color: var(--background-color);
     opacity: 0.9;
     position: relative;
-    overflow: visible;
-    min-width: max-content;
+    overflow: hidden;
+    max-width: 200px; /* Limit tagline width */
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
     font-weight: 500 !important;
     letter-spacing: 0.01em !important;
@@ -93,6 +108,9 @@
     font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
     font-weight: 500 !important;
     letter-spacing: 0.01em !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Mobile Header 1 (Top Bar) - Mobile Styles */
@@ -127,6 +145,8 @@
     gap: 4px;
     cursor: pointer;
     padding: 8px;
+    flex-shrink: 0; /* Prevent menu toggle from shrinking */
+    margin-left: auto; /* Push to the right */
   }
 
   .mobile-menu-toggle span {
@@ -281,6 +301,84 @@
   .ribbons .ribbon {
     flex: 1;
     text-align: center;
+    /* Ensure ribbon text is visible */
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+  }
+
+  /* Mobile cross/close icons - fix weird appearance */
+  .mobile-menu-close,
+  .false-facts-close,
+  .facts-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    backdrop-filter: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Prevent expanding to fill space */
+    flex: 0 0 auto;
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+  }
+
+  .mobile-menu-close:hover,
+  .false-facts-close:hover,
+  .facts-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Ensure secret message buttons are clickable on mobile */
+  .false-facts-close,
+  .facts-close {
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    /* Mobile-specific styling for better appearance */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    backdrop-filter: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* Prevent expanding to fill space */
+    flex: 0 0 auto;
+    min-width: 32px;
+    max-width: 32px;
+    min-height: 32px;
+    max-height: 32px;
+  }
+
+  /* Hover effects for secret message buttons */
+  .false-facts-close:hover,
+  .facts-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   /* Mobile Modes Grid - 3 columns */
@@ -719,20 +817,7 @@
     z-index: 2000;
   }
 
-  /* Hide desktop elements on mobile */
-  .header1,
-  .header2,
-  .container {
-    display: none !important;
-  }
-
-  /* Show mobile elements */
-  .mobile-header,
-  .mobile-container {
-    display: block !important;
-  }
-
-  /* Mobile section visibility */
+  /* Mobile section visibility - work with unified structure */
   main.panel > section { 
     display: none !important; 
     opacity: 0; 
@@ -744,6 +829,333 @@
     display: block !important;
     opacity: 1;
     transform: none;
+  }
+
+  /* Ensure calculator sections are visible when active */
+  section.active-section {
+    display: block !important;
+  }
+
+  /* Mobile-specific calculator adjustments */
+  .conversion-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    display: grid !important;
+  }
+
+  .conversion-col {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Force single column layout on mobile */
+  @media (max-width: 768px) {
+    .conversion-grid {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto !important;
+      gap: 16px !important;
+      display: grid !important;
+    }
+    
+    .conversion-col {
+      grid-column: 1 !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    
+    /* Override any desktop grid settings */
+    .conversion-grid[style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+    
+    /* Ensure all grid items stack */
+    .conversion-grid > * {
+      grid-column: 1 !important;
+      width: 100% !important;
+    }
+  }
+
+  /* Mobile card adjustments */
+  .card {
+    padding: 16px !important;
+    margin-bottom: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Mobile input adjustments */
+  input, select, button {
+    padding: 14px 16px !important;
+    font-size: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Mobile button adjustments */
+  .button-group {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Ensure main content is visible on mobile */
+  .main-content-wrapper {
+    padding: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Force mobile layout for all sections */
+  main.panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  main.panel .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Mobile-specific calculator section fixes */
+  #bmi .conversion-grid,
+  #emi .conversion-grid,
+  #investment .conversion-grid,
+  #date .conversion-grid,
+  #time .conversion-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  #bmi .conversion-col,
+  #emi .conversion-col,
+  #investment .conversion-col,
+  #date .conversion-col,
+  #time .conversion-col {
+    grid-column: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Mobile input grid fixes */
+  .mobile-input-row,
+  .mobile-emi-inputs,
+  .mobile-sip-inputs,
+  .mobile-lump-sum-inputs {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* BMI Calculator specific input fixes */
+  #bmi input[type="number"],
+  #bmi input[placeholder*="height"] {
+    width: 100%;
+    max-width: 150px; /* Limit input width on mobile */
+    box-sizing: border-box;
+  }
+
+  /* BMI button grid fixes - keep buttons in grid but limit input width */
+  #bmi [style*="display: flex"] {
+    gap: 8px;
+    align-items: center;
+  }
+
+  #bmi [style*="display: flex"] input {
+    flex: 0 0 auto; /* Don't grow, don't shrink, auto basis */
+    max-width: 150px;
+  }
+
+  #bmi [style*="display: flex"] > div {
+    flex: 1; /* Let button containers take remaining space */
+  }
+
+  /* BMI Calculator layout fixes - stack inputs and unit chips vertically */
+  #bmi [style*="display: flex"] {
+    flex-direction: column; /* Stack vertically instead of horizontally */
+    gap: 8px;
+    align-items: stretch; /* Stretch items to full width */
+  }
+
+  #bmi [style*="display: flex"] input {
+    width: 100%; /* Take full width */
+    max-width: none; /* Remove width restriction */
+    flex: none; /* Remove flex properties */
+  }
+
+  #bmi [style*="display: flex"] > div {
+    width: 100%;
+    flex: none; /* Remove flex properties */
+  }
+
+  /* BMI Age input - take complete grid width on mobile */
+  #bmi [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr; /* Single column for age section */
+    gap: 16px;
+  }
+
+  #bmi [style*="grid-template-columns: 1fr 1fr"] > div:first-child {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  #bmi [style*="grid-template-columns: 1fr 1fr"] > div:last-child {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  /* Direct targeting of BMI age input field */
+  #bmi #ageVal {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* More aggressive targeting with multiple selectors */
+  #bmi #ageVal,
+  #bmi input#ageVal,
+  #bmi [id="ageVal"],
+  #bmi div > input#ageVal {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 1 1 100% !important;
+    grid-column: 1 !important;
+  }
+
+  /* Override any inline styles on the age input */
+  #bmi #ageVal[style] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* Override parent container constraints */
+  #bmi [style*="grid-template-columns: 1fr 1fr"] > div:first-child {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* Force the age input container to take full width */
+  #bmi [style*="grid-template-columns: 1fr 1fr"] > div:first-child > input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* BMI Unit chips - keep in one row, don't stack */
+  #bmi [style*="grid-template-columns: repeat(3, 1fr)"],
+  #bmi [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Responsive grid for unit chips */
+    gap: 8px;
+  }
+
+  /* BMI Weight/Height inputs - stack vertically but keep unit chips in row */
+  #bmi [style*="display: flex"] {
+    flex-direction: column; /* Stack input and unit chips vertically */
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  #bmi [style*="display: flex"] input {
+    width: 100%; /* Input takes full width */
+    max-width: none;
+    flex: none;
+  }
+
+  #bmi [style*="display: flex"] > div {
+    width: 100%;
+    flex: none;
+  }
+
+  /* BMI Speedometer legend - 2x2 grid (2 columns, 2 rows) */
+  #bmi [style*="grid-template-columns: repeat(4, auto)"] {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, auto);   /* 2 rows */
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  /* Force the legend to use grid layout and override any flex interference */
+  #speedometerLegend > div[style*="display: grid"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, auto) !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+
+  /* Additional backup rules for the legend */
+  #bmi #speedometerLegend {
+    display: block !important; /* Override flex display */
+  }
+
+  #bmi #speedometerLegend > div {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, auto) !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+    width: 100% !important;
+  }
+
+  /* EMI Calculator specific fixes */
+  #emi input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #emi .card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+  }
+
+  /* EMI Table responsive */
+  #emi table {
+    font-size: 12px;
+    min-width: 100%;
+    table-layout: fixed; /* Fixed table layout for better control */
+  }
+
+  #emi th,
+  #emi td {
+    padding: 6px 4px;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* EMI input grid fixes */
+  #emi [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns: 1fr; /* Stack inputs vertically on mobile */
+    gap: 12px;
+  }
+
+  /* Mobile menu positioning */
+  .menu {
+    display: none !important;
+  }
+
+  /* Mobile header adjustments */
+  .mobile-header {
+    display: flex !important;
+  }
+
+  .mobile-header1 {
+    display: block !important;
   }
 }
 
@@ -905,3 +1317,22 @@
 }
 
 /* Timezone components now use timezone-input.css */ 
+
+/* Mobile-specific BMI speedometer adjustments */
+@media (max-width: 768px) {
+  #bmiSpeedometer {
+    max-width: 100%;
+    height: auto;
+    min-height: 120px;
+  }
+  
+  .mobile-conversion-grid .card {
+    padding: 16px;
+  }
+  
+  /* Ensure canvas doesn't overflow on mobile */
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+} 

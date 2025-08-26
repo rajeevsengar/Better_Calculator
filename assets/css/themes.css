@@ -12,8 +12,10 @@
   --text-muted: #64748b;
   --border-color: #e2e8f0;
   --input-background: #ffffff;
+  --input-bg: #ffffff;
   --input-border: #cbd5e1;
   --button-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -30,8 +32,10 @@
   --text-muted: #b0b0b0;
   --border-color: #444944;
   --input-background: #404440;
+  --input-bg: #404440;
   --input-border: #555955;
   --button-hover: #388e3c;
+  --hover-bg: #404440;
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -48,8 +52,10 @@
   --text-muted: #b0b0b0;
   --border-color: #444449;
   --input-background: #404049;
+  --input-bg: #404049;
   --input-border: #555959;
   --button-hover: #7b1fa2;
+  --hover-bg: #404049;
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -66,8 +72,10 @@
   --text-muted: #b0b0b0;
   --border-color: #494444;
   --input-background: #494040;
+  --input-bg: #494040;
   --input-border: #595555;
   --button-hover: #f57c00;
+  --hover-bg: #494040;
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
