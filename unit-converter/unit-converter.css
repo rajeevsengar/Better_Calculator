@@ -1,0 +1,265 @@
+/* ============================================================
+   UNIT CONVERTER CSS - MAIN STYLES
+   ============================================================ */
+
+/* ============================================================
+   UNIT TYPES SECTION - LEFT SIDEBAR
+   ============================================================ */
+.unit-types-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2vh 1.5vw;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: 0 0 25%;
+  min-width: 250px;
+}
+
+/* ============================================================
+   UNIT TYPES MENU - SCROLLABLE CONTAINER
+   ============================================================ */
+.unit-types-menu {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 40vh;
+  min-height: fit-content;
+  height: fit-content;
+  padding-right: 0.5vw;
+}
+
+/* ============================================================
+   UNIT TYPES LIST - LIST ITEM STYLES
+   ============================================================ */
+.unit-types-list li {
+  font-size: clamp(12px, 1.2vw, 16px);
+  padding: clamp(6px, 1vw, 12px);
+  border-radius: clamp(12px, 2vw, 24px);
+  margin: 0.5vh 0;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  list-style: none;
+}
+
+.unit-types-list li:hover {
+  background: var(--accent-color);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+}
+
+.unit-types-list li.active-mode {
+  background: var(--primary-color);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+  transform: scale(1.02);
+}
+
+/* ============================================================
+   RESPONSIVE DISPLAY LOGIC - DESKTOP VS MOBILE
+   ============================================================ */
+/* Desktop unit types list - visible by default */
+.desktop-unit-types-list {
+  display: block;
+}
+
+/* Mobile combobox - hidden by default on desktop */
+.mobile-unit-select {
+  display: none;
+}
+
+/* ============================================================
+   UNIT CHIPS CONTAINER - RIGHT SIDE INPUT AREAS
+   ============================================================ */
+.unit-chips-container {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1.5vh;
+  height: fit-content;
+  max-height: 40vh;
+  min-height: 40vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR STYLING
+   ============================================================ */
+.unit-chips-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.unit-chips-container::-webkit-scrollbar-track {
+  background: var(--surface-color);
+  border-radius: 4px;
+}
+
+.unit-chips-container::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.unit-chips-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* ============================================================
+   UNIT BUTTONS - FROM/TO UNIT SELECTION
+   ============================================================ */
+.unit-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  width: 100%;
+}
+
+/* ============================================================
+   SWAP BUTTON - UNIT CONVERSION DIRECTION
+   ============================================================ */
+.swap-button-center {
+  display: flex;
+  justify-content: center;
+}
+
+.swap-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1.5vh 3vw;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+}
+
+.swap-button:hover {
+  background: var(--primary-hover);
+}
+
+/* Unit Converter Internal Layout */
+
+input, select, button, textarea {
+  font-size: clamp(14px, 1.5vw, 18px);
+  padding: clamp(6px, 1vw, 12px);
+  border-radius: clamp(4px, 0.5vw, 8px);
+}
+
+.chip {
+  font-size: clamp(12px, 1.2vw, 16px);
+  padding: clamp(6px, 1vw, 12px);
+  border-radius: clamp(12px, 2vw, 24px);
+}
+
+/* ============================================================
+   MOBILE COMBOBOX - TOUCH-FRIENDLY SELECTION
+   ============================================================ */
+.mobile-unit-select {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.mobile-unit-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS - LARGE SCREENS
+   ============================================================ */
+@media (max-width: 1200px) {
+  .calculator-main-section {
+    grid-template-columns: 30% 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================================
+   MOBILE STACKING - VERTICAL LAYOUT
+   ============================================================ */
+@media (max-width: 768px) {
+  .calculator-main-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .unit-types-section {
+    order: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Override unit chips container height on mobile */
+  .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
+    height: auto;
+    max-height: 40vh;
+  }
+  
+  .unit-types-section .title-header {
+    text-align: center;
+  }
+  
+  /* Make main calculator container take full width on mobile */
+  .calculator-main-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  /* Show mobile combobox, hide desktop list */
+  .unit-types-section .mobile-unit-select {
+    display: block;
+  }
+  
+  .unit-types-section .desktop-unit-types-list {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   VERY SMALL SCREENS - MOBILE OPTIMIZATION
+   ============================================================ */
+@media (max-width: 480px) {
+  /* Stack from-to cards vertically on very small screens */
+  .calculator-main-section > div:last-child > div:first-child {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .calculator-main-section .card {
+    min-width: 100%;
+  }
+  
+  /* Ensure full width on very small screens */
+  .calculator-main-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+  
+  /* Override unit chips container height on very small screens */
+  .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
+    height: auto;
+    max-height: 40vh;
+  }
+} 

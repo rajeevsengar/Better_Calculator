@@ -50,11 +50,17 @@ function initializeUnitConverter() {
    Utility Functions
    ============================================================ */
    function populateModeList() {
-    const listEl = document.getElementById("modesList");
-    if (!listEl) return;
+    const listEl = document.getElementById("unitTypesList");
+    const mobileSelect = document.getElementById("mobileUnitTypes");
+    
+    if (!listEl || !mobileSelect) return;
   
+    // Clear both elements
     listEl.innerHTML = "";
+    mobileSelect.innerHTML = '<option value="">Select Unit Type</option>';
+    
     MODES.forEach(mode => {
+      // Create list item for desktop
       const li = document.createElement("li");
       li.textContent = mode.label;
       li.setAttribute("data-value", mode.value);
@@ -69,6 +75,9 @@ function initializeUnitConverter() {
         currentMode = mode.value;
         listEl.querySelectorAll("li").forEach(el => el.classList.remove("active-mode"));
         li.classList.add("active-mode");
+        
+        // Update mobile select to match
+        mobileSelect.value = mode.value;
   
         setupForMode();
         unitChangeHandler(fromValueInput, selectedFromUnit);
@@ -76,6 +85,33 @@ function initializeUnitConverter() {
       });
   
       listEl.appendChild(li);
+      
+      // Create option for mobile select
+      const option = document.createElement("option");
+      option.value = mode.value;
+      option.textContent = mode.label;
+      if (mode.value === currentMode) {
+        option.selected = true;
+      }
+      mobileSelect.appendChild(option);
+    });
+    
+    // Add change event listener for mobile select
+    mobileSelect.addEventListener("change", (e) => {
+      if (e.target.value) {
+        currentMode = e.target.value;
+        
+        // Update desktop list to match
+        listEl.querySelectorAll("li").forEach(el => el.classList.remove("active-mode"));
+        const activeLi = listEl.querySelector(`[data-value="${currentMode}"]`);
+        if (activeLi) {
+          activeLi.classList.add("active-mode");
+        }
+        
+        setupForMode();
+        unitChangeHandler(fromValueInput, selectedFromUnit);
+        tryConvert();
+      }
     });
   }
   

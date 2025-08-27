@@ -20,36 +20,7 @@
   background: var(--primary-hover);
 }
 
-/* ========================================
-   MAIN CONTENT WRAPPER
-   ======================================== */
 
-.main-content-wrapper {
-  height: calc(100vh - 202px);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.1);
-  background: var(--card-background);
-  margin: 10px 0;
-}
-
-.main-content-wrapper::-webkit-scrollbar {
-  width: 8px;
-}
-
-.main-content-wrapper::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.main-content-wrapper::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 4px;
-}
-
-.main-content-wrapper::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
-}
 
 /* ========================================
    RIBBON POPUP STYLING
@@ -713,11 +684,6 @@
    ======================================== */
 
 @media (max-width: 768px) {
-  /* Main content wrapper */
-  .main-content-wrapper {
-    height: calc(100vh - 182px);
-  }
-  
   /* Site facts popup */
   .site-facts-popup {
     width: 95%;
