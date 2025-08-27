@@ -210,8 +210,10 @@ input, select, button, textarea {
   
   /* Override unit chips container height on mobile */
   .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
-    height: auto;
+    height: fit-content;
     max-height: 40vh;
+    min-height: unset;
+    overflow-y: auto;
   }
   
   .unit-types-section .title-header {
@@ -259,7 +261,9 @@ input, select, button, textarea {
   
   /* Override unit chips container height on very small screens */
   .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
-    height: auto;
+    height: fit-content;
     max-height: 40vh;
+    min-height: unset;
+    overflow-y: auto;
   }
 } 
