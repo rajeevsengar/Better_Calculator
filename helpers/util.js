@@ -130,36 +130,7 @@ function populateTextContent() {
       menuItems[4].textContent = window.getText('menu.investmentCalculator');
     }
     
-    // Menu items (Mobile)
-    const mobileMenuItems = document.querySelectorAll('.mobile-item');
-    if (mobileMenuItems.length >= 6) {
-      const unitText = window.getText('menu.unitConverter').split('• ')[1];
-      const bmiText = window.getText('menu.bmiCalculator').split('• ')[1];
-      const dateText = window.getText('menu.dateCalculator').split('• ')[1];
-      const timeText = window.getText('menu.timeCalculator').split('• ')[1];
-      const emiText = window.getText('menu.emiCalculator').split('• ')[1];
-      const investmentText = window.getText('menu.investmentCalculator').split('• ')[1];
-      
-      mobileMenuItems[0].textContent = `1 • ${unitText}`;
-      mobileMenuItems[1].textContent = `2 • ${bmiText}`;
-      mobileMenuItems[2].textContent = `3 • ${dateText}`;
-      mobileMenuItems[3].textContent = `4 • ${timeText}`;
-      mobileMenuItems[4].textContent = `5 • ${emiText}`;
-      mobileMenuItems[5].textContent = `6 • ${investmentText}`;
-    } else if (mobileMenuItems.length >= 5) {
-      // Backward compatibility (older layout without time calculator)
-      const unitText = window.getText('menu.unitConverter').split('• ')[1];
-      const bmiText = window.getText('menu.bmiCalculator').split('• ')[1];
-      const dateText = window.getText('menu.dateCalculator').split('• ')[1];
-      const emiText = window.getText('menu.emiCalculator').split('• ')[1];
-      const investmentText = window.getText('menu.investmentCalculator').split('• ')[1];
-      
-      mobileMenuItems[0].textContent = `1 • ${unitText}`;
-      mobileMenuItems[1].textContent = `2 • ${bmiText}`;
-      mobileMenuItems[2].textContent = `3 • ${dateText}`;
-      mobileMenuItems[3].textContent = `4 • ${emiText}`;
-      mobileMenuItems[4].textContent = `5 • ${investmentText}`;
-    }
+    // Mobile menu items are now handled by the site-header web component
     
     // Theme switcher (Desktop)
     const themeLabel = document.getElementById('themeLabel');

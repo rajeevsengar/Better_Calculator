@@ -1,9 +1,7 @@
 /* Mobile-specific styles for Pro Multi-Calculator */
 
 /* Global Mobile Font Override */
-.mobile-container *,
-.mobile-header *,
-.mobile-brand-text * {
+.mobile-container * {
   font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
 }
 
@@ -38,223 +36,10 @@
     min-height: 100vh;
   }
 
-  /* Mobile Header */
-  .mobile-header {
-    background: var(--accent-color);
-    padding: 12px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
 
-  .mobile-header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 16px;
-  }
 
-  .mobile-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0; /* Allow shrinking */
-  }
 
-  .mobile-brand img {
-    height: 40px;
-    width: auto;
-    flex-shrink: 0; /* Prevent logo from shrinking */
-  }
-
-  .mobile-brand-text {
-    flex: 1;
-    min-width: 0; /* Allow shrinking */
-  }
-
-  .mobile-brand-text h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .mobile-brand-text .tagline {
-    font-size: 0.875rem;
-    height: 1.4rem;
-    line-height: 1.4rem;
-    color: var(--background-color);
-    opacity: 0.9;
-    position: relative;
-    overflow: hidden;
-    max-width: 200px; /* Limit tagline width */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.01em !important;
-  }
-
-  .mobile-brand-text .tagline-line {
-    line-height: 1.4rem;
-    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.01em !important;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Mobile Header 1 (Top Bar) - Mobile Styles */
-  .mobile-header1 {
-    background: #f5f5f5;
-    padding: 6px 0;
-  }
-
-  .mobile-header1 .mobile-header1-inner {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 16px;
-  }
-
-  .mobile-header1 .flag-icon {
-    height: 20px;
-    width: auto;
-  }
-
-  .mobile-header1 p {
-    margin: 0;
-    color: black;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 14px;
-  }
-
-  /* Mobile Menu Toggle */
-  .mobile-menu-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    cursor: pointer;
-    padding: 8px;
-    flex-shrink: 0; /* Prevent menu toggle from shrinking */
-    margin-left: auto; /* Push to the right */
-  }
-
-  .mobile-menu-toggle span {
-    width: 24px;
-    height: 3px;
-    background: var(--background-color);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-  }
-
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-
-  /* Mobile Menu Overlay */
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    z-index: 1000;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .mobile-menu-overlay.active {
-    display: block;
-    opacity: 1;
-  }
-
-  .mobile-menu-content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 280px;
-    height: 100%;
-    background: var(--card-background);
-    padding: 20px;
-    overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-  }
-
-  .mobile-menu-overlay.active .mobile-menu-content {
-    transform: translateX(0);
-  }
-
-  .mobile-menu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .mobile-menu-header h3 {
-    margin: 0;
-    color: var(--text-primary);
-  }
-
-  .mobile-menu-close {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Mobile Menu Items */
-  .mobile-menu-items {
-    margin-bottom: 24px;
-  }
-
-  .mobile-item {
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    background: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    transition: all 0.2s ease;
-  }
-
-  .mobile-item:hover,
-  .mobile-item.active {
-    background-color: var(--primary-color);
-    color: var(--text-primary);
-    border-color: var(--primary-color);
-  }
+  /* Mobile menu styles are now handled by the site-header web component */
 
   /* Mobile Theme Switcher */
   .mobile-theme-switcher {
@@ -309,7 +94,6 @@
   }
 
   /* Mobile cross/close icons - fix weird appearance */
-  .mobile-menu-close,
   .false-facts-close,
   .facts-close {
     background: rgba(255, 255, 255, 0.1);
@@ -1149,14 +933,7 @@
     display: none !important;
   }
 
-  /* Mobile header adjustments */
-  .mobile-header {
-    display: flex !important;
-  }
 
-  .mobile-header1 {
-    display: block !important;
-  }
 }
 
 /* Tablet adjustments */
@@ -1206,28 +983,9 @@
     padding: 12px;
   }
 
-  .mobile-header {
-    padding: 8px 12px;
-  }
 
-  .mobile-brand-text h1 {
-    font-size: 1.25rem;
-    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
-  }
 
-  .mobile-brand-text .tagline {
-    font-size: 0.75rem;
-    font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.01em !important;
-  }
-
-  .mobile-menu-content {
-    width: 100%;
-  }
+  /* Mobile menu content styles are now handled by the site-header web component */
 
   .mobile-input-row {
     grid-template-columns: 1fr;

@@ -5,105 +5,150 @@
 /*  NEW CODE STARTS HERE */
 /* Main Calculator Container - Centered, Responsive, Configurable */
 .calculator-main-container {
-  width: 80%;
-  max-width: 80%;
-  min-width:fit-content;
+  width: 90%;
+  max-width: 90%;
+  min-width: fit-content;
   margin: 0 auto;
-  padding: 2rem;
-  height: fit-content;
+  margin-right: 0.5%;
+  padding: 6vh;
+  padding-right: 0;
+  height: 88vh;
   max-height: fit-content;
   box-sizing: border-box;
-  overflow: auto;
+  display: flex;
+  gap: 4.5%;
+}
+
+/* Main Content Area */
+.calculator-content {
+  flex: 0 0 75%;
   display: flex;
   flex-direction: column;
 }
 
-/* Responsive breakpoints for main container */
-@media (min-width: 1920px) {
+/* Ad Space - Integrated in main container */
+.ad-space {
+  flex: 10%;
+  background: #f9f9f9; 
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.title-header {
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: clamp(8px, 1.5vw, 16px);
+  padding: 12px 0;
+  border-bottom: 2px solid var(--border-color);
+  text-align: left;
+  position: relative;
+}
+
+input, select, button, textarea {
+  width: 100%;
+  font-size: clamp(14px, 1.5vw, 18px);
+  padding: clamp(6px, 1vw, 12px);
+  border-radius: clamp(4px, 0.5vw, 8px);
+  border: 1px solid var(--input-border);
+  background-color: var(--input-background);
+  color: var(--text-primary);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Tablet & iPad Pro range */
+@media (max-width: 1024px) and (min-width: 769px) {
   .calculator-main-container {
-    width: 70%;
-    max-width: 1400px;
-    padding: 2.5rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
+    padding: 4vh;
+    gap: 4%;
+  }
+  
+  .calculator-content {
+    flex: 0 0 76%;
+  }
+  
+  .ad-space {
+    flex: 9.5%;
+  }
+  
+  .title-header {
+    font-size: clamp(14px, 1.8vw, 20px);
+    margin-bottom: clamp(6px, 1.2vw, 12px);
+    padding: 10px 0;
   }
 }
 
-@media (min-width: 2560px) {
-  .calculator-main-container {
-    width: 65%;
-    max-width: 1600px;
-    padding: 3rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (min-width: 3840px) {
-  .calculator-main-container {
-    width: 60%;
-    max-width: 1800px;
-    padding: 3.5rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (min-width: 5000px) {
-  .calculator-main-container {
-    width: 55%;
-    max-width: 2000px;
-    padding: 4rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 1200px) {
-  .calculator-main-container {
-    width: 85%;
-    padding: 1.5rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 481px) {
   .calculator-main-container {
     width: 95%;
+    max-width: 95%;
+    margin: 0 auto;
     padding: 1rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
     display: flex;
     flex-direction: column;
+    gap: 16px;
+  }
+  
+  .calculator-content {
+    flex: none;
+    width: 100%;
+  }
+  
+  .ad-space {
+    flex: none;
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .title-header {
+    font-size: clamp(13px, 1.5vw, 18px);
+    margin-bottom: clamp(5px, 1vw, 10px);
+    padding: 8px 0;
   }
 }
 
 @media (max-width: 480px) {
   .calculator-main-container {
     width: 98%;
+    max-width: 98%;
+    margin: 0 auto;
     padding: 0.75rem;
-    height: fit-content;
-    max-height: fit-content;
-    overflow: auto;
+    height: auto;
+    min-height: auto;
+    max-height: none;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+  }
+  
+  .calculator-content {
+    flex: none;
+    width: 100%;
+  }
+  
+  .ad-space {
+    flex: none;
+    width: 100%;
+    padding: 0.75rem;
+  }
+  
+  .title-header {
+    font-size: clamp(12px, 1.2vw, 16px);
+    margin-bottom: clamp(4px, 0.8vw, 8px);
+    padding: 6px 0;
   }
 }
 
@@ -123,7 +168,15 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  overflow-y: hidden;
+  overflow-y: auto;
+}
+
+/* Mobile overflow override - placed after main rules for proper precedence */
+@media (max-width: 768px) {
+  html, body {
+    overflow-y: auto;
+    height: auto;
+  }
 }
 
 /* Container stretches to push footer down */
@@ -138,115 +191,7 @@ html, body {
   flex: 1;
 }
 
-/* HEADER */
-header {
-  width: 100%;
-}
 
-/* Header 1 */
-.header1 {
-  background: #f5f5f5;
-  padding: 6px 0;
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
-.flag-icon {
-  height: 20px;
-  width: auto;
-}
-
-.header-inner p {
-  margin: 0;
-  color: black;
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 14px;
-}
-
-/* Header 2 */
-.header2 {
-  background: var(--accent-color);
-}
-.header2 .header-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-}
-.header2 .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.header2 .brand-text {
-  display: flex;
-  flex-direction: column;
-}
-.header2 h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  letter-spacing: -0.02em;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-}
-.header2 .tagline {
-  font-size: 1rem;
-  color: var(--background-color);
-  position: relative;
-  overflow: visible;
-  height: 1.5rem;
-  line-height: 1.5rem;
-  min-width: max-content;
-  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.tagline-line {
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  position: absolute;
-  width: max-content;
-  left: 0;
-  line-height: 1.5rem;
-  white-space: nowrap;
-  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.tagline-first {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.tagline-second {
-  transform: translateY(100%);
-  opacity: 0;
-}
-
-/* Animation classes */
-.tagline.animate .tagline-first {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.tagline.animate .tagline-second {
-  transform: translateY(0);
-  opacity: 1;
-}
-.header2 img {
-  height: 50px;
-  width: auto;
-}
 
 /* LAYOUT */
 .container {
@@ -408,128 +353,9 @@ header {
   }
 }
 
-/* Mobile Menu Toggle */
-.mobile-menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
-  position: relative;
-}
 
-.mobile-menu-toggle span {
-  width: 24px;
-  height: 3px;
-  background: var(--text-primary);
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-  .mobile-menu-toggle {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Ensure mobile header has proper positioning */
-  .mobile-header {
-    position: relative;
-  }
-  
-  .mobile-header-inner {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* Ensure the toggle button is visible */
-  .mobile-menu-toggle {
-    position: relative;
-    z-index: 1001;
-  }
-}
-
-/* Mobile Menu Overlay */
-.mobile-menu-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.mobile-menu-overlay.active {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.mobile-menu-content {
-  position: fixed;
-  top: 0;
-  right: -300px;
-  width: 300px;
-  height: 100%;
-  background: var(--card-background);
-  padding: 20px;
-  overflow-y: auto;
-  transition: right 0.3s ease;
-  z-index: 1001;
-}
-
-.mobile-menu-overlay.active .mobile-menu-content {
-  right: 0 !important;
-}
-
-.mobile-menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mobile-menu-close {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: var(--text-primary);
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.mobile-menu-close:hover {
-  background: var(--hover-bg);
-}
-
-.mobile-menu-items {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 24px;
-}
 
 .mobile-item {
-  padding: 12px 16px;
-  border-radius: 6px;
-  cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
 }
@@ -562,18 +388,6 @@ header {
   flex: 0 0 auto;
   margin-bottom: 12px;
 }
-
-.title-header {
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: clamp(8px, 1.5vw, 16px);
-  padding: 12px 0;
-  border-bottom: 2px solid var(--border-color);
-  text-align: left;
-  position: relative;
-}
-
 
 /* BMI Result */
 .bmi-result {
@@ -678,7 +492,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 10px;
 }
 
-input,
+/* input,
 select,
 button,
 textarea {
@@ -695,7 +509,7 @@ textarea:focus {
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
-}
+} */
 .small {
   padding: 8px;
   font-size: 14px;
@@ -733,15 +547,6 @@ button.primary:hover {
   }
 }
 
-/* CARDS */
-.card {
-  background-color: var(--card-background);
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
 /* Responsive Card System */
 .card {
   background: var(--card-background);
@@ -753,8 +558,7 @@ button.primary:hover {
 
 @media (max-width: 768px) {
   .card {
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 4vw;
   }
 }
 

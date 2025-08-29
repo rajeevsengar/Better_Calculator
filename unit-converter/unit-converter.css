@@ -7,6 +7,7 @@
    ============================================================ */
 .unit-types-section {
   background: var(--card-bg);
+  background-color: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 2vh 1.5vw;
@@ -47,6 +48,7 @@
   background: var(--surface-color);
   border: 1px solid var(--border-color);
   list-style: none;
+  gap: 1.5rem;
 }
 
 .unit-types-list li:hover {
@@ -84,9 +86,8 @@
   border-radius: 6px;
   padding: 1rem;
   margin-top: 1.5vh;
-  height: fit-content;
-  max-height: 40vh;
-  min-height: 40vh;
+  height: 100%;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
@@ -147,13 +148,6 @@
   background: var(--primary-hover);
 }
 
-/* Unit Converter Internal Layout */
-
-input, select, button, textarea {
-  font-size: clamp(14px, 1.5vw, 18px);
-  padding: clamp(6px, 1vw, 12px);
-  border-radius: clamp(4px, 0.5vw, 8px);
-}
 
 .chip {
   font-size: clamp(12px, 1.2vw, 16px);
@@ -161,19 +155,39 @@ input, select, button, textarea {
   border-radius: clamp(12px, 2vw, 24px);
 }
 
+.calculator-main-section {
+  grid-template-columns: 30% 1fr;
+  gap: 1.5rem;
+  height: 100%;
+  min-height: 100%;
+}
+
+.from-to-section {
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.from-to-section .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 0;
+}
+
 /* ============================================================
    MOBILE COMBOBOX - TOUCH-FRIENDLY SELECTION
    ============================================================ */
 .mobile-unit-select {
   width: 100%;
-  padding: 1rem;
   font-size: 1rem;
   border: 2px solid var(--border-color);
   border-radius: 8px;
   background: var(--surface-color);
   color: var(--text-color);
   cursor: pointer;
-  margin-bottom: 1rem;
   box-sizing: border-box;
 }
 
@@ -196,35 +210,54 @@ input, select, button, textarea {
 /* ============================================================
    MOBILE STACKING - VERTICAL LAYOUT
    ============================================================ */
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 481px) {
+  .calculator-content {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  
   .calculator-main-section {
     flex-direction: column;
     gap: 1rem;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
   
   .unit-types-section {
     order: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
     width: 100%;
     max-width: 100%;
+    padding: 0.25rem;  
+    margin-bottom: 0.25rem;
+    height: auto;
+    min-height: fit-content;
   }
   
-  /* Override unit chips container height on mobile */
-  .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
-    height: fit-content;
-    max-height: 40vh;
-    min-height: unset;
-    overflow-y: auto;
+  /* Keep from-to sections side by side on mobile */
+  .from-to-section {
+    flex-direction: row;
+    gap: 1rem;
+    height: auto;
+    min-height: 0;
+  }
+  
+  /* Make from and to cards take half width each */
+  .calculator-main-container .calculator-content .calculator-main-section .from-to-section .card {
+    flex: 1;
+    min-width: 0;
+    max-width: 50%;
+    width: 50%;
+    height: auto;
+    overflow: visible;
   }
   
   .unit-types-section .title-header {
     text-align: center;
-  }
-  
-  /* Make main calculator container take full width on mobile */
-  .calculator-main-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 1rem;
+    padding:0.5rem;
   }
   
   /* Show mobile combobox, hide desktop list */
@@ -235,6 +268,13 @@ input, select, button, textarea {
   .unit-types-section .desktop-unit-types-list {
     display: none;
   }
+
+  .unit-chips-container{
+    height: 50vh;
+    max-height: 50vh;
+    min-height: 50vh;
+    overflow: auto;
+  }
 }
 
 
@@ -242,28 +282,53 @@ input, select, button, textarea {
    VERY SMALL SCREENS - MOBILE OPTIMIZATION
    ============================================================ */
 @media (max-width: 480px) {
-  /* Stack from-to cards vertically on very small screens */
-  .calculator-main-section > div:last-child > div:first-child {
+  .calculator-main-section {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
+    height: auto;
+    overflow: visible;
+    min-height: auto;
+  }
+  
+  /* Keep from-to sections side by side even on very small screens */
+  .from-to-section {
+    flex-direction: row;
+    gap: 0.75rem;
+    
+  }
+  
+  /* Make from and to cards take half width each on very small screens */
+  .calculator-main-container .calculator-content .calculator-main-section .from-to-section .card {
+    flex: 1;
+    min-width: 0;
+    max-width: 50%;
+    width: 50%;
   }
   
   .calculator-main-section .card {
     min-width: 100%;
+    height: auto;
+    overflow: visible;
   }
   
-  /* Ensure full width on very small screens */
-  .calculator-main-container {
-    width: 100%;
-    max-width: 100%;
-    padding: 0.75rem;
+  .unit-types-section {
+    flex: 1;
+    padding: 0.25rem;
+    margin-bottom: 0.25rem;
+    height:12vh;
+    max-height: 14vh;
   }
   
-  /* Override unit chips container height on very small screens */
-  .calculator-main-container .unit-types-card .calculator-main-section .unit-chips-container {
-    height: fit-content;
+  /* Ensure mobile combobox is shown and desktop list is hidden on very small screens */
+  .unit-types-section .mobile-unit-select {
+    display: block;
+  }
+  
+  .unit-types-section .desktop-unit-types-list {
+    display: none;
+  }
+
+  .unit-chips-container{
     max-height: 40vh;
-    min-height: unset;
-    overflow-y: auto;
   }
 } 

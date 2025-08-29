@@ -1,0 +1,360 @@
+/* ========================================
+   SITE HEADER COMPONENT STYLES
+   ======================================== */
+
+/* Component Host Styles */
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* ========================================
+   MAIN HEADER LAYOUT
+   ======================================== */
+.site-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 10vh;
+  min-height: 10vh;
+  margin-bottom: 2vh;
+}
+
+/* ========================================
+   HEADER LEFT SECTION - FLAG & TEXT
+   ======================================== */
+.top-sub-header {
+    width: 100%;
+    background: #fff;
+    padding: 0.5vh 0;
+}
+
+.flag-icon {
+  height: 2.5vh;
+  width: auto;
+}
+
+.built-with-love {
+  color: #000;
+  font-size: 1.5vh;
+  font-weight: 500;
+}
+
+/* ========================================
+   HEADER CENTER SECTION - LOGO & BRANDING
+   ======================================== */
+.main-header {
+    width: 100%;
+    background: var(--accent-color, #2196f3);
+    padding: 0.8vh 0;
+    position: relative;
+}
+
+/* Logo */
+.site-logo {
+    height: 5vh;
+    width: auto;
+}
+
+/* Brand text */
+.brand-text h1 {
+    font-size: 3vh;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+}
+
+/* ========================================
+   TAGLINE ANIMATION SYSTEM
+   ======================================== */
+.tagline {
+  font-size: 1.6vh;
+  color: #fff;
+  height: 2vh;
+  line-height: 2vh;
+  position: relative;
+}
+
+.tagline-line {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  width: max-content;
+  left: 0;
+  line-height: 2vh;
+  white-space: nowrap;
+  font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial",
+    sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Tagline Position States */
+.tagline-first {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tagline-second {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Animation Classes for Tagline Switching */
+.tagline.animate .tagline-first {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.tagline.animate .tagline-second {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ========================================
+   HEADER CONTENT - Both headers inner sections
+   ======================================== */
+.header-content {
+    width: 80%;
+    max-width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5vh;
+    box-sizing: border-box;
+    padding-left: 6vh;
+    padding-right: 6vh;
+}
+
+/* ========================================
+   MOBILE MENU TOGGLE BUTTON
+   ======================================== */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 0.5vh;
+  cursor: pointer;
+  padding: 1vh;
+  flex-shrink: 0;
+  position: absolute;
+  right: 2vh;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5vh;
+  backdrop-filter: blur(0.5vh);
+}
+
+.mobile-menu-toggle span {
+  width: 2.5vh;
+  height: 0.3vh;
+  background-color: var(--background-color, #ffffff);
+  transition: 0.3s;
+  border-radius: 0.15vh;
+  box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-toggle:hover span {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.1);
+}
+
+.mobile-menu-toggle:active span {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   MOBILE MENU OVERLAY SYSTEM
+   ======================================== */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+.mobile-menu-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 90%;
+  height: 100%;
+  background: var(--background-color, #ffffff);
+  padding: 2vh;
+  overflow-y: auto;
+  box-shadow: -0.5vh 0 2vh rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Menu Header */
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2vh;
+  padding-bottom: 1vh;
+  border-bottom: 0.1vh solid var(--border-color, #e0e0e0);
+}
+
+.mobile-menu-header h3 {
+  margin: 0;
+  font-size: 2.5vh;
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 3vh;
+  cursor: pointer;
+  padding: 0;
+  width: 5vh;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile Menu Items */
+.mobile-menu-items {
+  margin-bottom: 3vh;
+}
+
+.mobile-item {
+  padding: 1.5vh;
+  margin-bottom: 1vh;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 4vh;
+  display: flex;
+  align-items: center;
+  font-size: 1.8vh;
+  font-weight: 500;
+}
+
+.mobile-item:hover {
+  background: var(--card-background, #f5f5f5);
+}
+
+.mobile-item.active {
+  background: var(--accent-color, #2196f3);
+  color: var(--background-color, #ffffff);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - TABLET BREAKPOINT
+   ======================================== */
+@media (max-width: 1024px) {
+  /* Header Layout Adjustments */
+  .site-header {
+    height: 7vh;
+    min-height: 7vh;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1);
+  }
+
+  /* Left Section Adjustments */
+  .top-sub-header {
+    gap: 0.8vh;
+  }
+
+  .flag-icon {
+    height: 2vh;
+  }
+
+  .built-with-love {
+    font-size: 1.2vh;
+  }
+
+  /* Center Section Adjustments */
+  .main-header {
+    gap: 1.5vh;
+  }
+
+  .site-logo {
+    height: 4vh;
+  }
+
+  .brand-text h1 {
+    font-size: 2.2vh;
+  }
+
+  /* Tagline Adjustments */
+  .tagline {
+    font-size: 1.3vh;
+    height: 1.6vh;
+    line-height: 1.6vh;
+  }
+
+  .tagline-line {
+    line-height: 1.6vh;
+  }
+
+  /* Show Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: flex;
+    position: absolute;
+    right: 2vh;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .header-content {
+      width: 85%;
+      max-width: 85%;
+      padding: unset;
+      padding-left: 0.75rem;
+  }
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE BREAKPOINT
+   ======================================== */
+@media (max-width: 480px) {
+  /* Header Layout Adjustments */
+  .site-header {
+    height: 6vh;
+    min-height: 6vh;
+  }
+
+  /* Brand Text Adjustments */
+  .brand-text h1 {
+    font-size: 2vh;
+  }
+
+  /* Tagline Adjustments */
+  .tagline {
+    font-size: 1.1vh;
+    max-width: 20vh;
+  }
+
+  .header-content {
+    width: 98%;
+    max-width: 98%;
+    padding: unset;
+    padding-left: 0.75rem;
+  }
+
+  /* Mobile Menu Adjustments */
+  .mobile-menu-toggle {
+    right: 1vh;
+    padding: 0.8vh;
+  }
+
+  .mobile-menu-toggle span {
+    width: 2vh;
+    height: 0.25vh;
+  }
+
+  .mobile-menu-content {
+    width: 85%;
+    padding: 1.5vh;
+  }
+}

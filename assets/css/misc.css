@@ -162,27 +162,7 @@
   text-align: center;
 }
 
-/* ========================================
-   SITE LOGO EASTER EGG STYLING
-   ======================================== */
 
-.header2 .brand img {
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.header2 .brand img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-
-.header2 .brand img:active {
-  transform: scale(0.95);
-}
 
 /* ========================================
    SITE FACTS POPUP STYLING

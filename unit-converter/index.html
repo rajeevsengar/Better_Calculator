@@ -13,105 +13,18 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/themes.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/mobile.css" />
     <link rel="stylesheet" href="unit-converter.css" />
+    <script src="../components/site-header/site-header.js"></script>
   </head>
   <body>
     <div class="page-container">
-      <!-- Header -->
-      <header class="header1">
-        <div class="header-inner">
-          <img
-            src="../assets/images/india-flag.png"
-            alt="Calculator Icon - Calculator Icon Transparent"
-            alt="Logo"
-            class="flag-icon"
-          />
-          <p
-            id="builtWithLove"
-            style="color: black; font-family: Helvetica Neue"
-          ></p>
-        </div>
-      </header>
-
-      <!-- Responsive Header - Shows different content based on screen size -->
-      <header class="header2 mobile-header">
-        <div class="header-inner mobile-header-inner">
-          <div class="brand mobile-brand">
-            <img
-              id="siteLogo"
-              src="../assets/images/site_logo.png"
-              alt="Calculator Icon - Calculator Icon Transparent"
-              alt="Logo"
-            />
-            <div class="brand-text mobile-brand-text">
-              <h1 id="brandName"></h1>
-              <div id="tagline" class="muted tagline">
-                <div class="tagline-line tagline-first"></div>
-                <div class="tagline-line tagline-second"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mobile Menu Toggle - Only visible on mobile -->
-          <div class="mobile-menu-toggle" id="mobileMenuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Mobile Menu Overlay - Only visible on mobile -->
-      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="mobile-menu-content">
-          <div class="mobile-menu-header">
-            <h3>Menu</h3>
-            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
-          </div>
-
-          <!-- Menu Items -->
-          <div class="mobile-menu-items">
-            <div class="mobile-item active">Unit Converter</div>
-          </div>
-
-          <!-- Theme Switcher -->
-          <div class="mobile-theme-switcher">
-            <div class="theme-label">Theme:</div>
-            <div class="theme-options">
-              <label class="theme-option" data-theme="default">
-                <input type="radio" name="theme" value="default" checked />
-                <span class="theme-color" style="background: #2196f3"></span>
-              </label>
-              <label class="theme-option" data-theme="green">
-                <input type="radio" name="theme" value="green" />
-                <span class="theme-color" style="background: #4caf50"></span>
-              </label>
-              <label class="theme-option" data-theme="purple">
-                <input type="radio" name="theme" value="purple" />
-                <span class="theme-color" style="background: #9c27b0"></span>
-              </label>
-              <label class="theme-option" data-theme="orange">
-                <input type="radio" name="theme" value="orange" />
-                <span class="theme-color" style="background: #ff9800"></span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Global ribbons -->
-          <div class="ribbons">
-            <div class="ribbon" data-type="tips">Tips</div>
-            <div class="ribbon" data-type="instructions">Instructions</div>
-            <div class="ribbon" data-type="examples">Examples</div>
-            <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
-          </div>
-        </div>
-      </div>
+      <!-- Site Header Component -->
+      <site-header></site-header>
 
       <main class="calculator-main-container">
         <!-- Unit Converter -->
-        <div class="card unit-types-card">
-                <div class="calculator-main-section" style="display: flex; gap: 1.5rem; align-items: stretch;">
+        <div class="calculator-content">
+                <div class="calculator-main-section" style="display: flex; ">
                     <!-- Unit Types section - Left side -->
                     <div class="unit-types-section">
                         <div class="title-header">Unit Types</div>
@@ -126,8 +39,8 @@
                     </div>
                     
                     <!-- From-To inputs and swap button - Right side -->
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem; flex: 1;">
-                        <div style="display: flex; gap: 1.5rem;">
+                    <div  style="display: flex; flex-direction: column;flex: 1; gap: 1rem;">
+                        <div class="from-to-section" style="display: flex;">
                             <div class="card" style="flex: 1;">
                                 <div class="title-header">From</div>
                                 <input id="fromValue" placeholder="Enter value" />
@@ -152,23 +65,26 @@
                     </div>
                 </div>
             </div>
+            <div class="ad-space">
+              Ad Space<br><br><br><br>hsjsj<br><br><br>hshssb<br><br><br><br><br><br>rajeev<br><br>
+            </div>
       </main>
 
       <!-- Footer -->
-      <footer class="site-footer">
+      <!-- <footer class="site-footer">
         <div class="footer-content">
-          <div class="footer-main">
-            <p class="footer-tagline">
+          <div class="footer-main"> -->
+            <!-- <p class="footer-tagline">
               Not just another calculator website — it covers the missing
               features of others.
-            </p>
-            <p class="footer-highlight">
+            </p> -->
+            <!-- <p class="footer-highlight">
               🏆 The most feature-rich
               <span id="emi-link" class="footer-link">EMI Calculator</span>
               on the internet, our proud flagship.
-            </p>
-          </div>
-          <div
+            </p> -->
+          <!-- </div> -->
+          <!-- <div
             class="footer-easter-egg"
             id="falseEasterEgg"
             style="cursor: pointer"
@@ -179,12 +95,12 @@
               >This site contains a hidden easter egg. Good luck finding it!</em
             >
             🥚
-          </div>
-        </div>
-      </footer>
+          </div> -->
+        <!-- </div>
+      </footer> -->
 
       <!-- False Easter Egg Popup -->
-      <div
+      <!-- <div
         id="falseEasterEggPopup"
         class="false-easter-egg-popup"
         aria-hidden="true"
@@ -196,20 +112,19 @@
           </button>
         </div>
         <div class="false-facts-content"></div>
-      </div>
+      </div> -->
 
       <!-- Site Facts Popup -->
-      <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
+      <!-- <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
         <div class="facts-header">
           <h3></h3>
           <button class="facts-close" onclick="closeSiteFacts()">×</button>
         </div>
         <div class="facts-content">
           <div class="story-section">
-            <!-- Content will be populated dynamically from text-config.js -->
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <script src="../helpers/constants.js"></script>

@@ -26,8 +26,7 @@ function initializeResponsiveFunctionality() {
   // Initialize panel functionality
   initializePanelSystem();
   
-  // Initialize mobile menu (if on mobile)
-  initializeMobileMenu();
+  // Mobile menu is now handled by the site-header web component
   
   // Initialize responsive navigation
   initializeResponsiveNavigation();
@@ -135,8 +134,7 @@ function showPanel(panelId) {
   // Setup ribbons
   setupRibbons(panelId);
   
-  // Close mobile menu if open
-  closeMobileMenu();
+  // Mobile menu is now handled by the site-header web component
 }
 
 // Unified calculator initialization
@@ -238,95 +236,11 @@ function initializePanelCalculators(panelId) {
   }
 }
 
-// Mobile menu functionality
-function initializeMobileMenu() {
-  console.log('Initializing mobile menu...');
-  
-  const menuToggle = document.getElementById('mobileMenuToggle');
-  const menuOverlay = document.getElementById('mobileMenuOverlay');
-  const menuClose = document.getElementById('mobileMenuClose');
-  
-  console.log('Mobile menu elements found:', {
-    toggle: !!menuToggle,
-    overlay: !!menuOverlay,
-    close: !!menuClose
-  });
-  
-  if (menuToggle && menuOverlay && menuClose) {
-    menuToggle.addEventListener('click', () => {
-      console.log('Mobile menu toggle clicked');
-      openMobileMenu();
-    });
-    
-    menuClose.addEventListener('click', () => {
-      console.log('Mobile menu close clicked');
-      closeMobileMenu();
-    });
-    
-    // Close menu when clicking outside
-    menuOverlay.addEventListener('click', (e) => {
-      if (e.target === menuOverlay) {
-        console.log('Closing mobile menu - clicked outside');
-        closeMobileMenu();
-      }
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menuOverlay.classList.contains('active')) {
-        console.log('Closing mobile menu - escape key');
-        closeMobileMenu();
-      }
-    });
-    
-    console.log('Mobile menu initialized successfully');
-  } else {
-    console.error('Mobile menu elements not found');
-  }
-}
+// Mobile menu functionality is now handled by the site-header web component
 
-// Open mobile menu
-function openMobileMenu() {
-  console.log('Opening mobile menu...');
-  
-  const menuOverlay = document.getElementById('mobileMenuOverlay');
-  const menuToggle = document.getElementById('mobileMenuToggle');
-  
-  if (menuOverlay && menuToggle) {
-    menuOverlay.style.display = 'block';
-    menuOverlay.classList.add('active');
-    menuToggle.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    console.log('Mobile menu opened successfully');
-  } else {
-    console.error('Failed to open mobile menu - elements not found');
-  }
-}
+// Mobile menu open/close functions are now handled by the site-header web component
 
-// Close mobile menu
-function closeMobileMenu() {
-  console.log('Closing mobile menu...');
-  
-  const menuOverlay = document.getElementById('mobileMenuOverlay');
-  const menuToggle = document.getElementById('mobileMenuToggle');
-  
-  if (menuOverlay && menuToggle) {
-    menuOverlay.classList.remove('active');
-    menuToggle.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    
-    // Add a small delay to ensure smooth transition
-    setTimeout(() => {
-      if (!menuOverlay.classList.contains('active')) {
-        menuOverlay.style.display = 'none';
-        console.log('Mobile menu closed successfully');
-      }
-    }, 300);
-  } else {
-    console.error('Failed to close mobile menu - elements not found');
-  }
-}
+// Mobile menu close function is now handled by the site-header web component
 
 // Initialize responsive navigation
 function initializeResponsiveNavigation() {
@@ -359,10 +273,7 @@ function handleResponsiveLayout() {
     setTimeout(() => forceMobileLayout(), 100);
   }
   
-  // Close mobile menu if switching to desktop
-  if (!isMobile) {
-    closeMobileMenu();
-  }
+  // Mobile menu is now handled by the site-header web component
 }
 
 // Debug function to check grid layout
