@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeResponsiveFunctionality() {
   console.log('Initializing responsive functionality...');
   
-  // Verify calculator scripts are loaded
-  verifyCalculatorScripts();
-  
   // Initialize theme switcher
   initializeThemeSwitcher();
   
@@ -21,10 +18,7 @@ function initializeResponsiveFunctionality() {
   populateTextContent();
   
   // Initialize date calculator tabs
-  initializeDateTabs();
-  
-  // Initialize panel functionality
-  initializePanelSystem();
+  // initializePanelSystem();
   
   // Mobile menu is now handled by the site-header web component
   
@@ -37,204 +31,293 @@ function initializeResponsiveFunctionality() {
   console.log('Responsive functionality initialized successfully');
 }
 
-// Verify that all calculator scripts are loaded
-function verifyCalculatorScripts() {
-  console.log('Verifying calculator scripts...');
-  
-  const calculators = {
-    'UnitConverter': window.UnitConverter,
-    'BMICalculator': window.BMICalculator,
-    'EMI': window.EMI,
-    'Investment': window.Investment,
-    'DateCalculator': window.DateCalculator || window.dateCalculator
-  };
-  
-  Object.entries(calculators).forEach(([name, calculator]) => {
-    if (calculator) {
-      console.log(`✅ ${name} loaded successfully`);
-    } else {
-      console.error(`❌ ${name} NOT loaded`);
+// Lazy load calculator scripts only when needed
+function loadCalculatorScript(calculatorName) {
+  return new Promise((resolve, reject) => {
+    // Check if already loaded
+    if (window[calculatorName]) {
+      resolve(window[calculatorName]);
+      return;
     }
+
+    // Define script paths for each calculator
+    const scriptPaths = {
+      'UnitConverter': 'unit-converter/unit-converter.js',
+      'BMICalculator': 'bmi-calculator/bmi-calculator.js',
+      'EMI': 'emi-calculator/emi-calculator.js',
+      'Investment': 'investment-calculator/investment-calculator.js',
+      'DateCalculator': 'date-calculator/date-calculator.js',
+      'timezone_calculator': 'timezone_calculator/timezone_calculator.js'
+    };
+
+    const scriptPath = scriptPaths[calculatorName];
+    if (!scriptPath) {
+      reject(new Error(`Unknown calculator: ${calculatorName}`));
+      return;
+    }
+
+    // Create and load script
+    const script = document.createElement('script');
+    script.src = scriptPath;
+    script.onload = () => {
+      console.log(`✅ ${calculatorName} script loaded successfully`);
+      resolve(window[calculatorName]);
+    };
+    script.onerror = () => {
+      console.error(`❌ Failed to load ${calculatorName} script`);
+      reject(new Error(`Failed to load ${calculatorName} script`));
+    };
+    
+    document.head.appendChild(script);
   });
+}
+
+// Load web components when needed
+function loadWebComponents() {
+  return new Promise((resolve) => {
+    const components = [
+      'components/date-input/date-input.js',
+      'components/time-input/time-input.js',
+      'components/searchable-select/searchable-select.js'
+    ];
+
+    let loadedCount = 0;
+    const totalComponents = components.length;
+
+    components.forEach(componentPath => {
+      const script = document.createElement('script');
+      script.src = componentPath;
+      script.onload = () => {
+        loadedCount++;
+        if (loadedCount === totalComponents) {
+          console.log('✅ All web components loaded');
+          resolve();
+        }
+      };
+      script.onerror = () => {
+        console.warn(`⚠️ Failed to load web component: ${componentPath}`);
+        loadedCount++;
+        if (loadedCount === totalComponents) {
+          resolve();
+        }
+      };
+      document.head.appendChild(script);
+    });
+  });
+}
+
+// Show loading indicator for calculator
+function showCalculatorLoading(panelId) {
+  const section = document.getElementById(panelId);
+  if (section) {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.id = `${panelId}-loading`;
+    loadingDiv.className = 'calculator-loading';
+    loadingDiv.innerHTML = `
+      <div class="loading-spinner"></div>
+      <p>Loading calculator...</p>
+    `;
+    
+    section.appendChild(loadingDiv);
+  }
+}
+
+// Hide loading indicator for calculator
+function hideCalculatorLoading(panelId) {
+  const loadingDiv = document.getElementById(`${panelId}-loading`);
+  if (loadingDiv) {
+    loadingDiv.remove();
+  }
 }
 
 // Unified panel system
-function initializePanelSystem() {
-  console.log('Initializing panel system...');
-  const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
-  const sections = document.querySelectorAll('main.panel .container > section');
+// function initializePanelSystem() {
+//   console.log('Initializing panel system...');
+//   const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
+//   const sections = document.querySelectorAll('main.panel .container > section');
 
-  console.log('Found menu items:', menuItems.length);
-  console.log('Found sections:', sections.length);
+//   console.log('Found menu items:', menuItems.length);
+//   console.log('Found sections:', sections.length);
 
-  if (menuItems.length > 0) {
-    menuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        console.log('Menu item clicked:', item.dataset.panel);
-        showPanel(item.dataset.panel);
-      });
-    });
+//   if (menuItems.length > 0) {
+//     menuItems.forEach(item => {
+//       item.addEventListener('click', () => {
+//         console.log('Menu item clicked:', item.dataset.panel);
+//         showPanel(item.dataset.panel);
+//       });
+//     });
 
-    // Ensure initial state matches the active menu item
-    const initial = document.querySelector('.menu .item.active, .mobile-item.active') || menuItems[0];
-    if (initial) {
-      console.log('Setting initial panel:', initial.dataset.panel);
-      showPanel(initial.dataset.panel);
-    }
-  }
-}
+//     // Ensure initial state matches the active menu item
+//     const initial = document.querySelector('.menu .item.active, .mobile-item.active') || menuItems[0];
+//     if (initial) {
+//       console.log('Setting initial panel:', initial.dataset.panel);
+//       showPanel(initial.dataset.panel);
+//     }
+//   }
+// }
 
-// Unified panel switching function
-function showPanel(panelId) {
-  console.log('Showing panel:', panelId);
+// // Unified panel switching function
+// function showPanel(panelId) {
+//   console.log('Showing panel:', panelId);
   
-  const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
-  const sections = document.querySelectorAll('main.panel .container > section');
+//   const menuItems = document.querySelectorAll('.menu .item, .mobile-item');
+//   const sections = document.querySelectorAll('main.panel .container > section');
   
-  console.log('Found sections:', sections.length);
-  sections.forEach((section, index) => {
-    console.log(`Section ${index}:`, section.id, 'classes:', section.className);
-  });
+//   console.log('Found sections:', sections.length);
+//   sections.forEach((section, index) => {
+//     console.log(`Section ${index}:`, section.id, 'classes:', section.className);
+//   });
   
-  // Highlight menu items
-  menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
+//   // Highlight menu items
+//   menuItems.forEach(m => m.classList.toggle('active', m.dataset.panel === panelId));
 
-  // Hide all sections
-  sections.forEach(s => {
-    console.log(`Hiding section: ${s.id}`);
-    s.classList.remove('active-section');
-  });
+//   // Hide all sections
+//   sections.forEach(s => {
+//     console.log(`Hiding section: ${s.id}`);
+//     s.classList.remove('active-section');
+//   });
 
-  // Show target section
-  const target = document.getElementById(panelId);
-  if (!target) {
-    console.error('Panel not found:', panelId);
-    return;
-  }
+//   // Show target section
+//   const target = document.getElementById(panelId);
+//   if (!target) {
+//     console.error('Panel not found:', panelId);
+//     return;
+//   }
   
-  console.log(`Showing target section: ${panelId}`);
-  target.classList.add('active-section');
+//   console.log(`Showing target section: ${panelId}`);
+//   target.classList.add('active-section');
 
-  // Check if section is now visible
-  setTimeout(() => {
-    const isVisible = target.classList.contains('active-section');
-    const computedStyle = window.getComputedStyle(target);
-    console.log(`Section ${panelId} visibility:`, {
-      hasActiveClass: isVisible,
-      display: computedStyle.display,
-      opacity: computedStyle.opacity,
-      visibility: computedStyle.visibility
-    });
-  }, 100);
+//   // Check if section is now visible
+//   setTimeout(() => {
+//     const isVisible = target.classList.contains('active-section');
+//     const computedStyle = window.getComputedStyle(target);
+//     console.log(`Section ${panelId} visibility:`, {
+//       hasActiveClass: isVisible,
+//       display: computedStyle.display,
+//       opacity: computedStyle.opacity,
+//       visibility: computedStyle.visibility
+//     });
+//   }, 100);
 
-  // Initialize calculators lazily
-  console.log('Initializing calculators for panel:', panelId);
-  initializePanelCalculators(panelId);
+//   // Initialize calculators lazily
+//   console.log('Initializing calculators for panel:', panelId);
+//   initializePanelCalculators(panelId);
 
-  // Setup ribbons
-  setupRibbons(panelId);
+//   // Setup ribbons
+//   setupRibbons(panelId);
   
-  // Mobile menu is now handled by the site-header web component
-}
+//   // Mobile menu is now handled by the site-header web component
+// }
 
-// Unified calculator initialization
-function initializePanelCalculators(panelId) {
-  console.log('Initializing calculators for panel:', panelId);
+// // Unified calculator initialization with lazy loading
+// async function initializePanelCalculators(panelId) {
+//   console.log('Initializing calculators for panel:', panelId);
   
-  switch (panelId) {
-    case 'emi':
-      console.log('Initializing EMI calculator...');
-      if (window.EMI && window.EMI.initializeEMICalculator) {
-        window.EMI.initializeEMICalculator();
-        console.log('EMI calculator initialized successfully');
-      } else {
-        console.error('EMI calculator not found or initializeEMICalculator not available');
-      }
-      break;
-      
-    case 'investment':
-      console.log('Initializing Investment calculator...');
-      if (window.Investment && window.Investment.initializeInvestmentCalculator) {
-        window.Investment.initializeInvestmentCalculator();
-        console.log('Investment calculator initialized successfully');
-      } else {
-        console.error('Investment calculator not found or initializeInvestmentCalculator not available');
-      }
-      break;
-      
-    case 'conversion':
-      console.log('Initializing Unit Converter...');
-      if (window.UnitConverter && window.UnitConverter.initializeUnitConverter) {
-        window.UnitConverter.initializeUnitConverter();
-        console.log('Unit Converter initialized successfully');
-      } else {
-        console.error('Unit Converter not found or initializeUnitConverter not available');
-      }
-      break;
-      
-    case 'unit':
-      console.log('Initializing Unit Converter...');
-      if (window.UnitConverter && window.UnitConverter.initializeUnitConverter) {
-        window.UnitConverter.initializeUnitConverter();
-        console.log('Unit Converter initialized successfully');
-      } else {
-        console.error('Unit Converter not found or initializeUnitConverter not available');
-      }
-      break;
-      
-    case 'date':
-      console.log('Initializing Date Calculator...');
-      if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
-        window.DateCalculator.initializeDateCalculator();
-        console.log('Date Calculator initialized successfully');
-      } else if (window.dateCalculator) {
-        // Alternative: check if instance already exists
-        console.log('Date Calculator instance already exists');
-      } else {
-        console.error('Date Calculator not found or initializeDateCalculator not available');
-      }
-      break;
-      
-    case 'time':
-      console.log('Initializing Time Calculator...');
-      if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
-        window.DateCalculator.initializeDateCalculator();
-        console.log('Time Calculator initialized successfully');
-      } else if (window.dateCalculator) {
-        // Alternative: check if instance already exists
-        console.log('Time Calculator instance already exists');
-      } else {
-        console.error('Time Calculator not found or initializeDateCalculator not available');
-      }
-      break;
-      
-    case 'bmi':
-      console.log('Initializing BMI Calculator...');
-      if (window.BMICalculator && window.BMICalculator.initializeBMICalculator) {
-        window.BMICalculator.initializeBMICalculator();
+//   // Show loading indicator
+//   showCalculatorLoading(panelId);
+  
+//   try {
+//     switch (panelId) {
+//       case 'emi':
+//         console.log('Loading EMI calculator...');
+//         const emiCalculator = await loadCalculatorScript('EMI');
+//         if (emiCalculator && emiCalculator.initializeEMICalculator) {
+//           emiCalculator.initializeEMICalculator();
+//           console.log('EMI calculator initialized successfully');
+//         } else {
+//           console.error('EMI calculator not found or initializeEMICalculator not available');
+//         }
+//         break;
         
-        // Initialize speedometer after a short delay to ensure DOM is ready
-        setTimeout(() => {
-          if (window.BMICalculator && window.BMICalculator.updateSpeedometer) {
-            console.log('Initializing BMI speedometer...');
-            // Use safe update if available, otherwise use regular update
-            if (window.BMICalculator.safeUpdateSpeedometer) {
-              window.BMICalculator.safeUpdateSpeedometer(0);
-            }
-            // Removed the fallback call that was causing the error
-          }
-        }, 100);
+//       case 'investment':
+//         console.log('Loading Investment calculator...');
+//         const investmentCalculator = await loadCalculatorScript('Investment');
+//         if (investmentCalculator && investmentCalculator.initializeInvestmentCalculator) {
+//           investmentCalculator.initializeInvestmentCalculator();
+//           console.log('Investment calculator initialized successfully');
+//         } else {
+//           console.error('Investment calculator not found or initializeInvestmentCalculator not available');
+//         }
+//         break;
         
-        console.log('BMI Calculator initialized successfully');
-      } else {
-        console.error('BMI Calculator not found or initializeBMICalculator not available');
-      }
-      break;
-      
-    default:
-      console.log('No calculator initialization for panel:', panelId);
-  }
-}
+//       case 'conversion':
+//       case 'unit':
+//         console.log('Loading Unit Converter...');
+//         const unitConverter = await loadCalculatorScript('UnitConverter');
+//         if (unitConverter && unitConverter.initializeUnitConverter) {
+//           unitConverter.initializeUnitConverter();
+//           console.log('Unit Converter initialized successfully');
+//         } else {
+//           console.error('Unit Converter not found or initializeUnitConverter not available');
+//         }
+//         break;
+        
+//       case 'date':
+//         console.log('Loading Date Calculator...');
+//         // Load web components first for date calculator
+//         await loadWebComponents();
+//         const dateCalculator = await loadCalculatorScript('DateCalculator');
+//         if (dateCalculator && dateCalculator.initializeDateCalculator) {
+//           dateCalculator.initializeDateCalculator();
+//           console.log('Date Calculator initialized successfully');
+//         } else if (window.dateCalculator) {
+//           // Alternative: check if instance already exists
+//           console.log('Date Calculator instance already exists');
+//         } else {
+//           console.error('Date Calculator not found or initializeDateCalculator not available');
+//         }
+//         break;
+        
+//       case 'time':
+//         console.log('Loading Time Calculator...');
+//         // Load web components first for time calculator
+//         await loadWebComponents();
+//         const timeCalculator = await loadCalculatorScript('DateCalculator');
+//         if (timeCalculator && timeCalculator.initializeDateCalculator) {
+//           timeCalculator.initializeDateCalculator();
+//           console.log('Time Calculator initialized successfully');
+//         } else if (window.dateCalculator) {
+//           // Alternative: check if instance already exists
+//           console.log('Date Calculator instance already exists');
+//         } else {
+//           console.error('Date Calculator not found or initializeDateCalculator not available');
+//         }
+//         break;
+        
+//       case 'bmi':
+//         console.log('Loading BMI Calculator...');
+//         const bmiCalculator = await loadCalculatorScript('BMICalculator');
+//         if (bmiCalculator && bmiCalculator.initializeBMICalculator) {
+//           bmiCalculator.initializeBMICalculator();
+          
+//           // Initialize speedometer after a short delay to ensure DOM is ready
+//           setTimeout(() => {
+//             if (bmiCalculator && bmiCalculator.updateSpeedometer) {
+//               console.log('Initializing BMI speedometer...');
+//               // Use safe update if available, otherwise use regular update
+//               if (bmiCalculator.safeUpdateSpeedometer) {
+//                 bmiCalculator.safeUpdateSpeedometer(0);
+//               }
+//               // Removed the fallback call that was causing the error
+//             }
+//           }, 100);
+          
+//           console.log('BMI Calculator initialized successfully');
+//         } else {
+//           console.error('BMI Calculator not found or initializeEMICalculator not available');
+//         }
+//         break;
+        
+//       default:
+//         console.log('No calculator initialization for panel:', panelId);
+//     }
+//   } catch (error) {
+//     console.error(`Error initializing calculator for panel ${panelId}:`, error);
+//   } finally {
+//     // Hide loading indicator
+//     hideCalculatorLoading(panelId);
+//   }
+// }
 
 // Mobile menu functionality is now handled by the site-header web component
 
@@ -267,80 +350,80 @@ function handleResponsiveLayout() {
   document.body.classList.toggle('desktop-layout', !isMobile);
   
   // Debug grid layout on mobile
-  if (isMobile) {
-    debugGridLayout();
-    // Force mobile layout to ensure it's applied
-    setTimeout(() => forceMobileLayout(), 100);
-  }
+  // if (isMobile) {
+  //   debugGridLayout();
+  //   // Force mobile layout to ensure it's applied
+  //   setTimeout(() => forceMobileLayout(), 100);
+  // }
   
   // Mobile menu is now handled by the site-header web component
 }
 
 // Debug function to check grid layout
-function debugGridLayout() {
-  console.log('=== Mobile Grid Layout Debug ===');
+// function debugGridLayout() {
+//   console.log('=== Mobile Grid Layout Debug ===');
   
-  const container = document.querySelector('.container');
-  if (container) {
-    const computedStyle = window.getComputedStyle(container);
-    console.log('Container grid:', {
-      display: computedStyle.display,
-      gridTemplateColumns: computedStyle.gridTemplateColumns,
-      width: computedStyle.width,
-      maxWidth: computedStyle.maxWidth
-    });
-  }
+//   const container = document.querySelector('.container');
+//   if (container) {
+//     const computedStyle = window.getComputedStyle(container);
+//     console.log('Container grid:', {
+//       display: computedStyle.display,
+//       gridTemplateColumns: computedStyle.gridTemplateColumns,
+//       width: computedStyle.width,
+//       maxWidth: computedStyle.maxWidth
+//     });
+//   }
   
-  const conversionGrids = document.querySelectorAll('.conversion-grid');
-  conversionGrids.forEach((grid, index) => {
-    const computedStyle = window.getComputedStyle(grid);
-    console.log(`Conversion grid ${index}:`, {
-      display: computedStyle.display,
-      gridTemplateColumns: computedStyle.gridTemplateColumns,
-      width: computedStyle.width
-    });
-  });
+//   const conversionGrids = document.querySelectorAll('.conversion-grid');
+//   conversionGrids.forEach((grid, index) => {
+//     const computedStyle = window.getComputedStyle(grid);
+//     console.log(`Conversion grid ${index}:`, {
+//       display: computedStyle.display,
+//       gridTemplateColumns: computedStyle.gridTemplateColumns,
+//       width: computedStyle.width
+//     });
+//   });
   
-  const conversionCols = document.querySelectorAll('.conversion-col');
-  conversionCols.forEach((col, index) => {
-    const computedStyle = window.getComputedStyle(col);
-    console.log(`Conversion col ${index}:`, {
-      display: computedStyle.display,
-      gridColumn: computedStyle.gridColumn,
-      width: computedStyle.width
-    });
-  });
+//   const conversionCols = document.querySelectorAll('.conversion-col');
+//   conversionCols.forEach((col, index) => {
+//     const computedStyle = window.getComputedStyle(col);
+//     console.log(`Conversion col ${index}:`, {
+//       display: computedStyle.display,
+//       gridColumn: computedStyle.gridColumn,
+//       width: computedStyle.width
+//     });
+//   });
   
-  console.log('=== End Debug ===');
-}
+//   console.log('=== End Debug ===');
+// }
 
 // Force mobile layout when CSS isn't sufficient
-function forceMobileLayout() {
-  console.log('Forcing mobile layout...');
+// function forceMobileLayout() {
+//   console.log('Forcing mobile layout...');
   
-  const container = document.querySelector('.container');
-  if (container) {
-    container.style.gridTemplateColumns = '1fr';
-    container.style.gap = '16px';
-    container.style.maxWidth = '100%';
-    container.style.padding = '0 16px';
-  }
+//   const container = document.querySelector('.container');
+//   if (container) {
+//     container.style.gridTemplateColumns = '1fr';
+//     container.style.gap = '16px';
+//     container.style.maxWidth = '100%';
+//     container.style.padding = '0 16px';
+//   }
   
-  const conversionGrids = document.querySelectorAll('.conversion-grid');
-  conversionGrids.forEach(grid => {
-    grid.style.gridTemplateColumns = '1fr';
-    grid.style.gap = '16px';
-  });
+//   const conversionGrids = document.querySelectorAll('.conversion-grid');
+//   conversionGrids.forEach(grid => {
+//     grid.style.gridTemplateColumns = '1fr';
+//     grid.style.gap = '16px';
+//   });
   
-  const conversionCols = document.querySelectorAll('.conversion-col');
-  conversionCols.forEach(col => {
-    col.style.gridColumn = '1';
-    col.style.width = '100%';
-    col.style.minWidth = '0';
-  });
+//   const conversionCols = document.querySelectorAll('.conversion-col');
+//   conversionCols.forEach(col => {
+//     col.style.gridColumn = '1';
+//     col.style.width = '100%';
+//     col.style.minWidth = '0';
+//   });
   
-  console.log('Mobile layout forced');
-}
+//   console.log('Mobile layout forced');
+// }
 
 // Date Calculator Tab Functionality - works for both desktop and mobile
 function initializeDateTabs() {

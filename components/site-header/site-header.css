@@ -7,6 +7,10 @@
   display: block;
   width: 100%;
   margin-bottom: 1rem;
+
+  /* position: sticky;
+  top: 0;
+  z-index: 100; */
 }
 
 /* ========================================
@@ -17,7 +21,6 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  /* border: 2px solid red; */
 }
 
 /* ========================================
@@ -53,17 +56,8 @@
     background-position: bottom; /* Center the image */
     background-repeat: no-repeat; /* Don't repeat the image */
     padding: 0.8rem 0; /* Scaled down from 1.2rem to 0.8rem for better proportions */
-    position: relative;
 }
 
-
-/* Ensure content stays above overlay */
-.main-header > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* Logo */
 .site-logo {
     height: 2.5rem;
     width: auto;
@@ -86,8 +80,6 @@
     padding: 0.2rem 0;
     border-bottom: 0.05rem solid var(--border-color, #e0e0e0);
     overflow-x: auto; /* Horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical overflow */
-    min-height: fit-content;
     height: 2rem;
     display: flex; /* Make it a flexbox container */
     align-items: center; /* Center items vertically */
