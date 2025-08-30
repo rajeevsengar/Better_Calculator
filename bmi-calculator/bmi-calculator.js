@@ -64,13 +64,10 @@ function initializeBMICalculator() {
   });
 
   // Auto-format ft+in input
-  // heightValInput.addEventListener("input", () => {
-  //   formatFtInField(selectedHeightUnit, heightValInput)
-  // });
+  heightValInput.addEventListener("input", () => {
+    formatFtInField(selectedHeightUnit, heightValInput)
+  });
 
-  // Don't initialize speedometer here - wait until panel is visible
-  // updateSpeedometer(0); // Removed this line
-  
   // Calculate BMI with default values immediately
   setTimeout(() => {
     computeBMI();
@@ -304,7 +301,7 @@ function updateSpeedometer(bmi) {
   // Keep canvas size same as CSS (no resizing)
   const width = canvas.offsetWidth;
   const height = canvas.offsetHeight;
-  
+
   // Check if canvas has valid dimensions
   if (width <= 0 || height <= 0) {
     return;
@@ -314,7 +311,7 @@ function updateSpeedometer(bmi) {
   canvas.height = height;
 
   const centerX = width / 2;
-  const centerY = height - 20;
+  const centerY = height - 10;
   
   // Fix: Ensure radius is always positive and reasonable
   const maxRadius = Math.min(width / 2 - 10, height - 40);
