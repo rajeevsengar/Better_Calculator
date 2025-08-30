@@ -6,11 +6,10 @@
    UNIT TYPES SECTION - LEFT SIDEBAR
    ============================================================ */
 .unit-types-section {
-  background: var(--card-bg);
-  background-color: #ffffff;
+  background: var(--card-background, #ffffff);
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 2vh 1.5vw;
+  padding: 1rem 1.5vw;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -26,7 +25,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 40vh;
+  max-height: 20rem;
   min-height: fit-content;
   height: fit-content;
   padding-right: 0.5vw;
@@ -39,7 +38,7 @@
   font-size: clamp(12px, 1.2vw, 16px);
   padding: clamp(6px, 1vw, 12px);
   border-radius: clamp(12px, 2vw, 24px);
-  margin: 0.5vh 0;
+  margin: 0.25rem 0;
   width: 100%;
   text-align: center;
   box-sizing: border-box;
@@ -85,12 +84,13 @@
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 1rem;
-  margin-top: 1.5vh;
-  height: 100%;
+  margin-top: 0.8rem;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
+  height: 22rem;
+  max-height: 22rem;
 }
 
 /* ============================================================
@@ -120,7 +120,7 @@
 .unit-buttons {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 0.5rem;
   width: 100%;
 }
 
@@ -136,7 +136,7 @@
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 1.5vh 3vw;
+  padding: 0.8rem 3vw;
   border-radius: 8px;
   cursor: pointer;
   font-size: clamp(0.9rem, 1.1vw, 1.1rem);
@@ -270,9 +270,9 @@
   }
 
   .unit-chips-container{
-    height: 50vh;
-    max-height: 50vh;
-    min-height: 50vh;
+    height: 25rem;
+    max-height: 25rem;
+    min-height: 25rem;
     overflow: auto;
   }
 }
@@ -315,8 +315,8 @@
     flex: 1;
     padding: 0.25rem;
     margin-bottom: 0.25rem;
-    height:12vh;
-    max-height: 14vh;
+    height: 6rem;
+    max-height: 7rem;
   }
   
   /* Ensure mobile combobox is shown and desktop list is hidden on very small screens */
@@ -329,6 +329,6 @@
   }
 
   .unit-chips-container{
-    max-height: 40vh;
+    max-height: 20rem;
   }
 } 

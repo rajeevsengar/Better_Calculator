@@ -10,13 +10,10 @@
   min-width: fit-content;
   margin: 0 auto;
   margin-right: 0.5%;
-  padding: 6vh;
-  padding-right: 0;
-  height: 88vh;
-  max-height: fit-content;
+  padding: 0.5rem;
   box-sizing: border-box;
   display: flex;
-  gap: 4.5%;
+  gap: 3%;
 }
 
 /* Main Content Area */
@@ -29,7 +26,8 @@
 /* Ad Space - Integrated in main container */
 .ad-space {
   flex: 10%;
-  background: #f9f9f9; 
+  height:fit-content;
+  background: var(--card-background, #f9f9f9); 
   text-align: center;
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -68,7 +66,7 @@ textarea:focus {
 /* Tablet & iPad Pro range */
 @media (max-width: 1024px) and (min-width: 769px) {
   .calculator-main-container {
-    padding: 4vh;
+    padding: 0.5rem;
     gap: 4%;
   }
   
@@ -92,7 +90,7 @@ textarea:focus {
     width: 95%;
     max-width: 95%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0.5rem;
     height: auto;
     min-height: auto;
     max-height: none;
@@ -125,7 +123,7 @@ textarea:focus {
     width: 98%;
     max-width: 98%;
     margin: 0 auto;
-    padding: 0.75rem;
+    padding: 0.5rem;
     height: auto;
     min-height: auto;
     max-height: none;
@@ -164,7 +162,7 @@ body {
 
 /* Make body fill full screen */
 html, body {
-  height: 100%;
+  height: auto;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -189,6 +187,12 @@ html, body {
 /* Content grows, footer stays at bottom */
 .content {
   flex: 1;
+  margin-top: 1rem; /* Add space between header and main content */
+}
+
+/* Main panel styling */
+main.panel {
+  margin-top: 1rem; /* Ensure proper spacing from site header */
 }
 
 

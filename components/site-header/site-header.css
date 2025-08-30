@@ -6,6 +6,7 @@
 :host {
   display: block;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
 /* ========================================
@@ -15,9 +16,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  max-height: 10vh;
-  min-height: 10vh;
-  margin-bottom: 2vh;
+  height: auto;
+  /* border: 2px solid red; */
 }
 
 /* ========================================
@@ -26,17 +26,17 @@
 .top-sub-header {
     width: 100%;
     background: #fff;
-    padding: 0.5vh 0;
+    padding: 0.2rem 0;
 }
 
 .flag-icon {
-  height: 2.5vh;
+  height: 1rem;
   width: auto;
 }
 
 .built-with-love {
   color: #000;
-  font-size: 1.5vh;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -45,33 +45,144 @@
    ======================================== */
 .main-header {
     width: 100%;
-    background: var(--accent-color, #2196f3);
-    padding: 0.8vh 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                url('../../assets/images/header-background.png');
+    /* background: linear-gradient(rgba(33, 150, 243, 0.85), rgba(100, 150, 200, 0.85)), 
+                url('../../assets/images/header-background.png'); */
+    background-size: cover; /* Cover the entire header area */
+    background-position: bottom; /* Center the image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+    padding: 0.8rem 0; /* Scaled down from 1.2rem to 0.8rem for better proportions */
     position: relative;
+}
+
+
+/* Ensure content stays above overlay */
+.main-header > * {
+    position: relative;
+    z-index: 2;
 }
 
 /* Logo */
 .site-logo {
-    height: 5vh;
+    height: 2.5rem;
     width: auto;
 }
 
 /* Brand text */
 .brand-text h1 {
-    font-size: 3vh;
+    font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
     color: #fff;
 }
 
 /* ========================================
+   MENU HEADER - CALCULATOR LINKS
+   ======================================== */
+.menu-header {
+    width: 100%;
+    background: #333933; /* Green theme's card-background color */
+    padding: 0.2rem 0;
+    border-bottom: 0.05rem solid var(--border-color, #e0e0e0);
+    overflow-x: auto; /* Horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical overflow */
+    min-height: fit-content;
+    height: 2rem;
+    display: flex; /* Make it a flexbox container */
+    align-items: center; /* Center items vertically */
+}
+
+.calculator-links {
+    display: flex;
+    justify-content: flex-start; /* Left-aligned instead of center */
+    align-items: center; /* This centers items vertically in flexbox */
+    gap: 1rem;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    min-width: max-content; /* Ensure content doesn't shrink */
+    height: 100%; /* Take full height of parent */
+}
+
+.calculator-link {
+    color: #ffffff; /* Static white text for good contrast on dark green */
+    text-decoration: none;
+    font-size: 0.8rem; /* Further reduced from 1rem to 0.8rem for more compact menu */
+    font-weight: 500;
+    padding: 0.15rem 0.6rem;
+    border-radius: 0.2rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.calculator-link:hover {
+    color: var(--accent-color, #2196f3);
+    background: var(--accent-color-light, rgba(33, 150, 243, 0.1));
+    transform: translateY(-0.05rem);
+}
+
+.calculator-link.active {
+    color: var(--accent-color, #2196f3);
+    background: var(--accent-color-lighter, rgba(33, 150, 243, 0.15));
+    font-weight: 600;
+}
+
+/* ========================================
+   HOME HEADER - HOME LINK
+   ======================================== */
+.home-header {
+    width: 100%;
+    background: var(--background-color, #ffffff);
+    padding: 0.15rem 0;
+    border-bottom: 0.05rem solid var(--border-color, #e0e0e0);
+    overflow-x: auto; /* Horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical overflow */
+    min-height: fit-content;
+}
+
+.home-link-container {
+    display: flex;
+    justify-content: flex-start; /* Left-aligned instead of center */
+    align-items: center;
+    min-width: max-content; /* Ensure content doesn't shrink */
+}
+
+.home-link {
+    color: var(--text-secondary, #666);
+    text-decoration: none;
+    font-size: 0.7rem; /* Further reduced from 0.9rem to 0.7rem for more compact header */
+    font-weight: 500;
+    padding: 0.1rem 0.8rem 0.1rem 0; /* Further reduced padding for more compact look */
+    border-radius: 0.2rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.home-link:hover {
+    color: var(--accent-color, #2196f3);
+    background: var(--accent-color-light, rgba(33, 150, 243, 0.1));
+    transform: translateY(-0.05rem);
+}
+
+.home-link.active {
+    color: var(--accent-color, #2196f3);
+    background: var(--accent-color-lighter, rgba(33, 150, 243, 0.15));
+    font-weight: 600;
+}
+
+.home-icon {
+    font-size: 0.8rem;
+}
+
+/* ========================================
    TAGLINE ANIMATION SYSTEM
    ======================================== */
 .tagline {
-  font-size: 1.6vh;
+  font-size: 0.9rem;
   color: #fff;
-  height: 2vh;
-  line-height: 2vh;
+  height: 1.2rem;
+  line-height: 1.2rem;
   position: relative;
 }
 
@@ -80,7 +191,7 @@
   position: absolute;
   width: max-content;
   left: 0;
-  line-height: 2vh;
+  line-height: 1.2rem;
   white-space: nowrap;
   font-family: "Inter", "Segoe UI", "Roboto", "Helvetica Neue", "Arial",
     sans-serif;
@@ -114,15 +225,16 @@
    HEADER CONTENT - Both headers inner sections
    ======================================== */
 .header-content {
-    width: 80%;
-    max-width: 80%;
+    width: 90%; /* Aligned with calculator-main-container */
+    max-width: 90%; /* Aligned with calculator-main-container */
     margin: 0 auto;
+    margin-right: 0.5%; /* Aligned with calculator-main-container */
     display: flex;
     align-items: center;
-    gap: 1.5vh;
+    gap: 1rem;
     box-sizing: border-box;
-    padding-left: 6vh;
-    padding-right: 6vh;
+    padding-left: 0; /* Remove fixed padding to align with container */
+    padding-right: 0; /* Remove fixed padding to align with container */
 }
 
 /* ========================================
@@ -131,27 +243,27 @@
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 0.5vh;
+  gap: 0.4rem; /* Reduced from 0.5rem */
   cursor: pointer;
-  padding: 1vh;
+  padding: 0.75rem; /* Reduced from 1rem */
   flex-shrink: 0;
   position: absolute;
-  right: 2vh;
+  right: 2rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 0.5vh;
-  backdrop-filter: blur(0.5vh);
+  border-radius: 0.4rem; /* Reduced from 0.5rem */
+  backdrop-filter: blur(0.5rem);
 }
 
 .mobile-menu-toggle span {
-  width: 2.5vh;
-  height: 0.3vh;
+  width: 2rem; /* Reduced from 2.5rem */
+  height: 0.25rem; /* Reduced from 0.3rem */
   background-color: var(--background-color, #ffffff);
   transition: 0.3s;
-  border-radius: 0.15vh;
-  box-shadow: 0 0 0.5vh rgba(0, 0, 0, 0.3);
+  border-radius: 0.125rem; /* Reduced from 0.15rem */
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.3); /* Reduced from 0.5rem */
 }
 
 .mobile-menu-toggle:hover span {
@@ -181,13 +293,13 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 80%;
-  max-width: 90%;
+  width: 75%; /* Reduced from 80% */
+  max-width: 85%; /* Reduced from 90% */
   height: 100%;
   background: var(--background-color, #ffffff);
-  padding: 2vh;
+  padding: 1.5rem; /* Reduced from 2rem */
   overflow-y: auto;
-  box-shadow: -0.5vh 0 2vh rgba(0, 0, 0, 0.1);
+  box-shadow: -0.5rem 0 2rem rgba(0, 0, 0, 0.1);
 }
 
 /* Mobile Menu Header */
@@ -195,45 +307,53 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2vh;
-  padding-bottom: 1vh;
-  border-bottom: 0.1vh solid var(--border-color, #e0e0e0);
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+  padding-bottom: 0.75rem; /* Reduced from 1rem */
+  border-bottom: 0.1rem solid var(--border-color, #e0e0e0);
 }
 
 .mobile-menu-header h3 {
   margin: 0;
-  font-size: 2.5vh;
+  font-size: 2rem; /* Reduced from 2.5rem */
+  color: var(--text-primary, #333);
 }
 
 .mobile-menu-close {
   background: none;
   border: none;
-  font-size: 3vh;
+  font-size: 2.5rem; /* Reduced from 3rem */
   cursor: pointer;
   padding: 0;
-  width: 5vh;
-  height: 5vh;
+  width: 4rem; /* Reduced from 5rem */
+  height: 4rem; /* Reduced from 5rem */
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--text-primary, #333);
+  transition: color 0.2s ease;
+}
+
+.mobile-menu-close:hover {
+  color: var(--accent-color, #2196f3);
 }
 
 /* Mobile Menu Items */
 .mobile-menu-items {
-  margin-bottom: 3vh;
+  margin-bottom: 2rem; /* Reduced from 3rem */
 }
 
 .mobile-item {
-  padding: 1.5vh;
-  margin-bottom: 1vh;
-  border-radius: 0.5vh;
+  padding: 1rem; /* Reduced from 1.5rem */
+  margin-bottom: 0.75rem; /* Reduced from 1rem */
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.2s;
-  min-height: 4vh;
+  min-height: 3rem; /* Reduced from 4rem */
   display: flex;
   align-items: center;
-  font-size: 1.8vh;
+  font-size: 1.4rem; /* Reduced from 1.8rem */
   font-weight: 500;
+  color: var(--text-primary, #333);
 }
 
 .mobile-item:hover {
@@ -245,71 +365,142 @@
   color: var(--background-color, #ffffff);
 }
 
+/* Mobile Menu Separator */
+.mobile-separator {
+  height: 0.1rem;
+  background: var(--border-color, #e0e0e0);
+  margin: 0.75rem 0; /* Reduced from 1rem */
+  border-radius: 0.05rem;
+}
+
+/* Mobile Menu Links */
+.mobile-link {
+  text-decoration: none;
+  color: var(--text-primary, #333);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-link:hover {
+  background: var(--card-background, #f5f5f5);
+}
+
+/* Custom scrollbar styling for horizontal scrolling */
+.menu-header::-webkit-scrollbar,
+.home-header::-webkit-scrollbar {
+    height: 4px; /* Horizontal scrollbar height */
+}
+
+.menu-header::-webkit-scrollbar-track,
+.home-header::-webkit-scrollbar-track {
+    background: var(--border-color, #e0e0e0);
+    border-radius: 2px;
+}
+
+.menu-header::-webkit-scrollbar-thumb,
+.home-header::-webkit-scrollbar-thumb {
+    background: var(--accent-color, #2196f3);
+    border-radius: 2px;
+}
+
+.menu-header::-webkit-scrollbar-thumb:hover,
+.home-header::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color, #3b82f6);
+}
+
 /* ========================================
    RESPONSIVE DESIGN - TABLET BREAKPOINT
    ======================================== */
 @media (max-width: 1024px) {
   /* Header Layout Adjustments */
   .site-header {
-    height: 7vh;
-    min-height: 7vh;
+    height: auto; /* Scaled down from 14rem to 5rem for better proportions */
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 0.25vh 1vh rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   }
 
   /* Left Section Adjustments */
   .top-sub-header {
-    gap: 0.8vh;
+    gap: 0.5rem;
   }
 
   .flag-icon {
-    height: 2vh;
+    height: 0.8rem;
   }
 
   .built-with-love {
-    font-size: 1.2vh;
+    font-size: 0.7rem;
   }
 
   /* Center Section Adjustments */
   .main-header {
-    gap: 1.5vh;
+    gap: 1rem;
   }
 
   .site-logo {
-    height: 4vh;
+    height: 2rem;
   }
 
   .brand-text h1 {
-    font-size: 2.2vh;
+    font-size: 1.4rem;
   }
 
   /* Tagline Adjustments */
   .tagline {
-    font-size: 1.3vh;
-    height: 1.6vh;
-    line-height: 1.6vh;
+    font-size: 0.8rem;
+    height: 1rem;
+    line-height: 1rem;
   }
 
   .tagline-line {
-    line-height: 1.6vh;
+    line-height: 1rem;
+  }
+
+  /* Menu Header Adjustments */
+  .menu-header {
+    padding: 0.15rem 0;
+  }
+
+  .calculator-links {
+    gap: 0.8rem;
+    justify-content: flex-start; /* Left-aligned on smaller screens */
+  }
+
+  .calculator-link {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  /* Home Header Adjustments */
+  .home-header {
+    padding: 0.1rem 0;
+  }
+
+  .home-link {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.6rem 0.1rem 0; /* Further reduced padding for more compact look */
   }
 
   /* Show Mobile Menu Toggle */
   .mobile-menu-toggle {
     display: flex;
     position: absolute;
-    right: 2vh;
+    right: 2rem;
     top: 50%;
     transform: translateY(-50%);
   }
 
   .header-content {
-      width: 85%;
-      max-width: 85%;
+      width: 90%; /* Aligned with calculator-main-container */
+      max-width: 90%; /* Aligned with calculator-main-container */
+      margin: 0 auto;
+      margin-right: 0.5%; /* Aligned with calculator-main-container */
       padding: unset;
-      padding-left: 0.75rem;
+      padding-left: 0; /* Remove fixed padding to align with container */
+      padding-right: 0; /* Remove fixed padding to align with container */
   }
 }
 
@@ -318,43 +509,84 @@
    RESPONSIVE DESIGN - MOBILE BREAKPOINT
    ======================================== */
 @media (max-width: 480px) {
-  /* Header Layout Adjustments */
-  .site-header {
-    height: 6vh;
-    min-height: 6vh;
-  }
-
   /* Brand Text Adjustments */
   .brand-text h1 {
-    font-size: 2vh;
+    font-size: 1.2rem;
   }
 
   /* Tagline Adjustments */
   .tagline {
-    font-size: 1.1vh;
-    max-width: 20vh;
+    font-size: 0.7rem;
+    max-width: 12rem;
+  }
+
+  /* Hide bottom sub-headers on mobile - items go to mobile menu */
+  .menu-header {
+    display: none;
+  }
+
+  .home-header {
+    display: block;
+    padding: 0.1rem 0;
+  }
+
+  .home-link {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.5rem 0.1rem 0; /* Further reduced padding for more compact look */
   }
 
   .header-content {
-    width: 98%;
-    max-width: 98%;
+    width: 95%; /* Aligned with calculator-main-container mobile styles */
+    max-width: 95%; /* Aligned with calculator-main-container mobile styles */
+    margin: 0 auto;
     padding: unset;
-    padding-left: 0.75rem;
+    padding-left: 0; /* Remove fixed padding to align with container */
   }
 
   /* Mobile Menu Adjustments */
   .mobile-menu-toggle {
-    right: 1vh;
-    padding: 0.8vh;
+    right: 1rem;
+    padding: 0.6rem; /* Reduced from 0.8rem */
   }
 
   .mobile-menu-toggle span {
-    width: 2vh;
-    height: 0.25vh;
+    width: 1.75rem; /* Reduced from 2rem */
+    height: 0.2rem; /* Reduced from 0.25rem */
   }
 
   .mobile-menu-content {
-    width: 85%;
-    padding: 1.5vh;
+    width: 80%; /* Reduced from 85% for very small screens */
+    padding: 1.25rem; /* Reduced from 1.5rem for very small screens */
+  }
+  
+  /* Further reduce mobile menu items on very small screens */
+  .mobile-item {
+    padding: 0.875rem; /* Reduced from 1rem */
+    margin-bottom: 0.5rem; /* Reduced from 0.75rem */
+    min-height: 2.5rem; /* Reduced from 3rem */
+    font-size: 1.2rem; /* Reduced from 1.4rem */
+  }
+  
+  .mobile-menu-header h3 {
+    font-size: 1.75rem; /* Reduced from 2rem */
+  }
+  
+  .mobile-menu-close {
+    width: 3.5rem; /* Reduced from 4rem */
+    height: 3.5rem; /* Reduced from 4rem */
+    font-size: 2.25rem; /* Reduced from 2.5rem */
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN - LARGE SCREEN
+   ======================================== */
+@media (min-width: 1025px) {
+  .calculator-links {
+    justify-content: center; /* Center on large screens */
+  }
+  
+  .home-link-container {
+    justify-content: center; /* Center on large screens */
   }
 }

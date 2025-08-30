@@ -11,133 +11,16 @@
     <link rel="stylesheet" href="../assets/css/themes.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
     <link rel="stylesheet" href="../assets/css/mobile.css" />
+    <script src="../components/site-header/site-header.js"></script>
 </head>
 <body>
     <div class="page-container">
-        <!-- Header -->
-        <header class="header1">
-            <div class="header-inner">
-                <img src="../assets/images/india-flag.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo" class="flag-icon">
-                <p id="builtWithLove" style="color:black; font-family:Helvetica Neue"></p>
-            </div>
-        </header>
-        
-        <!-- Responsive Header - Shows different content based on screen size -->
-        <header class="header2 mobile-header">
-            <div class="header-inner mobile-header-inner">
-                <div class="brand mobile-brand">
-                    <img id="siteLogo" src="../assets/images/site_logo.png" alt="Calculator Icon - Calculator Icon Transparent" alt="Logo">
-                    <div class="brand-text mobile-brand-text">
-                        <h1 id="brandName"></h1>
-                        <div id="tagline" class="muted tagline">
-                            <div class="tagline-line tagline-first"></div>
-                            <div class="tagline-line tagline-second"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mobile Menu Toggle - Only visible on mobile -->
-                <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </header>
-
-        <!-- Mobile Menu Overlay - Only visible on mobile -->
-        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-            <div class="mobile-menu-content">
-                <div class="mobile-menu-header">
-                    <h3>Menu</h3>
-                    <button class="mobile-menu-close" id="mobileMenuClose">×</button>
-                </div>
-                
-                <!-- Menu Items -->
-                <div class="mobile-menu-items">
-                    <div class="mobile-item" data-panel="conversion">1 • Unit Converter</div>
-                    <div class="mobile-item" data-panel="bmi">2 • BMI Calculator</div>
-                    <div class="mobile-item" data-panel="date">3 • Date Calculator</div>
-                    <div class="mobile-item active" data-panel="time">4 • Time Calculator</div>
-                    <div class="mobile-item" data-panel="emi">5 • EMI Calculator</div>
-                    <div class="mobile-item" data-panel="investment">6 • Investment Calculator</div>
-                </div>
-
-                <!-- Theme Switcher -->
-                <div class="mobile-theme-switcher">
-                    <div class="theme-label">Theme:</div>
-                    <div class="theme-options">
-                        <label class="theme-option" data-theme="default">
-                            <input type="radio" name="theme" value="default" checked />
-                            <span class="theme-color" style="background: #2196f3"></span>
-                        </label>
-                        <label class="theme-option" data-theme="green">
-                            <input type="radio" name="theme" value="green" />
-                            <span class="theme-color" style="background: #4caf50"></span>
-                        </label>
-                        <label class="theme-option" data-theme="purple">
-                            <input type="radio" name="theme" value="purple" />
-                            <span class="theme-color" style="background: #9c27b0"></span>
-                        </label>
-                        <label class="theme-option" data-theme="orange">
-                            <input type="radio" name="theme" value="orange" />
-                            <span class="theme-color" style="background: #ff9800"></span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Global ribbons -->
-                <div class="ribbons">
-                    <div class="ribbon" data-type="tips">Tips</div>
-                    <div class="ribbon" data-type="instructions">Instructions</div>
-                    <div class="ribbon" data-type="examples">Examples</div>
-                    <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
-                </div>
-            </div>
-        </div>
+        <!-- Site Header Component -->
+        <site-header></site-header>
 
         <main class="content panel">
             <div class="main-content-wrapper">
                 <div class="container">
-                    <!-- Menu - Hidden on mobile, shown on desktop -->
-                    <aside class="menu">
-                        <div class="item" data-panel="conversion">1 • Unit Converter</div>
-                        <div class="item" data-panel="bmi">2 • BMI Calculator</div>
-                        <div class="item" data-panel="date">3 • Date Calculator</div>
-                        <div class="item active" data-panel="time">4 • Time Calculator</div>
-                        <div class="item" data-panel="emi">5 • EMI Calculator</div>
-                        <div class="item" data-panel="investment">6 • Investment Calculator</div>
-                
-                        <div class="theme-switcher">
-                            <div id="themeLabel" class="theme-label">Theme:</div>
-                            <div class="theme-options">
-                                <label class="theme-option" data-theme="default">
-                                    <input type="radio" name="theme" value="default" checked />
-                                    <span class="theme-color" style="background: #2196f3"></span>
-                                </label>
-                                <label class="theme-option" data-theme="green">
-                                    <input type="radio" name="theme" value="green" />
-                                    <span class="theme-color" style="background: #4caf50"></span>
-                                </label>
-                                <label class="theme-option" data-theme="purple">
-                                    <input type="radio" name="theme" value="purple" />
-                                    <span class="theme-color" style="background: #9c27b0"></span>
-                                </label>
-                                <label class="theme-option" data-theme="orange">
-                                    <input type="radio" name="theme" value="orange" />
-                                    <span class="theme-color" style="background: #ff9800"></span>
-                                </label>
-                            </div>
-                        </div>
-                
-                        <!-- Global ribbons -->
-                        <div class="ribbons">
-                            <div id="ribbonTips" class="ribbon" data-type="tips">Tips</div>
-                            <div id="ribbonInstructions" class="ribbon" data-type="instructions">Instructions</div>
-                            <div id="ribbonExamples" class="ribbon" data-type="examples">Examples</div>
-                            <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
-                        </div>
-                    </aside>
 
                     <!-- Time Calculator Section -->
                     <section id="time" class="active-section">

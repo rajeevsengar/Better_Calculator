@@ -53,6 +53,25 @@ class SiteHeader extends HTMLElement {
                 </div>
             </div>
         </div>
+
+        <div class="menu-header">
+            <div class="header-content">
+                <div class="calculator-links" id="calculatorLinks">
+                    <!-- Calculator links will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <div class="home-header">
+            <div class="header-content">
+                <div class="home-link-container">
+                    <a href="${isSubPage ? '../index.html' : 'index.html'}" class="home-link" id="homeLink">
+                        <span class="home-icon">🏠</span>
+                        <span>Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
       </header>
 
 
@@ -77,6 +96,8 @@ class SiteHeader extends HTMLElement {
     const mobileMenuToggle = this.shadowRoot.getElementById('mobileMenuToggle');
     const mobileMenuOverlay = this.shadowRoot.getElementById('mobileMenuOverlay');
     const mobileMenuClose = this.shadowRoot.getElementById('mobileMenuClose');
+    
+
 
     // Mobile menu toggle
     if (mobileMenuToggle) {
@@ -150,8 +171,78 @@ class SiteHeader extends HTMLElement {
       this.shadowRoot.querySelector('.tagline-second').textContent = 'Imagined by Human, Designed by AI';
     }
 
+    // Populate calculator links in bottom sub-header
+    this.populateCalculatorLinks();
+    this.populateHomeLink(); // Populate home link
+    
     // Populate mobile menu items based on current page
     this.populateMobileMenu();
+  }
+
+  populateCalculatorLinks() {
+    const calculatorLinks = this.shadowRoot.getElementById('calculatorLinks');
+    if (!calculatorLinks) return;
+
+    const currentPath = window.location.pathname;
+    const isSubPage = currentPath.includes('/unit-converter') || 
+                     currentPath.includes('/bmi-calculator') || 
+                     currentPath.includes('/date-calculator') || 
+                     currentPath.includes('/time-calculator') || 
+                     currentPath.includes('/emi-calculator') || 
+                     currentPath.includes('/investment-calculator');
+
+    const baseUrl = isSubPage ? '../' : '';
+    
+    const links = [
+      { text: 'Unit Converter', url: `${baseUrl}unit-converter/index.html`, active: currentPath.includes('unit-converter') },
+      { text: 'BMI Calculator', url: `${baseUrl}bmi-calculator/index.html`, active: currentPath.includes('bmi-calculator') },
+      { text: 'Date Calculator', url: `${baseUrl}date-calculator/index.html`, active: currentPath.includes('date-calculator') },
+      { text: 'Time Calculator', url: `${baseUrl}time-calculator/index.html`, active: currentPath.includes('time-calculator') },
+      { text: 'EMI Calculator', url: `${baseUrl}emi-calculator/index.html`, active: currentPath.includes('emi-calculator') },
+      { text: 'Investment Calculator', url: `${baseUrl}investment-calculator/index.html`, active: currentPath.includes('investment-calculator') }
+    ];
+
+    calculatorLinks.innerHTML = links.map(link => {
+      const activeClass = link.active ? ' active' : '';
+      return `<a href="${link.url}" class="calculator-link${activeClass}">${link.text}</a>`;
+    }).join('');
+
+    // Add click handlers for calculator links
+    const linkElements = calculatorLinks.querySelectorAll('.calculator-link');
+    linkElements.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Remove active class from all calculator links
+        linkElements.forEach(l => l.classList.remove('active'));
+        // Remove active class from home link
+        const homeLink = this.shadowRoot.getElementById('homeLink');
+        if (homeLink) homeLink.classList.remove('active');
+        // Add active class to clicked link
+        link.classList.add('active');
+      });
+    });
+  }
+
+  populateHomeLink() {
+    const homeLink = this.shadowRoot.getElementById('homeLink');
+    if (!homeLink) return;
+
+    const currentPath = window.location.pathname;
+    const isHomePage = currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/');
+    
+    // Add active class if on home page
+    if (isHomePage) {
+      homeLink.classList.add('active');
+    }
+
+    // Add click handler for home link
+    homeLink.addEventListener('click', () => {
+      // Remove active class from calculator links
+      const calculatorLinks = this.shadowRoot.querySelectorAll('.calculator-link');
+      calculatorLinks.forEach(link => link.classList.remove('active'));
+      
+      // Add active class to home link
+      homeLink.classList.add('active');
+    });
   }
 
   populateMobileMenu() {
@@ -160,69 +251,66 @@ class SiteHeader extends HTMLElement {
 
     // Get current page path to determine which menu items to show
     const currentPath = window.location.pathname;
+    const isSubPage = currentPath.includes('/unit-converter') || 
+                     currentPath.includes('/bmi-calculator') || 
+                     currentPath.includes('/date-calculator') || 
+                     currentPath.includes('/time-calculator') || 
+                     currentPath.includes('/emi-calculator') || 
+                     currentPath.includes('/investment-calculator');
+    
+    const baseUrl = isSubPage ? '../' : '';
     let menuItems = [];
 
     if (currentPath.includes('unit-converter')) {
-      menuItems = [
-        { text: 'Unit Converter', active: true }
-      ];
+      menuItems.push({ text: 'Unit Converter', active: true });
     } else if (currentPath.includes('bmi-calculator')) {
-      menuItems = [
-        { text: 'BMI Calculator', active: true }
-      ];
+      menuItems.push({ text: 'BMI Calculator', active: true });
     } else if (currentPath.includes('date-calculator')) {
-      menuItems = [
-        { text: 'Date Calculator', active: true }
-      ];
+      menuItems.push({ text: 'Date Calculator', active: true });
     } else if (currentPath.includes('time-calculator')) {
-      menuItems = [
-        { text: 'Time Calculator', active: true }
-      ];
+      menuItems.push({ text: 'Time Calculator', active: true });
     } else if (currentPath.includes('emi-calculator')) {
-      menuItems = [
-        { text: 'EMI Calculator', active: true }
-      ];
+      menuItems.push({ text: 'EMI Calculator', active: true });
     } else if (currentPath.includes('investment-calculator')) {
-      menuItems = [
-        { text: 'Investment Calculator', active: true }
-      ];
+      menuItems.push({ text: 'Investment Calculator', active: true });
     } else {
-      // Main page - show all calculators
-      menuItems = [
-        { text: '1 • Unit Converter', dataPanel: 'conversion' },
-        { text: '2 • BMI Calculator', dataPanel: 'bmi' },
-        { text: '3 • Date Calculator', dataPanel: 'date' },
-        { text: '4 • Time Calculator', dataPanel: 'time' },
-        { text: '5 • EMI Calculator', dataPanel: 'emi' },
-        { text: '6 • Investment Calculator', dataPanel: 'investment' }
-      ];
+      // Main page - show all calculators with navigation links
+      menuItems.push(
+        { text: '1 • Unit Converter', url: 'unit-converter/', isLink: true },
+        { text: '2 • BMI Calculator', url: 'bmi-calculator/', isLink: true },
+        { text: '3 • Date Calculator', url: 'date-calculator/', isLink: true },
+        { text: '4 • Time Calculator', url: 'time-calculator/', isLink: true },
+        { text: '5 • EMI Calculator', url: 'emi-calculator/', isLink: true },
+        { text: '6 • Investment Calculator', url: 'investment-calculator/', isLink: true }
+      );
+    }
+
+    // Add calculator links for sub-pages
+    if (isSubPage) {
+      menuItems.push({ text: '---', isSeparator: true });
+      menuItems.push(
+        { text: 'Unit Converter', url: `${baseUrl}unit-converter/index.html`, isLink: true },
+        { text: 'BMI Calculator', url: `${baseUrl}bmi-calculator/index.html`, isLink: true },
+        { text: 'Date Calculator', url: `${baseUrl}date-calculator/index.html`, isLink: true },
+        { text: 'Time Calculator', url: `${baseUrl}time-calculator/index.html`, isLink: true },
+        { text: 'EMI Calculator', url: `${baseUrl}emi-calculator/index.html`, isLink: true },
+        { text: 'Investment Calculator', url: `${baseUrl}investment-calculator/index.html`, isLink: true }
+      );
     }
 
     mobileMenuItems.innerHTML = menuItems.map(item => {
-      const activeClass = item.active ? ' active' : '';
-      const dataAttr = item.dataPanel ? ` data-panel="${item.dataPanel}"` : '';
-      return `<div class="mobile-item${activeClass}"${dataAttr}>${item.text}</div>`;
+      if (item.isSeparator) {
+        return '<div class="mobile-separator"></div>';
+      } else if (item.isLink) {
+        return `<a href="${item.url}" class="mobile-item mobile-link">${item.text}</a>`;
+      } else {
+        const activeClass = item.active ? ' active' : '';
+        const dataAttr = item.dataPanel ? ` data-panel="${item.dataPanel}"` : '';
+        return `<div class="mobile-item${activeClass}"${dataAttr}>${item.text}</div>`;
+      }
     }).join('');
 
-    // Add click handlers for menu items
-    const items = mobileMenuItems.querySelectorAll('.mobile-item');
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        const panel = item.dataset.panel;
-        if (panel) {
-          this.handleMenuNavigation(panel);
-        }
-      });
-    });
-  }
-
-  handleMenuNavigation(panel) {
-    // Handle navigation to different calculator panels
-    // This can be customized based on your navigation needs
-    console.log(`Navigating to panel: ${panel}`);
-    
-    // Close mobile menu
-    this.shadowRoot.getElementById('mobileMenuOverlay').style.display = 'none';
+    // No need for click handlers since links handle navigation automatically
   }
 
   startTaglineAnimation() {
