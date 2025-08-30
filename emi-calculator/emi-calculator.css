@@ -1,0 +1,82 @@
+/* EMI Calculator Specific Styles */
+
+/* EMI Calculator specific styling */
+#emiPieChart {
+  background-color: var(--card-background);
+}
+
+/* EMI Calculator specific fixes */
+#emi input {
+  width: 100%;
+  max-width: 200px;
+}
+
+#emi .card {
+  padding: 16px;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+/* EMI Table responsive */
+#emi table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+#emi th,
+#emi td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* EMI input grid fixes */
+#emi [style*="grid-template-columns: repeat(3, 1fr)"] {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px;
+}
+
+/* Mobile EMI Container */
+.mobile-emi-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-emi-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mobile EMI input adjustments */
+@media (max-width: 768px) {
+  .mobile-emi-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .mobile-emi-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .mobile-emi-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+/* Mobile container input fixes */
+.mobile-container input#emiAmt,
+.mobile-container input#emiRate,
+.mobile-container input#emiMonths {
+  width: 100%;
+  max-width: none;
+} 

@@ -1,0 +1,36 @@
+/* Timezone Calculator Specific Styles */
+
+/* Mobile timezone converter columns */
+.mobile-timezone-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-timezone-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-timezone-selects select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--input-background);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+/* Timezone input responsive adjustments */
+@media (max-width: 768px) {
+  .mobile-timezone-selects {
+    gap: 12px;
+  }
+  
+  .mobile-timezone-selects select {
+    padding: 14px;
+    font-size: 16px;
+  }
+} 

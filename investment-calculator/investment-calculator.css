@@ -1,0 +1,43 @@
+/* Investment Calculator Specific Styles */
+
+/* Investment Calculator specific fixes */
+#investment input {
+  width: 100%;
+  max-width: 200px;
+}
+
+#investment .card {
+  padding: 16px;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+/* Investment input grid fixes */
+#investment [style*="grid-template-columns: repeat(3, 1fr)"] {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px;
+}
+
+/* Mobile Investment Container */
+.mobile-investment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-investment-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mobile Investment input adjustments */
+@media (max-width: 768px) {
+  .mobile-investment-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+} 

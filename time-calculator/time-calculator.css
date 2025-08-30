@@ -1,0 +1,57 @@
+/* Time Calculator Specific Styles */
+
+/* Enhanced Input Styles */
+.enhanced-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.enhanced-inputs input[type="time"],
+.enhanced-inputs select {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.enhanced-inputs input[type="time"] {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.enhanced-inputs select {
+  cursor: pointer;
+}
+
+/* Mobile-specific time input styles */
+.mobile-time-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mobile time input adjustments */
+@media (max-width: 768px) {
+  .enhanced-inputs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .enhanced-inputs input[type="time"],
+  .enhanced-inputs select {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-primary);
+    font-size: 16px;
+  }
+} 

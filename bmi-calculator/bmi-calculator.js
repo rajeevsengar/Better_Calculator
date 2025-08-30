@@ -64,9 +64,9 @@ function initializeBMICalculator() {
   });
 
   // Auto-format ft+in input
-  heightValInput.addEventListener("input", () => {
-    formatFtInField(selectedHeightUnit, heightValInput)
-  });
+  // heightValInput.addEventListener("input", () => {
+  //   formatFtInField(selectedHeightUnit, heightValInput)
+  // });
 
   // Don't initialize speedometer here - wait until panel is visible
   // updateSpeedometer(0); // Removed this line
@@ -107,9 +107,6 @@ function weightUnitChangeHandler(weightValInput, selectedWeightUnit){
 
 // Global safety wrapper for updateSpeedometer
 function safeUpdateSpeedometer(bmi) {
-  console.log('safeUpdateSpeedometer called with bmi:', bmi);
-  console.log('Call stack:', new Error().stack);
-  
   try {
     updateSpeedometer(bmi);
   } catch (error) {
@@ -288,18 +285,10 @@ function showBMIFacts(bmi, age, gender, category) {
 }
 
 function updateSpeedometer(bmi) {
-  console.log('updateSpeedometer called with bmi:', bmi);
-  
-  // Check if BMI panel is visible before trying to draw
+  // Check if BMI panel exists
   const bmiPanel = document.getElementById('bmi');
-  console.log('BMI panel found:', !!bmiPanel);
-  if (bmiPanel) {
-    console.log('BMI panel classes:', bmiPanel.className);
-    console.log('BMI panel has active-section:', bmiPanel.classList.contains('active-section'));
-  }
   
-  if (!bmiPanel || !bmiPanel.classList.contains('active-section')) {
-    console.log('BMI panel not visible, skipping speedometer update');
+  if (!bmiPanel) {
     return;
   }
 
@@ -316,11 +305,8 @@ function updateSpeedometer(bmi) {
   const width = canvas.offsetWidth;
   const height = canvas.offsetHeight;
   
-  console.log('Canvas dimensions:', { width, height });
-  
   // Check if canvas has valid dimensions
   if (width <= 0 || height <= 0) {
-    console.log('Canvas has invalid dimensions, skipping speedometer update');
     return;
   }
   
@@ -333,8 +319,6 @@ function updateSpeedometer(bmi) {
   // Fix: Ensure radius is always positive and reasonable
   const maxRadius = Math.min(width / 2 - 10, height - 40);
   const radius = Math.max(maxRadius, 30); // Minimum radius of 30px
-  
-  console.log('Radius calculation:', { maxRadius, radius, centerX, centerY });
 
   // Clear canvas
   ctx.clearRect(0, 0, width, height);
@@ -426,8 +410,9 @@ function drawBMIText(ctx, bmi, centerX, centerY, radius) {
 
 // Function to redraw speedometer when theme changes
 function redrawSpeedometerForTheme() {
-  // Only redraw if BMI panel is active
-  if (document.getElementById('bmi')?.classList.contains('active-section')) {
+  // Check if BMI panel exists
+  const bmiPanel = document.getElementById('bmi');
+  if (bmiPanel) {
     // Get current BMI value from the result display
     const bmiResult = document.getElementById('bmiResultLarge');
     if (bmiResult && bmiResult.textContent !== '—') {
@@ -466,12 +451,13 @@ function bmiReset() {
   selectedGender = "male";
   updateChipSelection(genderButtons, selectedGender);
   
-  // Reset speedometer only if BMI panel is visible
+  // Reset speedometer
   const bmiPanel = document.getElementById('bmi');
-  if (bmiPanel && bmiPanel.classList.contains('active-section')) {
+  if (bmiPanel) {
     safeUpdateSpeedometer(0);
   }
 }
 
 window.computeBMI = computeBMI;
 window.bmiReset = bmiReset;
+window.initializeBMICalculator = initializeBMICalculator;

@@ -1,0 +1,109 @@
+/* Date Calculator Specific Styles */
+
+/* Date Input Field */
+.input-field {
+  padding: 12px 16px;
+  border: 2px solid var(--input-border, #cbd5e1);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+  background-color: var(--input-background, #ffffff);
+  color: var(--text-primary, #1e293b);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Size variants for input field */
+.input-field.size-small {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.input-field.size-large {
+  padding: 16px 20px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+/* Date & Time Calculator Tabs */
+.date-tabs,
+.time-tabs {
+  width: 100%;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border-color);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background: var(--card-bg);
+  border: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.tab-button:hover {
+  background: var(--hover-bg);
+}
+
+.tab-button.active {
+  background: var(--primary-color);
+  color: white;
+  border-bottom-color: var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Result box for date difference */
+.result-box {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* Mobile Date Container */
+.mobile-date-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-date-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mobile Date input adjustments */
+@media (max-width: 768px) {
+  .mobile-date-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+} 

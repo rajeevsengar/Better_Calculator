@@ -39,6 +39,13 @@ html, body {
   flex-direction: column;
 }
 
+.calculator-main-section {
+  grid-template-columns: 30% 1fr;
+  gap: 1.5rem;
+  height: 100%;
+  min-height: 100%;
+}
+
 /* Ad Space - Integrated in main container */
 .ad-space {
   flex: 10%;
@@ -75,6 +82,22 @@ input:focus, select:focus, textarea:focus {
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* Button Hover Effects */
+button {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button.button-primary:hover {
+  background: var(--primary-hover, #1976d2);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
 /* Tablet & iPad Pro range */
@@ -128,6 +151,14 @@ input:focus, select:focus, textarea:focus {
     margin-bottom: clamp(5px, 1vw, 10px);
     padding: 8px 0;
   }
+  
+  .calculator-main-section {
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
 }
 
 @media (max-width: 480px) {
@@ -158,6 +189,14 @@ input:focus, select:focus, textarea:focus {
     font-size: clamp(12px, 1.2vw, 16px);
     margin-bottom: clamp(4px, 0.8vw, 8px);
     padding: 6px 0;
+  }
+  
+  .calculator-main-section {
+    flex-direction: column;
+    gap: 0.75rem;
+    height: auto;
+    overflow: visible;
+    min-height: auto;
   }
 }
 

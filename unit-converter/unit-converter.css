@@ -124,42 +124,10 @@
   width: 100%;
 }
 
-/* ============================================================
-   SWAP BUTTON - UNIT CONVERSION DIRECTION
-   ============================================================ */
-.swap-button-center {
-  display: flex;
-  justify-content: center;
-}
-
-.swap-button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.8rem 3vw;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: clamp(0.9rem, 1.1vw, 1.1rem);
-  transition: background-color 0.2s ease;
-  font-weight: 500;
-}
-
-.swap-button:hover {
-  background: var(--primary-hover);
-}
-
-
 .chip {
   font-size: clamp(12px, 1.2vw, 16px);
   padding: clamp(6px, 1vw, 12px);
   border-radius: clamp(12px, 2vw, 24px);
-}
-
-.calculator-main-section {
-  grid-template-columns: 30% 1fr;
-  gap: 1.5rem;
-  height: 100%;
-  min-height: 100%;
 }
 
 .from-to-section {
@@ -204,26 +172,12 @@
 /* ============================================================
    RESPONSIVE BREAKPOINTS - LARGE SCREENS
    ============================================================ */
-@media (max-width: 1200px) {
-  .calculator-main-section {
-    grid-template-columns: 30% 1fr;
-    gap: 1.5rem;
-  }
-}
 
 /* ============================================================
    MOBILE STACKING - VERTICAL LAYOUT
    ============================================================ */
 @media (max-width: 768px) and (min-width: 481px) {
   .calculator-content {
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-  
-  .calculator-main-section {
-    flex-direction: column;
-    gap: 1rem;
     height: auto;
     min-height: 0;
     overflow: visible;
@@ -286,13 +240,6 @@
    VERY SMALL SCREENS - MOBILE OPTIMIZATION
    ============================================================ */
 @media (max-width: 480px) {
-  .calculator-main-section {
-    flex-direction: column;
-    gap: 0.75rem;
-    height: auto;
-    overflow: visible;
-    min-height: auto;
-  }
   
   /* Keep from-to sections side by side even on very small screens */
   .from-to-section {
