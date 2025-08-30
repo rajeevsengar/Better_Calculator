@@ -120,7 +120,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   flex-wrap: nowrap;
   position: relative;
 }
@@ -131,11 +130,10 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 4px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  min-width: 40px;
+  min-width: 32px;
   position: relative;
 }
 
@@ -151,8 +149,8 @@
 }
 
 .theme-color {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -201,69 +199,26 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 10px;
+  font-size: 8px;
   font-weight: bold;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* Theme name labels - static colors for each theme */
-.theme-option::after {
-  content: attr(data-theme);
-  margin-top: 3px;
-  font-size: 8px;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0.2px;
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-/* Default theme name - always blue */
-.theme-option[data-theme="default"]::after {
-  color: #3b82f6;
-}
-
-/* Green theme name - always green */
-.theme-option[data-theme="green"]::after {
-  color: #4caf50;
-}
-
-/* Purple theme name - always purple */
-.theme-option[data-theme="purple"]::after {
-  color: #9c27b0;
-}
-
-/* Orange theme name - always orange */
-.theme-option[data-theme="orange"]::after {
-  color: #ff9800;
-}
-
-/* Hover and selected states use the same static colors */
-.theme-option:hover::after {
-  opacity: 1;
-}
-
-.theme-option input[type="radio"]:checked ~ ::after {
-  font-weight: 600;
-}
+/* Theme name labels removed - only colored circles visible */
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .theme-options {
-    gap: 6px;
+    gap: 4px;
   }
   
   .theme-option {
-    min-width: 35px;
-    padding: 3px;
+    min-width: 28px;
+    padding: 2px;
   }
   
   .theme-color {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .theme-option::after {
-    font-size: 7px;
+    width: 14px;
+    height: 14px;
   }
 }

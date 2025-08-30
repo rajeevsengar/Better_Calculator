@@ -5,10 +5,58 @@ class SiteHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    this.ensureThemeSelectorLoaded();
     this.render();
     this.setupEventListeners();
     this.populateContent();
     this.startTaglineAnimation();
+  }
+
+  ensureThemeSelectorLoaded() {
+    // Check if theme-selector component is already defined
+    if (!customElements.get('theme-selector')) {
+      console.log('Theme selector not found, loading automatically...');
+      
+      // Load the theme-selector component script
+      const script = document.createElement('script');
+      script.src = this.getThemeSelectorPath();
+      
+      script.onload = () => {
+        console.log('Theme selector script loaded successfully');
+        // Wait a bit for the component to register
+        setTimeout(() => {
+          if (customElements.get('theme-selector')) {
+            console.log('Theme selector component registered successfully');
+          } else {
+            console.error('Theme selector component failed to register');
+          }
+        }, 100);
+      };
+      
+      script.onerror = (error) => {
+        console.error('Failed to load theme selector script:', error);
+        console.error('Attempted path:', this.getThemeSelectorPath());
+      };
+      
+      document.head.appendChild(script);
+    } else {
+      console.log('Theme selector already loaded');
+    }
+  }
+
+  getThemeSelectorPath() {
+    // Determine the correct path based on current page
+    const currentPath = window.location.pathname;
+    const isSubPage = currentPath.includes('/unit-converter') || 
+                     currentPath.includes('/bmi-calculator') || 
+                     currentPath.includes('/date-calculator') || 
+                     currentPath.includes('/time-calculator') || 
+                     currentPath.includes('/emi-calculator') || 
+                     currentPath.includes('/investment-calculator');
+    
+    const path = isSubPage ? '../components/themes-selector/themes-selector.js' : 'components/themes-selector/themes-selector.js';
+    console.log('Theme selector path:', path, 'Current path:', currentPath, 'Is subpage:', isSubPage);
+    return path;
   }
 
   render() {
@@ -30,8 +78,13 @@ class SiteHeader extends HTMLElement {
       <header class="site-header">
         <div class="top-sub-header">
             <div class="header-content">
-                <img src="${imagePrefix}india-flag.png" alt="India Flag" class="flag-icon">
-                <span class="built-with-love" id="builtWithLove"></span>
+                <div class="left-section">
+                    <img src="${imagePrefix}india-flag.png" alt="India Flag" class="flag-icon">
+                    <span class="built-with-love" id="builtWithLove"></span>
+                </div>
+                <div class="right-section">
+                    <theme-selector></theme-selector>
+                </div>
             </div>
         </div>
         
@@ -90,6 +143,14 @@ class SiteHeader extends HTMLElement {
         </div>
       </div>
     `;
+
+    // Try to load theme selector again after render if it's still not available
+    setTimeout(() => {
+      if (!customElements.get('theme-selector')) {
+        console.log('Theme selector still not available after render, trying again...');
+        this.ensureThemeSelectorLoaded();
+      }
+    }, 500);
   }
 
   setupEventListeners() {
@@ -97,6 +158,16 @@ class SiteHeader extends HTMLElement {
     const mobileMenuOverlay = this.shadowRoot.getElementById('mobileMenuOverlay');
     const mobileMenuClose = this.shadowRoot.getElementById('mobileMenuClose');
     
+    // Check if theme selector is rendered
+    setTimeout(() => {
+      const themeSelector = this.shadowRoot.querySelector('theme-selector');
+      if (themeSelector) {
+        console.log('Theme selector found in shadow DOM');
+      } else {
+        console.log('Theme selector NOT found in shadow DOM');
+        console.log('Available elements:', this.shadowRoot.querySelectorAll('*'));
+      }
+    }, 1000);
 
 
     // Mobile menu toggle

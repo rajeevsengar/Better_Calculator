@@ -32,6 +32,26 @@
     padding: 0.2rem 0;
 }
 
+.top-sub-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.top-sub-header .left-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.top-sub-header .right-section {
+    display: flex;
+    align-items: center;
+}
+
 .flag-icon {
   height: 1rem;
   width: auto;

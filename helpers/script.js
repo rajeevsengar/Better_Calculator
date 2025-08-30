@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeResponsiveFunctionality() {
   console.log('Initializing responsive functionality...');
   
-  // Initialize theme switcher
-  initializeThemeSwitcher();
+  // Theme switcher is now handled by the theme-selector web component
   
   // Populate text content from configuration
   populateTextContent();
@@ -575,72 +574,7 @@ function setupRibbons(panelId) {
   }
 }
 
-// Theme switcher functionality
-function initializeThemeSwitcher() {
-  // Check if we're on mobile - use media query instead of DOM element
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  
-  const themeRadios = document.querySelectorAll('input[name="theme"]');
-  
-  // Load saved theme from localStorage
-  const savedTheme = localStorage.getItem('selectedTheme') || 'default';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  
-  // Set the correct radio button
-  const savedRadio = document.querySelector(`input[name="theme"][value="${savedTheme}"]`);
-  if (savedRadio) {
-    savedRadio.checked = true;
-  }
-  
-  // Handle initial theme setup
-  setTimeout(() => {
-    handleThemeChange();
-  }, 200);
-  
-  // Add event listeners for theme changes
-  themeRadios.forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      const selectedTheme = e.target.value;
-      document.documentElement.setAttribute('data-theme', selectedTheme);
-      localStorage.setItem('selectedTheme', selectedTheme);
-      
-      // Add a subtle animation effect
-      document.body.style.transition = 'all 0.3s ease';
-      setTimeout(() => {
-        document.body.style.transition = '';
-      }, 300);
-      
-      // Handle theme-dependent updates
-      handleThemeChange();
-    });
-  });
-}
-
-// Function to handle all theme-dependent updates
-function handleThemeChange() {
-  // Small delay to ensure theme variables are updated
-  setTimeout(() => {
-    // Update BMI speedometer only if BMI panel is active
-    const bmiPanel = document.getElementById('bmi');
-    if (bmiPanel && bmiPanel.classList.contains('active-section')) {
-    if (window.redrawSpeedometerForTheme && typeof window.redrawSpeedometerForTheme === 'function') {
-      window.redrawSpeedometerForTheme();
-      }
-    }
-    
-    // Update EMI charts if EMI panel is active
-    if (window.EMI && typeof window.EMI.updateChartsForTheme === 'function') {
-      window.EMI.updateChartsForTheme();
-    }
-    
-    // Update investment charts if investment panel is active
-    if (window.Investment && typeof window.Investment.updateChartsForTheme === 'function') {
-      window.Investment.updateChartsForTheme();
-    }
-    
-    // Add more theme-dependent updates here as needed
-  }, 100);
-}
+// Theme switcher functionality is now handled by the theme-selector web component
 
 // Provide global wrappers for EMI actions used by HTML buttons
 window.generateAmortizationSchedule = function() {
@@ -841,54 +775,4 @@ setTimeout(function() {
   setupFalseEasterEgg();
 }, 1000);
 
-// ============================================================================
-// EVENT-BASED WEB COMPONENT THEME SYNCHRONIZATION SYSTEM
-// ============================================================================
-// This system fires events when themes change, allowing web components to
-// listen and update themselves automatically - no manual syncing needed!
-
-// Function to fire theme change events that web components can listen to
-function fireThemeChangeEvent(theme) {
-  // Create a custom event that bubbles up through the DOM
-  const themeEvent = new CustomEvent('themeChanged', {
-    detail: { theme: theme },
-    bubbles: true,      // Event bubbles up through parent elements
-    composed: true      // Event can cross shadow DOM boundaries
-  });
-  
-  // Dispatch from document.documentElement so it bubbles up everywhere
-  document.documentElement.dispatchEvent(themeEvent);
-}
-
-// Function to initialize the event-based theme synchronization system
-function initializeUniversalThemeSync() {
-  // Watch for theme changes on the document element
-  const themeObserver = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-        // Theme changed - fire event instead of manually syncing
-        const newTheme = document.documentElement.getAttribute('data-theme') || 'default';
-        fireThemeChangeEvent(newTheme);
-      }
-    });
-  });
-  
-  // Start observing theme changes
-  themeObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['data-theme']
-  });
-  
-  // Fire initial theme event so components know the current theme
-  const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
-  fireThemeChangeEvent(currentTheme);
-}
-
-// Initialize the universal theme sync system when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  // Small delay to ensure all web components are registered
-  setTimeout(initializeUniversalThemeSync, 100);
-});
-
-// Also try to initialize after a longer delay for components that load later
-setTimeout(initializeUniversalThemeSync, 1000);
+// Theme synchronization is now handled by the theme-selector web component
