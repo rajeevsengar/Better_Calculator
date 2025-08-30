@@ -74,12 +74,23 @@ html, body {
 /* Ad Space - Integrated in main container */
 .ad-space {
   flex: 10%;
-  height:fit-content;
-  background: var(--card-background, #f9f9f9); 
+  height: fit-content;
+  background: var(--card-background, #f9f9f9);
   text-align: center;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-color, #ddd);
   border-radius: 8px;
   box-sizing: border-box;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: default;
+  transition: background 0.3s ease;
 }
 
 .title-header {
@@ -169,6 +180,7 @@ button.button-primary:hover {
     flex: none;
     width: 100%;
     padding: 1rem;
+    margin-top: 1rem;
   }
   
   .title-header {
@@ -208,6 +220,7 @@ button.button-primary:hover {
     flex: none;
     width: 100%;
     padding: 0.75rem;
+    margin-top: 1rem;
   }
   
   .title-header {

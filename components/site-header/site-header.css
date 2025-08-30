@@ -424,27 +424,6 @@
 /* ========================================
    RESPONSIVE DESIGN - TABLET BREAKPOINT
    ======================================== */
-
-@media (max-width: 480px) {
-  .menu-header {
-    display: none;
-  }
-  
-  /* Mobile Menu Toggle for very small screens */
-  .mobile-menu-toggle {
-    display: flex;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0.5rem;
-  }
-  
-  .mobile-menu-toggle span {
-    width: 1.5rem;
-    height: 0.15rem;
-  }
-}
-
 @media (max-width: 1024px) {
   /* Header Layout Adjustments */
   .site-header {
@@ -603,5 +582,25 @@
     width: 3.5rem; /* Reduced from 4rem */
     height: 3.5rem; /* Reduced from 4rem */
     font-size: 2.25rem; /* Reduced from 2.5rem */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-header {
+    display: none;
+  }
+  
+  /* Mobile Menu Toggle for very small screens */
+  .mobile-menu-toggle {
+    display: flex;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.5rem;
+  }
+  
+  .mobile-menu-toggle span {
+    width: 1.5rem;
+    height: 0.15rem;
   }
 }
