@@ -8,6 +8,14 @@ let sipResultsDiv, lumpSumResultsDiv;
 // Create global namespace
 window.Investment = window.Investment || {};
 
+window.addEventListener('load', () => {
+  const loader = document.querySelector('#initial-loader');
+  const app = document.querySelector('#app');
+
+  loader.style.display = 'none';  // Hide spinner
+  app.style.display = 'block';    // Show content
+});
+
 function initializeInvestmentCalculator() {
   // SIP Calculator elements
   sipAmountInput = document.getElementById("sipAmount");

@@ -1,6 +1,16 @@
 // Time Calculator - Simple Timezone Converter Implementation
 "use strict";
 
+window.addEventListener('load', () => {
+  const loader = document.querySelector('#initial-loader');
+  const app = document.querySelector('#app');
+
+  if (loader && app) {
+    loader.style.display = 'none';  // Hide spinner
+    app.style.display = 'block';    // Show content
+  }
+});
+
 class TimeCalculator {
   constructor() {
     this.initializeElements();

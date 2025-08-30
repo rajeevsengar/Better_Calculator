@@ -8,15 +8,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css" />
-
     <link rel="stylesheet" href="../assets/css/misc.css" />
     <link rel="stylesheet" href="../assets/css/mobile.css" />
     <link rel="stylesheet" href="time-calculator.css" />
     <link rel="stylesheet" href="../timezone_calculator/timezone-calculator.css" />
-    <script src="../components/site-header/site-header.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../components/site-header/site-header.js" defer></script>
+    <script src="time-calculator.js" defer></script>
+    <script src="../helpers/constants.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
+    <script src="../helpers/util.js" defer></script>
+    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../helpers/bmi-facts-config.js" defer></script>
+    <!-- Web Components -->
+    <script src="../components/date-input/date-input.js" defer></script>
+    <script src="../components/time-input/time-input.js" defer></script>
+    <script src="../components/searchable-select/searchable-select.js" defer></script>
+    <script type="module" src="../components/timezone-input/timezone-input.js" defer></script>
 </head>
 <body>
-    <div class="page-container">
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
         <!-- Site Header Component -->
         <site-header></site-header>
 
@@ -152,24 +167,5 @@
             </div>
         </div>
     </div>
-
-    <script src="../helpers/constants.js"></script>
-    <script src="../helpers/text-config.js"></script>
-    <script src="../helpers/util.js"></script>
-    <script src="../helpers/ribbons-config.js"></script>
-    <script src="../helpers/bmi-facts-config.js"></script>
-    
-    <!-- Calculator Scripts -->
-    <script src="../time-calculator/time-calculator.js"></script>
-    <script src="../timezone_calculator/timezone_calculator.js"></script>
-    
-    <!-- Web Components -->
-    <script src="../components/date-input/date-input.js"></script>
-    <script src="../components/time-input/time-input.js"></script>
-    <script src="../components/searchable-select/searchable-select.js"></script>
-    <script type="module" src="../components/timezone-input/timezone-input.js"></script>
-    
-    <!-- Main Script (load last) -->
-    <script src="../helpers/script.js"></script>
 </body>
 </html> 

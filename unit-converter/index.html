@@ -5,119 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Unit Converter</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
-
     <link rel="stylesheet" href="../assets/css/misc.css" />
     <link rel="stylesheet" href="unit-converter.css" />
-    <script src="../components/site-header/site-header.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../components/site-header/site-header.js" defer></script>
+    <script src="../unit-converter/unit-converter.js" defer></script>
+
   </head>
   <body>
-    <div class="page-container">
-      <site-header></site-header>
-
-      <main class="calculator-main-container">
-        <!-- Unit Converter -->
-        <div class="calculator-content">
-          <div class="calculator-main-section" style="display: flex; ">
-              <!-- Unit Types section - Left side -->
-              <div class="unit-types-section">
-                  <div class="title-header">Unit Types</div>
-                  <!-- Mobile-friendly combobox -->
-                  <select id="mobileUnitTypes" class="mobile-unit-select">
-                      <option value="">Select Unit Type</option>
-                  </select>
-                  <!-- Desktop list view -->
-                  <div id="unitTypesList" class="unit-types-list desktop-unit-types-list">
-                      <!-- Content will be populated dynamically from text-config.js -->
-                  </div>
-              </div>
-              
-              <!-- From-To inputs and swap button - Right side -->
-              <div  style="display: flex; flex-direction: column;flex: 1; gap: 1rem;">
-                  <div class="from-to-section" style="display: flex;">
-                      <div class="card" style="flex: 1;">
-                          <div class="title-header">From</div>
-                          <input id="fromValue" placeholder="Enter value" />
-                          <div class="unit-chips-container">
-                              <div id="fromUnitButtons" class="unit-buttons"></div>
-                          </div>
-                      </div>
-                      <div class="card" style="flex: 1;">
-                          <div class="title-header">To</div>
-                          <input id="toValue" placeholder="Result" readonly />
-                          <div class="unit-chips-container">
-                              <div id="toUnitButtons" class="unit-buttons"></div>
-                          </div>
-                      </div>
-                  </div>
-                    <!-- Swap button below the inputs -->
-                  <div class="swap-button-center" style="display: flex; justify-content: center;">
-                      <button onclick="swapUnits()" class="button-primary">
-                          Swap
-                      </button>
-                  </div>
-              </div>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <site-header></site-header>
+  
+        <main class="calculator-main-container">
+          <!-- Unit Converter -->
+          <div class="calculator-content">
+            <div class="calculator-main-section" style="display: flex; ">
+                <!-- Unit Types section - Left side -->
+                <div class="unit-types-section">
+                    <div class="title-header">Unit Types</div>
+                    <!-- Mobile-friendly combobox -->
+                    <select id="mobileUnitTypes" class="mobile-unit-select">
+                        <option value="">Select Unit Type</option>
+                    </select>
+                    <!-- Desktop list view -->
+                    <div id="unitTypesList" class="unit-types-list desktop-unit-types-list">
+                        <!-- Content will be populated dynamically from text-config.js -->
+                    </div>
+                </div>
+                
+                <!-- From-To inputs and swap button - Right side -->
+                <div  style="display: flex; flex-direction: column;flex: 1; gap: 1rem;">
+                    <div class="from-to-section" style="display: flex;">
+                        <div class="card" style="flex: 1;">
+                            <div class="title-header">From</div>
+                            <input id="fromValue" placeholder="Enter value" />
+                            <div class="unit-chips-container">
+                                <div id="fromUnitButtons" class="unit-buttons"></div>
+                            </div>
+                        </div>
+                        <div class="card" style="flex: 1;">
+                            <div class="title-header">To</div>
+                            <input id="toValue" placeholder="Result" readonly />
+                            <div class="unit-chips-container">
+                                <div id="toUnitButtons" class="unit-buttons"></div>
+                            </div>
+                        </div>
+                    </div>
+                      <!-- Swap button below the inputs -->
+                    <div class="swap-button-center" style="display: flex; justify-content: center;">
+                        <button onclick="swapUnits()" class="button-primary">
+                            Swap
+                        </button>
+                    </div>
+                </div>
+            </div>
           </div>
-        </div>
-        <div class="ad-space">
-          Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
-        </div>
-      </main>
-
-      <!-- Footer -->
-      <!-- <footer class="site-footer">
-        <div class="footer-content">
-          <div class="footer-main"> -->
-            <!-- <p class="footer-tagline">
-              Not just another calculator website — it covers the missing
-              features of others.
-            </p> -->
-            <!-- <p class="footer-highlight">
-              🏆 The most feature-rich
-              <span id="emi-link" class="footer-link">EMI Calculator</span>
-              on the internet, our proud flagship.
-            </p> -->
-          <!-- </div> -->
-          <!-- <div
-            class="footer-easter-egg"
-            id="falseEasterEgg"
-            style="cursor: pointer"
-            title="Click me if you dare..."
-          >
-            🥚
-            <em
-              >This site contains a hidden easter egg. Good luck finding it!</em
+          <div class="ad-space">
+            Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+          </div>
+        </main>
+  
+        <!-- Footer -->
+        <!-- <footer class="site-footer">
+          <div class="footer-content">
+            <div class="footer-main"> -->
+              <!-- <p class="footer-tagline">
+                Not just another calculator website — it covers the missing
+                features of others.
+              </p> -->
+              <!-- <p class="footer-highlight">
+                🏆 The most feature-rich
+                <span id="emi-link" class="footer-link">EMI Calculator</span>
+                on the internet, our proud flagship.
+              </p> -->
+            <!-- </div> -->
+            <!-- <div
+              class="footer-easter-egg"
+              id="falseEasterEgg"
+              style="cursor: pointer"
+              title="Click me if you dare..."
             >
-            🥚
-          </div> -->
-        <!-- </div>
-      </footer> -->
-
-      <!-- False Easter Egg Popup -->
-      <!-- <div
-        id="falseEasterEggPopup"
-        class="false-easter-egg-popup"
-        aria-hidden="true"
-      >
-        <div class="false-facts-header">
-          <h3></h3>
-          <button class="false-facts-close" onclick="closeFalseEasterEgg()">
-            ×
-          </button>
-        </div>
-        <div class="false-facts-content"></div>
-      </div> -->
-
-      <!-- Site Facts Popup -->
-      <!-- <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
-        <div class="facts-header">
-          <h3></h3>
-          <button class="facts-close" onclick="closeSiteFacts()">×</button>
-        </div>
-        <div class="facts-content">
-          <div class="story-section">
+              🥚
+              <em
+                >This site contains a hidden easter egg. Good luck finding it!</em
+              >
+              🥚
+            </div> -->
+          <!-- </div>
+        </footer> -->
+  
+        <!-- False Easter Egg Popup -->
+        <!-- <div
+          id="falseEasterEggPopup"
+          class="false-easter-egg-popup"
+          aria-hidden="true"
+        >
+          <div class="false-facts-header">
+            <h3></h3>
+            <button class="false-facts-close" onclick="closeFalseEasterEgg()">
+              ×
+            </button>
           </div>
-        </div>
-      </div> -->
+          <div class="false-facts-content"></div>
+        </div> -->
+  
+        <!-- Site Facts Popup -->
+        <!-- <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
+          <div class="facts-header">
+            <h3></h3>
+            <button class="facts-close" onclick="closeSiteFacts()">×</button>
+          </div>
+          <div class="facts-content">
+            <div class="story-section">
+            </div>
+          </div>
+        </div> -->
+      </div>
     </div>
 
     <script src="../helpers/constants.js"></script>
@@ -126,11 +133,6 @@
     <script src="../helpers/ribbons-config.js"></script>
     <script src="../helpers/bmi-facts-config.js"></script>
 
-    <!-- Calculator Scripts -->
-    <script src="../unit-converter/unit-converter.js"></script>
-
-    <!-- Main Script (load last) -->
-    <script src="../helpers/script.js"></script>
 
     <!-- Initialize Unit Converter -->
     <script>

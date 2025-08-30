@@ -12,10 +12,15 @@
     <link rel="stylesheet" href="../assets/css/misc.css" />
     <link rel="stylesheet" href="../assets/css/mobile.css" />
     <link rel="stylesheet" href="emi-calculator.css" />
-    <script src="../components/site-header/site-header.js"></script>
+    <script src="../components/site-header/site-header.js" defer></script>
+    <script src="emi-calculator.js" defer></script>
 </head>
 <body>
-    <div class="page-container">
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
         <!-- Site Header Component -->
         <site-header></site-header>
 
@@ -180,10 +185,6 @@
     <script src="../helpers/ribbons-config.js"></script>
     <script src="../helpers/bmi-facts-config.js"></script>
     
-    <!-- Calculator Scripts -->
-    <script src="../emi-calculator/emi-calculator.js"></script>
-    
-    <!-- Main Script (load last) -->
-    <script src="../helpers/script.js"></script>
+
 </body>
 </html> 

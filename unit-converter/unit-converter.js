@@ -17,6 +17,15 @@ let currentMode = null;
 window.UnitConverter = window.UnitConverter || {};
 window.UnitConverter.initializeUnitConverter = initializeUnitConverter;
 
+window.addEventListener('load', () => {
+  const loader = document.querySelector('#initial-loader');
+  const app = document.querySelector('#app');
+
+  loader.style.display = 'none';  // Hide spinner
+  app.style.display = 'block';    // Show content
+});
+
+
 /* ============================================================
    Initialization
    ============================================================ */

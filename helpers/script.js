@@ -1,5 +1,13 @@
 // Unified responsive functionality for Pro Multi-Calculator
 // script.js
+window.addEventListener('load', () => {
+  const loader = document.querySelector('#initial-loader');
+  const app = document.querySelector('#app');
+
+  loader.style.display = 'none';  // Hide spinner
+  app.style.display = 'block';    // Show content
+});
+
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOM Content Loaded - Initializing responsive functionality');
@@ -13,11 +21,6 @@ function initializeResponsiveFunctionality() {
   
   // Theme switcher is now handled by the theme-selector web component
   
-  // Populate text content from configuration
-  populateTextContent();
-  
-  // Initialize date calculator tabs
-  // initializePanelSystem();
   
   // Mobile menu is now handled by the site-header web component
   
