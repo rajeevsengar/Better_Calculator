@@ -96,6 +96,36 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
+  max-width: 15rem;
+}
+
+/* Speedometer Chart Styles */
+.bmi-speedometer {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+.speedometer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  margin: 2rem 0;
+}
+
+.speedometer-legend {
+  margin-top: 1rem;
+}
+
+.speedometer-legend > div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* Mobile Responsive Styles */
@@ -187,33 +217,10 @@
     gap: 0.75rem;
     font-size: 11px;
   }
-}
 
-/* Speedometer Chart Styles */
-.bmi-speedometer {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-  height: auto;
-  vertical-align: bottom;
-}
-
-.speedometer-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  margin: 2rem 0;
-}
-
-.speedometer-legend {
-  margin-top: 1rem;
-}
-
-.speedometer-legend > div {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  font-size: 12px;
-  text-align: center;
+  .bmi-result-container {
+    max-width: 100%;
+    width: 100%;
+    flex: 1 1 100%;
+  }
 }

@@ -11,6 +11,31 @@ html, body {
   transition: all 0.3s ease;
   color: var(--text-primary);
   font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+  overflow-y: auto; /* Only show scrollbar when needed */
+}
+
+/* Custom scrollbar styling - thin and only visible when needed */
+::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Invisible track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2); /* Subtle thumb */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4); /* More visible on hover */
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 } 
 
 .page-container {
