@@ -48,17 +48,18 @@
   border: 1px solid var(--border-color);
   list-style: none;
   gap: 1.5rem;
+  color: var(--text-primary);
 }
 
 .unit-types-list li:hover {
   background: var(--accent-color);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border-color: var(--primary-color);
 }
 
 .unit-types-list li.active-mode {
   background: var(--primary-color);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border-color: var(--primary-color);
   transform: scale(1.02);
 }

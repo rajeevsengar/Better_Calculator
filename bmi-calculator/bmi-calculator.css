@@ -116,7 +116,6 @@
 .weight-unit-buttons button.selected,
 .height-mode-buttons button.selected {
   background: var(--primary-color);
-  color: white;
   border-color: var(--primary-color);
 }
 

@@ -4,15 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Investment Calculator</title>
+    
     <!-- Critical theme initialization to prevent flash -->
     <script>
-      // Immediately set theme to prevent flash
-      (function() {
-        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-      })();
-      
       // Wait for DOM and CSS to be ready before showing content
       document.addEventListener('DOMContentLoaded', function() {
         // Small delay to ensure CSS variables are loaded
@@ -36,13 +30,12 @@
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../components/themes-selector/themes.css" />
+    <link rel="stylesheet" href="../assets/css/themes.css" />
     <link rel="stylesheet" href="investment-calculator.css" />
     <!-- Scripts -->
-    <script src="../components/themes-selector/themes-selector.js"></script>
     <script src="../helpers/script.js" defer></script>
-    <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/constants.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
     <script src="../helpers/ribbons-config.js" defer></script>
     <script src="../components/site-header/site-header.js"></script>

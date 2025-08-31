@@ -79,6 +79,10 @@ class TimezoneInput extends HTMLElement {
         this.render();
         this._setupEventListeners();
         this._setupThemeListener();
+        
+        // Initialize with current theme on page load
+        this._initializeTheme();
+        
         if (this._default) {
             this._setDefaultValue();
         }
@@ -129,11 +133,20 @@ class TimezoneInput extends HTMLElement {
     }
 
     _setupThemeListener() {
-        // Listen for theme change events from parent document
+        // Listen for theme change events
         document.addEventListener('themeChanged', (event) => {
             const newTheme = event.detail.theme;
             this.updateTheme(newTheme);
         });
+    }
+
+    _initializeTheme() {
+        // Get current theme from document attributes
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
+        const currentVariant = document.documentElement.getAttribute('data-variant') || 'light';
+        
+        // Apply the current theme
+        this.updateTheme(currentTheme);
     }
 
     _dispatchChangeEvent() {
@@ -259,10 +272,30 @@ class TimezoneInput extends HTMLElement {
 
     /**
      * Update the component theme
-     * @param {string} theme - Theme name (green, purple, orange, default)
+     * @param {string} theme - Theme name (default, green, black)
      */
     updateTheme(theme) {
         this.setAttribute('data-theme', theme);
+        
+        // Get CSS variables from the document and apply them to the component
+        const root = document.documentElement;
+        const computedStyle = getComputedStyle(root);
+        
+        // Update component's CSS variables
+        this.style.setProperty('--primary-color', computedStyle.getPropertyValue('--primary-color'));
+        this.style.setProperty('--primary-hover', computedStyle.getPropertyValue('--primary-hover'));
+        this.style.setProperty('--input-border', computedStyle.getPropertyValue('--input-border'));
+        this.style.setProperty('--input-background', computedStyle.getPropertyValue('--input-background'));
+        this.style.setProperty('--text-primary', computedStyle.getPropertyValue('--text-primary'));
+        this.style.setProperty('--text-secondary', computedStyle.getPropertyValue('--text-secondary'));
+        this.style.setProperty('--card-background', computedStyle.getPropertyValue('--card-background'));
+        this.style.setProperty('--border-color', computedStyle.getPropertyValue('--border-color'));
+        this.style.setProperty('--shadow-color', computedStyle.getPropertyValue('--shadow-color'));
+        
+        // Force a re-render to ensure CSS variables are properly applied
+        this.render();
+        this._setupEventListeners();
+        
         const timezoneSelect = this.shadowRoot.querySelector('#timezoneSelect');
         if (timezoneSelect) {
             timezoneSelect.updateTheme(theme);

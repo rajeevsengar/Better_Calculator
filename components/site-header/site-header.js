@@ -10,6 +10,9 @@ class SiteHeader extends HTMLElement {
     this.setupEventListeners();
     this.populateContent();
     this.startTaglineAnimation();
+    
+    // Initialize theme on component load
+    this.initializeTheme();
   }
 
   render() {
@@ -36,7 +39,26 @@ class SiteHeader extends HTMLElement {
                     <span class="built-with-love" id="builtWithLove"></span>
                 </div>
                 <div class="right-section">
-                    <theme-selector></theme-selector>
+                    <!-- Integrated Theme Selector -->
+                    <div class="integrated-theme-selector">
+                        <div class="theme-radio-group">
+                            <input type="radio" id="theme-default" name="theme" value="default" checked>
+                            <label for="theme-default" class="theme-radio-label theme-default" title="Orange Theme">●</label>
+                            
+                            <input type="radio" id="theme-green" name="theme" value="green">
+                            <label for="theme-green" class="theme-radio-label theme-green" title="Green Theme">●</label>
+                            
+                            <input type="radio" id="theme-black" name="theme" value="black">
+                            <label for="theme-black" class="theme-radio-label theme-black" title="Black Theme">●</label>
+                        </div>
+                        
+                        <div class="variant-toggle">
+                            <input type="checkbox" id="variant-toggle" name="variant">
+                            <label for="variant-toggle" class="variant-toggle-label" title="Toggle Dark/Light Mode">
+                                <span class="toggle-icon"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -107,63 +129,102 @@ class SiteHeader extends HTMLElement {
   }
 
   setupEventListeners() {
+    // Mobile menu toggle
     const mobileMenuToggle = this.shadowRoot.getElementById('mobileMenuToggle');
     const mobileMenuOverlay = this.shadowRoot.getElementById('mobileMenuOverlay');
     const mobileMenuClose = this.shadowRoot.getElementById('mobileMenuClose');
-    
-    // Check if theme selector is rendered
-    setTimeout(() => {
-      const themeSelector = this.shadowRoot.querySelector('theme-selector');
-      if (themeSelector) {
-        console.log('Theme selector found in shadow DOM');
-      } else {
-        console.log('Theme selector NOT found in shadow DOM');
-        console.log('Available elements:', this.shadowRoot.querySelectorAll('*'));
-      }
-    }, 1000);
 
-
-    // Mobile menu toggle
-    if (mobileMenuToggle) {
-      mobileMenuToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (mobileMenuOverlay) {
-          mobileMenuOverlay.style.display = 'block';
-          document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
+    if (mobileMenuToggle && mobileMenuOverlay) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('active');
       });
     }
 
-    // Mobile menu close
-    if (mobileMenuClose) {
-      mobileMenuClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (mobileMenuOverlay) {
-          mobileMenuOverlay.style.display = 'none';
-          document.body.style.overflow = ''; // Restore scrolling
-        }
+    if (mobileMenuClose && mobileMenuOverlay) {
+      mobileMenuClose.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
       });
     }
 
-    // Close menu when clicking outside
+    // Close mobile menu when clicking outside
     if (mobileMenuOverlay) {
       mobileMenuOverlay.addEventListener('click', (e) => {
         if (e.target === mobileMenuOverlay) {
-          mobileMenuOverlay.style.display = 'none';
-          document.body.style.overflow = ''; // Restore scrolling
+          mobileMenuOverlay.classList.remove('active');
         }
       });
     }
 
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenuOverlay && mobileMenuOverlay.style.display === 'block') {
-        mobileMenuOverlay.style.display = 'none';
-        document.body.style.overflow = '';
-      }
+    // Theme switching functionality
+    this.setupThemeSwitching();
+  }
+
+  setupThemeSwitching() {
+    const themeRadios = this.shadowRoot.querySelectorAll('input[name="theme"]');
+    const variantToggle = this.shadowRoot.querySelector('#variant-toggle');
+    
+    // Set initial theme based on current state or default
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
+    const currentVariant = document.documentElement.getAttribute('data-variant') || 'light';
+    
+    // Set initial radio button state
+    const initialThemeRadio = this.shadowRoot.querySelector(`input[value="${currentTheme}"]`);
+    if (initialThemeRadio) {
+      initialThemeRadio.checked = true;
+    }
+    
+    // Set initial variant toggle state
+    if (variantToggle) {
+      variantToggle.checked = currentVariant === 'dark';
+    }
+    
+    // Handle theme radio button changes
+    themeRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const selectedTheme = e.target.value;
+        const currentVariant = document.documentElement.getAttribute('data-variant') || 'light';
+        
+        // Apply theme
+        document.documentElement.setAttribute('data-theme', selectedTheme);
+        document.documentElement.setAttribute('data-variant', currentVariant);
+        
+        // Save to localStorage
+        localStorage.setItem('selectedTheme', selectedTheme);
+        localStorage.setItem('selectedVariant', currentVariant);
+        
+        // Fire theme change event
+        this.fireThemeChangeEvent(selectedTheme, currentVariant);
+      });
     });
+    
+    // Handle variant toggle changes
+    if (variantToggle) {
+      variantToggle.addEventListener('change', (e) => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
+        const newVariant = e.target.checked ? 'dark' : 'light';
+        
+        // Apply variant
+        document.documentElement.setAttribute('data-variant', newVariant);
+        
+        // Save to localStorage
+        localStorage.setItem('selectedVariant', newVariant);
+        
+        // Fire theme change event
+        this.fireThemeChangeEvent(currentTheme, newVariant);
+      });
+    }
+  }
+
+  fireThemeChangeEvent(theme, variant) {
+    // Create a custom event that bubbles up through the DOM
+    const themeEvent = new CustomEvent('themeChanged', {
+      detail: { theme: theme, variant: variant },
+      bubbles: true,
+      composed: true
+    });
+    
+    // Dispatch from document.documentElement so it bubbles up everywhere
+    document.documentElement.dispatchEvent(themeEvent);
   }
 
   populateContent() {
@@ -235,6 +296,12 @@ class SiteHeader extends HTMLElement {
     const linkElements = calculatorLinks.querySelectorAll('.calculator-link');
     linkElements.forEach(link => {
       link.addEventListener('click', (e) => {
+        // Check if this link is already active (current page)
+        if (link.classList.contains('active')) {
+          e.preventDefault(); // Prevent navigation if already on this page
+          return;
+        }
+        
         // Remove active class from all calculator links
         linkElements.forEach(l => l.classList.remove('active'));
         // Remove active class from home link
@@ -259,7 +326,13 @@ class SiteHeader extends HTMLElement {
     }
 
     // Add click handler for home link
-    homeLink.addEventListener('click', () => {
+    homeLink.addEventListener('click', (e) => {
+      // Check if already on home page
+      if (homeLink.classList.contains('active')) {
+        e.preventDefault(); // Prevent navigation if already on home page
+        return;
+      }
+      
       // Remove active class from calculator links
       const calculatorLinks = this.shadowRoot.querySelectorAll('.calculator-link');
       calculatorLinks.forEach(link => link.classList.remove('active'));
@@ -379,6 +452,26 @@ class SiteHeader extends HTMLElement {
         tagline.classList.remove('animate');
       }, 3000);
     });
+  }
+
+  initializeTheme() {
+    const currentTheme = localStorage.getItem('selectedTheme') || 'default';
+    const currentVariant = localStorage.getItem('selectedVariant') || 'light';
+
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    document.documentElement.setAttribute('data-variant', currentVariant);
+
+    // Set initial radio button state
+    const initialThemeRadio = this.shadowRoot.querySelector(`input[value="${currentTheme}"]`);
+    if (initialThemeRadio) {
+      initialThemeRadio.checked = true;
+    }
+
+    // Set initial variant toggle state
+    const variantToggle = this.shadowRoot.querySelector('#variant-toggle');
+    if (variantToggle) {
+      variantToggle.checked = currentVariant === 'dark';
+    }
   }
 }
 

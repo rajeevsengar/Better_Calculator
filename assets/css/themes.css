@@ -1,0 +1,235 @@
+/* Critical: Prevent flash by using opacity instead of visibility */
+body:not([data-theme-applied]) {
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+body[data-theme-applied] {
+  opacity: 1;
+}
+
+/* Default theme (Orange + White) - replacing old default */
+:root {
+  --primary-color: #ff9800;
+  --primary-hover: #f57c00;
+  --accent-color: #ffb74d;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --button-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --header-height: 6rem;
+}
+
+
+/* Default theme light variant (explicit) */
+html[data-theme="default"][data-variant="light"] {
+  --primary-color: #ff9800;
+  --primary-hover: #f57c00;
+  --accent-color: #ffb74d;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --button-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --header-height: 6rem;
+}
+
+/* Default theme (Orange + Dark) - replacing old default */
+[data-theme="default"][data-variant="dark"] {
+  --primary-color: #ff9800;
+  --primary-hover: #f57c00;
+  --accent-color: #ffb74d;
+  --background-color: #1f1a1a;
+  --surface-color: #332d2d;
+  --card-background: #393333;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted: #b0b0b0;
+  --border-color: #494444;
+  --input-background: #494040;
+  --input-bg: #494040;
+  --input-border: #595555;
+  --button-hover: #f57c00;
+  --hover-bg: #494040;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Green Theme + White */
+[data-theme="green"][data-variant="light"] {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --accent-color: #81c784;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --button-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Green Theme + Dark */
+[data-theme="green"][data-variant="dark"] {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --accent-color: #81c784;
+  --background-color: #1a1f1a;
+  --surface-color: #2d332d;
+  --card-background: #333933;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-color: #444944;
+  --input-background: #404440;
+  --input-bg: #404440;
+  --input-border: #555955;
+  --button-hover: #388e3c;
+  --hover-bg: #404440;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Black Theme + Light */
+[data-theme="black"][data-variant="light"] {
+  --primary-color: #000000;
+  --primary-hover: #1a1a1a;
+  --accent-color: #cccccc;
+  --background-color: #ffffff;
+  --surface-color: #f8f8f8;
+  --card-background: #ffffff;
+  --text-primary: black;
+  --text-secondary: white;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --button-hover: #f0f0f0;
+  --hover-bg: #f0f0f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Black Theme + Dark */
+[data-theme="black"][data-variant="dark"] {
+  --primary-color: #ffffff;
+  --primary-hover: #ffffff;
+  --accent-color: #ffffff;
+  --background-color: #000000;
+  --surface-color: #0a0a0a;
+  --card-background: #1a1a1a;
+  --text-primary: white;
+  --text-secondary: black;
+  --text-muted: #a0a0a0;
+  --border-color: #333333;
+  --input-background: #1a1a1a;
+  --input-bg: #1a1a1a;
+  --input-border: #404040;
+  --button-hover: #0a0a0a;
+  --hover-bg: #1a1a1a;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Legacy support for existing themes without variant (defaults to light) */
+[data-theme="green"]:not([data-variant]) {
+  --primary-color: #4caf50;
+  --primary-hover: #388e3c;
+  --accent-color: #81c784;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --card-background: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --button-hover: #f1f5f9;
+  --hover-bg: #f1f5f9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="black"]:not([data-variant]) {
+  --primary-color: #000000;
+  --primary-hover: #1a1a1a;
+  --accent-color: #cccccc;
+  --background-color: #ffffff;
+  --surface-color: #f8f8f8;
+  --card-background: #ffffff;
+  --text-primary: black;
+  --text-secondary: white;
+  --text-muted: #666666;
+  --border-color: #e0e0e0;
+  --input-background: #ffffff;
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --button-hover: #f0f0f0;
+  --hover-bg: #f0f0f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Text Selection Styling for all themes */
+::selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Higher specificity selectors */
+html::selection,
+body::selection,
+*::selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+html::-moz-selection,
+body::-moz-selection,
+*::-moz-selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Theme-specific text selection overrides */
+[data-theme]::selection,
+[data-theme] *::selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+[data-theme]::-moz-selection,
+[data-theme] *::-moz-selection {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  /* Mobile-specific theme adjustments can go here */
+}

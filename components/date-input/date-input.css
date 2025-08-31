@@ -1,8 +1,19 @@
 /* Date Input Web Component Styles */
 
-/* Import theme CSS */
-@import url('../themes-selector/themes.css');
-@import url('../../assets/css/style.css');
+/* Component will inherit theme variables from parent document automatically */
+
+/* Fallback values for when variables are not defined */
+:host {
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --input-border: #cbd5e1;
+    --input-background: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --card-background: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(59, 130, 246, 0.3);
+}
 
 /* Component Container */
 .date-input-container {
@@ -10,29 +21,29 @@
     flex-direction: column;
     gap: 8px;
     max-width: 300px;
-    margin:0;
+    margin: 0;
 }
 
 /* Size variants */
 .date-input-container.size-small {
     max-width: 200px;
-    margin: 0;  /* No margin - spacing handled by parent */
+    margin: 0;
 }
 
 .date-input-container.size-large {
     max-width: 400px;
-    margin: 0;  /* No margin - spacing handled by parent */
+    margin: 0;
 }
 
 .date-input-container.size-full {
     max-width: 100%;
-    margin: 0;  /* No margin - spacing handled by parent */
+    margin: 0;
 }
 
 /* Label styling */
 .date-input-label {
     font-size: 13px;
-    color: var(--text-secondary, #475569);
+    color: var(--text-secondary);
     display: block;
     margin-bottom: 6px;
     font-weight: 500;
@@ -41,13 +52,12 @@
 /* Date Input Field */
 .date-input-field {
     padding: 12px 16px;
-    border: 2px solid var(--input-border, #cbd5e1);
+    border: 2px solid var(--input-border);
     border-radius: 8px;
     font-size: 16px;
     font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
-    background-color: var(--input-background, #ffffff);
-    color: var(--text-primary, #1e293b);
-    transition: all 0.3s ease;
+    background-color: var(--input-background);
+    color: var(--text-primary);
     cursor: pointer;
     width: 100%;
     box-sizing: border-box;
@@ -67,13 +77,13 @@
 }
 
 .date-input-field:hover {
-    border-color: var(--primary-color, #3b82f6);
+    border-color: var(--primary-color);
 }
 
 .date-input-field:focus {
     outline: none;
-    border-color: var(--primary-color, #3b82f6);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--shadow-color);
 }
 
 .date-input-field::-webkit-calendar-picker-indicator {
@@ -96,13 +106,12 @@
 .quick-link {
     padding-bottom: 8px;
     background: none;
-    color: var(--primary-color, #3b82f6);
+    color: var(--primary-color);
     border: none;
     border-radius: 6px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
     font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
     min-width: fit-content;
     text-decoration: underline;
@@ -113,7 +122,7 @@
 }
 
 .quick-link:hover {
-    color: var(--primary-hover, #2563eb);
+    color: var(--primary-hover);
     text-decoration-thickness: 2px;
     transform: translateY(-1px);
 }
@@ -132,7 +141,6 @@
     border: none;
 }
 
-/* Size variants for quick link */
 .quick-link.size-small {
     padding-top: 8px;
     padding-bottom: 8px;
@@ -145,39 +153,4 @@
     padding-bottom: 8px;
     font-size: 16px;
     border-radius: 8px;
-}
-
-/* Focus effects using theme colors */
-.date-input-field:focus {
-    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 59, 130, 246), 0.1);
-}
-
-/* CSS Custom Properties for theming - inherit from parent document */
-:host {
-    /* Use CSS custom properties from parent document if available, fallback to defaults */
-    --primary-color: var(--primary-color, #3b82f6);
-    --primary-hover: var(--primary-hover, #2563eb);
-    --input-border: var(--input-border, #cbd5e1);
-    --input-background: var(--input-background, #ffffff);
-    --text-primary: var(--text-primary, #1e293b);
-    --text-secondary: var(--text-secondary, #475569);
-    --card-background: var(--card-background, #ffffff);
-    --border-color: var(--border-color, #e2e8f0);
-    --shadow-color: var(--shadow-color, rgba(0, 0, 0, 0.1));
-}
-
-/* Theme-specific overrides to ensure theme colors work */
-:host([data-theme="green"]) {
-    --primary-color: #4caf50;
-    --primary-hover: #388e3c;
-}
-
-:host([data-theme="purple"]) {
-    --primary-color: #9c27b0;
-    --primary-hover: #7b1fa2;
-}
-
-:host([data-theme="orange"]) {
-    --primary-color: #ff9800;
-    --primary-hover: #f57c00;
 } 
