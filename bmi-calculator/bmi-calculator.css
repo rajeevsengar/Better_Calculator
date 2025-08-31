@@ -14,6 +14,24 @@
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1rem;
+  width: 100%;
+}
+
+/* Desktop section spacing */
+.age-gender-row {
+  margin-bottom: 1.5rem;
+}
+
+.age-input {
+  margin-bottom: 1.5rem; /* Add margin below age input */
+}
+
+.weight-section {
+  margin-bottom: 1.5rem;
+}
+
+.height-section {
+  margin-bottom: 1.5rem;
 }
 
 /* Label Styles */
@@ -57,6 +75,11 @@
   margin-top: 0.5rem; /* Consistent top margin for all button groups */
 }
 
+.gender-buttons {
+  height: auto; /* Let height be determined by content */
+  align-items: center; /* Center buttons vertically */
+}
+
 .gender-buttons button,
 .weight-unit-buttons button,
 .height-mode-buttons button {
@@ -74,6 +97,12 @@
   flex: 1;
   min-width: 6.25rem;
   max-width: fit-content;
+}
+
+.gender-buttons button {
+  height: calc(clamp(6px, 1vw, 12px) * 2 + clamp(14px, 1.5vw, 18px) + 2px); /* Match input field height exactly */
+  min-height: 2.5rem; /* Fallback minimum height */
+  box-sizing: border-box; /* Include padding and border in height calculation */
 }
 
 .gender-buttons button:hover,
@@ -109,7 +138,9 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
-  max-width: 15rem;
+  max-width: 15rem; /* Increased from 15rem to make it wider */
+  flex: 1; /* Make it expand to fill available space */
+  min-width: 15rem; /* Allow flex item to shrink below content size */
 }
 
 /* Speedometer Chart Styles */
@@ -141,8 +172,8 @@
   text-align: center;
 }
 
-/* Mobile Responsive Styles */
-@media (max-width: 768px) {
+/* Mobile Responsive Styles - Only for phones, not tablets */
+@media (max-width: 480px) {
   .bmi-input-container {
     order: 1;
     flex: none;
@@ -204,6 +235,12 @@
   .weight-unit-buttons,
   .height-mode-buttons {
     justify-content: flex-start;
+  }
+  
+  /* Gender buttons normal height on mobile */
+  .gender-buttons button {
+    height: auto; /* Normal height on mobile */
+    min-height: 2.5rem; /* Standard button height */
   }
   
   /* Calculate buttons stack vertically on mobile */
