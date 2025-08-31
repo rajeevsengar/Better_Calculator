@@ -4,22 +4,34 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Time Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Immediately set theme to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        // Mark theme as applied to make body visible
+        document.body.setAttribute('data-theme-applied', 'true');
+      })();
+    </script>
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/mobile.css" />
+    <link rel="stylesheet" href="../components/themes-selector/themes.css" />
+    <link rel="preload" as="script" href="../components/site-header/site-header.js">
     <link rel="stylesheet" href="time-calculator.css" />
-    <link rel="stylesheet" href="../timezone_calculator/timezone-calculator.css" />
+    <!-- Scripts -->
+    <script src="../components/themes-selector/themes-selector.js"></script>
     <script src="../helpers/script.js" defer></script>
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="time-calculator.js" defer></script>
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
     <script src="../helpers/ribbons-config.js" defer></script>
-    <script src="../helpers/bmi-facts-config.js" defer></script>
+    <script src="../components/site-header/site-header.js"></script>
+    <script src="time-calculator.js" defer></script>
+
     <!-- Web Components -->
     <script src="../components/date-input/date-input.js" defer></script>
     <script src="../components/time-input/time-input.js" defer></script>

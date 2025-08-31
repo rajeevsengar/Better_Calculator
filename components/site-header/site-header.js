@@ -5,58 +5,11 @@ class SiteHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    this.ensureThemeSelectorLoaded();
+    // Theme selector is already loaded in head, no need to load dynamically
     this.render();
     this.setupEventListeners();
     this.populateContent();
     this.startTaglineAnimation();
-  }
-
-  ensureThemeSelectorLoaded() {
-    // Check if theme-selector component is already defined
-    if (!customElements.get('theme-selector')) {
-      console.log('Theme selector not found, loading automatically...');
-      
-      // Load the theme-selector component script
-      const script = document.createElement('script');
-      script.src = this.getThemeSelectorPath();
-      
-      script.onload = () => {
-        console.log('Theme selector script loaded successfully');
-        // Wait a bit for the component to register
-        setTimeout(() => {
-          if (customElements.get('theme-selector')) {
-            console.log('Theme selector component registered successfully');
-          } else {
-            console.error('Theme selector component failed to register');
-          }
-        }, 100);
-      };
-      
-      script.onerror = (error) => {
-        console.error('Failed to load theme selector script:', error);
-        console.error('Attempted path:', this.getThemeSelectorPath());
-      };
-      
-      document.head.appendChild(script);
-    } else {
-      console.log('Theme selector already loaded');
-    }
-  }
-
-  getThemeSelectorPath() {
-    // Determine the correct path based on current page
-    const currentPath = window.location.pathname;
-    const isSubPage = currentPath.includes('/unit-converter') || 
-                     currentPath.includes('/bmi-calculator') || 
-                     currentPath.includes('/date-calculator') || 
-                     currentPath.includes('/time-calculator') || 
-                     currentPath.includes('/emi-calculator') || 
-                     currentPath.includes('/investment-calculator');
-    
-    const path = isSubPage ? '../components/themes-selector/themes-selector.js' : 'components/themes-selector/themes-selector.js';
-    console.log('Theme selector path:', path, 'Current path:', currentPath, 'Is subpage:', isSubPage);
-    return path;
   }
 
   render() {
@@ -148,7 +101,7 @@ class SiteHeader extends HTMLElement {
     setTimeout(() => {
       if (!customElements.get('theme-selector')) {
         console.log('Theme selector still not available after render, trying again...');
-        this.ensureThemeSelectorLoaded();
+        // This part is no longer needed as theme selector is loaded in head
       }
     }, 500);
   }

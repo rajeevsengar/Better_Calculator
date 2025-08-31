@@ -4,17 +4,38 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Date Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Immediately set theme to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        // Mark theme as applied to make body visible
+        document.body.setAttribute('data-theme-applied', 'true');
+      })();
+    </script>
+    
     <link rel="stylesheet" href="../assets/css/style.css" />
-
     <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/mobile.css" />
+    <link rel="stylesheet" href="../components/themes-selector/themes.css" />
     <link rel="stylesheet" href="date-calculator.css" />
-    <link rel="stylesheet" href="../timezone_calculator/timezone-calculator.css" />
-    <script src="../components/site-header/site-header.js" defer></script>
+    <link rel="preload" as="script" href="../components/site-header/site-header.js">
+    <!-- Scripts -->
+    <script src="../components/themes-selector/themes-selector.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../helpers/constants.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
+    <script src="../helpers/util.js" defer></script>
+    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../components/site-header/site-header.js"></script>
+    <!-- Web Components -->
+    <script src="../components/date-input/date-input.js" defer></script>
+    <script src="../components/time-input/time-input.js" defer></script>
+    <script src="../components/searchable-select/searchable-select.js" defer></script>
+    <script type="module" src="../components/timezone-input/timezone-input.js" defer></script>
     <script src="date-calculator.js" defer></script>
+
 </head>
 <body>
     <div id="initial-loader">
@@ -265,17 +286,5 @@
             </div>
         </div>
     </div>
-
-    <script src="../helpers/constants.js"></script>
-    <script src="../helpers/text-config.js"></script>
-    <script src="../helpers/util.js"></script>
-    <script src="../helpers/ribbons-config.js"></script>
-    <script src="../helpers/bmi-facts-config.js"></script>
-    
-    <!-- Web Components -->
-    <script src="../components/date-input/date-input.js"></script>
-    <script src="../components/time-input/time-input.js"></script>
-    <script src="../components/searchable-select/searchable-select.js"></script>
-    <script type="module" src="../components/timezone-input/timezone-input.js"></script>
 </body>
 </html> 

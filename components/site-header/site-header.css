@@ -546,8 +546,8 @@
   .mobile-menu-toggle {
     display: flex;
     right: 1.5rem;
-    top: 2rem; /* Position below the menu header to avoid overlap */
-    transform: none; /* Remove transform since we're using fixed positioning */
+    top: 50%; /* Position below the menu header to avoid overlap */
+    transform: translateY(-80%); /* Remove transform since we're using fixed positioning */
     padding: 0.6rem;
   }
   

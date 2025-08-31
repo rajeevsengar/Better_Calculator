@@ -4,13 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Unit Converter</title>
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Immediately set theme to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        // Mark theme as applied to make body visible
+        document.body.setAttribute('data-theme-applied', 'true');
+      })();
+    </script>
+    
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
+    <link rel="stylesheet" href="../components/themes-selector/themes.css" />
     <link rel="stylesheet" href="unit-converter.css" />
-    <script src="../helpers/script.js" defer></script>
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="../unit-converter/unit-converter.js" defer></script>
 
+    <!-- Scripts -->
+    <script src="../components/themes-selector/themes-selector.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../helpers/constants.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
+    <script src="../helpers/util.js" defer></script>
+    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../components/site-header/site-header.js"></script>
+    <script src="unit-converter.js" defer></script>
   </head>
   <body>
     <div id="initial-loader">
@@ -126,14 +145,6 @@
         </div> -->
       </div>
     </div>
-
-    <script src="../helpers/constants.js"></script>
-    <script src="../helpers/text-config.js"></script>
-    <script src="../helpers/util.js"></script>
-    <script src="../helpers/ribbons-config.js"></script>
-    <script src="../helpers/bmi-facts-config.js"></script>
-
-
     <!-- Initialize Unit Converter -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {

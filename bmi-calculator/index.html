@@ -4,16 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>BMI Calculator</title>
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Immediately set theme to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        // Mark theme as applied to make body visible
+        document.body.setAttribute('data-theme-applied', 'true');
+      })();
+    </script>
+    
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
+    <link rel="stylesheet" href="../components/themes-selector/themes.css" />
+    <link rel="preload" as="script" href="../components/site-header/site-header.js">
     <link rel="stylesheet" href="bmi-calculator.css" />
 
+    <!-- Scripts -->
+    <script src="../components/themes-selector/themes-selector.js"></script>
     <script src="../helpers/script.js" defer></script>
-    <script src="../components/site-header/site-header.js" defer></script>
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
     <script src="../helpers/bmi-facts-config.js" defer></script>
+    <script src="../components/site-header/site-header.js"></script>
     <script src="../bmi-calculator/bmi-calculator.js" defer></script>
   </head>
   <body>
