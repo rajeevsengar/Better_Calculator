@@ -1,6 +1,11 @@
-/* Critical: Prevent flash by hiding body until theme is applied */
+/* Critical: Prevent flash by using opacity instead of visibility */
 body:not([data-theme-applied]) {
-  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+body[data-theme-applied] {
+  opacity: 1;
 }
 
 /* Theme-specific color variables - these override the base variables in style.css */

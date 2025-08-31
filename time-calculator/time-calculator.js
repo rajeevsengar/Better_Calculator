@@ -1,13 +1,7 @@
 // Time Calculator - Main Script
 "use strict";
 
-window.addEventListener('load', () => {
-  const loader = document.querySelector('#initial-loader');
-  const app = document.querySelector('#app');
 
-  loader.style.display = 'none';  // Hide spinner
-  app.style.display = 'block';    // Show content
-});
 
 // Create global namespace
 window.TimeCalculator = window.TimeCalculator || {};

@@ -10,13 +10,7 @@ let bmiSpeedometerCanvas, speedometerLegendDiv;
 window.BMICalculator = window.BMICalculator || {};
 window.BMICalculator.initializeBMICalculator = initializeBMICalculator;
 
-window.addEventListener('load', () => {
-  const loader = document.querySelector('#initial-loader');
-  const app = document.querySelector('#app');
 
-  loader.style.display = 'none';  // Hide spinner
-  app.style.display = 'block';    // Show content
-});
 
 // Gender options
 const GENDER_OPTIONS = [

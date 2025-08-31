@@ -7,13 +7,7 @@
 // Create global namespace
 window.EMI = window.EMI || {};
 
-window.addEventListener('load', () => {
-  const loader = document.querySelector('#initial-loader');
-  const app = document.querySelector('#app');
 
-  loader.style.display = 'none';  // Hide spinner
-  app.style.display = 'block';    // Show content
-});
 
 // Toggle this to true while developing to see internal logs
 

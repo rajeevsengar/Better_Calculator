@@ -11,16 +11,34 @@
       (function() {
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         document.documentElement.setAttribute('data-theme', savedTheme);
-        // Mark theme as applied to make body visible
-        document.body.setAttribute('data-theme-applied', 'true');
+        
       })();
+      
+      // Wait for DOM and CSS to be ready before showing content
+      document.addEventListener('DOMContentLoaded', function() {
+        // Small delay to ensure CSS variables are loaded
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
     </script>
     
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/misc.css" />
     <link rel="stylesheet" href="../components/themes-selector/themes.css" />
     <link rel="stylesheet" href="date-calculator.css" />
-    <link rel="preload" as="script" href="../components/site-header/site-header.js">
     <!-- Scripts -->
     <script src="../components/themes-selector/themes-selector.js"></script>
     <script src="../helpers/script.js" defer></script>

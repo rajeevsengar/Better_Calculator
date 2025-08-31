@@ -1,12 +1,6 @@
 // Unified responsive functionality for Pro Multi-Calculator
 // script.js
 window.addEventListener('load', () => {
-  const loader = document.querySelector('#initial-loader');
-  const app = document.querySelector('#app');
-
-  loader.style.display = 'none';  // Hide spinner
-  app.style.display = 'block';    // Show content
-  
   // Ensure theme is applied even if component fails
   ensureThemeApplied();
 });
