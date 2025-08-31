@@ -37,8 +37,9 @@
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
-    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../helpers/calculator-description.js"></script>
     <script src="../components/site-header/site-header.js"></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
     <script src="emi-calculator.js" defer></script>
 </head>
 <body>
@@ -50,119 +51,145 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="calculator-main-container">
-          <div class="calculator-content">
-            <div class="calculator-main-section">
-              <!-- EMI Calculator Section -->
-              <section id="emi" class="active-section">
-                        <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
-                            <div>
-                                <div class="card">
-                                    <div style="
-                                        display: grid;
-                                        grid-template-columns: repeat(3, 1fr);
-                                        gap: 16px;
-                                        margin-bottom: 20px;
-                                    ">
-                                        <div>
-                                            <label>Loan Amount</label>
-                                            <input id="emiAmt" />
-                                        </div>
-                                        <div>
-                                            <label>Annual Rate (%)</label>
-                                            <input id="emiRate" />
-                                        </div>
-                                        <div>
-                                            <label>Tenure (months)</label>
-                                            <input id="emiMonths" />
-                                        </div>
-                                    </div>
-
-                                    <div style="margin-bottom: 20px">
-                                        <label>Recalculation Mode</label>
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <div class="calculator-content">
+                <div class="calculator-main-section">
+                  <!-- EMI Calculator Section -->
+                  <section id="emi" class="active-section">
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
+                                <div>
+                                    <div class="card">
                                         <div style="
                                             display: grid;
                                             grid-template-columns: repeat(3, 1fr);
                                             gap: 16px;
-                                            margin-top: 8px;
+                                            margin-bottom: 20px;
                                         ">
-                                            <label style="display: flex; align-items: center; gap: 8px">
-                                                <input type="radio" name="recalcMode" value="emi" checked />
-                                                <span>Change EMI amount</span>
-                                            </label>
-                                            <label style="display: flex; align-items: center; gap: 8px">
-                                                <input type="radio" name="recalcMode" value="tenure" />
-                                                <span>Change tenure</span>
-                                            </label>
+                                            <div>
+                                                <label>Loan Amount</label>
+                                                <input id="emiAmt" />
+                                            </div>
+                                            <div>
+                                                <label>Annual Rate (%)</label>
+                                                <input id="emiRate" />
+                                            </div>
+                                            <div>
+                                                <label>Tenure (months)</label>
+                                                <input id="emiMonths" />
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-bottom: 20px">
+                                            <label>Recalculation Mode</label>
+                                            <div style="
+                                                display: grid;
+                                                grid-template-columns: repeat(3, 1fr);
+                                                gap: 16px;
+                                                margin-top: 8px;
+                                            ">
+                                                <label style="display: flex; align-items: center; gap: 8px">
+                                                    <input type="radio" name="recalcMode" value="emi" checked />
+                                                    <span>Change EMI amount</span>
+                                                </label>
+                                                <label style="display: flex; align-items: center; gap: 8px">
+                                                    <input type="radio" name="recalcMode" value="tenure" />
+                                                    <span>Change tenure</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div style="display: flex; gap: 8px; margin-bottom: 20px">
+                                            <button class="button-primary" onclick="generateAmortizationSchedule()">
+                                                Calculate / Build Schedule
+                                            </button>
+                                            <button onclick="clearEMI()">Clear</button>
                                         </div>
                                     </div>
 
-                                    <div style="display: flex; gap: 8px; margin-bottom: 20px">
-                                        <button class="button-primary" onclick="generateAmortizationSchedule()">
-                                            Calculate / Build Schedule
-                                        </button>
-                                        <button onclick="clearEMI()">Clear</button>
-                                    </div>
-                                </div>
+                                    <div class="card" style="margin-top: 20px">
+                                        <h3 style="margin-top: 0; margin-bottom: 16px">
+                                            Amortization Schedule
+                                        </h3>
+                                        <div class="instructions-box">
+                                            <strong>Instructions:</strong>
+                                            <ul>
+                                                <li>
+                                                    <strong>Prepayment:</strong> Enter amount to reduce loan
+                                                    principal (reduces EMI/tenure)
+                                                </li>
+                                                <li>
+                                                    <strong>Top-up:</strong> Enter amount to increase loan
+                                                    principal (increases EMI/tenure)
+                                                </li>
+                                                <li>
+                                                    <strong>New Rate%:</strong> Enter new interest rate from
+                                                    that month onwards
+                                                </li>
+                                                <li>
+                                                    Click outside any edited cell or press Enter to
+                                                    recalculate
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="max-height: 400px; overflow: auto; margin-bottom: 20px">
+                                            <table id="amortTable" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Month</th>
+                                                        <th>EMI</th>
+                                                        <th>Principal</th>
+                                                        <th>Interest</th>
+                                                        <th>Prepayment</th>
+                                                        <th>Top-up</th>
+                                                        <th>New Rate%</th>
+                                                        <th>Outstanding</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
 
-                                <div class="card" style="margin-top: 20px">
-                                    <h3 style="margin-top: 0; margin-bottom: 16px">
-                                        Amortization Schedule
-                                    </h3>
-                                    <div class="instructions-box">
-                                        <strong>Instructions:</strong>
-                                        <ul>
-                                            <li>
-                                                <strong>Prepayment:</strong> Enter amount to reduce loan
-                                                principal (reduces EMI/tenure)
-                                            </li>
-                                            <li>
-                                                <strong>Top-up:</strong> Enter amount to increase loan
-                                                principal (increases EMI/tenure)
-                                            </li>
-                                            <li>
-                                                <strong>New Rate%:</strong> Enter new interest rate from
-                                                that month onwards
-                                            </li>
-                                            <li>
-                                                Click outside any edited cell or press Enter to
-                                                recalculate
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div style="max-height: 400px; overflow: auto; margin-bottom: 20px">
-                                        <table id="amortTable" style="width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Month</th>
-                                                    <th>EMI</th>
-                                                    <th>Principal</th>
-                                                    <th>Interest</th>
-                                                    <th>Prepayment</th>
-                                                    <th>Top-up</th>
-                                                    <th>New Rate%</th>
-                                                    <th>Outstanding</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                    </div>
-
-                                    <div style="text-align: center">
-                                        <h4 style="margin-bottom: 16px">Payment Breakdown</h4>
-                                        <div style="display: inline-block">
-                                            <canvas id="emiPieChart" width="300" height="300"></canvas>
+                                        <div style="text-align: center">
+                                            <h4 style="margin-bottom: 16px">Payment Breakdown</h4>
+                                            <div style="display: inline-block">
+                                                <canvas id="emiPieChart" width="300" height="300"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Right Grid: Ad Space -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </main>
+              
+              <!-- Additional Content Wrapper (for calculator description, etc.) -->
+              <div class="main-content-wrapper">
+                <!-- Left Grid: Calculator Description -->
+                <div class="left-grid">
+                  <calculator-description calculator="emi"></calculator-description>
+                </div>
+                
+                <!-- Right Grid: Additional Ad Space or Content -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
+                </div>
+              </div>
+            </main>
 
         <!-- Footer -->
         <footer class="site-footer">

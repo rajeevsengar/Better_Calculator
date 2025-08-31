@@ -13,7 +13,6 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
-  margin-bottom: 1rem;
   width: 100%;
 }
 
@@ -140,6 +139,11 @@
   max-width: 15rem; /* Increased from 15rem to make it wider */
   flex: 1; /* Make it expand to fill available space */
   min-width: 15rem; /* Allow flex item to shrink below content size */
+  height: auto; /* Let height be determined by content */
+  min-height: 100%; /* Ensure it takes at least full height of parent */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Speedometer Chart Styles */

@@ -38,8 +38,9 @@
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
-    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../helpers/calculator-description.js"></script>
     <script src="../components/site-header/site-header.js"></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
     <script src="unit-converter.js" defer></script>
   </head>
   <body>
@@ -50,52 +51,77 @@
       <div class="page-container">
         <site-header></site-header>
 
-        <main class="calculator-main-container">
-          <!-- Unit Converter -->
-          <div class="calculator-content">
-            <div class="calculator-main-section" style="display: flex; ">
-                <!-- Unit Types section - Left side -->
-                <div class="unit-types-section">
-                    <div class="title-header">Unit Types</div>
-                    <!-- Mobile-friendly combobox -->
-                    <select id="mobileUnitTypes" class="mobile-unit-select">
-                        <option value="">Select Unit Type</option>
-                    </select>
-                    <!-- Desktop list view -->
-                    <div id="unitTypesList" class="unit-types-list desktop-unit-types-list">
-                        <!-- Content will be populated dynamically from text-config.js -->
-                    </div>
-                </div>
-                
-                <!-- From-To inputs and swap button - Right side -->
-                <div  style="display: flex; flex-direction: column;flex: 1; gap: 1rem;">
-                    <div class="from-to-section" style="display: flex;">
-                        <div class="card" style="flex: 1;">
-                            <div class="title-header">From</div>
-                            <input id="fromValue" placeholder="Enter value" />
-                            <div class="unit-chips-container">
-                                <div id="fromUnitButtons" class="unit-buttons"></div>
-                            </div>
-                        </div>
-                        <div class="card" style="flex: 1;">
-                            <div class="title-header">To</div>
-                            <input id="toValue" placeholder="Result" readonly />
-                            <div class="unit-chips-container">
-                                <div id="toUnitButtons" class="unit-buttons"></div>
-                            </div>
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <!-- Unit Converter -->
+              <div class="calculator-content">
+                <div class="calculator-main-section" style="display: flex; ">
+                    <!-- Unit Types section - Left side -->
+                    <div class="unit-types-section">
+                        <div class="title-header">Unit Types</div>
+                        <!-- Mobile-friendly combobox -->
+                        <select id="mobileUnitTypes" class="mobile-unit-select">
+                            <option value="">Select Unit Type</option>
+                        </select>
+                        <!-- Desktop list view -->
+                        <div id="unitTypesList" class="unit-types-list desktop-unit-types-list">
+                            <!-- Content will be populated dynamically from text-config.js -->
                         </div>
                     </div>
-                      <!-- Swap button below the inputs -->
-                    <div class="swap-button-center" style="display: flex; justify-content: center;">
-                        <button onclick="swapUnits()" class="button-primary">
-                            Swap
-                        </button>
+                    
+                    <!-- From-To inputs and swap button - Right side -->
+                    <div  style="display: flex; flex-direction: column;flex: 1; gap: 1rem;">
+                        <div class="from-to-section" style="display: flex;">
+                            <div class="card" style="flex: 1;">
+                                <div class="title-header">From</div>
+                                <input id="fromValue" placeholder="Enter value" />
+                                <div class="unit-chips-container">
+                                    <div id="fromUnitButtons" class="unit-buttons"></div>
+                                </div>
+                            </div>
+                            <div class="card" style="flex: 1;">
+                                <div class="title-header">To</div>
+                                <input id="toValue" placeholder="Result" readonly />
+                                <div class="unit-chips-container">
+                                    <div id="toUnitButtons" class="unit-buttons"></div>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- Swap button below the inputs -->
+                        <div class="swap-button-center" style="display: flex; justify-content: center;">
+                            <button onclick="swapUnits()" class="button-primary">
+                                Swap
+                            </button>
+                        </div>
                     </div>
                 </div>
+              </div>
+            </div>
+            
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
             </div>
           </div>
-          <div class="ad-space">
-            Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+          
+          <!-- Additional Content Wrapper (for calculator description, etc.) -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Description -->
+            <div class="left-grid">
+              <calculator-description calculator="conversion"></calculator-description>
+            </div>
+            
+            <!-- Right Grid: Additional Ad Space or Content -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
           </div>
         </main>
       </div>

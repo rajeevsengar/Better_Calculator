@@ -38,8 +38,9 @@
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
-    <script src="../helpers/ribbons-config.js" defer></script>
+    <script src="../helpers/calculator-description.js"></script>
     <script src="../components/site-header/site-header.js"></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
     <script src="time-calculator.js" defer></script>
 
     <!-- Web Components -->
@@ -57,97 +58,123 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="calculator-main-container">
-          <div class="calculator-content">
-            <div class="calculator-main-section">
-              <!-- Time Calculator Section -->
-              <section id="time" class="active-section">
-                        <div class="time-tabs">
-                            <div class="tab-buttons">
-                                <button class="tab-button active" data-tab="timezone">Timezone</button>
-                                <button class="tab-button" data-tab="count-time">Count Time</button>
-                                <button class="tab-button" data-tab="add-time">Add Time</button>
-                            </div>
-                            
-                            <!-- Timezone Tab -->
-                            <div id="timezone" class="tab-content active">
-                                <div style="display: grid; grid-template-columns: 50% 50%; gap: 12px; align-items: stretch;">
-                                    <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
-                                        <timezone-input id="fromTimezone_tzConverter" default="now" size="full"></timezone-input>
-                                        <time-input id="fromTime_tzConverter" default="now" size="full" show-quick-links></time-input>
-                                        <date-input id="fromDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <div class="calculator-content">
+                <div class="calculator-main-section">
+                  <!-- Time Calculator Section -->
+                  <section id="time" class="active-section">
+                            <div class="time-tabs">
+                                <div class="tab-buttons">
+                                    <button class="tab-button active" data-tab="timezone">Timezone</button>
+                                    <button class="tab-button" data-tab="count-time">Count Time</button>
+                                    <button class="tab-button" data-tab="add-time">Add Time</button>
+                                </div>
+                                
+                                <!-- Timezone Tab -->
+                                <div id="timezone" class="tab-content active">
+                                    <div style="display: grid; grid-template-columns: 50% 50%; gap: 12px; align-items: stretch;">
+                                        <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                                            <timezone-input id="fromTimezone_tzConverter" default="now" size="full"></timezone-input>
+                                            <time-input id="fromTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                                            <date-input id="fromDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                                        </div>
+                                        <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                                            <timezone-input id="toTimezone_tzConverter" default="now" size="full"></timezone-input>
+                                            <time-input id="toTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                                            <date-input id="toDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                                        </div>
                                     </div>
-                                    <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
-                                        <timezone-input id="toTimezone_tzConverter" default="now" size="full"></timezone-input>
-                                        <time-input id="toTime_tzConverter" default="now" size="full" show-quick-links></time-input>
-                                        <date-input id="toDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                                    <!-- <div id="tzResult" class="muted card result-box"></div> -->
+                                </div>
+                                
+                                <!-- Count Time Tab -->
+                                <div id="count-time" class="tab-content">
+                                    <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                                        <div class="card">
+                                            <time-input id="fromTimeOnly" label="From Time" show-label show-quick-links default="now"></time-input>
+                                            <time-input id="toTimeOnly" label="To Time" show-label show-quick-links default="now"></time-input>
+                                            <div style="display: flex; gap: 8px; margin-top: 8px">
+                                                <button class="button-primary" onclick="calculateTimeDifference()">
+                                                    Compute Diff
+                                                </button>
+                                                <button onclick="clearTime()">Clear</button>
+                                            </div>
+                                        </div>
+                                        <div id="timeResult" class="muted card result-box"></div>
                                     </div>
                                 </div>
-                                <!-- <div id="tzResult" class="muted card result-box"></div> -->
-                            </div>
-                            
-                            <!-- Count Time Tab -->
-                            <div id="count-time" class="tab-content">
-                                <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
-                                    <div class="card">
-                                        <time-input id="fromTimeOnly" label="From Time" show-label show-quick-links default="now"></time-input>
-                                        <time-input id="toTimeOnly" label="To Time" show-label show-quick-links default="now"></time-input>
-                                        <div style="display: flex; gap: 8px; margin-top: 8px">
-                                            <button class="button-primary" onclick="calculateTimeDifference()">
-                                                Compute Diff
-                                            </button>
-                                            <button onclick="clearTime()">Clear</button>
+                                
+                                <!-- Add Time Tab -->
+                                <div id="add-time" class="tab-content">
+                                    <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
+                                        <div class="card">
+                                            <label>Add/Subtract Time</label>
+                                            <time-input id="baseTime" label="Base Time" show-label show-quick-links default="now"></time-input>
+                                            <div style="
+                                                display: grid;
+                                                grid-template-columns: repeat(3, 1fr);
+                                                gap: 8px;
+                                                margin-top: 8px;
+                                            ">
+                                                <input type="number" id="deltaHours" placeholder="Hours" />
+                                                <input type="number" id="deltaMinutes" placeholder="Minutes" />
+                                                <input type="number" id="deltaSeconds" placeholder="Seconds" />
+                                            </div>
+                                            <div style="
+                                                display: flex;
+                                                gap: 16px;
+                                                align-items: center;
+                                                margin-top: 8px;
+                                            ">
+                                                <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
+                                                    name="timeDeltaSign" value="add" checked />
+                                                    Add</label>
+                                                <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
+                                                    name="timeDeltaSign" value="subtract" />
+                                                    Subtract</label>
+                                            </div>
+                                            <div style="display: flex; gap: 8px; margin-top: 8px">
+                                                <button class="button-primary" onclick="addSubtractTime()">
+                                                    Apply
+                                                </button>
+                                            </div>
                                         </div>
+                                        <div id="timeMathRes" class="muted card result-box"> </div>
                                     </div>
-                                    <div id="timeResult" class="muted card result-box"></div>
                                 </div>
                             </div>
-                            
-                            <!-- Add Time Tab -->
-                            <div id="add-time" class="tab-content">
-                                <div style="display: grid; grid-template-columns: 60% 40%; gap: 12px; align-items: stretch;">
-                                    <div class="card">
-                                        <label>Add/Subtract Time</label>
-                                        <time-input id="baseTime" label="Base Time" show-label show-quick-links default="now"></time-input>
-                                        <div style="
-                                            display: grid;
-                                            grid-template-columns: repeat(3, 1fr);
-                                            gap: 8px;
-                                            margin-top: 8px;
-                                        ">
-                                            <input type="number" id="deltaHours" placeholder="Hours" />
-                                            <input type="number" id="deltaMinutes" placeholder="Minutes" />
-                                            <input type="number" id="deltaSeconds" placeholder="Seconds" />
-                                        </div>
-                                        <div style="
-                                            display: flex;
-                                            gap: 16px;
-                                            align-items: center;
-                                            margin-top: 8px;
-                                        ">
-                                            <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
-                                                name="timeDeltaSign" value="add" checked />
-                                                Add</label>
-                                            <label style="display: flex; align-items: center; gap: 6px"><input type="radio"
-                                                name="timeDeltaSign" value="subtract" />
-                                                Subtract</label>
-                                        </div>
-                                        <div style="display: flex; gap: 8px; margin-top: 8px">
-                                            <button class="button-primary" onclick="addSubtractTime()">
-                                                Apply
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div id="timeMathRes" class="muted card result-box"> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Right Grid: Ad Space -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </main>
+              
+              <!-- Additional Content Wrapper (for calculator description, etc.) -->
+              <div class="main-content-wrapper">
+                <!-- Left Grid: Calculator Description -->
+                <div class="left-grid">
+                  <calculator-description calculator="time"></calculator-description>
+                </div>
+                
+                <!-- Right Grid: Additional Ad Space or Content -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
+                </div>
+              </div>
+            </main>
 
         <!-- Footer -->
         <footer class="site-footer">
@@ -194,11 +221,10 @@
     <!-- Initialize Time Calculator -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        if (
-          window.TimeCalculator &&
-          window.TimeCalculator.initializeTimeCalculator
-        ) {
+        // Ensure proper initialization
+        if (window.TimeCalculator && window.TimeCalculator.initializeTimeCalculator) {
           window.TimeCalculator.initializeTimeCalculator();
+          console.log("Time Calculator initialized successfully");
         } else {
           console.error(
             "Time Calculator not found or initializeTimeCalculator not available"

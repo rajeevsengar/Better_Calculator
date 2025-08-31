@@ -39,7 +39,7 @@ function initializeResponsiveFunctionality() {
   initializeResponsiveNavigation();
   
   // Export functions for global access
-  window.setupRibbons = setupRibbons;
+  
   
   console.log('Responsive functionality initialized successfully');
 }
@@ -216,8 +216,7 @@ function hideCalculatorLoading(panelId) {
 //   console.log('Initializing calculators for panel:', panelId);
 //   initializePanelCalculators(panelId);
 
-//   // Setup ribbons
-//   setupRibbons(panelId);
+
   
 //   // Mobile menu is now handled by the site-header web component
 // }
@@ -480,113 +479,6 @@ function initializeCalculatorTabs(selector) {
 }
 
 // Text content is now populated from util.js
-
-function setupRibbons(panelId) {
-  const ribbons = document.querySelectorAll('.ribbon');
-  const popup = document.getElementById('ribbonPopup');
-  
-  if (!popup || ribbons.length === 0) {
-    return;
-  }
-  
-  // Check if we're on mobile - use media query instead of DOM element
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-  const getContent = (type) => {
-    const panelMap = (window.RIBBONS_CONTENT && window.RIBBONS_CONTENT[panelId]) || {};
-    const content = panelMap[type] || '';
-    
-    // Get the actual button text from the DOM
-    const ribbonButton = document.querySelector(`[data-type="${type}"]`);
-    const buttonText = ribbonButton ? ribbonButton.textContent : type.charAt(0).toUpperCase() + type.slice(1);
-    
-    return `<div class="popup-header">${buttonText}</div>${content}`;
-  };
-
-  // Store popup content to avoid re-rendering
-  const popupContent = {};
-  ribbons.forEach(r => {
-    const type = r.dataset.type;
-    popupContent[type] = getContent(type);
-  });
-
-  ribbons.forEach(r => {
-    if (isMobile) {
-      // Mobile: click to show/hide popup
-      r.onclick = (e) => {
-        const type = r.dataset.type;
-        
-        // Toggle popup visibility
-        const isVisible = popup.getAttribute('aria-hidden') === 'false';
-        
-        if (isVisible) {
-          popup.setAttribute('aria-hidden', 'true');
-        } else {
-          // Update content
-          if (popup.innerHTML !== popupContent[type]) {
-            popup.innerHTML = popupContent[type];
-            popup.scrollTop = 0;
-          }
-          
-          // Center popup on mobile screen
-          popup.style.left = '50%';
-          popup.style.top = '50%';
-          popup.style.transform = 'translate(-50%, -50%)';
-          popup.setAttribute('aria-hidden', 'false');
-        }
-      };
-    } else {
-      // Desktop: hover to show popup
-      r.onmouseenter = (e) => {
-        const type = r.dataset.type;
-        
-        // Clear any pending hide timeout
-        if (popup.hideTimeout) {
-          clearTimeout(popup.hideTimeout);
-          popup.hideTimeout = null;
-        }
-        
-        // Only update content if it's different to preserve scroll position
-        if (popup.innerHTML !== popupContent[type]) {
-          popup.innerHTML = popupContent[type];
-          // Reset scroll position when content changes
-          popup.scrollTop = 0;
-        }
-        
-        popup.style.left = `${e.currentTarget.getBoundingClientRect().left + e.currentTarget.offsetWidth/2}px`;
-        popup.style.top = `${e.currentTarget.getBoundingClientRect().top + window.scrollY - 8}px`;
-        popup.setAttribute('aria-hidden', 'false');
-      };
-      r.onmouseleave = () => {
-        // Set a timeout to hide popup, but allow it to be cancelled
-        popup.hideTimeout = setTimeout(() => {
-          if (!popup.matches(':hover')) {
-            popup.setAttribute('aria-hidden', 'true');
-          }
-          popup.hideTimeout = null;
-        }, 150);
-      };
-    }
-  });
-
-  // Add mouse events to the popup itself (desktop only)
-  if (!isMobile) {
-    popup.onmouseenter = () => {
-      // Clear any pending hide timeout when entering popup
-      if (popup.hideTimeout) {
-        clearTimeout(popup.hideTimeout);
-        popup.hideTimeout = null;
-      }
-      // Keep popup visible when cursor is over it
-      popup.setAttribute('aria-hidden', 'false');
-    };
-    
-    popup.onmouseleave = () => {
-      // Hide popup when cursor leaves it
-      popup.setAttribute('aria-hidden', 'true');
-    };
-  }
-}
 
 // Theme switcher functionality is now handled by the theme-selector web component
 

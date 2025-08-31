@@ -126,7 +126,7 @@ function calculateSIP() {
 }
 
 function generateSIPBreakdown(monthlyAmount, annualRate, totalMonths) {
-  const tableBody = document.querySelector("#sipTable tbody");
+  const tableBody = document.querySelector("#sipBreakdownTable tbody");
   tableBody.innerHTML = "";
   
   const monthlyRate = annualRate / 12 / 100;
@@ -173,7 +173,52 @@ function calculateLumpSum() {
   document.getElementById("lumpSumTotalReturns").textContent = formatCurrency(totalReturns);
   document.getElementById("finalAmount").textContent = formatCurrency(finalAmount);
   
+  // Populate year-wise breakdown table
+  populateLumpSumBreakdownTable(initialAmount, annualRate, years, months);
+  
   lumpSumResultsDiv.style.display = "block";
+}
+
+function populateLumpSumBreakdownTable(initialAmount, annualRate, years, months) {
+  const tableBody = document.querySelector("#lumpSumBreakdownTable tbody");
+  if (!tableBody) return;
+  
+  // Clear existing rows
+  tableBody.innerHTML = "";
+  
+  const totalMonths = years * 12 + months;
+  const monthlyRate = annualRate / 1200;
+  
+  for (let month = 1; month <= totalMonths; month++) {
+    const year = Math.ceil(month / 12);
+    const monthInYear = month % 12 || 12;
+    
+    // Calculate value at this point
+    let currentValue;
+    if (month <= years * 12) {
+      // Annual compounding for full years
+      const fullYears = Math.floor(month / 12);
+      const remainingMonths = month % 12;
+      currentValue = initialAmount 
+        * Math.pow(1 + annualRate / 100, fullYears)
+        * Math.pow(1 + monthlyRate, remainingMonths);
+    } else {
+      // Monthly compounding for remaining months
+      currentValue = initialAmount 
+        * Math.pow(1 + annualRate / 100, years)
+        * Math.pow(1 + monthlyRate, month - years * 12);
+    }
+    
+    const returns = currentValue - initialAmount;
+    
+    const row = document.createElement("tr");
+    row.appendChild(createTableCell(`${year}.${monthInYear.toString().padStart(2, '0')}`));
+    row.appendChild(createTableCell(formatCurrency(initialAmount)));
+    row.appendChild(createTableCell(formatCurrency(returns)));
+    row.appendChild(createTableCell(formatCurrency(currentValue)));
+    
+    tableBody.appendChild(row);
+  }
 }
 
 function clearSIP() {
@@ -197,6 +242,10 @@ function clearLumpSum() {
   if (lumpSumYearsInput) lumpSumYearsInput.value = "";
   if (lumpSumMonthsInput) lumpSumMonthsInput.value = "";
   if (lumpSumResultsDiv) lumpSumResultsDiv.style.display = "none";
+  
+  // Clear the breakdown table
+  const tableBody = document.querySelector("#lumpSumBreakdownTable tbody");
+  if (tableBody) tableBody.innerHTML = "";
   
   // Reset button state
   const calculateBtn = document.getElementById("calculateLumpSumBtn");

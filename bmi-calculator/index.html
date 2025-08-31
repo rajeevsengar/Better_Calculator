@@ -39,7 +39,9 @@
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
     <script src="../helpers/bmi-facts-config.js" defer></script>
+    <script src="../helpers/calculator-description.js"></script>
     <script src="../components/site-header/site-header.js"></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
     <script src="../bmi-calculator/bmi-calculator.js" defer></script>
   </head>
   <body>
@@ -50,169 +52,193 @@
       <div class="page-container">
         <site-header></site-header>
   
-        <main class="calculator-main-container">
-          <!-- BMI Calculator Section -->
-          <div class="calculator-content">
-            <div
-              id="bmi"
-              class="calculator-main-section"
-              style="display: flex;"
-            >
-              <!-- Age and Gender Inputs -->
-              <div class="bmi-input-container">
-                  
-                  <div style="display: flex; gap: 1rem;" class="age-gender-row">
-                      <div class="age-input">
-                          <label>Age</label>
-                          <input
-                              id="ageVal"
-                              type="number"
-                              min="0"
-                              max="120"
-                              placeholder="e.g. 25"
-                          />
-                      </div>
-                      <div class="gender-input">
-                              <label>Gender</label>
-                              <div id="genderButtons" class="gender-buttons"></div>
-                      </div>
-                  </div>
-  
-                  <!-- Weight Inputs and Buttons -->
-                  <div class="weight-section">
-                      <label>Weight</label>
-                      <div class="weight-input-row">
-                      <!-- Weight input -->
-                      <input
-                          id="weightVal"
-                          type="number"
-                          placeholder="e.g. 70"
-                      />
-                      <!-- Weight Unit Buttons -->
-                      <div id="weightUnitButtons" class="weight-unit-buttons"></div>
-                      </div>
-                  </div>
-  
-                  <!-- Height Unit Input and Buttons -->
-                  <div class="height-section">
-                      <label>Height</label>
-                      <div class="height-input-row">
-                      <!-- Height input -->
-                      <input
-                          id="heightVal"
-                          placeholder="Enter height"
-                      />
-                      <!-- Height Unit Buttons -->
-                      <div id="heightModeButtons" class="height-mode-buttons"></div>
-                      </div>
-                  </div>
-  
-                  <!-- Calculate Buttons -->
-                  <div class="calculate-buttons">
-                      <button class="button-primary" onclick="computeBMI()">
-                      Calculate BMI
-                      </button>
-                      <button onclick="bmiReset()">Reset</button>
-                  </div>
-  
-                  <!-- Speedometer Chart -->
-                  <div class="card speedometer-card">
-                      <div class="muted">BMI Categories</div>
-                      <div class="speedometer-wrapper">
-                          <canvas id="bmiSpeedometer" class="bmi-speedometer" width="400" height="240"></canvas>
-                      </div>
-                      <div id="speedometerLegend" class="speedometer-legend">
-                      <div class="legend-grid">
-                          <div class="legend-item">
-                          <div class="legend-color underweight"></div>
-                          <span>Underweight</span>
-                          </div>
-                          <div class="legend-item">
-                          <div class="legend-color normal"></div>
-                          <span>Normal</span>
-                          </div>
-                          <div class="legend-item">
-                          <div class="legend-color overweight"></div>
-                          <span>Overweight</span>
-                          </div>
-                          <div class="legend-item">
-                          <div class="legend-color obese"></div>
-                          <span>Obese</span>
-                          </div>
-                      </div>
-                      </div>
-                  </div>
-                  
-              </div>
-              <!-- Result -->
-              <div
-                class="bmi-result-container"
-                style="display: flex; flex-direction: column; flex: 1; gap: 1rem;"
-              >
-                <div class="title-header">Result</div>
-                <div id="bmiResultLarge" class="bmi-result">—</div>
-                <div id="bmiCategory" class="muted" style="margin-top: 6px">
-                  Enter values to get BMI and category.
-                </div>
-  
-                <!-- Additional BMI Information -->
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <!-- BMI Calculator Section -->
+              <div class="calculator-content">
                 <div
-                  id="bmiAdditionalInfo"
-                  style="margin-top: 16px; display: none"
+                  id="bmi"
+                  class="calculator-main-section"
+                  style="display: flex;"
                 >
-                  <div style="margin-bottom: 12px">
-                    <div
-                      class="muted"
-                      style="font-size: 12px; margin-bottom: 4px"
-                    >
-                      Healthy BMI Range:
-                    </div>
-                    <div
-                      id="healthyBmiRange"
-                      style="font-weight: 600; color: var(--text-primary)"
-                    ></div>
+                  <!-- Age and Gender Inputs -->
+                  <div class="bmi-input-container">
+                      
+                      <div style="display: flex; gap: 1rem;" class="age-gender-row">
+                          <div class="age-input">
+                              <label>Age</label>
+                              <input
+                                  id="ageVal"
+                                  type="number"
+                                  min="0"
+                                  max="120"
+                                  placeholder="e.g. 25"
+                              />
+                          </div>
+                          <div class="gender-input">
+                                  <label>Gender</label>
+                                  <div id="genderButtons" class="gender-buttons"></div>
+                          </div>
+                      </div>
+      
+                      <!-- Weight Inputs and Buttons -->
+                      <div class="weight-section">
+                          <label>Weight</label>
+                          <div class="weight-input-row">
+                          <!-- Weight input -->
+                          <input
+                              id="weightVal"
+                              type="number"
+                              placeholder="e.g. 70"
+                          />
+                          <!-- Weight Unit Buttons -->
+                          <div id="weightUnitButtons" class="weight-unit-buttons"></div>
+                          </div>
+                      </div>
+      
+                      <!-- Height Unit Input and Buttons -->
+                      <div class="height-section">
+                          <label>Height</label>
+                          <div class="height-input-row">
+                          <!-- Height input -->
+                          <input
+                              id="heightVal"
+                              placeholder="Enter height"
+                          />
+                          <!-- Height Unit Buttons -->
+                          <div id="heightModeButtons" class="height-mode-buttons"></div>
+                          </div>
+                      </div>
+      
+                      <!-- Calculate Buttons -->
+                      <div class="calculate-buttons">
+                          <button class="button-primary" onclick="computeBMI()">
+                          Calculate BMI
+                          </button>
+                          <button onclick="bmiReset()">Reset</button>
+                      </div>
+      
+                      <!-- Speedometer Chart -->
+                      <div class="card speedometer-card">
+                          <div class="muted">BMI Categories</div>
+                          <div class="speedometer-wrapper">
+                              <canvas id="bmiSpeedometer" class="bmi-speedometer" width="400" height="240"></canvas>
+                          </div>
+                          <div id="speedometerLegend" class="speedometer-legend">
+                          <div class="legend-grid">
+                              <div class="legend-item">
+                              <div class="legend-color underweight"></div>
+                              <span>Underweight</span>
+                              </div>
+                              <div class="legend-item">
+                              <div class="legend-color normal"></div>
+                              <span>Normal</span>
+                              </div>
+                              <div class="legend-item">
+                              <div class="legend-color overweight"></div>
+                              <span>Overweight</span>
+                              </div>
+                              <div class="legend-item">
+                              <div class="legend-color obese"></div>
+                              <span>Obese</span>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                      
                   </div>
-                  <div>
-                    <div
-                      class="muted"
-                      style="font-size: 12px; margin-bottom: 4px"
-                    >
-                      Healthy Weight for Height:
-                    </div>
-                    <div
-                      id="healthyWeightRange"
-                      style="font-weight: 600; color: var(--text-primary)"
-                    ></div>
-                  </div>
-                  <!-- Dividing line -->
+                  <!-- Result -->
                   <div
-                    style="
-                      border-top: 1px solid var(--border-color);
-                      margin: 16px 0;
-                    "
-                  ></div>
-                </div>
-  
-                <!-- BMI Facts Section -->
-                <div id="bmiFactsSection" style="margin-top: auto; display: none">
-                  <div class="muted" style="font-size: 15px; margin-bottom: 8px">
-                    💡 Did You Know?
+                    class="bmi-result-container"
+                    style="display: flex; flex-direction: column; flex: 1; gap: 1rem;"
+                  >
+                    <div class="title-header">Result</div>
+                    <div id="bmiResultLarge" class="bmi-result">—</div>
+                    <div id="bmiCategory" class="muted" style="margin-top: 6px">
+                      Enter values to get BMI and category.
+                    </div>
+      
+                    <!-- Additional BMI Information -->
+                    <div
+                      id="bmiAdditionalInfo"
+                      style="margin-top: 16px; display: none"
+                    >
+                      <div style="margin-bottom: 12px">
+                        <div
+                          class="muted"
+                          style="font-size: 12px; margin-bottom: 4px"
+                        >
+                          Healthy BMI Range:
+                        </div>
+                        <div
+                          id="healthyBmiRange"
+                          style="font-weight: 600; color: var(--text-primary)"
+                        ></div>
+                      </div>
+                      <div>
+                        <div
+                          class="muted"
+                          style="font-size: 12px; margin-bottom: 4px"
+                        >
+                          Healthy Weight for Height:
+                        </div>
+                        <div
+                          id="healthyWeightRange"
+                          style="font-weight: 600; color: var(--text-primary)"
+                        ></div>
+                      </div>
+                      <!-- Dividing line -->
+                      <div
+                        style="
+                          border-top: 1px solid var(--border-color);
+                          margin: 16px 0;
+                        "
+                      ></div>
+                    </div>
+      
+                    <!-- BMI Facts Section -->
+                    <div id="bmiFactsSection" style="margin-top: auto; display: none">
+                      <div class="muted" style="font-size: 15px; margin-bottom: 8px">
+                        💡 Did You Know?
+                      </div>
+                      <div
+                        id="bmiFactsContent"
+                        style="
+                          font-size: 16px;
+                          line-height: 1.4;
+                          color: var(--text-secondary);
+                        "
+                      ></div>
+                    </div>
                   </div>
-                  <div
-                    id="bmiFactsContent"
-                    style="
-                      font-size: 16px;
-                      line-height: 1.4;
-                      color: var(--text-secondary);
-                    "
-                  ></div>
                 </div>
               </div>
             </div>
+            
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
           </div>
-
-          <div class="ad-space">
-            Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+          
+          <!-- Additional Content Wrapper (for calculator description, etc.) -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Description -->
+            <div class="left-grid">
+              <calculator-description calculator="bmi"></calculator-description>
+            </div>
+            
+            <!-- Right Grid: Additional Ad Space or Content -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
           </div>
         </main>
       </div>

@@ -1,6 +1,12 @@
-// Ribbon content configuration - Fun & Creative Edition!
-// Map of panelId -> { tips, instructions, examples } (HTML strings allowed)
-window.RIBBONS_CONTENT = {
+// Calculator description content configuration
+window.CALCULATOR_DESCRIPTIONS = {
+  home: {
+    tips: '<ul style="margin:0;padding-left:18px"><li>Welcome to the most feature-rich calculator website on the internet!</li><li>Pro tip: Use the navigation to explore different calculators</li><li>Each calculator is designed to be intuitive and powerful</li></ul>',
+    instructions:
+      '<ul style="margin:0;padding-left:18px"><li>Step 1: Choose your calculator from the navigation menu</li><li>Step 2: Enter your values and parameters</li><li>Step 3: Get instant, accurate results</li><li>Step 4: Use advanced features for detailed analysis</li></ul>',
+    examples:
+      '<ul style="margin:0;padding-left:18px"><li>Unit Converter: Convert between 100+ unit types with precision</li><li>BMI Calculator: Get detailed health insights with visual charts</li><li>EMI Calculator: Plan loans with interactive amortization tables</li><li>Investment Calculator: Plan your financial future with SIP and lump sum options</li></ul>',
+  },
   conversion: {
     tips: '<ul style="margin:0;padding-left:18px"><li>Pro tip: Use Swap to flip units like a pancake!</li><li>Did you know? 1 meter = 3.28 feet (or roughly 3 feet + 3 inches)</li><li>Quick conversions for when you need answers faster than your brain can think!</li></ul>',
     instructions:
@@ -22,6 +28,13 @@ window.RIBBONS_CONTENT = {
     examples:
       '<ul style="margin:0;padding-left:18px"><li>From 2023-01-01 to 2024-03-10 (that\'s 434 days of your life, gone forever!)</li><li>IST → UTC (because India runs on its own time, literally!)</li><li>Add 2 weeks to today (for when you promise to start that diet... again!)</li></ul>',
   },
+  time: {
+    tips: '<ul style="margin:0;padding-left:18px"><li>Pro tip: Time zones can make or break your international meetings!</li><li>Did you know? Some countries have half-hour time zones (talk about being indecisive!)</li><li>Time arithmetic is like regular math, but with more zeros!</li></ul>',
+    instructions:
+      '<ul style="margin:0;padding-left:18px"><li>Step 1: Choose your time zone conversion or time calculation</li><li>Step 2: Enter your base time and target time zone</li><li>Step 3: For time differences, enter start and end times</li><li>Step 4: For time arithmetic, enter base time and delta values</li><li>Step 5: Get instant results with precision</li></ul>',
+    examples:
+      '<ul style="margin:0;padding-left:18px"><li>IST to UTC: 2:30 PM IST → 9:00 AM UTC (because time zones are confusing!)</li><li>Time difference: 9:00 AM to 5:00 PM = 8 hours (a full work day!)</li><li>Add 2 hours 30 minutes to 10:00 AM = 12:30 PM (simple math, complex time!)</li></ul>',
+  },
   emi: {
     tips: '<ul style="margin:0;padding-left:18px"><li>Pro tip: Prepayments can save you thousands! (and make your bank manager cry!)</li><li>The pie chart shows your money going to the bank vs. your pocket (spoiler: bank wins!)</li><li>Lower tenure = higher EMI but less total interest (choose your pain wisely!)</li></ul>',
     instructions:
@@ -36,4 +49,4 @@ window.RIBBONS_CONTENT = {
     examples:
       '<ul style="margin:0;padding-left:18px"><li>SIP: 5000/month • 12% return • 10 years = Future you will thank present you!</li><li>Lump sum: 1L • 12% return • 10 years = Because sometimes you just need to go big or go home!</li><li>Emergency fund: 50K • 6% return • 5 years = For when life throws you a curveball!</li></ul>',
   },
-};
+}; 

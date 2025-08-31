@@ -196,7 +196,7 @@
     min-height: fit-content;
   }
   
-  /* Keep from-to sections side by side on mobile */
+  /* Keep from-to sections side by side on tablet/iPad */
   .from-to-section {
     flex-direction: row;
     gap: 1rem;
@@ -204,7 +204,7 @@
     min-height: 0;
   }
   
-  /* Make from and to cards take half width each */
+  /* Make from and to cards take half width each on tablet/iPad */
   .calculator-main-container .calculator-content .calculator-main-section .from-to-section .card {
     flex: 1;
     min-width: 0;
@@ -229,9 +229,9 @@
   }
 
   .unit-chips-container{
-    height: 25rem;
-    max-height: 25rem;
-    min-height: 25rem;
+    height: 8rem;
+    max-height: 8rem;
+    min-height: 8rem;
     overflow: auto;
   }
 }
@@ -242,19 +242,19 @@
    ============================================================ */
 @media (max-width: 480px) {
   
-  /* Keep from-to sections side by side even on very small screens */
+  /* Stack from-to sections vertically on very small screens */
   .from-to-section {
-    flex-direction: row;
+    flex-direction: column;
     gap: 0.75rem;
     
   }
   
-  /* Make from and to cards take half width each on very small screens */
+  /* Make from and to cards take full width on very small screens */
   .calculator-main-container .calculator-content .calculator-main-section .from-to-section .card {
     flex: 1;
     min-width: 0;
-    max-width: 50%;
-    width: 50%;
+    max-width: 100%;
+    width: 100%;
   }
   
   .calculator-main-section .card {
@@ -281,6 +281,6 @@
   }
 
   .unit-chips-container{
-    max-height: 20rem;
+    max-height: 8rem;
   }
 } 

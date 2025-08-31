@@ -111,12 +111,3 @@ function calculateTimeArithmetic() {
   document.getElementById('timeResult').textContent = result;
   document.querySelector('#time-arithmetic-tab .results-section').style.display = 'block';
 }
-
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  if (window.TimeCalculator && window.TimeCalculator.initializeTimeCalculator) {
-    window.TimeCalculator.initializeTimeCalculator();
-  } else {
-    console.error('Time Calculator not found or initializeTimeCalculator not available');
-  }
-});

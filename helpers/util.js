@@ -146,21 +146,7 @@ function populateTextContent() {
       }
     });
     
-    // Ribbons
-    const ribbonTips = document.getElementById('ribbonTips');
-    if (ribbonTips) {
-      ribbonTips.textContent = window.getText('ribbons.tips');
-    }
-    
-    const ribbonInstructions = document.getElementById('ribbonInstructions');
-    if (ribbonInstructions) {
-      ribbonInstructions.textContent = window.getText('ribbons.instructions');
-    }
-    
-    const ribbonExamples = document.getElementById('ribbonExamples');
-    if (ribbonExamples) {
-      ribbonExamples.textContent = window.getText('ribbons.examples');
-    }
+
     
     // Unit Converter (Desktop)
     const fromLabel = document.querySelector('#conversion .card:first-child .card:first-child div:first-child');

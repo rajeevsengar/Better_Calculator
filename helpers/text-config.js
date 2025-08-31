@@ -30,12 +30,7 @@ window.TEXT_CONFIG = {
     orange: "orange"
   },
 
-  // Ribbons
-  ribbons: {
-    tips: "Tips",
-    instructions: "Instructions", 
-    examples: "Examples"
-  },
+
 
   // Unit Converter
   unitConverter: {
