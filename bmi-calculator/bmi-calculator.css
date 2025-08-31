@@ -51,27 +51,28 @@
 .weight-unit-buttons,
 .height-mode-buttons {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   flex-wrap: wrap;
   width: 100%;
+  margin-top: 0.5rem; /* Consistent top margin for all button groups */
 }
 
 .gender-buttons button,
 .weight-unit-buttons button,
 .height-mode-buttons button {
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   background: var(--surface-color, #f8f9fa);
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 14px;
-  min-height: 40px;
+  font-size: 0.875rem;
+  min-height: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
-  min-width: 100px;
+  min-width: 6.25rem;
   max-width: fit-content;
 }
 
@@ -88,6 +89,18 @@
   background: var(--primary-color);
   color: white;
   border-color: var(--primary-color);
+}
+
+/* Calculate Buttons */
+.calculate-buttons {
+  display: flex;
+  gap: 0.75rem; /* Gap between Calculate BMI and Reset buttons */
+  margin-top: 1.5rem; /* Top margin for calculate buttons section */
+}
+
+.calculate-buttons button {
+  flex: 1; /* Make buttons take equal width */
+  min-height: 2.75rem; /* Consistent button height */
 }
 
 /* Result Container Styles */
@@ -155,6 +168,7 @@
   .bmi-input-container > div:first-child {
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 1.5rem; /* Add consistent margin to age-gender section */
   }
   
   .bmi-input-container > div:first-child > div {
