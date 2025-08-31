@@ -11,8 +11,16 @@
       (function() {
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         document.documentElement.setAttribute('data-theme', savedTheme);
-        // Mark theme as applied to make body visible
-        document.body.setAttribute('data-theme-applied', 'true');
+        
+        // Only set body attribute if body exists
+        if (document.body) {
+          document.body.setAttribute('data-theme-applied', 'true');
+        } else {
+          // Wait for body to be available
+          document.addEventListener('DOMContentLoaded', function() {
+            document.body.setAttribute('data-theme-applied', 'true');
+          });
+        }
       })();
     </script>
     
@@ -199,6 +207,10 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="ad-space">
+            Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
           </div>
         </main>
       </div>

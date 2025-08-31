@@ -39,12 +39,11 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="content panel">
-            <div class="main-content-wrapper">
-                <div class="container">
-
-                    <!-- Investment Calculator Section -->
-                    <section id="investment" class="active-section">
+        <main class="calculator-main-container">
+          <div class="calculator-content">
+            <div class="calculator-main-section">
+              <!-- Investment Calculator Section -->
+              <section id="investment" class="active-section">
                         <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
                             <div>
                                 <!-- SIP Calculator -->
@@ -231,7 +230,9 @@
                         </div>
                     </section>
                 </div>
+              </div>
             </div>
+          </div>
         </main>
 
         <!-- Footer -->
@@ -275,5 +276,21 @@
             </div>
         </div>
     </div>
-</body>
+    
+    <!-- Initialize Investment Calculator -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (
+          window.Investment &&
+          window.Investment.initializeInvestmentCalculator
+        ) {
+          window.Investment.initializeInvestmentCalculator();
+        } else {
+          console.error(
+            "Investment Calculator not found or initializeInvestmentCalculator not available"
+          );
+        }
+      });
+    </script>
+  </body>
 </html> 

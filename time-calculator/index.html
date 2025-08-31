@@ -47,12 +47,11 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="content panel">
-            <div class="main-content-wrapper">
-                <div class="container">
-
-                    <!-- Time Calculator Section -->
-                    <section id="time" class="active-section">
+        <main class="calculator-main-container">
+          <div class="calculator-content">
+            <div class="calculator-main-section">
+              <!-- Time Calculator Section -->
+              <section id="time" class="active-section">
                         <div class="time-tabs">
                             <div class="tab-buttons">
                                 <button class="tab-button active" data-tab="timezone">Timezone</button>
@@ -135,7 +134,9 @@
                         </div>
                     </section>
                 </div>
+              </div>
             </div>
+          </div>
         </main>
 
         <!-- Footer -->
@@ -179,5 +180,21 @@
             </div>
         </div>
     </div>
-</body>
+    
+    <!-- Initialize Time Calculator -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (
+          window.TimeCalculator &&
+          window.TimeCalculator.initializeTimeCalculator
+        ) {
+          window.TimeCalculator.initializeTimeCalculator();
+        } else {
+          console.error(
+            "Time Calculator not found or initializeTimeCalculator not available"
+          );
+        }
+      });
+    </script>
+  </body>
 </html> 

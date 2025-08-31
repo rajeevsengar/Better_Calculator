@@ -166,12 +166,6 @@ class ThemeSelector extends HTMLElement {
         // Ensure body remains visible
         document.body.setAttribute('data-theme-applied', 'true');
         
-        // Add a subtle animation effect
-        document.body.style.transition = 'all 0.3s ease';
-        setTimeout(() => {
-          document.body.style.transition = '';
-        }, 300);
-        
         // Handle theme-dependent updates
         this.handleThemeChange();
         

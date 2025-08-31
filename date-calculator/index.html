@@ -46,12 +46,11 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="content panel">
-            <div class="main-content-wrapper">
-                <div class="container">
-
-                    <!-- Date Calculator Section -->
-                    <section id="date" class="active-section">
+        <main class="calculator-main-container">
+          <div class="calculator-content">
+            <div class="calculator-main-section">
+              <!-- Date Calculator Section -->
+              <section id="date" class="active-section">
                         <div class="date-tabs">
                             <div class="tab-buttons">
                                 <button class="tab-button active" data-tab="count-days">Count Days</button>
@@ -242,7 +241,9 @@
                         </div>
                     </section>
                 </div>
+              </div>
             </div>
+          </div>
         </main>
 
         <!-- Footer -->
@@ -286,5 +287,19 @@
             </div>
         </div>
     </div>
-</body>
+    
+    <!-- Initialize Date Calculator -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.dateCalculator) {
+          // Date calculator is already initialized via the script
+          console.log("Date Calculator initialized successfully");
+        } else {
+          console.error(
+            "Date Calculator not found or not properly initialized"
+          );
+        }
+      });
+    </script>
+  </body>
 </html> 

@@ -12,8 +12,16 @@
       (function() {
         const savedTheme = localStorage.getItem('selectedTheme') || 'default';
         document.documentElement.setAttribute('data-theme', savedTheme);
-        // Mark theme as applied to make body visible
-        document.body.setAttribute('data-theme-applied', 'true');
+        
+        // Only set body attribute if body exists
+        if (document.body) {
+          document.body.setAttribute('data-theme-applied', 'true');
+        } else {
+          // Wait for body to be available
+          document.addEventListener('DOMContentLoaded', function() {
+            document.body.setAttribute('data-theme-applied', 'true');
+          });
+        }
       })();
     </script>
     
@@ -42,14 +50,18 @@
         <site-header></site-header>
 
         <main class="calculator-main-container">
-            <aside class="menu">
-              <div class="ribbons">
-                <div id="ribbonTips" class="ribbon" data-type="tips">Tips</div>
-                <div id="ribbonInstructions" class="ribbon" data-type="instructions">Instructions</div>
-                <div id="ribbonExamples" class="ribbon" data-type="examples">Examples</div>
-                <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
-              </div>
-            </aside>
+          <div class="calculator-content">
+            <div class="calculator-main-section">
+              <aside class="menu">
+                <div class="ribbons">
+                  <div id="ribbonTips" class="ribbon" data-type="tips">Tips</div>
+                  <div id="ribbonInstructions" class="ribbon" data-type="instructions">Instructions</div>
+                  <div id="ribbonExamples" class="ribbon" data-type="examples">Examples</div>
+                  <div id="ribbonPopup" class="ribbon-popup" aria-hidden="true"></div>
+                </div>
+              </aside>
+            </div>
+          </div>
         </main>
 
         <!-- Footer -->

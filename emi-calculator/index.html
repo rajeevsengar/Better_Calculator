@@ -40,12 +40,11 @@
         <!-- Site Header Component -->
         <site-header></site-header>
 
-        <main class="content panel">
-            <div class="main-content-wrapper">
-                <div class="container">
-
-                    <!-- EMI Calculator Section -->
-                    <section id="emi" class="active-section">
+        <main class="calculator-main-container">
+          <div class="calculator-content">
+            <div class="calculator-main-section">
+              <!-- EMI Calculator Section -->
+              <section id="emi" class="active-section">
                         <div style="display: grid; grid-template-columns: 1fr; gap: 12px">
                             <div>
                                 <div class="card">
@@ -150,7 +149,9 @@
                         </div>
                     </section>
                 </div>
+              </div>
             </div>
+          </div>
         </main>
 
         <!-- Footer -->
@@ -194,5 +195,21 @@
             </div>
         </div>
     </div>
-</body>
+    
+    <!-- Initialize EMI Calculator -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (
+          window.EMI &&
+          window.EMI.initializeEMICalculator
+        ) {
+          window.EMI.initializeEMICalculator();
+        } else {
+          console.error(
+            "EMI Calculator not found or initializeEMICalculator not available"
+          );
+        }
+      });
+    </script>
+  </body>
 </html> 
