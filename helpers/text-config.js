@@ -190,39 +190,18 @@ window.TEXT_CONFIG = {
     seconds: "Seconds"
   },
 
-  // Footer
-  footer: {
-    tagline: "Not just another calculator website — it covers the missing features of others.",
-    highlight: "🏆 The most feature-rich",
-    emiLink: "EMI Calculator",
-    highlightEnd: "on the internet, our proud flagship.",
-    easterEgg: "🥚 This site contains a hidden easter egg. Good luck finding it! 🥚"
-  },
 
-  // Easter Eggs
-  easterEggs: {
-    falseEasterEgg: {
-      title: "🥚 Easter Egg Found!",
-      content: [
-        "<p>You really think it was that easy? 😏</p>",
-        "<p>This is just a decoy! The real easter egg is much more cleverly hidden...</p>",
-        "<p>Keep exploring! The actual secret is somewhere else on this page.</p>"
-      ]
-    },
-    siteFacts: {
-      title: "The Secret Story about me.",
-      content: 
-        [
-            "<p>Well, well, well... look who's curious enough to triple-click the logo! 🎉 You've just unlocked the secret story behind this website. Welcome to the exclusive club of explorers.</p>",
-            "<p>Now, confession time: I’m not really a programmer. I’ve dabbled here and there, but mostly I’m just someone who gets frustrated when tools don’t work the way I want them to. Every time I tried using online calculators, they were always missing something important. EMI calculators without prepayment options, no way to adjust interest rates, no top-ups. BMI tools that wouldn’t even let me pick the right units. It drove me nuts.</p>",
-            "<p>So I thought, *“Fine, I’ll build it myself.”* 💪 But here’s the twist—I didn’t do it alone. I teamed up with AI, describing the features I wanted, and together we turned ideas into reality. It’s like having a coding buddy who never gets tired of hearing me say, *“What if we add this?”* 🤖</p>",
-            "<p>And that’s how this site was born. Not to make money (though hey, I wouldn’t complain), but because I believe everyone deserves simple, powerful, and user-friendly tools. It’s also my way of giving back to the internet that’s given me so much over the years.</p>",
-            "<p>Now we’ve got BMI calculators that actually consider age and gender, EMI calculators with charts and smart prepayment options, investment projections that make sense, unit converters that don’t make you pull your hair out, and more. Basically, everything I wished existed when I was stuck with frustrating tools.</p>",
-            "<p>By finding this little Easter egg, you’ve shown the same curiosity this project was built with. So go ahead, share it with friends—let them know there’s a hidden story waiting for them too. 🥚✨</p>",
-            "<p>And hey… surprise! You actually read the whole story! 🎊 Since you were curious enough to find this Easter egg and stick around through my rambling, here’s a little <strong>reward</strong> just for you:</p>",
-            "<a href='https://github.com/rajeevsengar/Better_Calculator' target='_blank' class='github-btn'>🎁 View on GitHub</a>"
-          ]
-    }
+
+  // About Us Story
+  aboutUs: {
+    title: "About ZeroCalculator.net",
+    content: [
+      "<b>ZeroCalculator.net:</b> Smart, frustration-free online calculators for everyone.<br>We create simple, powerful, and user-friendly tools to make calculations easy and accurate—whether you're managing your finances, tracking health metrics, or converting units.",
+    
+      "<br><b class='section-heading'>Our Mission</b><br><b>Smarter tools, built for real people.</b><br><br>I’m a professional programmer, but I’ll admit—I’m not a web designer. Over the years, I tried countless online calculators, and every single time something was missing. EMI calculators without prepayment options. No flexibility to tweak interest rates. BMI tools that wouldn’t even let me pick the right units. It was frustrating.<br><br>So I decided to build the tools I wished already existed. But I didn’t do it alone—AI became my coding partner. Together, we turned ideas into reality, creating calculators that are practical, intuitive, and packed with the features people actually need.<br><br>ZeroCalculator.net isn’t about making money (though I wouldn’t complain if it happens someday). It’s about creating tools that make life easier and giving back to the internet community that has given me so much.",
+    
+      "<br><b class='section-heading'>Our Vision</b><br><b>Making calculations simple, accurate, and accessible.</b><br><br>We believe everyone deserves tools that just work—no clutter, no confusion. Our forte is our advanced BMI calculator, which supports every combination of height and weight units—whether you prefer feet and inches, centimeters, pounds, or kilograms—making it truly versatile for users worldwide. Beyond that, we offer EMI tools with smart prepayment options and interactive charts, investment projections that make sense, and unit converters that are effortless to use.<br><br>Our goal is to keep expanding—adding more tools, refining existing ones, and making ZeroCalculator the go-to platform for anyone who needs fast, accurate, and frustration-free calculations.<br><br>Whether you’re a casual user, a fitness enthusiast, or someone who simply wants precision without complexity, ZeroCalculator.net is here for you."
+    ]
   }
 };
 

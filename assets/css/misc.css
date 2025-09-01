@@ -28,9 +28,7 @@
 
 
 
-/* ========================================
-   SITE FACTS POPUP STYLING
-   ======================================== */
+
 
 .site-facts-popup {
   position: fixed;
@@ -155,215 +153,11 @@
   font-style: italic;
 }
 
-/* ========================================
-   FALSE EASTER EGG POPUP STYLING
-   ======================================== */
 
-.false-easter-egg-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  color: white;
-  border: 2px solid #c44569;
-  border-radius: 16px;
-  padding: 0;
-  max-width: 400px;
-  width: 90%;
-  max-height: 60vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(255, 107, 107, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10000;
-  display: none;
-  scrollbar-width: thin;
-  scrollbar-color: #c44569 rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  animation: falseEasterEggSlideIn 0.3s ease-out;
-}
 
-@keyframes falseEasterEggSlideIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.9) rotate(-2deg);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  }
-}
 
-.false-easter-egg-popup[aria-hidden="false"] {
-  display: block;
-}
 
-.false-facts-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px 16px 24px;
-  border-bottom: 2px solid #c44569;
-  background: linear-gradient(135deg, #c44569 0%, #a55c55 100%);
-  color: white;
-  border-radius: 16px 16px 0 0;
-}
 
-.false-facts-header h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.false-facts-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
-}
-
-.false-facts-close:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.false-facts-content {
-  padding: 20px 24px 24px 24px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0 0 16px 16px;
-}
-
-.false-facts-content p {
-  margin: 0 0 16px 0;
-  color: white;
-  font-size: 14px;
-  line-height: 1.6;
-  text-align: center;
-  font-weight: 500;
-}
-
-.false-facts-content p:last-child {
-  margin-bottom: 0;
-  font-style: italic;
-  opacity: 0.9;
-}
-
-/* ========================================
-   FOOTER STYLING
-   ======================================== */
-
-.site-footer {
-  background: var(--surface-color);
-  border-top: 1px solid var(--border-color);
-  padding-top: 5px;
-  padding-bottom: 10px;
-  margin-top: 0;
-  max-height: 50px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) rgba(255, 255, 255, 0.1);
-}
-
-.site-footer::-webkit-scrollbar {
-  width: 6px;
-}
-
-.site-footer::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-
-.site-footer::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 3px;
-}
-
-.site-footer::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
-}
-
-.footer-content {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-main {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.footer-tagline {
-  color: var(--text-secondary);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: 12px;
-  margin: 0 0 6px 0;
-  font-style: italic;
-  opacity: 0.8;
-}
-
-.footer-highlight {
-  color: var(--text-primary);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: 13px;
-  margin: 0;
-  font-weight: 500;
-}
-
-.footer-link {
-  color: var(--primary-color);
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.footer-link:hover {
-  color: var(--primary-hover);
-}
-
-.footer-easter-egg {
-  text-align: center;
-  color: var(--text-muted);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: 10px;
-  font-style: italic;
-  opacity: 0.7;
-  padding: 8px;
-  background: var(--card-background);
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  max-width: 400px;
-  margin: 0 auto;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.footer-easter-egg:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: scale(1.02);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.footer-easter-egg:active {
-  transform: scale(0.98);
-  background: rgba(255, 255, 255, 0.12);
-}
 
 .github-btn {
   display: inline-block;
@@ -433,7 +227,7 @@
 
 .chip:hover {
   background: var(--accent-color);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border-color: var(--primary-color);
 }
 
@@ -448,91 +242,16 @@
   background-color: var(--card-background);
 }
 
+
+
+
+
 /* ========================================
    RESPONSIVE DESIGN
    ======================================== */
 
 @media (max-width: 768px) {
-  /* Site facts popup */
-  .site-facts-popup {
-    width: 95%;
-    max-height: 80vh;
-  }
-  
-  .facts-header {
-    padding: 16px 20px 12px 20px;
-  }
-  
-  .facts-header h3 {
-    font-size: 14px;
-  }
-  
-  .facts-content {
-    padding: 16px 20px 20px 20px;
-  }
-  
-  .story-section {
-    padding: 14px;
-    margin-bottom: 20px;
-  }
-  
-  .story-section h4 {
-    font-size: 13px;
-    margin-bottom: 10px;
-  }
-  
-  .story-section p {
-    font-size: 12px;
-  }
-  
-  /* False easter egg popup */
-  .false-easter-egg-popup {
-    width: 95%;
-    max-height: 70vh;
-  }
-  
-  .false-facts-header {
-    padding: 16px 20px 12px 20px;
-  }
-  
-  .false-facts-header h3 {
-    font-size: 14px;
-  }
-  
-  .false-facts-content {
-    padding: 16px 20px 20px 20px;
-  }
-  
-  .false-facts-content p {
-    font-size: 13px;
-  }
-  
-  /* Footer */
-  .site-footer {
-    padding: 8px 0;
-    max-height: 70px;
-  }
-  
-  .footer-content {
-    padding: 0 16px;
-  }
-  
-  .footer-main {
-    margin-bottom: 8px;
-  }
-  
-  .footer-tagline {
-    font-size: 11px;
-  }
-  
-  .footer-highlight {
-    font-size: 12px;
-  }
-  
-  .footer-easter-egg {
-    font-size: 9px;
-    padding: 6px;
-  }
+
 }
 
 /* ========================================

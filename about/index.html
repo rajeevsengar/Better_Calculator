@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About Us - ZeroCalculator.net</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Wait for DOM and CSS to be ready before showing content
+      document.addEventListener('DOMContentLoaded', function() {
+        // Small delay to ensure CSS variables are loaded
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
+    </script>
+    
+    <!-- Styles-->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/misc.css" />
+    <link rel="stylesheet" href="../assets/css/themes.css" />
+    <link rel="stylesheet" href="about.css" />
+    
+    <!-- Scripts -->
+    <script src="../helpers/calculator-description.js"></script>
+    <script src="../components/site-header/site-header.js" defer></script>
+    <script src="../components/site-footer/site-footer.js" defer></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
+    <script src="../helpers/util.js" defer></script>
+  </head>
+
+  <body>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <!-- Site Header Component -->
+        <site-header></site-header>
+
+        <main>
+          <div class="main-content-wrapper">
+            <!-- Left Grid: About Content -->
+            <div class="left-grid">
+              <div class="about-content">
+                <h1 class="about-title">About ZeroCalculator.net</h1>
+                
+                <div class="about-story" id="aboutStory">
+                  <!-- Content will be populated dynamically from text-config.js -->
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Grid: Additional Content -->
+            <div class="right-grid">
+              <div class="about-sidebar">
+                <h3>Our Calculators</h3>
+                <ul class="calculator-list">
+                  <li><a href="../unit-converter/">Unit Converter</a></li>
+                  <li><a href="../bmi-calculator/">BMI Calculator</a></li>
+                  <li><a href="../date-calculator/">Date Calculator</a></li>
+                  <li><a href="../time-calculator/">Time Calculator</a></li>
+                  <li><a href="../emi-calculator/">EMI Calculator</a></li>
+                  <li><a href="../investment-calculator/">Investment Calculator</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Site Footer Component -->
+        <site-footer></site-footer>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const aboutStory = document.getElementById('aboutStory');
+        
+        if (aboutStory && typeof window.getTextArray === "function") {
+          const contentArray = window.getTextArray('aboutUs.content');
+    
+          aboutStory.innerHTML = contentArray.map(item => {
+            const trimmedItem = item.trim();
+    
+            // If content already contains HTML (like links, bold, or breaks), insert as-is
+            if (/<[a-z][\s\S]*>/i.test(trimmedItem)) {
+              return `<p>${trimmedItem}</p>`;
+            }
+    
+            // Otherwise, escape to prevent accidental HTML injection and wrap in paragraph
+            const safeText = trimmedItem
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;");
+    
+            return `<p>${safeText}</p>`;
+          }).join('');
+        }
+      });
+    </script>
+    
+  </body>
+</html> 

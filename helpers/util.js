@@ -190,21 +190,7 @@ function populateTextContent() {
       mobileModesInstruction.textContent = window.getText('unitConverter.modesInstruction');
     }
     
-    // Footer
-    const footerTagline = document.querySelector('.footer-tagline');
-    if (footerTagline) {
-      footerTagline.textContent = window.getText('footer.tagline');
-    }
-    
-    const footerHighlight = document.querySelector('.footer-highlight');
-    if (footerHighlight) {
-      footerHighlight.innerHTML = `${window.getText('footer.highlight')} <span id="emi-link" class="footer-link">${window.getText('footer.emiLink')}</span> ${window.getText('footer.highlightEnd')}`;
-    }
-    
-    const footerEasterEgg = document.getElementById('falseEasterEgg');
-    if (footerEasterEgg) {
-      footerEasterEgg.innerHTML = window.getText('footer.easterEgg');
-    }
+
     
     // Enhanced Mode Toggle (Desktop and Mobile)
     const enhancedToggleLabel = document.querySelector('.enhanced-toggle .toggle-label');
@@ -212,47 +198,7 @@ function populateTextContent() {
       enhancedToggleLabel.textContent = window.getText('date.enhancedMode');
     }
     
-    // Site Facts Popup
-    const siteFactsPopup = document.getElementById('siteFactsPopup');
-    if (siteFactsPopup) {
-      const factsHeader = siteFactsPopup.querySelector('.facts-header h3');
-      if (factsHeader) {
-        factsHeader.insertAdjacentHTML("beforeend", window.getText('easterEggs.siteFacts.title'));
-      }
-      
-      const factsContent = siteFactsPopup.querySelector('.facts-content .story-section');
-      if (factsContent) {
-        // Clear existing content
-        factsContent.innerHTML = '';
-        
-        // Add content from config
-        const factsArray = window.getTextArray('easterEggs.siteFacts.content');
-        factsArray.forEach(fact => {
-          factsContent.insertAdjacentHTML("beforeend", fact);
-        });
-      }
-    }
-    
-    // False Easter Egg Popup
-    const falseEasterEggPopup = document.getElementById('falseEasterEggPopup');
-    if (falseEasterEggPopup) {
-      const falseHeader = falseEasterEggPopup.querySelector('.false-facts-header h3');
-      if (falseHeader) {
-        falseHeader.insertAdjacentHTML("beforeend", window.getText('easterEggs.falseEasterEgg.title'));
-      }
-      
-      const falseContent = falseEasterEggPopup.querySelector('.false-facts-content');
-      if (falseContent) {
-        // Clear existing content
-        falseContent.innerHTML = '';
-        
-        // Add content from config
-        const falseArray = window.getTextArray('easterEggs.falseEasterEgg.content');
-        falseArray.forEach(content => {
-          falseContent.insertAdjacentHTML("beforeend", content);
-        });
-      }
-    }
+
   } else {
 
   }

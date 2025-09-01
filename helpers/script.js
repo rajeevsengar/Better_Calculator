@@ -499,7 +499,7 @@ window.clearEMI = function() {
 let logoClickCount = 0;
 let logoClickTimer = null;
 
-function setupSiteLogoEasterEgg() {
+function setupSiteLogo() {
   // Check if we're on mobile - use media query instead of DOM element
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   
@@ -549,136 +549,8 @@ function setupLogoEventListeners(siteLogo) {
       logoClickTimer = setTimeout(() => {
         logoClickCount = 0;
       }, 500);
-    } else if (logoClickCount === 3) {
-      clearTimeout(logoClickTimer);
-      logoClickCount = 0;
-      showSiteFacts();
     }
   });
 }
-
-function showSiteFacts() {
-  const popup = document.getElementById('siteFactsPopup');
-  
-  if (popup) {
-    popup.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-  }
-}
-
-function closeSiteFacts() {
-  const popup = document.getElementById('siteFactsPopup');
-  if (popup) {
-    popup.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // Restore scrolling
-  }
-}
-
-// Close facts popup when clicking outside
-document.addEventListener('click', function(e) {
-  const popup = document.getElementById('siteFactsPopup');
-  if (popup && !popup.contains(e.target) && popup.getAttribute('aria-hidden') === 'false') {
-    closeSiteFacts();
-  }
-});
-
-// Close facts popup with Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeSiteFacts();
-  }
-});
-
-// Initialize site logo easter egg when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  setupSiteLogoEasterEgg();
-});
-
-// Also try to set it up after a short delay in case DOM isn't fully ready
-setTimeout(function() {
-  setupSiteLogoEasterEgg();
-}, 1000);
-
-// False Easter Egg
-let falseEasterEggClickCount = 0;
-let falseEasterEggTimer = null;
-
-function setupFalseEasterEgg() {
-  // Check if we're on mobile - use media query instead of DOM element
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  
-  const falseEasterEgg = document.getElementById('falseEasterEgg');
-  
-  if (!falseEasterEgg) {
-    return;
-  }
-  
-  // Add visual feedback
-  falseEasterEgg.style.transition = 'all 0.2s ease';
-  
-  falseEasterEgg.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    falseEasterEggClickCount++;
-    
-    if (falseEasterEggClickCount === 1) {
-      falseEasterEggTimer = setTimeout(() => {
-        falseEasterEggClickCount = 0;
-      }, 500);
-    } else if (falseEasterEggClickCount === 2) {
-      clearTimeout(falseEasterEggTimer);
-      falseEasterEggClickCount = 0;
-      showFalseEasterEgg();
-    }
-  });
-  
-  // Also try mousedown for better detection
-  falseEasterEgg.addEventListener('mousedown', function(e) {
-    // Mousedown event handler
-  });
-}
-
-function showFalseEasterEgg() {
-  const popup = document.getElementById('falseEasterEggPopup');
-  
-  if (popup) {
-    popup.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-  }
-}
-
-function closeFalseEasterEgg() {
-  const popup = document.getElementById('falseEasterEggPopup');
-  if (popup) {
-    popup.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // Restore scrolling
-  }
-}
-
-// Close false easter egg popup when clicking outside
-document.addEventListener('click', function(e) {
-  const popup = document.getElementById('falseEasterEggPopup');
-  if (popup && !popup.contains(e.target) && popup.getAttribute('aria-hidden') === 'false') {
-    closeFalseEasterEgg();
-  }
-});
-
-// Close false easter egg popup with Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeFalseEasterEgg();
-  }
-});
-
-// Initialize false easter egg when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  setupFalseEasterEgg();
-});
-
-// Also try to set it up after a short delay in case DOM isn't fully ready
-setTimeout(function() {
-  setupFalseEasterEgg();
-}, 1000);
 
 // Theme synchronization is now handled by the theme-selector web component

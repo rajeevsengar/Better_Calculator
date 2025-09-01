@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sitemap - ZeroCalculator.net</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
+    
+    <!-- Critical theme initialization to prevent flash -->
+    <script>
+      // Wait for DOM and CSS to be ready before showing content
+      document.addEventListener('DOMContentLoaded', function() {
+        // Small delay to ensure CSS variables are loaded
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
+    </script>
+    
+    <!-- Styles-->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/misc.css" />
+    <link rel="stylesheet" href="../assets/css/themes.css" />
+    <link rel="stylesheet" href="sitemap.css" />
+    
+    <!-- Scripts -->
+    <script src="../helpers/calculator-description.js"></script>
+    <script src="../components/site-header/site-header.js" defer></script>
+    <script src="../components/site-footer/site-footer.js" defer></script>
+    <script src="../components/calculator-description/calculator-description.js"></script>
+    <script src="../helpers/script.js" defer></script>
+    <script src="../helpers/text-config.js" defer></script>
+    <script src="../helpers/util.js" defer></script>
+  </head>
+
+  <body>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <!-- Site Header Component -->
+        <site-header></site-header>
+
+        <main>
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Sitemap Content -->
+            <div class="left-grid">
+              <div class="sitemap-content">
+                <h1 class="sitemap-title">Sitemap</h1>
+                
+                <div class="sitemap-section">
+                  <h2>Main Pages</h2>
+                  <ul class="sitemap-list">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about/">About Us</a></li>
+                  </ul>
+                </div>
+                
+                <div class="sitemap-section">
+                  <h2>Calculators</h2>
+                  <ul class="sitemap-list">
+                    <li><a href="../unit-converter/">Unit Converter</a> - Convert between different units of measurement</li>
+                    <li><a href="../bmi-calculator/">BMI Calculator</a> - Calculate Body Mass Index with age and gender considerations</li>
+                    <li><a href="../date-calculator/">Date Calculator</a> - Calculate date differences and perform date arithmetic</li>
+                    <li><a href="../time-calculator/">Time Calculator</a> - Calculate time differences and perform time arithmetic</li>
+                    <li><a href="../emi-calculator/">EMI Calculator</a> - Calculate Equated Monthly Installments with advanced features</li>
+                    <li><a href="../investment-calculator/">Investment Calculator</a> - Calculate investment returns and projections</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Grid: Additional Content -->
+            <div class="right-grid">
+              <div class="sitemap-sidebar">
+                <h3>Quick Links</h3>
+                <ul class="quick-links">
+                  <li><a href="https://github.com/rajeevsengar/Zero_Calculator" target="_blank">GitHub Repository</a></li>
+                  <li><a href="../about/">About ZeroCalculator.net</a></li>
+                  <li><a href="../index.html">Back to Home</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Site Footer Component -->
+        <site-footer></site-footer>
+      </div>
+    </div>
+  </body>
+</html> 

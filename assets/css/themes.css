@@ -10,6 +10,7 @@ body[data-theme-applied] {
 
 /* Default theme (Orange + White) - replacing old default */
 :root {
+  --header-background : #ff9800;
   --primary-color: #ff9800;
   --primary-hover: #f57c00;
   --accent-color: #ffb74d;
@@ -32,6 +33,7 @@ body[data-theme-applied] {
 
 /* Default theme light variant (explicit) */
 html[data-theme="default"][data-variant="light"] {
+  --header-background : #ff9800;
   --primary-color: #ff9800;
   --primary-hover: #f57c00;
   --accent-color: #ffb74d;
@@ -53,6 +55,7 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Default theme (Orange + Dark) - replacing old default */
 [data-theme="default"][data-variant="dark"] {
+  --header-background : #ff9800;
   --primary-color: #ff9800;
   --primary-hover: #f57c00;
   --accent-color: #ffb74d;
@@ -73,6 +76,7 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Green Theme + White */
 [data-theme="green"][data-variant="light"] {
+  --header-background : #4caf50;
   --primary-color: #4caf50;
   --primary-hover: #388e3c;
   --accent-color: #81c784;
@@ -93,6 +97,7 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Green Theme + Dark */
 [data-theme="green"][data-variant="dark"] {
+  --header-background : #4caf50;
   --primary-color: #4caf50;
   --primary-hover: #388e3c;
   --accent-color: #81c784;
@@ -113,10 +118,11 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Black Theme + Light */
 [data-theme="black"][data-variant="light"] {
+  --header-background : #000000;
   --primary-color: #000000;
   --primary-hover: #1a1a1a;
   --accent-color: #cccccc;
-  --background-color: #ffffff;
+  --background-color: #f8f8f8;
   --surface-color: #f8f8f8;
   --card-background: #ffffff;
   --text-primary: black;
@@ -133,13 +139,14 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Black Theme + Dark */
 [data-theme="black"][data-variant="dark"] {
-  --primary-color: #ffffff;
-  --primary-hover: #ffffff;
-  --accent-color: #ffffff;
+  --header-background : #000000;
+  --primary-color: white;
+  --primary-hover: #1a1a1a;
+  --accent-color: rgba(255, 255, 255, 0.7);
   --background-color: #000000;
   --surface-color: #0a0a0a;
   --card-background: #1a1a1a;
-  --text-primary: white;
+  --text-primary: rgba(255, 255, 255, 0.7);
   --text-secondary: black;
   --text-muted: #a0a0a0;
   --border-color: #333333;
@@ -153,6 +160,7 @@ html[data-theme="default"][data-variant="light"] {
 
 /* Legacy support for existing themes without variant (defaults to light) */
 [data-theme="green"]:not([data-variant]) {
+  --header-background : #4caf50;
   --primary-color: #4caf50;
   --primary-hover: #388e3c;
   --accent-color: #81c784;
@@ -172,6 +180,7 @@ html[data-theme="default"][data-variant="light"] {
 }
 
 [data-theme="black"]:not([data-variant]) {
+  --header-background : #000000;
   --primary-color: #000000;
   --primary-hover: #1a1a1a;
   --accent-color: #cccccc;

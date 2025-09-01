@@ -23,7 +23,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/date-calculator') || 
                      currentPath.includes('/time-calculator') || 
                      currentPath.includes('/emi-calculator') || 
-                     currentPath.includes('/investment-calculator');
+                     currentPath.includes('/investment-calculator') ||
+                     currentPath.includes('/about') ||
+                     currentPath.includes('/sitemap');
     
     const imagePrefix = isSubPage ? '../assets/images/' : 'assets/images/';
     
@@ -65,14 +67,18 @@ class SiteHeader extends HTMLElement {
         
         <div class="main-header">
             <div class="header-content">
-                <img id="siteLogo" src="${imagePrefix}site_logo.png" alt="Site Logo" class="site-logo">
-                <div class="brand-text">
-                    <h1 id="brandName"></h1>
-                    <div id="tagline" class="tagline">
-                        <div class="tagline-line tagline-first"></div>
-                        <div class="tagline-line tagline-second"></div>
+                <a href="${isSubPage ? '../index.html' : 'index.html'}" class="brand-link">
+                    <div class="brand-section">
+                        <img src="${imagePrefix}site_logo.png" alt="Zero Calculator Logo" class="site-logo">
+                        <div class="brand-text">
+                            <h1 id="brandName"></h1>
+                            <div id="tagline" class="tagline">
+                                <div class="tagline-line tagline-first"></div>
+                                <div class="tagline-line tagline-second"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <div class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span>
@@ -90,16 +96,7 @@ class SiteHeader extends HTMLElement {
             </div>
         </div>
 
-        <div class="home-header">
-            <div class="header-content">
-                <div class="home-link-container">
-                    <a href="${isSubPage ? '../index.html' : 'index.html'}" class="home-link" id="homeLink">
-                        <span class="home-icon">🏠</span>
-                        <span>Home</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+
       </header>
 
 
@@ -235,11 +232,11 @@ class SiteHeader extends HTMLElement {
       const tagline = this.shadowRoot.getElementById('tagline');
 
       if (builtWithLove) {
-        builtWithLove.textContent = window.getText('header.builtWithLove') || 'Built with ❤️ in India.';
+        builtWithLove.textContent = window.getText('header.builtWithLove') || 'Made with ❤️ in India.';
       }
 
       if (brandName) {
-        brandName.textContent = window.getText('header.brandName') || 'zerocalculator.net';
+        brandName.innerHTML = (window.getText('header.brandName') || 'zerocalculator.net').replace('.', '<span class="zero">o </span>');
       }
 
       if (tagline) {
@@ -250,8 +247,8 @@ class SiteHeader extends HTMLElement {
       }
     } else {
       // Fallback content
-      this.shadowRoot.getElementById('builtWithLove').textContent = 'Built with ❤️ in India.';
-      this.shadowRoot.getElementById('brandName').textContent = 'zerocalculator.net';
+      this.shadowRoot.getElementById('builtWithLove').textContent = 'Made with ❤️ in India.';
+      this.shadowRoot.getElementById('brandName').innerHTML = 'zerocalculator<span class="zero">o </span>net';
       this.shadowRoot.querySelector('.tagline-first').textContent = 'Minimal - Fast - Powerful';
       this.shadowRoot.querySelector('.tagline-second').textContent = 'Imagined by Human, Designed by AI';
     }
@@ -274,7 +271,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/date-calculator') || 
                      currentPath.includes('/time-calculator') || 
                      currentPath.includes('/emi-calculator') || 
-                     currentPath.includes('/investment-calculator');
+                     currentPath.includes('/investment-calculator') ||
+                     currentPath.includes('/about') ||
+                     currentPath.includes('/sitemap');
 
     const baseUrl = isSubPage ? '../' : '';
     
@@ -318,7 +317,7 @@ class SiteHeader extends HTMLElement {
     if (!homeLink) return;
 
     const currentPath = window.location.pathname;
-    const isHomePage = currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/');
+    const isHomePage = currentPath === '/' || currentPath === '/index.html';
     
     // Add active class if on home page
     if (isHomePage) {
@@ -353,7 +352,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/date-calculator') || 
                      currentPath.includes('/time-calculator') || 
                      currentPath.includes('/emi-calculator') || 
-                     currentPath.includes('/investment-calculator');
+                     currentPath.includes('/investment-calculator') ||
+                     currentPath.includes('/about') ||
+                     currentPath.includes('/sitemap');
     
     const baseUrl = isSubPage ? '../' : '';
     let menuItems = [];
