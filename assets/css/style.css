@@ -5,11 +5,11 @@
 /*  NEW CODE STARTS HERE */
 
 html, body {
-  height: auto;
+  height: 100%;
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-primary);
-  font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+  font-family: Inter, system-ui, system-ui, Segoe UI, Roboto, Arial;
   overflow-y: auto; /* Only show scrollbar when needed */
 }
 
@@ -41,7 +41,7 @@ html, body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  
+  min-height: 100vh;
 }
 
 /* Generic Content Wrapper Layout */

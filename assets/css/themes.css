@@ -21,6 +21,7 @@ body[data-theme-applied] {
   --text-secondary: #475569;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
+  --border-light: #e2e8f0;
   --input-background: #ffffff;
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
@@ -28,6 +29,17 @@ body[data-theme-applied] {
   --hover-bg: #f1f5f9;
   --shadow-color: rgba(0, 0, 0, 0.1);
   --header-height: 6rem;
+  
+  /* Home page specific variables */
+  --accent-gradient: linear-gradient(135deg, #ff9800, #ffb74d);
+  --accent-hover: #f57c00;
+  --primary-button: #ff9800;
+  --primary-button-hover: #f57c00;
+  --preview-background: #f8fafc;
+  --result-background: #e8f5e8;
+  --tag-background: #f1f5f9;
+  --tag-text: #475569;
+  --featured-background: grey;
 }
 
 
@@ -66,12 +78,24 @@ html[data-theme="default"][data-variant="light"] {
   --text-secondary: #ffffff;
   --text-muted: #b0b0b0;
   --border-color: #494444;
+  --border-light: #494444;
   --input-background: #494040;
   --input-bg: #494040;
   --input-border: #595555;
   --button-hover: #f57c00;
   --hover-bg: #494040;
   --shadow-color: rgba(0, 0, 0, 0.3);
+  
+  /* Home page specific variables */
+  --accent-gradient: linear-gradient(135deg, #ff9800, #ffb74d);
+  --accent-hover: #f57c00;
+  --primary-button: #ff9800;
+  --primary-button-hover: #f57c00;
+  --preview-background: #2a2525;
+  --result-background: #2d3a2d;
+  --tag-background: #494040;
+  --tag-text: #b0b0b0;
+  --featured-background: #3d2f1a;
 }
 
 /* Green Theme + White */
@@ -87,12 +111,24 @@ html[data-theme="default"][data-variant="light"] {
   --text-secondary: #475569;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
+  --border-light: #e2e8f0;
   --input-background: #ffffff;
   --input-bg: #ffffff;
   --input-border: #cbd5e1;
   --button-hover: #f1f5f9;
   --hover-bg: #f1f5f9;
   --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  /* Home page specific variables */
+  --accent-gradient: linear-gradient(135deg, #4caf50, #81c784);
+  --accent-hover: #388e3c;
+  --primary-button: #4caf50;
+  --primary-button-hover: #388e3c;
+  --preview-background: #f8fafc;
+  --result-background: #e8f5e8;
+  --tag-background: #f1f5f9;
+  --tag-text: #475569;
+  --featured-background: #f1f8e9;
 }
 
 /* Green Theme + Dark */
@@ -157,6 +193,7 @@ html[data-theme="default"][data-variant="light"] {
   --hover-bg: #1a1a1a;
   --shadow-color: rgba(0, 0, 0, 0.5);
 }
+
 
 /* Legacy support for existing themes without variant (defaults to light) */
 [data-theme="green"]:not([data-variant]) {

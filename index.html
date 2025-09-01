@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/misc.css" />
     <link rel="stylesheet" href="assets/css/themes.css" />
+    <link rel="stylesheet" href="assets/css/home-page.css" />
     
     <!-- Scripts -->
     <script src="helpers/calculator-description.js"></script>
@@ -43,6 +44,30 @@
     <script src="components/site-footer/site-footer.js" defer></script>
     <script src="components/calculator-description/calculator-description.js"></script>
     <script src="helpers/script.js" defer></script>
+    
+    <!-- Iframe Preview Functions -->
+    <script>
+      // Make entire calculator card clickable to open calculator
+      document.addEventListener('DOMContentLoaded', function() {
+        const calculatorCards = document.querySelectorAll('.calculator-card');
+        
+        calculatorCards.forEach(card => {
+          // Make the card clickable (excluding iframe area)
+          card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the iframe
+            if (e.target.closest('.calculator-iframe')) {
+              return;
+            }
+            
+            // Find the calculator link and open it in same page
+            const calculatorLink = card.querySelector('.open-calculator-btn');
+            if (calculatorLink) {
+              window.location.href = calculatorLink.href;
+            }
+          });
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -58,61 +83,152 @@
 
         <main>
           <div class="main-content-wrapper">
-            <!-- Left Grid: Calculator Description -->
-            <div class="left-grid">
-              <calculator-description calculator="home"></calculator-description>
-            </div>
-            
-            <!-- Right Grid: Additional Ad Space or Content -->
-            <div class="right-grid">
-              <div class="ad-space">
-                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+            <div class="calculator-grid">
+              <!-- EMI Calculator - Featured -->
+              <div class="calculator-card featured">
+                <div class="featured-badge">🏆 Featured</div>
+                <div class="calculator-header">
+                  <div class="calculator-icon">💰</div>
+                  <h2 class="calculator-title">EMI Calculator</h2>
+                </div>
+                <p class="calculator-description">
+                  Calculate loan EMIs with detailed amortization schedule. Our flagship calculator with advanced features.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-text">
+                    <h3>EMI Calculator</h3>
+                    <p>Calculate loan EMIs with detailed amortization schedule. Input loan amount, interest rate, and term to get monthly payments and full breakdown.</p>
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">Amortization</span>
+                    <span class="feature-tag">Advanced</span>
+                  </div>
+                  <a href="emi-calculator/" class="open-calculator-btn">Open Calculator</a>
+                </div>
+              </div>
+
+              <!-- Unit Converter -->
+              <div class="calculator-card">
+                <div class="calculator-header">
+                  <div class="calculator-icon">📏</div>
+                  <h2 class="calculator-title">Unit Converter</h2>
+                </div>
+                <p class="calculator-description">
+                  Convert between various units of measurement including length, weight, temperature, and more.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-image-container">
+                    <img src="assets/images/unit-caculator-preview.png" alt="Unit Converter Preview" class="preview-screenshot">
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">Multiple Units</span>
+                    <span class="feature-tag">Real-time</span>
+                  </div>
+                  <a href="unit-converter/" class="open-calculator-btn">Open Calculator</a>
+                </div>
+              </div>
+
+              <!-- BMI Calculator -->
+              <div class="calculator-card">
+                <div class="calculator-header">
+                  <div class="calculator-icon">⚖️</div>
+                  <h2 class="calculator-title">BMI Calculator</h2>
+                </div>
+                <p class="calculator-description">
+                  Calculate Body Mass Index with visual feedback and health recommendations.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-image-container">
+                    <img src="assets/images/bmi-calculator-preview.png" alt="BMI Calculator Preview" class="preview-screenshot">
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">Health</span>
+                    <span class="feature-tag">Visual</span>
+                  </div>
+                  <a href="bmi-calculator/" class="open-calculator-btn">Open Calculator</a>
+                </div>
+              </div>
+
+              <!-- Date Calculator -->
+              <div class="calculator-card">
+                <div class="calculator-header">
+                  <div class="calculator-icon">📅</div>
+                  <h2 class="calculator-title">Date Calculator</h2>
+                </div>
+                <p class="calculator-description">
+                  Count days between dates and perform date arithmetic with ease.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-text">
+                    <h3>Date Calculator</h3>
+                    <p>Count days between dates and perform date arithmetic. Calculate date differences, add/subtract days, and find working days.</p>
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">Date Math</span>
+                    <span class="feature-tag">Counting</span>
+                  </div>
+                  <a href="date-calculator/" class="open-calculator-btn">Open Calculator</a>
+                </div>
+              </div>
+
+              <!-- Time Calculator -->
+              <div class="calculator-card">
+                <div class="calculator-header">
+                  <div class="calculator-icon">⏰</div>
+                  <h2 class="calculator-title">Time Calculator</h2>
+                </div>
+                <p class="calculator-description">
+                  Timezone conversion, time difference, and time arithmetic calculations.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-text">
+                    <h3>Time Calculator</h3>
+                    <p>Convert between timezones, calculate time differences, and perform time arithmetic. Perfect for scheduling and international coordination.</p>
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">Timezone</span>
+                    <span class="feature-tag">Conversion</span>
+                  </div>
+                  <a href="time-calculator/" class="open-calculator-btn">Open Calculator</a>
+                </div>
+              </div>
+
+              <!-- Investment Calculator -->
+              <div class="calculator-card">
+                <div class="calculator-header">
+                  <div class="calculator-icon">📈</div>
+                  <h2 class="calculator-title">Investment Calculator</h2>
+                </div>
+                <p class="calculator-description">
+                  SIP and lump sum investment calculations with growth projections.
+                </p>
+                <div class="calculator-preview">
+                  <div class="preview-text">
+                    <h3>Investment Calculator</h3>
+                    <p>Calculate SIP returns, lump sum investments, and growth projections. Plan your financial future with accurate calculations and visual charts.</p>
+                  </div>
+                </div>
+                <div class="calculator-footer">
+                  <div class="calculator-features">
+                    <span class="feature-tag">SIP</span>
+                    <span class="feature-tag">Projections</span>
+                  </div>
+                  <a href="investment-calculator/" class="open-calculator-btn">Open Calculator</a>
+                </div>
               </div>
             </div>
           </div>
         </main>
-
-        <!-- Footer -->
-        <!-- <footer class="site-footer">
-          <div class="footer-content">
-            <div class="footer-main">
-              <p class="footer-tagline">
-                Not just another calculator website — it covers the missing features of others.
-              </p>
-              <p class="footer-highlight">
-                🏆 The most feature-rich 
-                <span id="emi-link" class="footer-link">EMI Calculator</span>
-                on the internet, our proud flagship.
-              </p>
-            </div>
-            <div class="footer-easter-egg" id="falseEasterEgg" style="cursor: pointer;" title="Click me if you dare...">
-              🥚 <em>This site contains a hidden easter egg. Good luck finding it!</em> 🥚
-            </div>
-          </div>
-        </footer> -->
-
-        <!-- False Easter Egg Popup -->
-        <!-- <div id="falseEasterEggPopup" class="false-easter-egg-popup" aria-hidden="true">
-          <div class="false-facts-header">
-            <h3></h3>
-            <button class="false-facts-close" onclick="closeFalseEasterEgg()">×</button>
-          </div>
-          <div class="false-facts-content">
-          </div>
-        </div> -->
-        
-        <!-- Site Facts Popup -->
-        <!-- <div id="siteFactsPopup" class="site-facts-popup" aria-hidden="true">
-          <div class="facts-header">
-            <h3></h3>
-            <button class="facts-close" onclick="closeSiteFacts()">×</button>
-          </div>
-          <div class="facts-content">
-            <div class="story-section">
-            </div>
-          </div>
-        </div> -->
-        
         <!-- Site Footer Component -->
         <site-footer></site-footer>
       </div>
