@@ -83,148 +83,153 @@
 
         <main>
           <div class="main-content-wrapper">
-            <div class="calculator-grid">
-              <!-- EMI Calculator - Featured -->
-              <div class="calculator-card featured">
-                <div class="featured-badge">🏆 Featured</div>
-                <div class="calculator-header">
-                  <div class="calculator-icon">💰</div>
-                  <h2 class="calculator-title">EMI Calculator</h2>
-                </div>
-                <p class="calculator-description">
-                  Calculate loan EMIs with detailed amortization schedule. Our flagship calculator with advanced features.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-text">
-                    <h3>EMI Calculator</h3>
-                    <p>Calculate loan EMIs with detailed amortization schedule. Input loan amount, interest rate, and term to get monthly payments and full breakdown.</p>
+            <div class="left-grid">
+              <div class="calculator-grid">
+                <!-- EMI Calculator - Featured -->
+                <div class="calculator-card featured" onclick="window.location.href='emi-calculator/'">
+                  <div class="featured-badge">🏆 Featured</div>
+                  <div class="calculator-header">
+                    <div class="calculator-icon">💰</div>
+                    <h2 class="calculator-title">EMI Calculator</h2>
+                  </div>
+                  <p class="calculator-description">
+                    Calculate loan EMIs with detailed amortization schedule. Our flagship calculator with advanced features.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-text">
+                      <h3>EMI Calculator</h3>
+                      <p>Calculate loan EMIs with detailed amortization schedule.</p>
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">Amortization</span>
+                      <span class="feature-tag">Advanced</span>
+                    </div>
                   </div>
                 </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">Amortization</span>
-                    <span class="feature-tag">Advanced</span>
+
+                <!-- Unit Converter -->
+                <div class="calculator-card" onclick="window.location.href='unit-converter/'">
+                  <div class="calculator-header">
+                    <div class="calculator-icon">📏</div>
+                    <h2 class="calculator-title">Unit Converter</h2>
                   </div>
-                  <a href="emi-calculator/" class="open-calculator-btn">Open Calculator</a>
+                  <p class="calculator-description">
+                    Convert between various units of measurement including length, weight, temperature, and more.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-image-container">
+                      <img src="assets/images/unit-caculator-preview.png" alt="Unit Converter Preview" class="preview-screenshot">
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">Multiple Units</span>
+                      <span class="feature-tag">Real-time</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- BMI Calculator -->
+                <div class="calculator-card" onclick="window.location.href='bmi-calculator/'">
+                  <div class="calculator-header">
+                    <div class="calculator-icon">⚖️</div>
+                    <h2 class="calculator-title">BMI Calculator</h2>
+                  </div>
+                  <p class="calculator-description">
+                    Calculate Body Mass Index with visual feedback and health recommendations.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-image-container">
+                      <img src="assets/images/bmi-calculator-preview.png" alt="BMI Calculator Preview" class="preview-screenshot">
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">Health</span>
+                      <span class="feature-tag">Visual</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Date Calculator -->
+                <div class="calculator-card" onclick="window.location.href='date-calculator/'">
+                  <div class="calculator-header">
+                    <div class="calculator-icon">📅</div>
+                    <h2 class="calculator-title">Date Calculator</h2>
+                  </div>
+                  <p class="calculator-description">
+                    Count days between dates and perform date arithmetic with ease.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-text">
+                      <h3>Date Calculator</h3>
+                      <p>Count days between dates and perform date arithmetic. Calculate date differences, add/subtract days, and find working days.</p>
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">Date Math</span>
+                      <span class="feature-tag">Counting</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Time Calculator -->
+                <div class="calculator-card" onclick="window.location.href='time-calculator/'">
+                  <div class="calculator-header">
+                    <div class="calculator-icon">⏰</div>
+                    <h2 class="calculator-title">Time Calculator</h2>
+                  </div>
+                  <p class="calculator-description">
+                    Timezone conversion, time difference, and time arithmetic calculations.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-text">
+                      <h3>Time Calculator</h3>
+                      <p>Convert between timezones, calculate time differences, and perform time arithmetic.</p>
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">Timezone</span>
+                      <span class="feature-tag">Conversion</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Investment Calculator -->
+                <div class="calculator-card" onclick="window.location.href='investment-calculator/'">
+                  <div class="calculator-header">
+                    <div class="calculator-icon">📈</div>
+                    <h2 class="calculator-title">Investment Calculator</h2>
+                  </div>
+                  <p class="calculator-description">
+                    SIP and lump sum investment calculations with growth projections.
+                  </p>
+                  <div class="calculator-preview">
+                    <div class="preview-text">
+                      <h3>Investment Calculator</h3>
+                      <p>Calculate SIP returns, lump sum investments, and growth projections.</p>
+                    </div>
+                  </div>
+                  <div class="calculator-footer">
+                    <div class="calculator-features">
+                      <span class="feature-tag">SIP</span>
+                      <span class="feature-tag">Projections</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <!-- Unit Converter -->
-              <div class="calculator-card">
-                <div class="calculator-header">
-                  <div class="calculator-icon">📏</div>
-                  <h2 class="calculator-title">Unit Converter</h2>
-                </div>
-                <p class="calculator-description">
-                  Convert between various units of measurement including length, weight, temperature, and more.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-image-container">
-                    <img src="assets/images/unit-caculator-preview.png" alt="Unit Converter Preview" class="preview-screenshot">
-                  </div>
-                </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">Multiple Units</span>
-                    <span class="feature-tag">Real-time</span>
-                  </div>
-                  <a href="unit-converter/" class="open-calculator-btn">Open Calculator</a>
-                </div>
-              </div>
-
-              <!-- BMI Calculator -->
-              <div class="calculator-card">
-                <div class="calculator-header">
-                  <div class="calculator-icon">⚖️</div>
-                  <h2 class="calculator-title">BMI Calculator</h2>
-                </div>
-                <p class="calculator-description">
-                  Calculate Body Mass Index with visual feedback and health recommendations.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-image-container">
-                    <img src="assets/images/bmi-calculator-preview.png" alt="BMI Calculator Preview" class="preview-screenshot">
-                  </div>
-                </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">Health</span>
-                    <span class="feature-tag">Visual</span>
-                  </div>
-                  <a href="bmi-calculator/" class="open-calculator-btn">Open Calculator</a>
-                </div>
-              </div>
-
-              <!-- Date Calculator -->
-              <div class="calculator-card">
-                <div class="calculator-header">
-                  <div class="calculator-icon">📅</div>
-                  <h2 class="calculator-title">Date Calculator</h2>
-                </div>
-                <p class="calculator-description">
-                  Count days between dates and perform date arithmetic with ease.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-text">
-                    <h3>Date Calculator</h3>
-                    <p>Count days between dates and perform date arithmetic. Calculate date differences, add/subtract days, and find working days.</p>
-                  </div>
-                </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">Date Math</span>
-                    <span class="feature-tag">Counting</span>
-                  </div>
-                  <a href="date-calculator/" class="open-calculator-btn">Open Calculator</a>
-                </div>
-              </div>
-
-              <!-- Time Calculator -->
-              <div class="calculator-card">
-                <div class="calculator-header">
-                  <div class="calculator-icon">⏰</div>
-                  <h2 class="calculator-title">Time Calculator</h2>
-                </div>
-                <p class="calculator-description">
-                  Timezone conversion, time difference, and time arithmetic calculations.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-text">
-                    <h3>Time Calculator</h3>
-                    <p>Convert between timezones, calculate time differences, and perform time arithmetic. Perfect for scheduling and international coordination.</p>
-                  </div>
-                </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">Timezone</span>
-                    <span class="feature-tag">Conversion</span>
-                  </div>
-                  <a href="time-calculator/" class="open-calculator-btn">Open Calculator</a>
-                </div>
-              </div>
-
-              <!-- Investment Calculator -->
-              <div class="calculator-card">
-                <div class="calculator-header">
-                  <div class="calculator-icon">📈</div>
-                  <h2 class="calculator-title">Investment Calculator</h2>
-                </div>
-                <p class="calculator-description">
-                  SIP and lump sum investment calculations with growth projections.
-                </p>
-                <div class="calculator-preview">
-                  <div class="preview-text">
-                    <h3>Investment Calculator</h3>
-                    <p>Calculate SIP returns, lump sum investments, and growth projections. Plan your financial future with accurate calculations and visual charts.</p>
-                  </div>
-                </div>
-                <div class="calculator-footer">
-                  <div class="calculator-features">
-                    <span class="feature-tag">SIP</span>
-                    <span class="feature-tag">Projections</span>
-                  </div>
-                  <a href="investment-calculator/" class="open-calculator-btn">Open Calculator</a>
-                </div>
+            </div>
+            
+            <div class="right-grid">
+              <!-- Right sidebar content can go here -->
+              <div class="ad-space">
+                <h2>Ad Space</h2>
+                <p>This is a test ad space.</p>
+                <p>This is a test ad space.</p>
               </div>
             </div>
           </div>

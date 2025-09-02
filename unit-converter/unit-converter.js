@@ -124,8 +124,9 @@ function initializeUnitConverter() {
    ============================================================ */
 function setupForMode() {
   if (!currentMode) return;
-  [selectedFromUnit, selectedToUnit] = defaultUnits_UnitConverter[currentMode];
 
+  [selectedFromUnit, selectedToUnit] = [UNIT_KEYS[currentMode][0].value, UNIT_KEYS[currentMode][1].value];
+  
   buildUnitChips(fromButtonsContainer, UNIT_KEYS[currentMode], selectedFromUnit, unit => {
     selectedFromUnit = unit;
     unitChangeHandler(fromValueInput, selectedFromUnit);

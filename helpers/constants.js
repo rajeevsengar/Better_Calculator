@@ -340,22 +340,6 @@ const TEMP_FROM_C = {
 };
 
 /* ============================================================
-    Set default for modes
-   ============================================================ */
-
-const defaultUnits_UnitConverter = {
-  height: [CONST_FTIN, CONST_CM],
-  length: [CONST_FT, CONST_CM],
-  volume: [CONST_GAL_US, CONST_L],
-  mass: [CONST_KG, CONST_LB],
-  temperature: [CONST_C, CONST_F],
-  area: [CONST_SQFT, CONST_ACRE],
-  data: [CONST_KILOBYTE, CONST_MEGABYTE],
-  speed: [CONST_KMPH, CONST_MPS],
-  time: [CONST_HOUR, CONST_MIN],
-};
-
-/* ============================================================
    Constants: Modes
    ============================================================ */
 const MODES = [
