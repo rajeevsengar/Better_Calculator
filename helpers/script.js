@@ -19,17 +19,6 @@ function ensureThemeApplied() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM Content Loaded - Initializing responsive functionality');
-  initializeResponsiveFunctionality();
-});
-
-// Unified responsive functionality for both mobile and desktop
-function initializeResponsiveFunctionality() {
-  initializeResponsiveNavigation();
-  console.log('Responsive functionality initialized successfully');
-}
-
 // Lazy load calculator scripts only when needed
 function loadCalculatorScript(calculatorName) {
   return new Promise((resolve, reject) => {
@@ -130,29 +119,6 @@ function hideCalculatorLoading(panelId) {
 }
 
 
-// Initialize responsive navigation
-function initializeResponsiveNavigation() {
-  // Handle window resize for responsive behavior
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      handleResponsiveLayout();
-    }, 250);
-  });
-  
-  // Initial responsive layout check
-  handleResponsiveLayout();
-}
-
-// Handle responsive layout changes
-function handleResponsiveLayout() {
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  
-  // Update body class for CSS targeting
-  document.body.classList.toggle('mobile-layout', isMobile);
-  document.body.classList.toggle('desktop-layout', !isMobile);
-}
 
 // Date Calculator Tab Functionality - works for both desktop and mobile
 function initializeDateTabs() {
@@ -197,8 +163,6 @@ function initializeCalculatorTabs(selector) {
 
 // Text content is now populated from util.js
 
-// Theme switcher functionality is now handled by the theme-selector web component
-
 // Provide global wrappers for EMI actions used by HTML buttons
 window.generateAmortizationSchedule = function() {
   if (window.EMI && typeof window.EMI.generateAmortizationSchedule === 'function') {
@@ -216,56 +180,3 @@ window.clearEMI = function() {
 let logoClickCount = 0;
 let logoClickTimer = null;
 
-function setupSiteLogo() {
-  // Check if we're on mobile - use media query instead of DOM element
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-  
-  // Try multiple selectors to find the logo, with ID being the most reliable
-  const siteLogo = document.getElementById('siteLogo') ||
-                   document.querySelector('.header2 .brand img') || 
-                   document.querySelector('.header2 img[src*="site_logo"]') ||
-                   document.querySelector('img[src*="site_logo"]');
-  
-  if (!siteLogo) {
-    // Try to find it after a longer delay
-    setTimeout(function() {
-      const delayedLogo = document.getElementById('siteLogo') || 
-                          document.querySelector('.header2 .brand img');
-      if (delayedLogo) {
-        setupLogoEventListeners(delayedLogo);
-      }
-    }, 2000);
-    
-    return;
-  }
-  
-  setupLogoEventListeners(siteLogo);
-}
-
-function setupLogoEventListeners(siteLogo) {
-  siteLogo.style.cursor = 'pointer';
-  siteLogo.title = 'Triple-click me for a surprise!';
-  
-  // Add visual feedback on hover
-  siteLogo.style.transition = 'transform 0.2s ease, filter 0.2s ease';
-  siteLogo.addEventListener('mouseenter', function() {
-    this.style.transform = 'scale(1.05)';
-  });
-  
-  siteLogo.addEventListener('mouseleave', function() {
-    this.style.transform = 'scale(1)';
-  });
-  
-  siteLogo.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    logoClickCount++;
-    
-    if (logoClickCount === 1) {
-      logoClickTimer = setTimeout(() => {
-        logoClickCount = 0;
-      }, 500);
-    }
-  });
-}

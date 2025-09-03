@@ -160,6 +160,117 @@ button.button-primary:hover {
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
+/*Brand name and logo*/
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-logo {
+  height: 2rem;
+  width: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 1);
+  padding: 0.25rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-description {
+  color: var(--text-secondary, #666666);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.brand-name {
+  font-weight: 600;
+  color: var(--text-primary, #333333);
+  font-size: 1.2rem;
+}
+
+.brand-name .o {
+  color: red;
+  font-size: 0.4em;
+  font-weight: 700;
+  vertical-align: baseline;
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+  background: rgba(255, 255, 255, 1);
+}
+
+/* ========================================
+   ENHANCED BRAND SECTION STYLES
+   ======================================== */
+.brand-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.brand-link:hover .brand-text .brand-name::after {
+  width: 100%;
+}
+
+.brand-link:hover .brand-text .brand-name {
+  color: var(--text-primary, #333333);
+  transform: translateY(-0.1rem);
+}
+
+.brand-link:hover .site-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.brand-logo {
+  width: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 1);
+  padding: 0.25rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brand-text .brand-name{
+  margin: 0;
+}
+
+.brand-text .brand-name::after {
+  content: '';
+  position: absolute;
+  bottom: -0.2rem;
+  left: 0;
+  width: 0;
+  height: 0.2rem;
+  background: var(--text-primary, #333333);
+  transition: width 0.3s ease;
+  border-radius: 0.1rem;
+}
+
+.brand-text .brand-name .zero {
+  color: red;
+  vertical-align: baseline;
+}
+
 /* Tablet & iPad Pro range */
 @media (max-width: 1024px) and (min-width: 769px) {
   .main-content-wrapper {

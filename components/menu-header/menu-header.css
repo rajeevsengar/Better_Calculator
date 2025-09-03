@@ -1,0 +1,106 @@
+/* ========================================
+   MENU HEADER - CALCULATOR LINKS
+   ======================================== */
+   :host {
+    display: block;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 1rem;
+   }
+
+.menu-header {
+    width: 100%;
+    padding: 0.2rem 0;
+    border-bottom: 0.05rem solid var(--border-color, #e0e0e0);
+    overflow-x: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--background-color, #ffffff);
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+
+.calculator-links {
+    height: 100%;
+    width: 90%;
+    max-width: 90%;
+    min-width: max-content; /* Ensure content doesn't shrink */
+    margin: 0 auto;
+    margin-right: 0.5%;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: flex-start; /* Left-aligned instead of center */
+    align-items: center; /* This centers items vertically in flexbox */
+    gap: 1rem;
+    flex-wrap: nowrap;
+}
+
+.calculator-link {
+    color: var(--text-primary, #333333);
+    text-decoration: none;
+    font-size: 1rem; /* Further reduced from 1rem to 0.8rem for more compact menu */
+    font-weight: 500;
+    padding: 0.15rem 0.6rem;
+    border-radius: 0.2rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.calculator-link:hover {
+    background: var(--accent-color);
+    color: var(--text-secondary);
+    transform: translateY(-0.05rem);
+}
+
+.calculator-link.active {
+    color: var(--text-secondary, #2196f3);
+    background: var(--primary-color, rgba(33, 150, 243, 0.15));
+    font-weight: 600;
+}
+
+/* Custom scrollbar styling for horizontal scrolling */
+.menu-header::-webkit-scrollbar {
+    height: 4px; /* Horizontal scrollbar height */
+}
+
+.menu-header::-webkit-scrollbar-track {
+    background: var(--border-color, #e0e0e0);
+    border-radius: 2px;
+}
+
+.menu-header::-webkit-scrollbar-thumb {
+    background: var(--accent-color, #2196f3);
+    border-radius: 2px;
+}
+
+.menu-header::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color, #3b82f6);
+}
+
+@media (max-width: 1024px) {
+ /* Keep menu header visible but adjust toggle position to avoid overlap */
+ .menu-header {
+    display: block;
+    padding: 0.15rem 0;
+  }
+
+  .calculator-links {
+    gap: 0.8rem;
+    justify-content: flex-start; /* Left-aligned on smaller screens */
+  }
+
+  .calculator-link {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+    .menu-header {
+      display: none;
+    }
+}

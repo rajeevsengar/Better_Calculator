@@ -1,11 +1,9 @@
 class SiteHeader extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
   }
 
   connectedCallback() {
-    // Theme selector is already loaded in head, no need to load dynamically
     this.render();
     this.setupEventListeners();
     this.populateContent();
@@ -16,7 +14,6 @@ class SiteHeader extends HTMLElement {
   }
 
   render() {
-    // Determine the correct image paths based on current page
     const currentPath = window.location.pathname;
     const isSubPage = currentPath.includes('/unit-converter') || 
                      currentPath.includes('/bmi-calculator') || 
@@ -29,7 +26,7 @@ class SiteHeader extends HTMLElement {
     
     const imagePrefix = isSubPage ? '../assets/images/' : 'assets/images/';
     
-    this.shadowRoot.innerHTML = `
+    this.innerHTML = `
       <link rel="stylesheet" href="${isSubPage ? '../components/site-header/site-header.css' : 'components/site-header/site-header.css'}">
       
       <!-- Main Header Section -->
@@ -69,9 +66,9 @@ class SiteHeader extends HTMLElement {
             <div class="header-content">
                 <a href="${isSubPage ? '../index.html' : 'index.html'}" class="brand-link">
                     <div class="brand-section">
-                        <img src="${imagePrefix}site_logo.png" alt="Zero Calculator Logo" class="site-logo">
+                        <img src="${imagePrefix}site_logo.png" alt="Zero Calculator Logo" class="brand-logo">
                         <div class="brand-text">
-                            <h1 id="brandName"></h1>
+                            <h1 class="brand-name" id="brandName"></h1>
                             <div id="tagline" class="tagline">
                                 <div class="tagline-line tagline-first"></div>
                                 <div class="tagline-line tagline-second"></div>
@@ -87,18 +84,7 @@ class SiteHeader extends HTMLElement {
                 </div>
             </div>
         </div>
-
-        <div class="menu-header">
-            <div class="header-content">
-                <div class="calculator-links" id="calculatorLinks">
-                    <!-- Calculator links will be populated dynamically -->
-                </div>
-            </div>
-        </div>
-
-
       </header>
-
 
       <!-- Mobile Menu Overlay -->
       <div class="mobile-menu-overlay" id="mobileMenuOverlay">
@@ -115,21 +101,13 @@ class SiteHeader extends HTMLElement {
         </div>
       </div>
     `;
-
-    // Try to load theme selector again after render if it's still not available
-    setTimeout(() => {
-      if (!customElements.get('theme-selector')) {
-        console.log('Theme selector still not available after render, trying again...');
-        // This part is no longer needed as theme selector is loaded in head
-      }
-    }, 500);
   }
 
   setupEventListeners() {
     // Mobile menu toggle
-    const mobileMenuToggle = this.shadowRoot.getElementById('mobileMenuToggle');
-    const mobileMenuOverlay = this.shadowRoot.getElementById('mobileMenuOverlay');
-    const mobileMenuClose = this.shadowRoot.getElementById('mobileMenuClose');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
     if (mobileMenuToggle && mobileMenuOverlay) {
       mobileMenuToggle.addEventListener('click', () => {
@@ -157,15 +135,15 @@ class SiteHeader extends HTMLElement {
   }
 
   setupThemeSwitching() {
-    const themeRadios = this.shadowRoot.querySelectorAll('input[name="theme"]');
-    const variantToggle = this.shadowRoot.querySelector('#variant-toggle');
+    const themeRadios = this.querySelectorAll('input[name="theme"]');
+    const variantToggle = this.querySelector('#variant-toggle');
     
     // Set initial theme based on current state or default
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
     const currentVariant = document.documentElement.getAttribute('data-variant') || 'light';
     
     // Set initial radio button state
-    const initialThemeRadio = this.shadowRoot.querySelector(`input[value="${currentTheme}"]`);
+    const initialThemeRadio = this.querySelector(`input[value="${currentTheme}"]`);
     if (initialThemeRadio) {
       initialThemeRadio.checked = true;
     }
@@ -227,9 +205,9 @@ class SiteHeader extends HTMLElement {
   populateContent() {
     // Get text content from global window object if available
     if (window.getText) {
-      const builtWithLove = this.shadowRoot.getElementById('builtWithLove');
-      const brandName = this.shadowRoot.getElementById('brandName');
-      const tagline = this.shadowRoot.getElementById('tagline');
+      const builtWithLove = document.getElementById('builtWithLove');
+      const brandName = document.getElementById('brandName');
+      const tagline = document.getElementById('tagline');
 
       if (builtWithLove) {
         builtWithLove.textContent = window.getText('header.builtWithLove') || 'Made with ❤️ in India.';
@@ -247,10 +225,10 @@ class SiteHeader extends HTMLElement {
       }
     } else {
       // Fallback content
-      this.shadowRoot.getElementById('builtWithLove').textContent = 'Made with ❤️ in India.';
-      this.shadowRoot.getElementById('brandName').innerHTML = 'zerocalculator<span class="zero">o </span>net';
-      this.shadowRoot.querySelector('.tagline-first').textContent = 'Minimal - Fast - Powerful';
-      this.shadowRoot.querySelector('.tagline-second').textContent = 'Imagined by Human, Designed by AI';
+      document.getElementById('builtWithLove').textContent = 'Made with ❤️ in India.';
+      document.getElementById('brandName').innerHTML = 'zerocalculator<span class="zero">o </span>net';
+      this.querySelector('.tagline-first').textContent = 'Minimal - Fast - Powerful';
+      this.querySelector('.tagline-second').textContent = 'Imagined by Human, Designed by AI';
     }
 
     // Populate calculator links in bottom sub-header
@@ -262,7 +240,7 @@ class SiteHeader extends HTMLElement {
   }
 
   populateCalculatorLinks() {
-    const calculatorLinks = this.shadowRoot.getElementById('calculatorLinks');
+    const calculatorLinks = document.getElementById('calculatorLinks');
     if (!calculatorLinks) return;
 
     const currentPath = window.location.pathname;
@@ -304,7 +282,7 @@ class SiteHeader extends HTMLElement {
         // Remove active class from all calculator links
         linkElements.forEach(l => l.classList.remove('active'));
         // Remove active class from home link
-        const homeLink = this.shadowRoot.getElementById('homeLink');
+        const homeLink = document.getElementById('homeLink');
         if (homeLink) homeLink.classList.remove('active');
         // Add active class to clicked link
         link.classList.add('active');
@@ -313,7 +291,7 @@ class SiteHeader extends HTMLElement {
   }
 
   populateHomeLink() {
-    const homeLink = this.shadowRoot.getElementById('homeLink');
+    const homeLink = document.getElementById('homeLink');
     if (!homeLink) return;
 
     const currentPath = window.location.pathname;
@@ -333,7 +311,7 @@ class SiteHeader extends HTMLElement {
       }
       
       // Remove active class from calculator links
-      const calculatorLinks = this.shadowRoot.querySelectorAll('.calculator-link');
+      const calculatorLinks = this.querySelectorAll('.calculator-link');
       calculatorLinks.forEach(link => link.classList.remove('active'));
       
       // Add active class to home link
@@ -342,7 +320,7 @@ class SiteHeader extends HTMLElement {
   }
 
   populateMobileMenu() {
-    const mobileMenuItems = this.shadowRoot.getElementById('mobileMenuItems');
+    const mobileMenuItems = document.getElementById('mobileMenuItems');
     if (!mobileMenuItems) return;
 
     // Get current page path to determine which menu items to show
@@ -412,7 +390,7 @@ class SiteHeader extends HTMLElement {
   }
 
   startTaglineAnimation() {
-    const taglines = this.shadowRoot.querySelectorAll('.tagline');
+    const taglines = this.querySelectorAll('.tagline');
     if (taglines.length === 0) return;
 
     const animateTime = 3000; // 3 seconds per line
@@ -443,7 +421,7 @@ class SiteHeader extends HTMLElement {
 
   // Public method to trigger tagline animation
   triggerTaglineAnimation() {
-    const taglines = this.shadowRoot.querySelectorAll('.tagline');
+    const taglines = this.querySelectorAll('.tagline');
     taglines.forEach(tagline => {
       tagline.classList.remove('animate');
       setTimeout(() => {
@@ -463,13 +441,13 @@ class SiteHeader extends HTMLElement {
     document.documentElement.setAttribute('data-variant', currentVariant);
 
     // Set initial radio button state
-    const initialThemeRadio = this.shadowRoot.querySelector(`input[value="${currentTheme}"]`);
+    const initialThemeRadio = this.querySelector(`input[value="${currentTheme}"]`);
     if (initialThemeRadio) {
       initialThemeRadio.checked = true;
     }
 
     // Set initial variant toggle state
-    const variantToggle = this.shadowRoot.querySelector('#variant-toggle');
+    const variantToggle = this.querySelector('#variant-toggle');
     if (variantToggle) {
       variantToggle.checked = currentVariant === 'dark';
     }

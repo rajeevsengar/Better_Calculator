@@ -6,11 +6,6 @@
 :host {
   display: block;
   width: 100%;
-  margin-bottom: 1rem;
-
-  /* position: sticky;
-  top: 0;
-  z-index: 100; */
 }
 
 /* ========================================
@@ -205,11 +200,11 @@
    ======================================== */
 .main-header {
     width: 100%;
-    background: linear-gradient(135deg, var(--header-background, #ff9800) 0%, var(--primary-hover, #f57c00) 100%);
+    background: var(--background-color, #ffffff);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 2.5rem 0; /* Even bigger padding for impressive header */
+    padding: 1.5rem 0; /* Even bigger padding for impressive header */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
@@ -229,152 +224,36 @@
 /* ========================================
    ENHANCED BRAND SECTION STYLES
    ======================================== */
-.brand-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.brand-link:hover {
-    transform: translateY(-2px);
-}
-
-.brand-link:hover .brand-text h1::after {
-    width: 100%;
-}
-
-.brand-link:hover .brand-text h1 {
-    color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-0.1rem);
-}
-
-.brand-link:hover .site-logo {
-    transform: scale(1.05);
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
-}
-
-.brand-section {
-    display: flex;
-    align-items: center;
+.header-content .brand-section {
+    align-items: end;
     gap: 1.5rem;
-    flex: 1;
 }
 
-.brand-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.header-content .brand-logo {
+  height: 4rem;
+}
+
+.header-content .brand-text .brand-name{
     gap: 0.75rem;
-    justify-content: center;
 }
 
-.site-logo {
-    height: 4rem;
-    width: auto;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-    border-radius: 0.5rem;
-    background: rgba(255, 255, 255, 1);
-    padding: 0.5rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Logo hover effect now handled by brand-link:hover */
-
-/* Desmos-Style Brand Text */
-
-.brand-text h1 {
+.header-content .brand-text .brand-name {
     font-size: 2.8rem;
     font-weight: 700;
-    margin: 0;
-    color: #fff;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-    transition: all 0.3s ease;
-    position: relative;
 }
 
-.brand-text h1::after {
-    content: '';
-    position: absolute;
-    bottom: -0.2rem;
-    left: 0;
-    width: 0;
-    height: 0.2rem;
-    background: rgba(255, 255, 255, 0.8);
-    transition: width 0.3s ease;
-    border-radius: 0.1rem;
-}
-
-.brand-text h1 .zero {
-    color: red;
+.header-content .brand-text .brand-name .zero {
     font-size: 0.4em;
     font-weight: 700;
-    vertical-align: baseline;
 }
-
 /* Brand text hover effects now handled by brand-link:hover */
-
-/* ========================================
-   MENU HEADER - CALCULATOR LINKS
-   ======================================== */
-.menu-header {
-    width: 100%;
-    background: #333933; /* Green theme's card-background color */
-    padding: 0.2rem 0;
-    border-bottom: 0.05rem solid var(--border-color, #e0e0e0);
-    overflow-x: auto; /* Horizontal scrolling */
-    height: 2rem;
-    display: flex; /* Make it a flexbox container */
-    align-items: center; /* Center items vertically */
-}
-
-.calculator-links {
-    display: flex;
-    justify-content: flex-start; /* Left-aligned instead of center */
-    align-items: center; /* This centers items vertically in flexbox */
-    gap: 1rem;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    min-width: max-content; /* Ensure content doesn't shrink */
-    height: 100%; /* Take full height of parent */
-}
-
-.calculator-link {
-    color: #ffffff; /* Static white text for good contrast on dark green */
-    text-decoration: none;
-    font-size: 0.8rem; /* Further reduced from 1rem to 0.8rem for more compact menu */
-    font-weight: 500;
-    padding: 0.15rem 0.6rem;
-    border-radius: 0.2rem;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-.calculator-link:hover {
-    color: var(--accent-color, #2196f3);
-    background: var(--accent-color-light, rgba(33, 150, 243, 0.1));
-    transform: translateY(-0.05rem);
-}
-
-.calculator-link.active {
-    color: var(--accent-color, #2196f3);
-    background: var(--accent-color-lighter, rgba(33, 150, 243, 0.15));
-    font-weight: 600;
-}
-
-
 
 /* ========================================
    TAGLINE ANIMATION SYSTEM
    ======================================== */
 .tagline {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary, #333333);
   height: 1.5rem;
   line-height: 1.5rem;
   position: relative;
@@ -385,7 +264,7 @@
 }
 
 .tagline:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--text-primary, #333333);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -461,6 +340,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 0.4rem; /* Reduced from 0.5rem */
   backdrop-filter: blur(0.5rem);
+  color: var(--text-primary, #333333);
 }
 
 .mobile-menu-toggle span {
@@ -596,25 +476,6 @@
   background: var(--card-background, #f5f5f5);
 }
 
-/* Custom scrollbar styling for horizontal scrolling */
-.menu-header::-webkit-scrollbar {
-    height: 4px; /* Horizontal scrollbar height */
-}
-
-.menu-header::-webkit-scrollbar-track {
-    background: var(--border-color, #e0e0e0);
-    border-radius: 2px;
-}
-
-.menu-header::-webkit-scrollbar-thumb {
-    background: var(--accent-color, #2196f3);
-    border-radius: 2px;
-}
-
-.menu-header::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color, #3b82f6);
-}
-
 /* ========================================
    RESPONSIVE DESIGN - TABLET BREAKPOINT
    ======================================== */
@@ -628,11 +489,6 @@
     box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   }
   
-  /* Keep menu header visible but adjust toggle position to avoid overlap */
-  .menu-header {
-    display: block;
-  }
-
   /* Left Section Adjustments */
   .top-sub-header {
     gap: 0.5rem;
@@ -651,20 +507,19 @@
     gap: 1rem;
   }
 
-  .brand-section {
+  .header-content .brand-section {
     gap: 1rem;
   }
 
-  .brand-section {
+  .header-content .brand-section {
     gap: 0.75rem;
   }
 
-  .site-logo {
-    height: 2rem;
-    padding: 0.3rem;
+  .header-content .brand-logo {
+    height: 2.5rem;
   }
 
-  .brand-text h1 {
+  .header-content .brand-text .brand-name {
     font-size: 1.4rem;
   }
 
@@ -679,22 +534,6 @@
     line-height: 1rem;
   }
 
-  /* Menu Header Adjustments */
-  .menu-header {
-    padding: 0.15rem 0;
-  }
-
-  .calculator-links {
-    gap: 0.8rem;
-    justify-content: flex-start; /* Left-aligned on smaller screens */
-  }
-
-  .calculator-link {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-  }
-
-
 
   .header-content {
       width: 90%; /* Aligned with calculator-main-container */
@@ -706,7 +545,7 @@
       padding-right: 0; /* Remove fixed padding to align with container */
   }
   /* Brand Text Adjustments */
-  .brand-text h1 {
+  .header-content .brand-text .brand-name {
     font-size: 1.6rem;
     font-weight: 700;
   }
@@ -718,9 +557,6 @@
   }
 
   /* Hide bottom sub-headers on mobile - items go to mobile menu */
-  
-
-
 
   .header-content {
     width: 95%; /* Aligned with calculator-main-container mobile styles */
@@ -774,20 +610,21 @@
 }
 
 @media (max-width: 480px) {
-  .menu-header {
-    display: none;
+  :host {
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   
-  .brand-section {
+  .header-content .brand-section {
     gap: 0.5rem;
   }
 
-  .site-logo {
-    height: 1.5rem;
-    padding: 0.2rem;
+  .header-content .brand-logo {
+    height: 2.5rem;
   }
 
-  .brand-text h1 {
+  .header-content .brand-text .brand-name {
     font-size: 1.2rem;
   }
 

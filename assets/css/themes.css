@@ -157,7 +157,7 @@ html[data-theme="default"][data-variant="light"] {
   --header-background : #000000;
   --primary-color: #000000;
   --primary-hover: #1a1a1a;
-  --accent-color: #cccccc;
+  --accent-color: #636363;
   --background-color: #f8f8f8;
   --surface-color: #f8f8f8;
   --card-background: #ffffff;
@@ -177,7 +177,7 @@ html[data-theme="default"][data-variant="light"] {
 [data-theme="black"][data-variant="dark"] {
   --header-background : #000000;
   --primary-color: white;
-  --primary-hover: #1a1a1a;
+  --primary-hover: white;
   --accent-color: rgba(255, 255, 255, 0.7);
   --background-color: #000000;
   --surface-color: #0a0a0a;

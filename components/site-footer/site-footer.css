@@ -37,26 +37,26 @@ site-footer {
 /* ========================================
    FOOTER BRAND SECTION
    ======================================== */
-.footer-brand {
-  display: flex;
-  align-items: center;
+.brand-section {
   gap: 0.75rem;
 }
 
-.footer-logo {
+.brand-logo {
   height: 2rem;
-  width: auto;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-  transition: all 0.3s ease;
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 1);
-  padding: 0.25rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brand-text .brand-name{
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.brand-text .brand-name .zero {
+  font-size: 0.4em;
+  font-weight: 700;
 }
 
 .footer-description {
-  color: var(--text-secondary, #666666);
+  color: var(--text-primary, #666666);
   font-size: 0.85rem;
   line-height: 1.5;
   max-width: 600px;
@@ -64,50 +64,25 @@ site-footer {
   opacity: 0.9;
 }
 
-.brand-name {
-  font-weight: 600;
-  color: var(--text-primary, #333333);
-  font-size: 1.2rem;
-}
-
-.brand-name .o {
-  color: red;
-  font-size: 0.4em;
-  font-weight: 700;
-  vertical-align: baseline;
-}
-
-.footer-logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
-  background: rgba(255, 255, 255, 1);
-}
-
 /* ========================================
    FOOTER INFO SECTION
    ======================================== */
-.footer-info {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-}
-
 .footer-links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
+  color: var(--text-primary, #666666);
+  font-size: 0.8rem;
 }
 
 .footer-link {
-  color: var(--text-secondary, #666666);
+  display: flex;
+  align-items: center;
+  color: var(--text-primary, #666666);
   text-decoration: none;
-  font-size: 0.8rem;
   transition: all 0.2s ease;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  display: flex;
-  align-items: center;
   gap: 0.5rem;
 }
 
@@ -117,34 +92,6 @@ site-footer {
 }
 
 .footer-link svg {
-  flex-shrink: 0;
-}
-
-.open-source {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-secondary, #666666);
-  font-size: 0.8rem;
-}
-
-.github-link {
-  display: flex;
-  align-items: center;
-  color: var(--text-secondary, #666666);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  gap: 0.5rem;
-}
-
-.github-link:hover {
-  color: var(--accent-color, #2196f3);
-  background: var(--hover-bg, rgba(33, 150, 243, 0.1));
-}
-
-.github-link svg {
   flex-shrink: 0;
 }
 
@@ -163,11 +110,6 @@ site-footer {
     text-align: center;
   }
   
-  .footer-info {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
   .footer-links {
     gap: 0.75rem;
   }
@@ -177,11 +119,11 @@ site-footer {
     max-width: 500px;
   }
   
-  .footer-logo {
+  .brand-logo {
     height: 1.75rem;
   }
   
-  .brand-name {
+  .brand-text {
     font-size: 1.1rem;
   }
 }
@@ -201,109 +143,24 @@ site-footer {
     max-width: 400px;
   }
   
-  .footer-logo {
+  .brand-logo {
     height: 1.5rem;
   }
   
-  .brand-name {
+  .brand-text {
     font-size: 1rem;
   }
   
-  .open-source,
+  .footer-links,
   .copyright {
     font-size: 0.75rem;
   }
 }
 
 /* ========================================
-   THEME SUPPORT
-   ======================================== */
-
-/* Default Theme (Orange) */
-[data-theme="default"] .site-footer {
-  --background-color: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-muted: #999999;
-  --border-color: #e0e0e0;
-  --accent-color: #ff9800;
-  --hover-bg: rgba(255, 152, 0, 0.1);
-  --logo-bg: rgba(255, 255, 255, 0.1);
-  --logo-border: rgba(255, 255, 255, 0.2);
-  --logo-bg-hover: rgba(255, 255, 255, 0.15);
-}
-
-/* Default Theme Dark Variant */
-[data-theme="default"][data-variant="dark"] .site-footer {
-  --background-color: #1f1a1a;
-  --text-primary: #ffffff;
-  --text-secondary: #b0b0b0;
-  --text-muted: #808080;
-  --border-color: #494444;
-  --accent-color: #ffb74d;
-  --hover-bg: rgba(255, 183, 77, 0.1);
-  --logo-bg: rgba(255, 255, 255, 0.1);
-  --logo-border: rgba(255, 255, 255, 0.2);
-  --logo-bg-hover: rgba(255, 255, 255, 0.15);
-}
-
-/* Green Theme */
-[data-theme="green"] .site-footer {
-  --background-color: #ffffff;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-muted: #999999;
-  --border-color: #e0e0e0;
-  --accent-color: #4caf50;
-  --hover-bg: rgba(76, 175, 80, 0.1);
-  --logo-bg: rgba(255, 255, 255, 0.1);
-  --logo-border: rgba(255, 255, 255, 0.2);
-  --logo-bg-hover: rgba(255, 255, 255, 0.15);
-}
-
-/* Green Theme Dark Variant */
-[data-theme="green"][data-variant="dark"] .site-footer {
-  --background-color: #1a1f1a;
-  --text-primary: #ffffff;
-  --text-secondary: #e0e0e0;
-  --text-muted: #b0b0b0;
-  --border-color: #444944;
-  --accent-color: #81c784;
-  --hover-bg: rgba(129, 199, 132, 0.1);
-  --logo-bg: rgba(255, 255, 255, 0.1);
-  --logo-border: rgba(255, 255, 255, 0.2);
-  --logo-bg-hover: rgba(255, 255, 255, 0.15);
-}
-
-/* Black Theme */
-[data-theme="black"] .site-footer {
-  --background-color: #ffffff;
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --text-muted: #999999;
-  --border-color: #e0e0e0;
-  --accent-color: #cccccc;
-  --hover-bg: rgba(204, 204, 204, 0.1);
-  --logo-bg: rgba(255, 255, 255, 0.1);
-  --logo-border: rgba(255, 255, 255, 0.2);
-  --logo-bg-hover: rgba(255, 255, 255, 0.15);
-}
-
-/* Black Theme Dark Variant */
-[data-theme="black"][data-variant="dark"] .site-footer {
-  --background-color: #000000;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-muted: #808080;
-  --border-color: #333333;
-  --accent-color: #ffffff;
-  --hover-bg: rgba(255, 255, 255, 0.1);
-}
-
-/* ========================================
    ACCESSIBILITY & FOCUS STATES
    ======================================== */
-.github-link:focus {
+.footer-link:focus {
   outline: 2px solid var(--accent-color, #2196f3);
   outline-offset: 2px;
   border-radius: 0.25rem;
@@ -318,7 +175,7 @@ site-footer {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .github-link {
+  .footer-link {
     transition: none;
   }
 } 
