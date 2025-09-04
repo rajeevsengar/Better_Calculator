@@ -17,7 +17,7 @@ class SiteFooter extends HTMLElement {
                      currentPath.includes('/time-calculator') || 
                      currentPath.includes('/emi-calculator') || 
                      currentPath.includes('/investment-calculator') ||
-                     currentPath.includes('/about') ||
+                     currentPath.includes('/about-us') ||
                      currentPath.includes('/sitemap');
     
     const cssPath = isSubPage ? '../components/site-footer/site-footer.css' : 'components/site-footer/site-footer.css';
@@ -41,7 +41,7 @@ class SiteFooter extends HTMLElement {
           </div>
           
           <div class="footer-links">
-              <a href="${isSubPage ? '../about/' : 'about/'}" class="footer-link">
+              <a href="${isSubPage ? '../about-us/' : 'about-us/'}" class="footer-link">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                 </svg>
@@ -64,7 +64,7 @@ class SiteFooter extends HTMLElement {
             </div>
             
             <div class="copyright">
-              © 2024 ZeroCalculator. All rights reserved.
+              © 2025 ZeroCalculator. All rights reserved.
             </div>
           </div>
         </div>

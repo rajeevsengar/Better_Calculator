@@ -19,7 +19,7 @@ class MenuHeader extends HTMLElement {
                        currentPath.includes('/time-calculator') || 
                        currentPath.includes('/emi-calculator') || 
                        currentPath.includes('/investment-calculator') ||
-                       currentPath.includes('/about') ||
+                       currentPath.includes('/about-us') ||
                        currentPath.includes('/sitemap');
       
       this.shadowRoot.innerHTML = `
@@ -49,7 +49,7 @@ class MenuHeader extends HTMLElement {
                        currentPath.includes('/time-calculator') || 
                        currentPath.includes('/emi-calculator') || 
                        currentPath.includes('/investment-calculator') ||
-                       currentPath.includes('/about') ||
+                       currentPath.includes('/about-us') ||
                        currentPath.includes('/sitemap');
   
       const baseUrl = isSubPage ? '../' : '';

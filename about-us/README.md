@@ -5,7 +5,7 @@ This folder contains the About Us page for ZeroCalculator.net.
 ## Files
 
 - `index.html` - The main About Us page with the story content
-- `about.css` - Dedicated CSS styles for the About Us page
+- `about-us.css` - Dedicated CSS styles for the About Us page
 - `README.md` - This documentation file
 
 ## Features
