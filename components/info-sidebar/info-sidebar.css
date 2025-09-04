@@ -1,0 +1,90 @@
+/* ========================================
+   INFO SIDEBAR COMPONENT STYLES
+   ======================================== */
+
+info-sidebar {
+  display: block;
+  width: 100%;
+}
+
+.info-sidebar {
+  background: var(--card-background, #ffffff);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px var(--shadow-color, rgba(0, 0, 0, 0.1));
+  position: sticky;
+  top: 2rem;
+}
+
+.info-sidebar h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary, #333333);
+  margin: 0 0 1rem 0;
+}
+
+.info-sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-sidebar-list li {
+  margin-bottom: 0.75rem;
+}
+
+.info-sidebar-list a {
+  color: var(--text-primary, #333333);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.info-sidebar-list a:hover {
+  color: var(--primary-color, #ff6b35);
+  background: var(--hover-bg, rgba(255, 107, 53, 0.1));
+  transform: translateX(0.25rem);
+}
+
+/* ========================================
+   DARK VARIANT OVERRIDES
+   ======================================== */
+[data-variant="dark"] .info-sidebar h3 {
+  color: #ffffff;
+}
+
+[data-variant="dark"] .info-sidebar-list a {
+  color: #ffffff;
+}
+
+[data-variant="dark"] .info-sidebar-list a:hover {
+  color: var(--primary-color, #ff6b35);
+}
+
+/* ========================================
+   LIGHT VARIANT OVERRIDES
+   ======================================== */
+[data-variant="light"] .info-sidebar h3 {
+  color: #333333;
+}
+
+[data-variant="light"] .info-sidebar-list a {
+  color: #333333;
+}
+
+[data-variant="light"] .info-sidebar-list a:hover {
+  color: var(--primary-color, #ff6b35);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .info-sidebar {
+    position: static;
+    margin-top: 1rem;
+  }
+}

@@ -111,6 +111,7 @@ site-footer {
   }
   
   .footer-links {
+    display: ruby;
     gap: 0.75rem;
   }
   

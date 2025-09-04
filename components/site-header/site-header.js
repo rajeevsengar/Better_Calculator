@@ -22,6 +22,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/emi-calculator') || 
                      currentPath.includes('/investment-calculator') ||
                      currentPath.includes('/about-us') ||
+                     currentPath.includes('/contact-us') ||
+                     currentPath.includes('/privacy') ||
+                     currentPath.includes('/terms') ||
                      currentPath.includes('/sitemap');
     
     const imagePrefix = isSubPage ? '../assets/images/' : 'assets/images/';
@@ -251,6 +254,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/emi-calculator') || 
                      currentPath.includes('/investment-calculator') ||
                      currentPath.includes('/about-us') ||
+                     currentPath.includes('/contact-us') ||
+                     currentPath.includes('/privacy') ||
+                     currentPath.includes('/terms') ||
                      currentPath.includes('/sitemap');
 
     const baseUrl = isSubPage ? '../' : '';
@@ -332,6 +338,9 @@ class SiteHeader extends HTMLElement {
                      currentPath.includes('/emi-calculator') || 
                      currentPath.includes('/investment-calculator') ||
                      currentPath.includes('/about-us') ||
+                     currentPath.includes('/contact-us') ||
+                     currentPath.includes('/privacy') ||
+                     currentPath.includes('/terms') ||
                      currentPath.includes('/sitemap');
     
     const baseUrl = isSubPage ? '../' : '';
