@@ -350,6 +350,7 @@
   transition: 0.3s;
   border-radius: 0.125rem; /* Reduced from 0.15rem */
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.3); /* Reduced from 0.5rem */
+  background-color: var(--primary-color, #333333);
 }
 
 .mobile-menu-toggle:hover span {

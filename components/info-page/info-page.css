@@ -116,10 +116,10 @@ info-page {
    ======================================== */
 @media (max-width: 768px) {
   .info-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .info-content {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
