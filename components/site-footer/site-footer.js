@@ -69,7 +69,7 @@ class SiteFooter extends HTMLElement {
             </div>
             
             <div class="copyright">
-              © 2025 ${BRAND_NAME_SHORT}. All rights reserved.
+              © 2025 ${BRAND_NAME}. All rights reserved.
             </div>
           </div>
         </div>
