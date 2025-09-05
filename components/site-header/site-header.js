@@ -17,8 +17,8 @@ class SiteHeader extends HTMLElement {
 
   render() {
     const isSubPage = window.isSubPage();
-    
-    const imagePrefix = isSubPage ? '../assets/images/' : 'assets/images/';
+    const homeURL = window.getURLS().home;
+    const imagePrefix = window.getURLS().imagePrefix;
     
     this.innerHTML = `
       <link rel="stylesheet" href="${isSubPage ? '../components/site-header/site-header.css' : 'components/site-header/site-header.css'}">
@@ -58,7 +58,7 @@ class SiteHeader extends HTMLElement {
         
         <div class="main-header">
             <div class="header-content">
-                <a href="${isSubPage ? '../index.html' : 'index.html'}" class="brand-link">
+                <a href="${homeURL}" class="brand-link">
                     <div class="brand-section">
                         <img src="${imagePrefix}site_logo.png" alt="Zero Calculator Logo" class="brand-logo">
                         <div class="brand-text">
