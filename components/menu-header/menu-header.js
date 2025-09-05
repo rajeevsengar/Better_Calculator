@@ -12,18 +12,7 @@ class MenuHeader extends HTMLElement {
     }
 
     render() {
-      const currentPath = window.location.pathname;
-      const isSubPage = currentPath.includes('/unit-converter') || 
-                       currentPath.includes('/bmi-calculator') || 
-                       currentPath.includes('/date-calculator') || 
-                       currentPath.includes('/time-calculator') || 
-                       currentPath.includes('/emi-calculator') || 
-                       currentPath.includes('/investment-calculator') ||
-                       currentPath.includes('/about-us') ||
-                       currentPath.includes('/contact-us') ||
-                       currentPath.includes('/privacy') ||
-                       currentPath.includes('/terms') ||
-                       currentPath.includes('/sitemap');
+      const isSubPage = window.isSubPage();
       
       this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="${isSubPage ? '../components/menu-header/menu-header.css' : 'components/menu-header/menu-header.css'}">
@@ -44,31 +33,9 @@ class MenuHeader extends HTMLElement {
     populateCalculatorLinks() {
       const calculatorLinks = this.shadowRoot.getElementById('calculatorLinks');
       if (!calculatorLinks) return;
-  
-      const currentPath = window.location.pathname;
-      const isSubPage = currentPath.includes('/unit-converter') || 
-                       currentPath.includes('/bmi-calculator') || 
-                       currentPath.includes('/date-calculator') || 
-                       currentPath.includes('/time-calculator') || 
-                       currentPath.includes('/emi-calculator') || 
-                       currentPath.includes('/investment-calculator') ||
-                       currentPath.includes('/about-us') ||
-                       currentPath.includes('/contact-us') ||
-                       currentPath.includes('/privacy') ||
-                       currentPath.includes('/terms') ||
-                       currentPath.includes('/sitemap');
-  
-      const baseUrl = isSubPage ? '../' : '';
       
-      const links = [
-        { text: 'Unit Converter', url: `${baseUrl}unit-converter/index.html`, active: currentPath.includes('unit-converter') },
-        { text: 'BMI Calculator', url: `${baseUrl}bmi-calculator/index.html`, active: currentPath.includes('bmi-calculator') },
-        { text: 'Date Calculator', url: `${baseUrl}date-calculator/index.html`, active: currentPath.includes('date-calculator') },
-        { text: 'Time Calculator', url: `${baseUrl}time-calculator/index.html`, active: currentPath.includes('time-calculator') },
-        { text: 'EMI Calculator', url: `${baseUrl}emi-calculator/index.html`, active: currentPath.includes('emi-calculator') },
-        { text: 'Investment Calculator', url: `${baseUrl}investment-calculator/index.html`, active: currentPath.includes('investment-calculator') }
-      ];
-  
+      const links = window.initializeCalculatorLinks();
+
       calculatorLinks.innerHTML = links.map(link => {
         const activeClass = link.active ? ' active' : '';
         return `<a href="${link.url}" class="calculator-link${activeClass}">${link.text}</a>`;
@@ -86,9 +53,6 @@ class MenuHeader extends HTMLElement {
           
           // Remove active class from all calculator links
           linkElements.forEach(l => l.classList.remove('active'));
-          // Remove active class from home link
-          const homeLink = this.shadowRoot.getElementById('homeLink');
-          if (homeLink) homeLink.classList.remove('active');
           // Add active class to clicked link
           link.classList.add('active');
         });

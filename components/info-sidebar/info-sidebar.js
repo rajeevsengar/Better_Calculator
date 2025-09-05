@@ -3,10 +3,6 @@
  * A reusable sidebar component for info pages
  * 
  * Usage:
- * <info-sidebar 
- *   sidebar-title="Our Calculators"
- *   sidebar-links='[{"text":"Unit Converter","href":"../unit-converter/"}]'>
- * </info-sidebar>
  */
 
 class InfoSidebar extends HTMLElement {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - ZeroCalculator.net</title>
+    <title id="privacy-title"></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
@@ -39,13 +39,13 @@
     <link rel="stylesheet" href="../components/info-sidebar/info-sidebar.css" />
     
     <!-- Scripts -->
-    <script src="../helpers/calculator-description.js"></script>
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/constants.js"></script>
     <script src="../components/site-header/site-header.js" defer></script>
     <script src="../components/menu-header/menu-header.js" defer></script>
     <script src="../components/site-footer/site-footer.js" defer></script>
     <script src="../components/info-page/info-page.js" defer></script>
     <script src="../components/info-sidebar/info-sidebar.js" defer></script>
-    <script src="../helpers/script.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
   </head>
 
@@ -73,8 +73,9 @@
             <!-- Right Grid: Additional Content -->
             <div class="right-grid">
               <info-sidebar 
+                id="privacy-sidebar"
                 sidebar-title="Legal"
-                sidebar-links='[{"text":"Terms of Service","href":"../terms/"},{"text":"Contact Us","href":"../contact-us/"},{"text":"About Us","href":"../about-us/"}]'>
+                sidebar-links='[]'>
               </info-sidebar>
             </div>
           </div>
@@ -84,6 +85,31 @@
         <site-footer></site-footer>
       </div>
     </div>
+
+    <script>
+      // Initialize page title and sidebar links with dynamic content
+      document.addEventListener('DOMContentLoaded', function() {
+        const brandInfo = window.getBrandInfo();
+        
+        // Set page title
+        const pageTitle = document.getElementById('privacy-title');
+        if (pageTitle) {
+          pageTitle.textContent = `Privacy Policy - ${brandInfo.name}`;
+        }
+        
+        // Initialize sidebar links
+        const sidebar = document.getElementById('privacy-sidebar');
+        if (sidebar) {
+          const urls = window.getURLS();
+          const links = [
+            {"text":"Terms of Service","href":urls.terms},
+            {"text":"Contact Us","href":urls.contactUs},
+            {"text":"About Us","href":urls.aboutUs}
+          ];
+          sidebar.setAttribute('sidebar-links', JSON.stringify(links));
+        }
+      });
+    </script>
     
   </body>
 </html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Terms of Service - ZeroCalculator.net</title>
+    <title id="terms-title"></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
@@ -39,13 +39,13 @@
     <link rel="stylesheet" href="../components/info-sidebar/info-sidebar.css" />
     
     <!-- Scripts -->
-    <script src="../helpers/calculator-description.js"></script>
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/constants.js"></script>
     <script src="../components/site-header/site-header.js" defer></script>
     <script src="../components/menu-header/menu-header.js" defer></script>
     <script src="../components/site-footer/site-footer.js" defer></script>
     <script src="../components/info-page/info-page.js" defer></script>
     <script src="../components/info-sidebar/info-sidebar.js" defer></script>
-    <script src="../helpers/script.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
   </head>
 
@@ -84,6 +84,19 @@
         <site-footer></site-footer>
       </div>
     </div>
+
+    <script>
+      // Initialize page title with dynamic content
+      document.addEventListener('DOMContentLoaded', function() {
+        const brandInfo = window.getBrandInfo();
+        
+        // Set page title
+        const pageTitle = document.getElementById('terms-title');
+        if (pageTitle) {
+          pageTitle.textContent = `Terms of Service - ${brandInfo.name}`;
+        }
+      });
+    </script>
     
   </body>
 </html>

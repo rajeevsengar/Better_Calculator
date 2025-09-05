@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title id="pageTitle">ZeroCalculator.net - The most feature-rich calculator website on the internet</title>
+    <title id="pageTitle"></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon.png" />
@@ -39,33 +39,48 @@
     <link rel="stylesheet" href="assets/css/home-page.css" />
     
     <!-- Scripts -->
-    <script src="helpers/calculator-description.js"></script>
+    <script src="helpers/script.js"></script>
+    <script src="helpers/constants.js"></script>
     <script src="components/site-header/site-header.js" defer></script>
     <script src="components/menu-header/menu-header.js" defer></script>
     <script src="components/site-footer/site-footer.js" defer></script>
     <script src="components/calculator-description/calculator-description.js"></script>
-    <script src="helpers/script.js" defer></script>
     
-    <!-- Iframe Preview Functions -->
+    <!-- Calculator Card Click Handlers -->
     <script>
-      // Make entire calculator card clickable to open calculator
+      // Set page title and make calculator cards clickable
       document.addEventListener('DOMContentLoaded', function() {
-        const calculatorCards = document.querySelectorAll('.calculator-card');
+        const brandInfo = window.getBrandInfo();
+        const pageTitle = document.getElementById('pageTitle');
+        if (pageTitle) {
+          pageTitle.textContent = brandInfo.fullTitle;
+        }
         
-        calculatorCards.forEach(card => {
-          // Make the card clickable (excluding iframe area)
-          card.addEventListener('click', function(e) {
-            // Don't trigger if clicking on the iframe
-            if (e.target.closest('.calculator-iframe')) {
-              return;
-            }
-            
-            // Find the calculator link and open it in same page
-            const calculatorLink = card.querySelector('.open-calculator-btn');
-            if (calculatorLink) {
-              window.location.href = calculatorLink.href;
-            }
-          });
+        const urls = window.getURLS();
+        
+        // Set up click handlers for each calculator card
+        const calculatorMappings = {
+          'emi-calculator-card': urls.emiCalculator,
+          'unit-converter-card': urls.unitConverter,
+          'bmi-calculator-card': urls.bmiCalculator,
+          'date-calculator-card': urls.dateCalculator,
+          'time-calculator-card': urls.timeCalculator,
+          'investment-calculator-card': urls.investmentCalculator
+        };
+        
+        Object.entries(calculatorMappings).forEach(([cardId, url]) => {
+          const card = document.getElementById(cardId);
+          if (card) {
+            card.addEventListener('click', function(e) {
+              // Don't trigger if clicking on the iframe
+              if (e.target.closest('.calculator-iframe')) {
+                return;
+              }
+              
+              // Navigate to the calculator
+              window.location.href = url;
+            });
+          }
         });
       });
     </script>
@@ -88,7 +103,7 @@
             <div class="left-grid">
               <div class="calculator-grid">
                 <!-- EMI Calculator - Featured -->
-                <div class="calculator-card featured" onclick="window.location.href='emi-calculator/'">
+                <div class="calculator-card featured" id="emi-calculator-card">
                   <div class="featured-badge">🏆 Featured</div>
                   <div class="calculator-header">
                     <div class="calculator-icon">💰</div>
@@ -112,7 +127,7 @@
                 </div>
 
                 <!-- Unit Converter -->
-                <div class="calculator-card" onclick="window.location.href='unit-converter/'">
+                <div class="calculator-card" id="unit-converter-card">
                   <div class="calculator-header">
                     <div class="calculator-icon">📏</div>
                     <h2 class="calculator-title">Unit Converter</h2>
@@ -134,7 +149,7 @@
                 </div>
 
                 <!-- BMI Calculator -->
-                <div class="calculator-card" onclick="window.location.href='bmi-calculator/'">
+                <div class="calculator-card" id="bmi-calculator-card">
                   <div class="calculator-header">
                     <div class="calculator-icon">⚖️</div>
                     <h2 class="calculator-title">BMI Calculator</h2>
@@ -156,7 +171,7 @@
                 </div>
 
                 <!-- Date Calculator -->
-                <div class="calculator-card" onclick="window.location.href='date-calculator/'">
+                <div class="calculator-card" id="date-calculator-card">
                   <div class="calculator-header">
                     <div class="calculator-icon">📅</div>
                     <h2 class="calculator-title">Date Calculator</h2>
@@ -179,7 +194,7 @@
                 </div>
 
                 <!-- Time Calculator -->
-                <div class="calculator-card" onclick="window.location.href='time-calculator/'">
+                <div class="calculator-card" id="time-calculator-card">
                   <div class="calculator-header">
                     <div class="calculator-icon">⏰</div>
                     <h2 class="calculator-title">Time Calculator</h2>
@@ -202,7 +217,7 @@
                 </div>
 
                 <!-- Investment Calculator -->
-                <div class="calculator-card" onclick="window.location.href='investment-calculator/'">
+                <div class="calculator-card" id="investment-calculator-card">
                   <div class="calculator-header">
                     <div class="calculator-icon">📈</div>
                     <h2 class="calculator-title">Investment Calculator</h2>

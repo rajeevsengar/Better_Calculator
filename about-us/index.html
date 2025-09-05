@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About Us - ZeroCalculator.net</title>
+    <title id="about-title"></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
@@ -39,13 +39,13 @@
     <link rel="stylesheet" href="../components/info-sidebar/info-sidebar.css" />
     
     <!-- Scripts -->
-    <script src="../helpers/calculator-description.js"></script>
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/constants.js"></script>
     <script src="../components/site-header/site-header.js" defer></script>
     <script src="../components/menu-header/menu-header.js" defer></script>
     <script src="../components/site-footer/site-footer.js" defer></script>
     <script src="../components/info-page/info-page.js" defer></script>
     <script src="../components/info-sidebar/info-sidebar.js" defer></script>
-    <script src="../helpers/script.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
   </head>
 
@@ -65,7 +65,7 @@
             <!-- Left Grid: About Content -->
             <div class="left-grid">
               <info-page 
-                page-title="About ZeroCalculator.net" 
+                page-title="" 
                 content-key="aboutUs.content">
               </info-page>
             </div>
@@ -73,8 +73,9 @@
             <!-- Right Grid: Additional Content -->
             <div class="right-grid">
               <info-sidebar 
+                id="about-sidebar"
                 sidebar-title="Our Calculators"
-                sidebar-links='[{"text":"Unit Converter","href":"../unit-converter/"},{"text":"BMI Calculator","href":"../bmi-calculator/"},{"text":"Date Calculator","href":"../date-calculator/"},{"text":"Time Calculator","href":"../time-calculator/"},{"text":"EMI Calculator","href":"../emi-calculator/"},{"text":"Investment Calculator","href":"../investment-calculator/"}]'>
+                sidebar-links='[]'>
               </info-sidebar>
             </div>
           </div>
@@ -85,6 +86,39 @@
       </div>
     </div>
 
+    <script>
+      // Initialize page title and sidebar links with dynamic content
+      document.addEventListener('DOMContentLoaded', function() {
+        const brandInfo = window.getBrandInfo();
+        
+        // Set page title
+        const pageTitle = document.getElementById('about-title');
+        if (pageTitle) {
+          pageTitle.textContent = `About Us - ${brandInfo.name}`;
+        }
+        
+        // Set info page title
+        const infoPage = document.querySelector('info-page');
+        if (infoPage) {
+          infoPage.setAttribute('page-title', `About ${brandInfo.name}`);
+        }
+        
+        // Initialize sidebar links
+        const sidebar = document.getElementById('about-sidebar');
+        if (sidebar) {
+          const urls = window.getURLS();
+          const links = [
+            {"text":"Unit Converter","href":urls.unitConverter},
+            {"text":"BMI Calculator","href":urls.bmiCalculator},
+            {"text":"Date Calculator","href":urls.dateCalculator},
+            {"text":"Time Calculator","href":urls.timeCalculator},
+            {"text":"EMI Calculator","href":urls.emiCalculator},
+            {"text":"Investment Calculator","href":urls.investmentCalculator}
+          ];
+          sidebar.setAttribute('sidebar-links', JSON.stringify(links));
+        }
+      });
+    </script>
     
   </body>
 </html> 

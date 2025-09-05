@@ -3,12 +3,6 @@
  * A reusable web component for info pages like About Us, Contact, Privacy, Terms, etc.
  * 
  * Usage:
- * <info-page 
- *   page-title="About Us" 
- *   content-key="aboutUs.content"
- *   sidebar-title="Our Calculators"
- *   sidebar-links='[{"text":"Unit Converter","href":"../unit-converter/"}]'>
- * </info-page>
  */
 
 class InfoPage extends HTMLElement {

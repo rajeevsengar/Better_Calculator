@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sitemap - ZeroCalculator.net</title>
+    <title id="sitemap-title"></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
@@ -38,12 +38,12 @@
     <link rel="stylesheet" href="sitemap.css" />
     
     <!-- Scripts -->
-    <script src="../helpers/calculator-description.js"></script>
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/constants.js"></script>
     <script src="../components/site-header/site-header.js" defer></script>
     <script src="../components/menu-header/menu-header.js" defer></script>
     <script src="../components/site-footer/site-footer.js" defer></script>
     <script src="../components/calculator-description/calculator-description.js"></script>
-    <script src="../helpers/script.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
   </head>
@@ -68,21 +68,15 @@
                 
                 <div class="sitemap-section">
                   <h2>Main Pages</h2>
-                  <ul class="sitemap-list">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../about-us/">About Us</a></li>
+                  <ul class="sitemap-list" id="main-pages-list">
+                    <!-- Links will be populated by JavaScript -->
                   </ul>
                 </div>
                 
                 <div class="sitemap-section">
                   <h2>Calculators</h2>
-                  <ul class="sitemap-list">
-                    <div onclick="window.location.href='../unit-converter/'"><li><a>Unit Converter<br><br></a>Convert between different units of measurement</li></div>
-                    <div onclick="window.location.href='../bmi-calculator/'"><li><a>BMI Calculator<br><br></a>Calculate Body Mass Index with age and gender considerations</li></div>
-                    <div onclick="window.location.href='../date-calculator/'"><li><a>Date Calculator<br><br></a>Calculate date differences and perform date arithmetic</li></div>
-                    <div onclick="window.location.href='../time-calculator/'"><li><a>Time Calculator<br><br></a>Calculate time differences and perform time arithmetic</li></div>
-                    <div onclick="window.location.href='../emi-calculator/'"><li><a>EMI Calculator<br><br></a>Calculate Equated Monthly Installments with advanced features</li></div>
-                    <div onclick="window.location.href='../investment-calculator/'"><li><a>Investment Calculator<br><br></a>Calculate investment returns and projections</li></div>
+                  <ul class="sitemap-list" id="calculators-list">
+                    <!-- Links will be populated by JavaScript -->
                   </ul>
                 </div>
               </div>
@@ -92,10 +86,8 @@
             <div class="right-grid">
               <div class="sitemap-sidebar">
                 <h3>Quick Links</h3>
-                <ul class="quick-links">
-                  <li><a href="https://github.com/rajeevsengar/Zero_Calculator" target="_blank">GitHub Repository</a></li>
-                  <li><a href="../about-us/">About ZeroCalculator.net</a></li>
-                  <li><a href="../index.html">Back to Home</a></li>
+                <ul class="quick-links" id="quick-links-list">
+                  <!-- Links will be populated by JavaScript -->
                 </ul>
               </div>
             </div>
@@ -106,5 +98,52 @@
         <site-footer></site-footer>
       </div>
     </div>
+
+    <script>
+      // Initialize page title and sitemap links with dynamic content
+      document.addEventListener('DOMContentLoaded', function() {
+        const brandInfo = window.getBrandInfo();
+        
+        // Set page title
+        const pageTitle = document.getElementById('sitemap-title');
+        if (pageTitle) {
+          pageTitle.textContent = `Sitemap - ${brandInfo.name}`;
+        }
+        
+        const urls = window.getURLS();
+        
+        // Populate main pages
+        const mainPagesList = document.getElementById('main-pages-list');
+        if (mainPagesList) {
+          mainPagesList.innerHTML = `
+            <li><a href="${urls.home}">Home</a></li>
+            <li><a href="${urls.aboutUs}">About Us</a></li>
+          `;
+        }
+        
+        // Populate calculators
+        const calculatorsList = document.getElementById('calculators-list');
+        if (calculatorsList) {
+          calculatorsList.innerHTML = `
+            <div onclick="window.location.href='${urls.unitConverter}'"><li><a>Unit Converter<br><br></a>Convert between different units of measurement</li></div>
+            <div onclick="window.location.href='${urls.bmiCalculator}'"><li><a>BMI Calculator<br><br></a>Calculate Body Mass Index with age and gender considerations</li></div>
+            <div onclick="window.location.href='${urls.dateCalculator}'"><li><a>Date Calculator<br><br></a>Calculate date differences and perform date arithmetic</li></div>
+            <div onclick="window.location.href='${urls.timeCalculator}'"><li><a>Time Calculator<br><br></a>Calculate time differences and perform time arithmetic</li></div>
+            <div onclick="window.location.href='${urls.emiCalculator}'"><li><a>EMI Calculator<br><br></a>Calculate Equated Monthly Installments with advanced features</li></div>
+            <div onclick="window.location.href='${urls.investmentCalculator}'"><li><a>Investment Calculator<br><br></a>Calculate investment returns and projections</li></div>
+          `;
+        }
+        
+        // Populate quick links
+        const quickLinksList = document.getElementById('quick-links-list');
+        if (quickLinksList) {
+          quickLinksList.innerHTML = `
+            <li><a href="${urls.githubUrl}" target="_blank">GitHub Repository</a></li>
+            <li><a href="${urls.aboutUs}">About ${brandInfo.name}</a></li>
+            <li><a href="${urls.home}">Back to Home</a></li>
+          `;
+        }
+      });
+    </script>
   </body>
 </html> 

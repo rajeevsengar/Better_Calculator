@@ -340,6 +340,22 @@ const TEMP_FROM_C = {
 };
 
 /* ============================================================
+   Constants: URLs
+   ============================================================ */
+const GITHUB_REPO_URL = "https://github.com/rajeevsengar/zerocalculator";
+const CONTACT_EMAIL = "contact@zerocalculator.net";
+const PRIVACY_EMAIL = "privacy@zerocalculator.net";
+const LEGAL_EMAIL = "legal@zerocalculator.net";
+const SUPPORT_EMAIL = "support@zerocalculator.net";
+
+/* ============================================================
+   Constants: Brand Information
+   ============================================================ */
+const BRAND_NAME = "zerocalculator.net";
+const BRAND_DOMAIN = "zerocalculator.net";
+const BRAND_TAGLINE = "The most feature-rich calculator website on the internet";
+
+/* ============================================================
    Constants: Modes
    ============================================================ */
 const MODES = [
