@@ -220,7 +220,7 @@ class SiteHeader extends HTMLElement {
     } else {
       // Fallback content
       document.getElementById('builtWithLove').textContent = 'Made with ❤️ in India.';
-      document.getElementById('brandName').innerHTML = 'zerocalculator<span class="zero">o </span>net';
+      document.getElementById('brandName').innerHTML = BRAND_NAME_SHORT + '<span class="zero">o </span>' + DOMAIN_NAME;
       this.querySelector('.tagline-first').textContent = 'Minimal - Fast - Powerful';
       this.querySelector('.tagline-second').textContent = 'Imagined by Human, Designed by AI';
     }

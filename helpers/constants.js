@@ -352,7 +352,9 @@ const SUPPORT_EMAIL = "support@zerocalculator.net";
    Constants: Brand Information
    ============================================================ */
 const BRAND_NAME = "zerocalculator.net";
+const BRAND_NAME_SHORT = "zerocalculator";
 const BRAND_DOMAIN = "zerocalculator.net";
+const DOMAIN_NAME = "net";
 const BRAND_TAGLINE = "The most feature-rich calculator website on the internet";
 
 /* ============================================================

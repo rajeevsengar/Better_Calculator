@@ -19,9 +19,9 @@ class SiteFooter extends HTMLElement {
         <div class="footer-content">
           <a href="${footerData.home}" class="brand-link">
             <div class="brand-section">
-              <img src="${footerData.imagePrefix}site_logo.png" alt="zerocalculator Logo" class="brand-logo">
+              <img src="${footerData.imagePrefix}site_logo.png" alt="${BRAND_NAME_SHORT} Logo" class="brand-logo">
               <div class="brand-text">
-              <h1 class="brand-name">zerocalculator<span class="zero">o </span>net</h1>
+              <h1 class="brand-name">${BRAND_NAME_SHORT}<span class="zero">o </span>${DOMAIN_NAME}</h1>
               </div>
             </div>
           </a>
@@ -69,7 +69,7 @@ class SiteFooter extends HTMLElement {
             </div>
             
             <div class="copyright">
-              © 2025 ZeroCalculator. All rights reserved.
+              © 2025 ${BRAND_NAME_SHORT}. All rights reserved.
             </div>
           </div>
         </div>
