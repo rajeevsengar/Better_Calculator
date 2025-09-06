@@ -41,7 +41,7 @@ class TimeInput extends HTMLElement {
     render() {
         // HTML structure goes here - NO external templates
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/components/time-input/time-input.css">
+            <link rel="stylesheet" href="../../components/time-input/time-input.css">
             <div class="time-input-container size-${this._size}">
                 ${this._showLabel ? `<label class="time-label" for="timeInput">${this._label}</label>` : ''}
                 <div class="input-wrapper">

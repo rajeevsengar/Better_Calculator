@@ -59,6 +59,8 @@
     color: var(--text-primary);
     cursor: pointer;
     padding: 8px 12px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Size variants for input field */
@@ -93,6 +95,7 @@
     display: flex;
     gap: 8px;
     justify-content: flex-start;
+    padding-top: 8px;
 }
 
 /* Quick Link Styling */

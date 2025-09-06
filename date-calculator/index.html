@@ -40,6 +40,7 @@
     <script src="../helpers/constants.js" defer></script>
     <script src="../helpers/text-config.js" defer></script>
     <script src="../helpers/util.js" defer></script>
+    <script src="../helpers/timezone-resolver.js" defer></script>
     <!-- Web Components -->
     <script src="../components/site-header/site-header.js" defer></script>
     <script src="../components/menu-header/menu-header.js" defer></script>
@@ -71,151 +72,176 @@
                 <div class="calculator-main-section">
                   <!-- Date Calculator Section -->
                   <section id="date" class="active-section">
-                            <div class="date-tabs">
-                                <div class="tab-buttons">
-                                    <button class="tab-button active" data-tab="count-days">Count Days</button>
-                                    <button class="tab-button" data-tab="add-days">Add Days</button>
-                                </div>
-                                
-                                <!-- Count Days Tab -->
-                                <div id="count-days" class="tab-content active">
-                                    <!-- Enhanced Mode Toggle -->
-                                    <div id="toggle-slider-enhanced" style="cursor: pointer;" class="enhanced-toggle">
-                                        <div class="toggle-container">
-                                            <label class="toggle-label">Enhanced Mode</label>
-                                            <div class="toggle-switch">
-                                                <input type="checkbox" id="enhancedToggle" />
-                                                <span class="toggle-slider"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- From and To Sections Side by Side -->
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 8px;">
-                                        <!-- From Section -->
-                                        <div class="card">
-                                            <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">Start Date</h4>
-                                            <date-input id="fromDate" label="From Date" size="full" show-label show-quick-links default="now"></date-input>
-                                            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                                                <time-input id="fromTime" label="From Time" size="full" show-label show-quick-links default="now" style="display: none;"></time-input>
-                                                <timezone-input id="fromTimezone" label="From Timezone" size="full" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- To Section -->
-                                        <div class="card">
-                                            <h4 style="margin: 0 0 12px 0; color: var(--text-primary, #1e293b); font-size: 14px; font-weight: 600;">End Date</h4>
-                                            <date-input id="toDate" label="To Date" size="full" show-label show-quick-links default="now"></date-input>
-                                            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                                                <time-input id="toTime" label="To Time" size="full" show-label show-quick-links default="now" style="display: none;"></time-input>
-                                                <timezone-input id="toTimezone" label="To Timezone" size="full" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Add 1 day to end date section -->
-                                    <div id="includeEndDateDiv" class="card">
-                                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                            Include end date in calculation (1 day is added)
-                                            <input type="checkbox" id="includeEndDate" />
-                                        </label>
-                                    </div>
-                                    <!-- Compute Difference Button -->
-                                    <div style="display: flex; gap: 8px; margin-top: 8px; margin-bottom: 16px;">
-                                        <button class="button-primary" onclick="countDays()">
-                                            Compute Difference
-                                        </button>
-                                        <button onclick="clearDates()">Clear</button>
-                                    </div>
-                                    <!-- Result Section at Bottom -->
-                                    <div id="dateResultContainer" style="display: none; margin-top: 16px;">
-                                        <div id="dateResult" class="muted card result-box"></div>
-                                    </div>
-                                </div>
-                                <!-- Add Days Tab -->
-                                <div id="add-days" class="tab-content">
-                                    <!-- Enhanced Mode Toggle -->
-                                    <div class="enhanced-toggle" style="cursor: pointer;" id="toggle-slider-add-days">
-                                        <div class="toggle-container">
-                                            <label class="toggle-label">Show Time Inputs</label>
-                                            <div class="toggle-switch">
-                                                <input type="checkbox" id="addDaysEnhancedToggle" />
-                                                <span class="toggle-slider"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Date Arithmetic -->
-                                    <div class="card" style="display: grid; grid-template-columns: 100%; align-items: stretch;">
-                                        <!-- Date Input -->
-                                        <label>Date Arithmetic</label>
-                                        <date-input id="baseDate" label="Base Date" size="full" show-label show-quick-links default="now"></date-input>
-                                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                                            <time-input id="baseTime" label="Base Time" size="full" show-label show-quick-links default="now" style="display: none;"></time-input>
-                                            <timezone-input id="baseTimezone" label="Base Timezone" size="full" show-label default="now" style="display: none; margin-top: 8px;"></timezone-input>
-                                        </div>
-                                    </div>
-
-                                    <!-- Delta Inputs -->
-                                    <div class="card" style="margin-top: 16px;">
-                                        <label style="display: block; margin-bottom: 12px; font-weight: 500;">Add/Subtract Time</label>
-                                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-                                            <div>
-                                                <label style="margin-bottom: 12px;" class="input-label" for="deltaDays">Days</label>
-                                                <input class="input-field" type="number" id="deltaDays" placeholder="Days" />
-                                            </div>
-                                            <div>
-                                                <label style="margin-bottom: 12px;" class="input-label" for="deltaHours">Hours</label>
-                                                <input class="input-field" type="number" id="deltaHours" placeholder="Hours" />
-                                            </div>
-                                            <div>
-                                                <label style="margin-bottom: 12px;" class="input-label" for="deltaMinutes">Minutes</label>
-                                                <input class="input-field" type="number" id="deltaMinutes" placeholder="Minutes" />
-                                            </div>
-                                            <div>
-                                                <label style="margin-bottom: 12px;" class="input-label" for="deltaSeconds">Seconds</label>
-                                                <input class="input-field" type="number" id="deltaSeconds" placeholder="Seconds" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Operation -->
-                                    <div class="card" style="margin-top: 16px; width: 50%;">
-                                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Operation</label>
-                                        <div id="deltaSignChips" style="display: grid; grid-template-columns: 20% 20%; gap: 12px;">
-                                            <button class="chip selected" data-value="add">Add</button>
-                                            <button class="chip" data-value="subtract">Subtract</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Action Buttons -->
-                                    <div class="card" style="margin-top: 16px;">
-                                        <div style="display: flex; gap: 8px;">
-                                            <button class="button-primary" onclick="addSubtractDays()">
-                                                Apply
-                                            </button>
-                                            <button onclick="clearAddDays()">
-                                                Clear
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Result Section -->
-                                    <div id="dateResultContainer1" style="display: none; margin-top: 16px;">
-                                        <div id="dateMathRes" class="muted card result-box"></div>
+                    <div class="date-tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="count-days">Count Days</button>
+                            <button class="tab-button" data-tab="add-days">Add Days</button>
+                        </div>
+                        
+                        <!-- Count Days Tab -->
+                        <div id="count-days" class="tab-content active">
+                            <!-- Enhanced Mode Toggle -->
+                            <div id="toggle-slider-enhanced" style="cursor: pointer;" class="enhanced-toggle">
+                                <div class="toggle-container">
+                                    <label class="toggle-label">Enhanced Mode</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="enhancedToggle" />
+                                        <span class="toggle-slider"></span>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                            <!-- From and To Sections Side by Side -->
+                            <div style="display: grid; grid-template-columns: 40% 16% 40%; gap: 16px; margin-bottom: 8px;">
+                                <!-- From Section -->
+                                <div class="card">
+                                    <h4 class="input-label">Start Date</h4>
+                                    <date-input id="fromDate" size="full" show-quick-links default="now"></date-input>
+                                    <div id="fromTimeInputs" style="display: none; flex-direction: column;">
+                                        <h4 class="input-label">From Timezone</h4>
+                                        <timezone-input id="fromTimezone" size="full" default="now"></timezone-input>
+                                        <h4 class="input-label">From Time</h4>
+                                        <time-input id="fromTime" size="full" show-quick-links default="now"></time-input>
+                                    </div>
+                                </div>
+                                <div></div>
+                                <!-- To Section -->
+                                <div class="card">
+                                    <h4 class="input-label">End Date</h4>
+                                    <date-input id="toDate" size="full" show-quick-links default="now"></date-input>
+                                    <div id="toTimeInputs" style="display: none; flex-direction: column;">
+                                      <h4 class="input-label">To Timezone</h4>
+                                      <timezone-input id="toTimezone" size="full" default="now"></timezone-input>
+                                      <h4 class="input-label">To Time</h4>
+                                        <time-input id="toTime" size="full" show-quick-links default="now"></time-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add 1 day to end date section -->
+                            <div id="includeEndDateDiv" class="card">
+                                <label style="cursor: pointer; display: grid; grid-template-columns: 5% 80%; gap: 16px; margin-bottom: 8px; margin-top: 32px;">
+                                  <input type="checkbox" id="includeEndDate" />
+                                    Include end date in calculation (1 day is added)
+                                </label>
+                            </div>
+                            <!-- Compute Difference Button -->
+                            <div style="display: flex; gap: 8px; margin-top: 32px; margin-bottom: 16px;">
+                                <button class="button-primary" onclick="countDays()">
+                                    Compute Difference
+                                </button>
+                                <button onclick="clearDates()">Clear</button>
+                            </div>
+                            <!-- Result Section at Bottom -->
+                            <div id="dateResultContainer" style="display: none; margin-top: 16px;">
+                                <div id="dateResult" class="muted card result-box"></div>
+                            </div>
+                        </div>
+                        <!-- Add Days Tab -->
+                        <div id="add-days" class="tab-content">
+                            <!-- Enhanced Mode Toggle -->
+                            <div class="enhanced-toggle" style="cursor: pointer;" id="toggle-slider-add-days">
+                                <div class="toggle-container">
+                                    <label class="toggle-label">Show Time Inputs</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="addDaysEnhancedToggle" />
+                                        <span class="toggle-slider"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Date Arithmetic -->
+                            <div class="card" style="display: grid; grid-template-columns: 100%; align-items: stretch;">
+                                <!-- Date Input -->
+                                <label>Date Arithmetic</label>
+                                <date-input id="baseDate" label="Base Date" size="full" show-label show-quick-links default="now"></date-input>
+                                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                    <label for="baseTime" style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-secondary, #475569); font-weight: 500;">Base Time</label>
+                                    <time-input id="baseTime" size="full" show-quick-links default="now" style="display: none;"></time-input>
+                                    <label for="baseTimezone" style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-secondary, #475569); font-weight: 500;">Base Timezone</label>
+                                    <timezone-input id="baseTimezone" size="full" default="now" style="display: none; margin-top: 8px;"></timezone-input>
+                                </div>
+                            </div>
+
+                            <!-- Date Arithmetic Inputs -->
+                            <div class="card" style="margin-top: 16px;">
+                                <label id="dateArithmeticLabel" style="display: block; margin-bottom: 12px; font-weight: 500;">Add/Subtract Time</label>
+                                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaDays">Days</label>
+                                        <input class="input-field" type="number" id="deltaDays" placeholder="Days" />
+                                    </div>
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaWeeks">Weeks</label>
+                                        <input class="input-field" type="number" id="deltaWeeks" placeholder="Weeks" />
+                                    </div>
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaMonths">Months</label>
+                                        <input class="input-field" type="number" id="deltaMonths" placeholder="Months" />
+                                    </div>
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaYears">Years</label>
+                                        <input class="input-field" type="number" id="deltaYears" placeholder="Years" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Time Arithmetic Inputs (Hidden by default) -->
+                            <div id="timeArithmeticCard" class="card" style="margin-top: 16px; display: none;">
+                                <label id="timeArithmeticLabel" style="display: block; margin-bottom: 12px; font-weight: 500;">Add/Subtract Time</label>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaHours">Hours</label>
+                                        <input class="input-field" type="number" id="deltaHours" placeholder="Hours" />
+                                    </div>
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaMinutes">Minutes</label>
+                                        <input class="input-field" type="number" id="deltaMinutes" placeholder="Minutes" />
+                                    </div>
+                                    <div>
+                                        <label style="margin-bottom: 12px;" class="input-label" for="deltaSeconds">Seconds</label>
+                                        <input class="input-field" type="number" id="deltaSeconds" placeholder="Seconds" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Operation -->
+                            <div class="card" style="margin-top: 16px; width: 50%;">
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500;">Operation</label>
+                                <div id="deltaSignChips" style="display: grid; grid-template-columns: 20% 20%; gap: 12px;">
+                                    <button class="chip selected" data-value="add">Add</button>
+                                    <button class="chip" data-value="subtract">Subtract</button>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="card" style="margin-top: 16px;">
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="button-primary" onclick="addSubtractDays()">
+                                        Apply
+                                    </button>
+                                    <button onclick="clearAddDays()">
+                                        Clear
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Result Section -->
+                            <div id="dateResultContainer1" style="display: none; margin-top: 16px;">
+                                <div id="dateMathRes" class="muted card result-box"></div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                
-                <!-- Right Grid: Ad Space -->
-                <div class="right-grid">
-                  <div class="ad-space">
-                    Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
-                  </div>
+                  </section>
                 </div>
               </div>
+            </div>
+              
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
+          </div>
               
               <!-- Additional Content Wrapper (for calculator description, etc.) -->
               <div class="main-content-wrapper">
@@ -242,15 +268,17 @@
     <!-- Initialize Date Calculator -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Use the static initialization method
-        if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
-          window.DateCalculator.initializeDateCalculator();
-          console.log("Date Calculator initialized successfully");
-        } else {
-          console.error(
-            "Date Calculator not found or initializeDateCalculator not available"
-          );
-        }
+        // Wait for web components to be ready
+        setTimeout(() => {
+          if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
+            window.DateCalculator.initializeDateCalculator();
+            console.log("Date Calculator initialized successfully");
+          } else {
+            console.error(
+              "Date Calculator not found or initializeDateCalculator not available"
+            );
+          }
+        }, 200);
       });
     </script>
   </body>

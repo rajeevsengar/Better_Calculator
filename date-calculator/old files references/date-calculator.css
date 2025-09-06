@@ -1,40 +1,3 @@
-/* Date Calculator Specific Styles */
-
-/* Date Input Field */
-.input-field {
-  padding: 12px 16px;
-  border: 2px solid var(--input-border, #cbd5e1);
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
-  background-color: var(--input-background, #ffffff);
-  color: var(--text-primary, #1e293b);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Size variants for input field */
-.input-field.size-small {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 6px;
-}
-
-.input-field.size-large {
-  padding: 16px 20px;
-  font-size: 18px;
-  border-radius: 10px;
-}
-
-.input-label {
-  margin: 16px 0 12px 0;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--text-primary, #1e293b);
-}
-
 /* Date & Time Calculator Tabs */
 .date-tabs,
 .time-tabs {
@@ -70,8 +33,8 @@
 }
 
 .tab-button.active {
-  background-color: var(--input-background);
-  color: var(--text-primary);
+  background: var(--primary-color);
+  color: white;
   border-bottom-color: var(--primary-color);
 }
 
@@ -81,29 +44,6 @@
 
 .tab-content.active {
   display: block;
-}
-
-/* Result box for date difference */
-.result-box {
-  background: var(--card-background);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 16px;
-  text-align: center;
-}
-
-/* Mobile Date Container */
-.mobile-date-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.mobile-date-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 /* Enhanced Toggle Styles */
@@ -195,37 +135,3 @@
     color: var(--text-primary);
     font-weight: 600;
   }
-
-/* Chip styles for operation selection */
-.chip {
-  padding: 8px 16px;
-  background: var(--card-bg);
-  border: 2px solid var(--border-color);
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-color);
-  transition: all 0.2s ease;
-  text-align: center;
-}
-
-.chip:hover {
-  background: var(--hover-bg);
-  border-color: var(--primary-color);
-}
-
-.chip.selected {
-  background-color: var(--input-background);
-  color: var(--text-primary);
-  border-color: var(--primary-color);
-}
-
-/* Mobile Date input adjustments */
-@media (max-width: 768px) {
-  .mobile-date-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-} 

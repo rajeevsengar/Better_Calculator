@@ -7,6 +7,15 @@ let previousheightUnit, previoudWeightUnit;
 let bmiResultLargeDiv, bmiCategoryDiv, bmiAdditionalInfoDiv, bmiFactsSectionDiv;
 let bmiSpeedometerCanvas, speedometerLegendDiv;
 
+// Static variables to store speedometer parameters for theme changes
+let speedometerParams = {
+  ctx: null,
+  bmi: 0,
+  centerX: 0,
+  centerY: 0,
+  radius: 0
+};
+
 window.BMICalculator = window.BMICalculator || {};
 window.BMICalculator.initializeBMICalculator = initializeBMICalculator;
 
@@ -70,6 +79,9 @@ function initializeBMICalculator() {
     formatFtInField(selectedHeightUnit, heightValInput)
   });
 
+  // Add theme change listener
+  addThemeChangeListener();
+
   // Calculate BMI with default values immediately
   setTimeout(() => {
     computeBMI();
@@ -102,6 +114,28 @@ function weightUnitChangeHandler(weightValInput, selectedWeightUnit){
   // do conversion
   weightValInput.value = convertUnit(weightValInput.value , 'mass', previoudWeightUnit, selectedWeightUnit);
   previoudWeightUnit = selectedWeightUnit;
+}
+
+// Theme change listener
+function addThemeChangeListener() {
+  // Listen for theme changes on the document element
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && 
+          (mutation.attributeName === 'data-theme' || mutation.attributeName === 'data-variant')) {
+        // Theme changed, redraw speedometer text
+        if (speedometerParams.ctx && speedometerParams.bmi > 0) {
+          drawBMIText();
+        }
+      }
+    });
+  });
+  
+  // Start observing theme changes
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme', 'data-variant']
+  });
 }
 
 // Global safety wrapper for updateSpeedometer
@@ -319,6 +353,13 @@ function updateSpeedometer(bmi) {
   const maxRadius = Math.min(width / 2 - 10, height - 40);
   const radius = Math.max(maxRadius, 30); // Minimum radius of 30px
 
+  // Store parameters for theme change redraws
+  speedometerParams.ctx = ctx;
+  speedometerParams.bmi = bmi;
+  speedometerParams.centerX = centerX;
+  speedometerParams.centerY = centerY;
+  speedometerParams.radius = radius;
+
   // Clear canvas
   ctx.clearRect(0, 0, width, height);
 
@@ -398,8 +439,20 @@ function updateSpeedometer(bmi) {
 }
 
 function drawBMIText(ctx, bmi, centerX, centerY, radius) {
-  const style = getComputedStyle(document.documentElement);
-  const textColor = style.getPropertyValue("--text-primary").trim();
+  // Use stored parameters if no arguments provided (for theme changes)
+  if (arguments.length === 0) {
+    if (!speedometerParams.ctx) return;
+    ctx = speedometerParams.ctx;
+    bmi = speedometerParams.bmi;
+    centerX = speedometerParams.centerX;
+    centerY = speedometerParams.centerY;
+    radius = speedometerParams.radius;
+  }
+
+  // Get the current theme to determine appropriate text color
+  const isDarkTheme = document.documentElement.getAttribute('data-variant') === 'dark';
+  // Use appropriate text color based on theme
+  const textColor = isDarkTheme ? '#ffffff' : '#000000';
 
   ctx.font = "16px Arial";
   ctx.fillStyle = textColor;

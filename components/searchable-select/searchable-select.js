@@ -46,10 +46,7 @@ class SearchableSelect extends HTMLElement {
     }
 
     disconnectedCallback() {
-        // Clean up event listeners
-        if (this._outsideClickHandler) {
-            document.removeEventListener('click', this._outsideClickHandler);
-        }
+        // Clean up event listeners - no longer needed since we removed outside click handler
     }
 
     // ============================================================================
@@ -58,21 +55,19 @@ class SearchableSelect extends HTMLElement {
     
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="/components/searchable-select/searchable-select.css">
-            <div class="component-container size-${this._size}">
-                ${this._showLabel ? `<label class="searchable-input-label">${this._label}</label>` : ''}
-                <div class="select-wrapper">
-                    <div class="searchable-select-field" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
-                        <span class="selected-text">${this._getSelectedText()}</span>
-                        <span class="select-arrow">▼</span>
+            <link rel="stylesheet" href="../../components/searchable-select/searchable-select.css">
+            <div class="searchable-select-container size-${this._size}">
+                ${this._showLabel ? `<label class="searchable-select-label">${this._label}</label>` : ''}
+                <div class="searchable-select-input size-${this._size}" tabindex="0" role="combobox" aria-expanded="false" aria-haspopup="listbox">
+                    <span class="selected-text">${this._getSelectedText()}</span>
+                    <span class="select-arrow">▼</span>
+                </div>
+                <div class="searchable-select-dropdown">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search options..." />
                     </div>
-                    <div class="dropdown-panel" style="display: none;">
-                        <div class="search-container">
-                            <input type="text" class="search-input" placeholder="Search options..." />
-                        </div>
-                        <div class="options-list" role="listbox">
-                            ${this._renderOptions()}
-                        </div>
+                    <div class="options-list" role="listbox">
+                        ${this._renderOptions()}
                     </div>
                 </div>
             </div>
@@ -156,13 +151,15 @@ class SearchableSelect extends HTMLElement {
     // ============================================================================
     
     _setupEventListeners() {
-        const trigger = this.shadowRoot.querySelector('.searchable-select-field');
+        const trigger = this.shadowRoot.querySelector('.searchable-select-input');
         const searchInput = this.shadowRoot.querySelector('.search-input');
         const optionsList = this.shadowRoot.querySelector('.options-list');
+        const dropdown = this.shadowRoot.querySelector('.searchable-select-dropdown');
 
         // Toggle dropdown
         trigger.addEventListener('click', (e) => {
             e.stopPropagation();
+            e.preventDefault();
             this._toggleDropdown();
         });
         trigger.addEventListener('keydown', (e) => this._handleTriggerKeydown(e));
@@ -174,17 +171,39 @@ class SearchableSelect extends HTMLElement {
         // Option selection
         optionsList.addEventListener('click', (e) => this._handleOptionClick(e));
 
-        // Close dropdown when clicking outside - use a more reliable approach
-        this._outsideClickHandler = (e) => this._handleOutsideClick(e);
-        document.addEventListener('click', this._outsideClickHandler);
+        // Track mouse position over input and dropdown
+        let isMouseOverInput = false;
+        let isMouseOverDropdown = false;
+
+        // Mouse enter/leave for input
+        trigger.addEventListener('mouseenter', () => {
+            isMouseOverInput = true;
+        });
+        trigger.addEventListener('mouseleave', () => {
+            isMouseOverInput = false;
+            setTimeout(() => this._checkAndCloseDropdown(), 200);
+        });
+
+        // Mouse enter/leave for dropdown
+        dropdown.addEventListener('mouseenter', () => {
+            isMouseOverDropdown = true;
+        });
+        dropdown.addEventListener('mouseleave', () => {
+            isMouseOverDropdown = false;
+            setTimeout(() => this._checkAndCloseDropdown(), 200);
+        });
+
+        // Store references for the check function
+        this._isMouseOverInput = () => isMouseOverInput;
+        this._isMouseOverDropdown = () => isMouseOverDropdown;
     }
 
     _toggleDropdown() {
         if (this._disabled) return;
         
         this._isOpen = !this._isOpen;
-        const dropdown = this.shadowRoot.querySelector('.dropdown-panel');
-        const trigger = this.shadowRoot.querySelector('.searchable-select-field');
+        const dropdown = this.shadowRoot.querySelector('.searchable-select-dropdown');
+        const trigger = this.shadowRoot.querySelector('.searchable-select-input');
         
         if (this._isOpen) {
             dropdown.style.display = 'block';
@@ -233,10 +252,10 @@ class SearchableSelect extends HTMLElement {
         }
     }
 
-    _handleOutsideClick(e) {
-        // Check if the click is outside this component
-        const target = e.target;
-        if (!this.contains(target) && !this.shadowRoot.contains(target)) {
+
+    _checkAndCloseDropdown() {
+        // Close dropdown only if mouse is not over input or dropdown
+        if (this._isOpen && !this._isMouseOverInput() && !this._isMouseOverDropdown()) {
             this._closeDropdown();
         }
     }
@@ -250,8 +269,8 @@ class SearchableSelect extends HTMLElement {
 
     _closeDropdown() {
         this._isOpen = false;
-        const dropdown = this.shadowRoot.querySelector('.dropdown-panel');
-        const trigger = this.shadowRoot.querySelector('.searchable-select-field');
+        const dropdown = this.shadowRoot.querySelector('.searchable-select-dropdown');
+        const trigger = this.shadowRoot.querySelector('.searchable-select-input');
         dropdown.style.display = 'none';
         trigger.setAttribute('aria-expanded', 'false');
         this._searchTerm = '';
@@ -440,7 +459,7 @@ class SearchableSelect extends HTMLElement {
     }
 
     getDropdownPanel() {
-        return this.shadowRoot.querySelector('.dropdown-panel');
+        return this.shadowRoot.querySelector('.searchable-select-dropdown');
     }
 
     getOptionsList() {

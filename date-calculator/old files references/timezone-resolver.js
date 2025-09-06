@@ -423,7 +423,7 @@ const TZ_COUNTRY_MAP = {
   "Atlantic/Faeroe": { country: "Faroe Islands", code: "WET/WEST" }
 };
 
-const TimezoneResolver = {
+export const TimezoneResolver = {
   buildTimezoneRows(timezones) {
     const rows = [];
     const now = new Date();
@@ -536,6 +536,3 @@ const TimezoneResolver = {
     }
   }
 };
-
-// Make TimezoneResolver available globally
-window.TimezoneResolver = TimezoneResolver;

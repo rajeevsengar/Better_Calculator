@@ -83,11 +83,6 @@ class SiteHeader extends HTMLElement {
       <!-- Mobile Menu Overlay -->
       <div class="mobile-menu-overlay" id="mobileMenuOverlay">
         <div class="mobile-menu-content">
-          <div class="mobile-menu-header">
-            <h3>Menu</h3>
-            <button class="mobile-menu-close" id="mobileMenuClose">×</button>
-          </div>
-          
           <!-- Menu Items -->
           <div class="mobile-menu-items" id="mobileMenuItems">
             <!-- Menu items will be populated dynamically -->
@@ -101,17 +96,20 @@ class SiteHeader extends HTMLElement {
     // Mobile menu toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-    const mobileMenuClose = document.getElementById('mobileMenuClose');
 
     if (mobileMenuToggle && mobileMenuOverlay) {
       mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuOverlay.classList.add('active');
-      });
-    }
-
-    if (mobileMenuClose && mobileMenuOverlay) {
-      mobileMenuClose.addEventListener('click', () => {
-        mobileMenuOverlay.classList.remove('active');
+        const isActive = mobileMenuOverlay.classList.contains('active');
+        
+        if (isActive) {
+          // Close menu
+          mobileMenuOverlay.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        } else {
+          // Open menu
+          mobileMenuOverlay.classList.add('active');
+          mobileMenuToggle.classList.add('active');
+        }
       });
     }
 
@@ -120,6 +118,7 @@ class SiteHeader extends HTMLElement {
       mobileMenuOverlay.addEventListener('click', (e) => {
         if (e.target === mobileMenuOverlay) {
           mobileMenuOverlay.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
         }
       });
     }
