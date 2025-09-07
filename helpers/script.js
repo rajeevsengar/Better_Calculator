@@ -57,8 +57,8 @@ function getURLS() {
     // Calculators
     unitConverter: `${baseUrl}general/unit-converter/`,
     bmiCalculator: `${baseUrl}health/bmi-calculator/`,
-    dateCalculator: `${baseUrl}date/date-calculator/`,
-    timeCalculator: `${baseUrl}date/time-calculator/`,
+    dateCalculator: `${baseUrl}date-calculator/date-calculator/`,
+    timeCalculator: `${baseUrl}date-calculator/time-calculator/`,
     emiCalculator: `${baseUrl}finance/emi-calculator/`,
     investmentCalculator: `${baseUrl}finance/investment-calculator/`,
     
@@ -112,8 +112,8 @@ function getScriptPaths() {
     // Calculator scripts
     calculators: {
       bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.js`,
-      dateCalculator: `${baseUrl}date/date-calculator/date-calculator.js`,
-      timeCalculator: `${baseUrl}date/time-calculator/time-calculator.js`,
+      dateCalculator: `${baseUrl}date-calculator/date-calculator/date-calculator.js`,
+      timeCalculator: `${baseUrl}date-calculator/time-calculator/time-calculator.js`,
       emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.js`,
       investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.js`,
       unitConverter: `${baseUrl}general/unit-converter/unit-converter.js`
@@ -153,8 +153,8 @@ function getCSSPaths() {
     // Calculator CSS files
     calculators: {
       bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.css`,
-      dateCalculator: `${baseUrl}date/date-calculator/date-calculator.css`,
-      timeCalculator: `${baseUrl}date/time-calculator/time-calculator.css`,
+      dateCalculator: `${baseUrl}date-calculator/date-calculator/date-calculator.css`,
+      timeCalculator: `${baseUrl}date-calculator/time-calculator/time-calculator.css`,
       emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.css`,
       investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.css`,
       unitConverter: `${baseUrl}general/unit-converter/unit-converter.css`
@@ -311,8 +311,8 @@ function isSubPage() {
   const currentPath = window.location.pathname;
   return currentPath.includes('/general/unit-converter') || 
          currentPath.includes('/health/bmi-calculator') || 
-         currentPath.includes('/date/date-calculator') || 
-         currentPath.includes('/date/time-calculator') || 
+         currentPath.includes('/date-calculator/date-calculator') || 
+         currentPath.includes('/date-calculator/time-calculator') || 
          currentPath.includes('/finance/emi-calculator') || 
          currentPath.includes('/finance/investment-calculator') ||
          currentPath.includes('/footer-pages/about-us') ||

@@ -22,7 +22,7 @@ Calculator/
 │   └── bmi-calculator/
 │       ├── index.html           # BMI Calculator standalone page
 │       └── bmi-calculator.js    # BMI calculation logic
-├── date/
+├── date-calculator/
 │   ├── date-calculator/
 │   │   ├── index.html           # Date Calculator standalone page
 │   │   └── date-calculator.js   # Date calculation logic
@@ -78,8 +78,8 @@ Open `index.html` in the root directory to access all calculators through the ma
 Each calculator can be accessed directly through its respective directory:
 - `general/unit-converter/` - Unit Converter
 - `health/bmi-calculator/` - BMI Calculator
-- `date/date-calculator/` - Date Calculator
-- `date/time-calculator/` - Time Calculator
+- `date-calculator/date-calculator/` - Date Calculator
+- `date-calculator/time-calculator/` - Time Calculator
 - `finance/emi-calculator/` - EMI Calculator
 - `finance/investment-calculator/` - Investment Calculator
 

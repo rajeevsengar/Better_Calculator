@@ -88,7 +88,7 @@ The component uses CSS custom properties that automatically adapt to your site's
   page-title="About ZeroCalculator.net" 
   content-key="aboutUs.content"
   sidebar-title="Our Calculators"
-  sidebar-links='[{"text":"Unit Converter","href":"../general/unit-converter/"},{"text":"BMI Calculator","href":"../health/bmi-calculator/"},{"text":"Date Calculator","href":"../date/date-calculator/"},{"text":"Time Calculator","href":"../date/time-calculator/"},{"text":"EMI Calculator","href":"../finance/emi-calculator/"},{"text":"Investment Calculator","href":"../finance/investment-calculator/"}]'>
+  sidebar-links='[{"text":"Unit Converter","href":"../general/unit-converter/"},{"text":"BMI Calculator","href":"../health/bmi-calculator/"},{"text":"Date Calculator","href":"../date-calculator/date-calculator/"},{"text":"Time Calculator","href":"../date-calculator/time-calculator/"},{"text":"EMI Calculator","href":"../finance/emi-calculator/"},{"text":"Investment Calculator","href":"../finance/investment-calculator/"}]'>
 </info-page>
 ```
 
