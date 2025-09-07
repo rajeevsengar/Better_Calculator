@@ -11,9 +11,10 @@ class SiteFooter extends HTMLElement {
   render() {
     // Get centralized footer links and paths
     const footerData = window.getURLS();
+    const cssPaths = window.getCSSPaths ? window.getCSSPaths() : { components: { siteFooter: footerData.cssPath } };
     
     this.innerHTML = `
-      <link rel="stylesheet" href="${footerData.cssPath}">
+      <link rel="stylesheet" href="${cssPaths.components.siteFooter}">
       
       <footer class="site-footer">
         <div class="footer-content">

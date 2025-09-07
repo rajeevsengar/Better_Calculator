@@ -90,7 +90,7 @@ class TimezoneInput extends HTMLElement {
     
     render() {
         this.shadowRoot.innerHTML = `
-            <link rel="stylesheet" href="../../components/searchable-select/searchable-select.css">
+            <link rel="stylesheet" href="${window.getCSSPaths ? window.getCSSPaths().components.searchableSelect : '../../components/searchable-select/searchable-select.css'}">
             <div class="component-container size-${this._size}">
                 ${this._showLabel ? `<label class="component-label">${this._label}</label>` : ''}
                 <searchable-select
@@ -105,7 +105,16 @@ class TimezoneInput extends HTMLElement {
 
         const timezoneSelect = this.shadowRoot.querySelector('#timezoneSelect');
         if (timezoneSelect) {
-            timezoneSelect.setOptions(this._timezoneOptions);
+            // Wait for the searchable-select component to be fully initialized
+            const trySetOptions = () => {
+                if (timezoneSelect.setOptions && typeof timezoneSelect.setOptions === 'function') {
+                    timezoneSelect.setOptions(this._timezoneOptions);
+                } else {
+                    // Retry after a short delay if setOptions is not available yet
+                    setTimeout(trySetOptions, 10);
+                }
+            };
+            trySetOptions();
         }
     }
 
@@ -298,7 +307,16 @@ class TimezoneInput extends HTMLElement {
         
         const timezoneSelect = this.shadowRoot.querySelector('#timezoneSelect');
         if (timezoneSelect) {
-            timezoneSelect.updateTheme(theme);
+            // Wait for the searchable-select component to be fully initialized
+            const tryUpdateTheme = () => {
+                if (timezoneSelect.updateTheme && typeof timezoneSelect.updateTheme === 'function') {
+                    timezoneSelect.updateTheme(theme);
+                } else {
+                    // Retry after a short delay if updateTheme is not available yet
+                    setTimeout(tryUpdateTheme, 10);
+                }
+            };
+            tryUpdateTheme();
         }
     }
 

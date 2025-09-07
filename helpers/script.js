@@ -55,6 +55,198 @@ function getURLS() {
   };
 }
 
+/**
+ * Centralized script path configuration
+ * Returns all script paths with proper base URL handling
+ * @returns {Object} Object containing all script paths
+ */
+function getScriptPaths() {
+  const isSubPage = window.isSubPage();
+  const baseUrl = isSubPage ? '../' : '';
+  
+  return {
+    // Helper scripts
+    helpers: {
+      script: `${baseUrl}helpers/script.js`,
+      constants: `${baseUrl}helpers/constants.js`,
+      textConfig: `${baseUrl}helpers/text-config.js`,
+      util: `${baseUrl}helpers/util.js`,
+      timezoneResolver: `${baseUrl}helpers/timezone-resolver.js`,
+      bmiFactsConfig: `${baseUrl}helpers/bmi-facts-config.js`
+    },
+    
+    // Component scripts
+    components: {
+      siteHeader: `${baseUrl}components/site-header/site-header.js`,
+      menuHeader: `${baseUrl}components/menu-header/menu-header.js`,
+      siteFooter: `${baseUrl}components/site-footer/site-footer.js`,
+      calculatorDescription: `${baseUrl}components/calculator-description/calculator-description.js`,
+      dateInput: `${baseUrl}components/date-input/date-input.js`,
+      timeInput: `${baseUrl}components/time-input/time-input.js`,
+      timezoneInput: `${baseUrl}components/timezone-input/timezone-input.js`,
+      searchableSelect: `${baseUrl}components/searchable-select/searchable-select.js`,
+      infoPage: `${baseUrl}components/info-page/info-page.js`,
+      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.js`
+    },
+    
+    // Calculator scripts
+    calculators: {
+      bmiCalculator: `${baseUrl}bmi-calculator/bmi-calculator.js`,
+      dateCalculator: `${baseUrl}date-calculator/date-calculator.js`,
+      timeCalculator: `${baseUrl}time-calculator/time-calculator.js`,
+      emiCalculator: `${baseUrl}emi-calculator/emi-calculator.js`,
+      investmentCalculator: `${baseUrl}investment-calculator/investment-calculator.js`,
+      unitConverter: `${baseUrl}unit-converter/unit-converter.js`
+    }
+  };
+}
+
+/**
+ * Centralized CSS path configuration
+ * Returns all CSS paths with proper base URL handling
+ * @returns {Object} Object containing all CSS paths
+ */
+function getCSSPaths() {
+  const isSubPage = window.isSubPage();
+  const baseUrl = isSubPage ? '../' : '';
+  
+  return {
+    // Main CSS files
+    main: {
+      style: `${baseUrl}assets/css/style.css`,
+      misc: `${baseUrl}assets/css/misc.css`,
+      themes: `${baseUrl}assets/css/themes.css`,
+      homePage: `${baseUrl}assets/css/home-page.css`
+    },
+    
+    // Component CSS files
+    components: {
+      siteHeader: `${baseUrl}components/site-header/site-header.css`,
+      menuHeader: `${baseUrl}components/menu-header/menu-header.css`,
+      siteFooter: `${baseUrl}components/site-footer/site-footer.css`,
+      dateInput: `${baseUrl}components/date-input/date-input.css`,
+      timeInput: `${baseUrl}components/time-input/time-input.css`,
+      searchableSelect: `${baseUrl}components/searchable-select/searchable-select.css`,
+      infoPage: `${baseUrl}components/info-page/info-page.css`,
+      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.css`
+    },
+    
+    // Calculator CSS files
+    calculators: {
+      bmiCalculator: `${baseUrl}bmi-calculator/bmi-calculator.css`,
+      dateCalculator: `${baseUrl}date-calculator/date-calculator.css`,
+      timeCalculator: `${baseUrl}time-calculator/time-calculator.css`,
+      emiCalculator: `${baseUrl}emi-calculator/emi-calculator.css`,
+      investmentCalculator: `${baseUrl}investment-calculator/investment-calculator.css`,
+      unitConverter: `${baseUrl}unit-converter/unit-converter.css`
+    },
+    
+    // Page-specific CSS files
+    pages: {
+      sitemap: `${baseUrl}sitemap/sitemap.css`
+    }
+  };
+}
+
+/**
+ * Get script paths for a specific page type
+ * @param {string} pageType - Type of page ('home', 'calculator', 'info')
+ * @param {string} calculatorName - Name of calculator (for calculator pages)
+ * @returns {Array} Array of script objects with src and defer properties
+ */
+function getScriptsForPage(pageType, calculatorName = null) {
+  const scripts = getScriptPaths();
+  const scriptList = [];
+  
+  // Common scripts for all pages - constants must load before script.js
+  scriptList.push({ src: scripts.helpers.constants, defer: false });
+  scriptList.push({ src: scripts.helpers.script, defer: false });
+  scriptList.push({ src: scripts.components.siteHeader, defer: true });
+  scriptList.push({ src: scripts.components.menuHeader, defer: true });
+  scriptList.push({ src: scripts.components.siteFooter, defer: true });
+  
+  if (pageType === 'home') {
+    scriptList.push({ src: scripts.components.calculatorDescription, defer: false });
+  } else if (pageType === 'calculator') {
+    scriptList.push({ src: scripts.helpers.textConfig, defer: true });
+    scriptList.push({ src: scripts.helpers.util, defer: true });
+    scriptList.push({ src: scripts.components.calculatorDescription, defer: true });
+    
+    // Add calculator-specific scripts
+    if (calculatorName && scripts.calculators[calculatorName]) {
+      scriptList.push({ src: scripts.calculators[calculatorName], defer: true });
+    }
+    
+    // Add component scripts based on calculator type
+    if (calculatorName === 'bmiCalculator') {
+      scriptList.push({ src: scripts.helpers.bmiFactsConfig, defer: true });
+    } else if (calculatorName === 'dateCalculator' || calculatorName === 'timeCalculator') {
+      scriptList.push({ src: scripts.helpers.timezoneResolver, defer: true });
+      scriptList.push({ src: scripts.components.dateInput, defer: true });
+      scriptList.push({ src: scripts.components.timeInput, defer: true });
+      scriptList.push({ src: scripts.components.searchableSelect, defer: true });
+      scriptList.push({ src: scripts.components.timezoneInput, defer: true, type: 'module' });
+    }
+  } else if (pageType === 'info') {
+    scriptList.push({ src: scripts.helpers.textConfig, defer: true });
+    scriptList.push({ src: scripts.helpers.util, defer: true });
+    scriptList.push({ src: scripts.components.infoPage, defer: true });
+    scriptList.push({ src: scripts.components.infoSidebar, defer: true });
+  }
+  
+  return scriptList;
+}
+
+/**
+ * Generate script tags HTML for a specific page type
+ * @param {string} pageType - Type of page ('home', 'calculator', 'info')
+ * @param {string} calculatorName - Name of calculator (for calculator pages)
+ * @returns {string} HTML string with script tags
+ */
+function generateScriptTags(pageType, calculatorName = null) {
+  const scripts = getScriptsForPage(pageType, calculatorName);
+  return scripts.map(script => {
+    const typeAttr = script.type ? ` type="${script.type}"` : '';
+    const deferAttr = script.defer ? ' defer' : '';
+    return `    <script src="${script.src}"${typeAttr}${deferAttr}></script>`;
+  }).join('\n');
+}
+
+/**
+ * Generate CSS link tags for a specific page type
+ * @param {string} pageType - Type of page ('home', 'calculator', 'info')
+ * @param {string} calculatorName - Name of calculator (for calculator pages)
+ * @returns {string} HTML string with CSS link tags
+ */
+function generateCSSTags(pageType, calculatorName = null) {
+  const cssPaths = getCSSPaths();
+  const cssList = [];
+  
+  // Common CSS for all pages
+  cssList.push(cssPaths.main.style);
+  cssList.push(cssPaths.main.misc);
+  cssList.push(cssPaths.main.themes);
+  
+  if (pageType === 'home') {
+    cssList.push(cssPaths.main.homePage);
+  } else if (pageType === 'calculator') {
+    // Add calculator-specific CSS
+    if (calculatorName && cssPaths.calculators[calculatorName]) {
+      cssList.push(cssPaths.calculators[calculatorName]);
+    }
+  } else if (pageType === 'info') {
+    cssList.push(cssPaths.components.infoPage);
+    cssList.push(cssPaths.components.infoSidebar);
+    
+    // Add page-specific CSS
+    if (calculatorName === 'sitemap') {
+      cssList.push(cssPaths.pages.sitemap);
+    }
+  }
+  
+  return cssList.map(cssPath => `    <link rel="stylesheet" href="${cssPath}" />`).join('\n');
+}
+
 function getBrandInfo() {
   return {
     name: BRAND_NAME,
@@ -67,15 +259,29 @@ function getBrandInfo() {
 function initializeCalculatorLinks() {
   const currentPath = window.location.pathname;
   const urls = getURLS();
+  const availableCalculators = getAvailableCalculators();
   
-  return [
-    { text: 'Unit Converter', url: urls.unitConverter, active: currentPath.includes('unit-converter') },
-    { text: 'BMI Calculator', url: urls.bmiCalculator, active: currentPath.includes('bmi-calculator') },
-    { text: 'Date Calculator', url: urls.dateCalculator, active: currentPath.includes('date-calculator') },
-    { text: 'Time Calculator', url: urls.timeCalculator, active: currentPath.includes('time-calculator') },
-    { text: 'EMI Calculator', url: urls.emiCalculator, active: currentPath.includes('emi-calculator') },
-    { text: 'Investment Calculator', url: urls.investmentCalculator, active: currentPath.includes('investment-calculator') }
-  ];
+  return availableCalculators.map(calc => ({
+    text: calc.text,
+    url: urls[calc.urlKey] || '#',
+    active: currentPath.includes(calc.urlKey.replace('Calculator', '-calculator').replace('Converter', '-converter'))
+  }));
+}
+
+function initializeCalculatorCategories() {
+  const currentPath = window.location.pathname;
+  const urls = getURLS();
+  const categories = getCalculatorsByCategory();
+  
+  return Object.values(categories).map(category => ({
+    name: category.name,
+    calculators: category.calculators.map(calc => ({
+      text: calc.text,
+      url: urls[calc.urlKey] || '#',
+      active: currentPath.includes(calc.urlKey.replace('Calculator', '-calculator').replace('Converter', '-converter')),
+      available: calc.available !== false
+    }))
+  }));
 }
 /**
  * Centralized function to check if current page is a sub-page
@@ -110,5 +316,11 @@ function isHomePage() {
 window.isSubPage = isSubPage;
 window.isHomePage = isHomePage;
 window.getURLS = getURLS;
+window.getScriptPaths = getScriptPaths;
+window.getCSSPaths = getCSSPaths;
+window.getScriptsForPage = getScriptsForPage;
+window.generateScriptTags = generateScriptTags;
+window.generateCSSTags = generateCSSTags;
 window.getBrandInfo = getBrandInfo;
 window.initializeCalculatorLinks = initializeCalculatorLinks;
+window.initializeCalculatorCategories = initializeCalculatorCategories;

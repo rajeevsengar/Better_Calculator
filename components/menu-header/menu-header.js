@@ -15,34 +15,76 @@ class MenuHeader extends HTMLElement {
       const isSubPage = window.isSubPage();
       
       this.shadowRoot.innerHTML = `
-        <link rel="stylesheet" href="${isSubPage ? '../components/menu-header/menu-header.css' : 'components/menu-header/menu-header.css'}">
+        <link rel="stylesheet" href="${window.getCSSPaths ? window.getCSSPaths().components.menuHeader : 'components/menu-header/menu-header.css'}">
         
         <!-- Menu Header Section -->
-        <header class="site-header">
           <div class="menu-header" style="position: sticky; top: 0; z-index: 100;">
-              <div class="header-content">
-                  <div class="calculator-links" id="calculatorLinks">
-                      <!-- Calculator links will be populated dynamically -->
-                  </div>
+              <div class="header-content" id="calculatorCategories">
+                      <!-- Calculator categories will be populated dynamically -->
               </div>
           </div>
-        </header>
       `;
     }
   
     populateCalculatorLinks() {
-      const calculatorLinks = this.shadowRoot.getElementById('calculatorLinks');
-      if (!calculatorLinks) return;
+      const calculatorCategories = this.shadowRoot.getElementById('calculatorCategories');
+      if (!calculatorCategories) return;
       
-      const links = window.initializeCalculatorLinks();
+      const categories = window.initializeCalculatorCategories();
 
-      calculatorLinks.innerHTML = links.map(link => {
-        const activeClass = link.active ? ' active' : '';
-        return `<a href="${link.url}" class="calculator-link${activeClass}">${link.text}</a>`;
+      calculatorCategories.innerHTML = categories.map(category => {
+        const availableCalculators = category.calculators.filter(calc => calc.available);
+        if (availableCalculators.length === 0) return '';
+        
+        return `
+          <div class="category-dropdown" data-category="${category.name.toLowerCase().replace(/\s+/g, '-')}">
+            <div class="category-toggle">
+              <span>${category.name}</span>
+              <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="category-menu">
+              ${availableCalculators.map(calc => {
+                const activeClass = calc.active ? ' active' : '';
+                return `<a href="${calc.url}" class="calculator-link${activeClass}">${calc.text}</a>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
       }).join('');
   
+      // Add hover handlers for category dropdowns
+      const categoryDropdowns = calculatorCategories.querySelectorAll('.category-dropdown');
+      categoryDropdowns.forEach(dropdown => {
+        const arrow = dropdown.querySelector('.dropdown-arrow');
+        
+        dropdown.addEventListener('mouseenter', () => {
+          // Close other dropdowns
+          categoryDropdowns.forEach(otherDropdown => {
+            if (otherDropdown !== dropdown) {
+              otherDropdown.classList.remove('active');
+              const otherArrow = otherDropdown.querySelector('.dropdown-arrow');
+              if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+            }
+          });
+          
+          // Open current dropdown
+          dropdown.classList.add('active');
+          if (arrow) {
+            arrow.style.transform = 'rotate(180deg)';
+          }
+        });
+        
+        dropdown.addEventListener('mouseleave', () => {
+          // Close current dropdown
+          dropdown.classList.remove('active');
+          if (arrow) {
+            arrow.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+
       // Add click handlers for calculator links
-      const linkElements = calculatorLinks.querySelectorAll('.calculator-link');
+      const linkElements = calculatorCategories.querySelectorAll('.calculator-link');
       linkElements.forEach(link => {
         link.addEventListener('click', (e) => {
           // Check if this link is already active (current page)
@@ -57,9 +99,9 @@ class MenuHeader extends HTMLElement {
           link.classList.add('active');
         });
       });
+
     }
-  
-  
+
   setupThemeSwitching() {
     const themeRadios = this.shadowRoot.querySelectorAll('input[name="theme"]');
     const variantToggle = this.shadowRoot.querySelector('#variant-toggle');

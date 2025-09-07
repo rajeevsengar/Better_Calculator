@@ -8,16 +8,80 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
     
-    <!-- Critical theme initialization to prevent flash -->
+    <!-- Scripts -->
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/script-loader.js"></script>
     <script>
-      // Wait for DOM and CSS to be ready before showing content
+      // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure CSS variables are loaded
+        // Apply data-theme first to prevent flash
         setTimeout(() => {
           if (document.body) {
             document.body.setAttribute('data-theme-applied', 'true');
           }
         }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('info', 'sitemap');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('info').then(() => {
+          // Initialize sitemap after all scripts are loaded
+          const brandInfo = window.getBrandInfo();
+          
+          // Set page title
+          const pageTitle = document.getElementById('sitemap-title');
+          if (pageTitle) {
+            pageTitle.textContent = `Sitemap - ${brandInfo.name}`;
+          }
+          
+          const urls = window.getURLS();
+          
+          // Populate main pages
+          const mainPagesList = document.getElementById('main-pages-list');
+          if (mainPagesList) {
+            mainPagesList.innerHTML = `
+              <li><a href="${urls.home}">Home</a></li>
+              <li><a href="${urls.aboutUs}">About Us</a></li>
+            `;
+          }
+          
+          // Populate calculators using centralized mapping
+          const calculatorsList = document.getElementById('calculators-list');
+          if (calculatorsList) {
+            const categories = window.initializeCalculatorCategories();
+            
+            calculatorsList.innerHTML = categories.map(category => {
+              const availableCalculators = category.calculators.filter(calc => calc.available);
+              if (availableCalculators.length === 0) return '';
+              
+              return `
+                <div class="sitemap-category">
+                  <h3 class="sitemap-category-title">${category.name}</h3>
+                  <div class="sitemap-category-calculators">
+                    ${availableCalculators.map(calc => `
+                      <div onclick="window.location.href='${calc.url || '#'}'" class="sitemap-calculator-item">
+                        <li><a>${calc.text}</a></li>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+          
+          // Populate quick links
+          const quickLinksList = document.getElementById('quick-links-list');
+          if (quickLinksList) {
+            quickLinksList.innerHTML = `
+              <li><a href="${urls.githubUrl}" target="_blank">GitHub Repository</a></li>
+              <li><a href="${urls.aboutUs}">About ${brandInfo.name}</a></li>
+              <li><a href="${urls.home}">Back to Home</a></li>
+            `;
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
       });
       
       // Hide spinner after all resources are loaded
@@ -30,22 +94,6 @@
         }
       });
     </script>
-    
-    <!-- Styles-->
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/themes.css" />
-    <link rel="stylesheet" href="sitemap.css" />
-    
-    <!-- Scripts -->
-    <script src="../helpers/script.js"></script>
-    <script src="../helpers/constants.js"></script>
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="../components/menu-header/menu-header.js" defer></script>
-    <script src="../components/site-footer/site-footer.js" defer></script>
-    <script src="../components/calculator-description/calculator-description.js"></script>
-    <script src="../helpers/text-config.js" defer></script>
-    <script src="../helpers/util.js" defer></script>
   </head>
 
   <body>
@@ -99,51 +147,5 @@
       </div>
     </div>
 
-    <script>
-      // Initialize page title and sitemap links with dynamic content
-      document.addEventListener('DOMContentLoaded', function() {
-        const brandInfo = window.getBrandInfo();
-        
-        // Set page title
-        const pageTitle = document.getElementById('sitemap-title');
-        if (pageTitle) {
-          pageTitle.textContent = `Sitemap - ${brandInfo.name}`;
-        }
-        
-        const urls = window.getURLS();
-        
-        // Populate main pages
-        const mainPagesList = document.getElementById('main-pages-list');
-        if (mainPagesList) {
-          mainPagesList.innerHTML = `
-            <li><a href="${urls.home}">Home</a></li>
-            <li><a href="${urls.aboutUs}">About Us</a></li>
-          `;
-        }
-        
-        // Populate calculators
-        const calculatorsList = document.getElementById('calculators-list');
-        if (calculatorsList) {
-          calculatorsList.innerHTML = `
-            <div onclick="window.location.href='${urls.unitConverter}'"><li><a>Unit Converter<br><br></a>Convert between different units of measurement</li></div>
-            <div onclick="window.location.href='${urls.bmiCalculator}'"><li><a>BMI Calculator<br><br></a>Calculate Body Mass Index with age and gender considerations</li></div>
-            <div onclick="window.location.href='${urls.dateCalculator}'"><li><a>Date Calculator<br><br></a>Calculate date differences and perform date arithmetic</li></div>
-            <div onclick="window.location.href='${urls.timeCalculator}'"><li><a>Time Calculator<br><br></a>Calculate time differences and perform time arithmetic</li></div>
-            <div onclick="window.location.href='${urls.emiCalculator}'"><li><a>EMI Calculator<br><br></a>Calculate Equated Monthly Installments with advanced features</li></div>
-            <div onclick="window.location.href='${urls.investmentCalculator}'"><li><a>Investment Calculator<br><br></a>Calculate investment returns and projections</li></div>
-          `;
-        }
-        
-        // Populate quick links
-        const quickLinksList = document.getElementById('quick-links-list');
-        if (quickLinksList) {
-          quickLinksList.innerHTML = `
-            <li><a href="${urls.githubUrl}" target="_blank">GitHub Repository</a></li>
-            <li><a href="${urls.aboutUs}">About ${brandInfo.name}</a></li>
-            <li><a href="${urls.home}">Back to Home</a></li>
-          `;
-        }
-      });
-    </script>
   </body>
 </html> 

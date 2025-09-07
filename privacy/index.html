@@ -8,16 +8,47 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
     
-    <!-- Critical theme initialization to prevent flash -->
+    <!-- Scripts -->
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/script-loader.js"></script>
     <script>
-      // Wait for DOM and CSS to be ready before showing content
+      // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure CSS variables are loaded
+        // Apply data-theme first to prevent flash
         setTimeout(() => {
           if (document.body) {
             document.body.setAttribute('data-theme-applied', 'true');
           }
         }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('info');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('info').then(() => {
+          // Initialize privacy page after all scripts are loaded
+          const brandInfo = window.getBrandInfo();
+          
+          // Set page title
+          const pageTitle = document.getElementById('privacy-title');
+          if (pageTitle) {
+            pageTitle.textContent = `Privacy Policy - ${brandInfo.name}`;
+          }
+          
+          // Initialize sidebar links
+          const sidebar = document.getElementById('privacy-sidebar');
+          if (sidebar) {
+            const urls = window.getURLS();
+            const links = [
+              {"text":"Terms of Service","href":urls.terms},
+              {"text":"Contact Us","href":urls.contactUs},
+              {"text":"About Us","href":urls.aboutUs}
+            ];
+            sidebar.setAttribute('sidebar-links', JSON.stringify(links));
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
       });
       
       // Hide spinner after all resources are loaded
@@ -30,23 +61,6 @@
         }
       });
     </script>
-    
-    <!-- Styles-->
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/themes.css" />
-    <link rel="stylesheet" href="../components/info-page/info-page.css" />
-    <link rel="stylesheet" href="../components/info-sidebar/info-sidebar.css" />
-    
-    <!-- Scripts -->
-    <script src="../helpers/script.js"></script>
-    <script src="../helpers/constants.js"></script>
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="../components/menu-header/menu-header.js" defer></script>
-    <script src="../components/site-footer/site-footer.js" defer></script>
-    <script src="../components/info-page/info-page.js" defer></script>
-    <script src="../components/info-sidebar/info-sidebar.js" defer></script>
-    <script src="../helpers/text-config.js" defer></script>
   </head>
 
   <body>
@@ -86,30 +100,6 @@
       </div>
     </div>
 
-    <script>
-      // Initialize page title and sidebar links with dynamic content
-      document.addEventListener('DOMContentLoaded', function() {
-        const brandInfo = window.getBrandInfo();
-        
-        // Set page title
-        const pageTitle = document.getElementById('privacy-title');
-        if (pageTitle) {
-          pageTitle.textContent = `Privacy Policy - ${brandInfo.name}`;
-        }
-        
-        // Initialize sidebar links
-        const sidebar = document.getElementById('privacy-sidebar');
-        if (sidebar) {
-          const urls = window.getURLS();
-          const links = [
-            {"text":"Terms of Service","href":urls.terms},
-            {"text":"Contact Us","href":urls.contactUs},
-            {"text":"About Us","href":urls.aboutUs}
-          ];
-          sidebar.setAttribute('sidebar-links', JSON.stringify(links));
-        }
-      });
-    </script>
     
   </body>
 </html>

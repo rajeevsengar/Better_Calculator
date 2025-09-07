@@ -8,16 +8,33 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
     
-    <!-- Critical theme initialization to prevent flash -->
+    <!-- Scripts -->
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/script-loader.js"></script>
     <script>
-      // Wait for DOM and CSS to be ready before showing content
+      // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure CSS variables are loaded
+        // Apply data-theme first to prevent flash
         setTimeout(() => {
           if (document.body) {
             document.body.setAttribute('data-theme-applied', 'true');
           }
         }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('calculator', 'investmentCalculator');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('calculator', 'investmentCalculator').then(() => {
+          // Initialize calculator after all scripts are loaded
+          if (window.Investment && window.Investment.initializeInvestmentCalculator) {
+            window.Investment.initializeInvestmentCalculator();
+          } else {
+            console.error("Investment Calculator not found or initializeInvestmentCalculator not available");
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
       });
       
       // Hide spinner after all resources are loaded
@@ -30,21 +47,6 @@
         }
       });
     </script>
-    <!-- Styles -->
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/themes.css" />
-    <link rel="stylesheet" href="investment-calculator.css" />
-    <!-- Scripts -->
-    <script src="../helpers/script.js"></script>
-    <script src="../helpers/constants.js" defer></script>
-    <script src="../helpers/text-config.js" defer></script>
-    <script src="../helpers/util.js" defer></script>
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="../components/menu-header/menu-header.js" defer></script>
-    <script src="../components/site-footer/site-footer.js" defer></script>
-    <script src="../components/calculator-description/calculator-description.js" defer></script>
-    <script src="investment-calculator.js" defer></script>
 </head>
 <body>
     <div id="initial-loader">
@@ -300,20 +302,5 @@
 
     </div>
     
-    <!-- Initialize Investment Calculator -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        if (
-          window.Investment &&
-          window.Investment.initializeInvestmentCalculator
-        ) {
-          window.Investment.initializeInvestmentCalculator();
-        } else {
-          console.error(
-            "Investment Calculator not found or initializeInvestmentCalculator not available"
-          );
-        }
-      });
-    </script>
   </body>
 </html> 

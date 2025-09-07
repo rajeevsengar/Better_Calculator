@@ -21,7 +21,7 @@ class SiteHeader extends HTMLElement {
     const imagePrefix = window.getURLS().imagePrefix;
     
     this.innerHTML = `
-      <link rel="stylesheet" href="${isSubPage ? '../components/site-header/site-header.css' : 'components/site-header/site-header.css'}">
+      <link rel="stylesheet" href="${window.getCSSPaths ? window.getCSSPaths().components.siteHeader : 'components/site-header/site-header.css'}">
       
       <!-- Main Header Section -->
       <header class="site-header">
@@ -232,12 +232,24 @@ class SiteHeader extends HTMLElement {
     const mobileMenuItems = document.getElementById('mobileMenuItems');
     if (!mobileMenuItems) return;
   
-    let menuItems = window.initializeCalculatorLinks();
+    const categories = window.initializeCalculatorCategories();
     
-    // Render menu items
-    mobileMenuItems.innerHTML = menuItems.map(item => {
-      const activeClass = item.active ? ' active' : '';
-      return `<a href="${item.url}" class="mobile-item mobile-link${activeClass}">${item.text}</a>`;
+    // Render menu items with categories
+    mobileMenuItems.innerHTML = categories.map(category => {
+      const availableCalculators = category.calculators.filter(calc => calc.available);
+      if (availableCalculators.length === 0) return '';
+      
+      return `
+        <div class="mobile-category-group">
+          <div class="mobile-category-header">${category.name}</div>
+          <div class="mobile-category-calculators">
+            ${availableCalculators.map(calc => {
+              const activeClass = calc.active ? ' active' : '';
+              return `<a href="${calc.url}" class="mobile-item mobile-link${activeClass}">${calc.text}</a>`;
+            }).join('')}
+          </div>
+        </div>
+      `;
     }).join('');
   }
   

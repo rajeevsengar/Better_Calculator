@@ -438,16 +438,36 @@
   margin-bottom: 2rem; /* Reduced from 3rem */
 }
 
+.mobile-category-group {
+  margin-bottom: 1.5rem;
+}
+
+.mobile-category-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-color, #666666);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.mobile-category-calculators {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
 .mobile-item {
-  padding: 1rem; /* Reduced from 1.5rem */
-  margin-bottom: 0.75rem; /* Reduced from 1rem */
-  border-radius: 0.5rem;
+  margin-bottom: 0.1rem; /* Minimal margin */
+  border-radius: 0.4rem;
   cursor: pointer;
   transition: background-color 0.2s;
-  min-height: 3rem; /* Reduced from 4rem */
+  min-height: 2rem; /* More compact */
   display: flex;
   align-items: center;
-  font-size: 1.4rem; /* Reduced from 1.8rem */
+  font-size: 1.1rem; /* Smaller font */
   font-weight: 500;
   color: var(--text-primary, #333);
 }
@@ -457,6 +477,7 @@
 }
 
 .mobile-item.active {
+  padding: 0.25rem;
   background: var(--accent-color, #2196f3);
   color: var(--background-color, #ffffff);
 }
@@ -605,9 +626,8 @@
   
   /* Further reduce mobile menu items on very small screens */
   .mobile-item {
-    padding: 0.875rem; /* Reduced from 1rem */
     margin-bottom: 0.5rem; /* Reduced from 0.75rem */
-    min-height: 2.5rem; /* Reduced from 3rem */
+    min-height: 2rem; /* Reduced from 3rem */
     font-size: 1.2rem; /* Reduced from 1.4rem */
   }
   

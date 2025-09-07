@@ -8,16 +8,33 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
     
-    <!-- Critical theme initialization to prevent flash -->
+    <!-- Scripts -->
+    <script src="../helpers/script.js"></script>
+    <script src="../helpers/script-loader.js"></script>
     <script>
-      // Wait for DOM and CSS to be ready before showing content
+      // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure CSS variables are loaded
+        // Apply data-theme first to prevent flash
         setTimeout(() => {
           if (document.body) {
             document.body.setAttribute('data-theme-applied', 'true');
           }
         }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('calculator', 'dateCalculator');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('calculator', 'dateCalculator').then(() => {
+          // Initialize calculator after all scripts are loaded
+          if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
+            window.DateCalculator.initializeDateCalculator();
+          } else {
+            console.error("Date Calculator not found or initializeDateCalculator not available");
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
       });
       
       // Hide spinner after all resources are loaded
@@ -30,27 +47,6 @@
         }
       });
     </script>
-    
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/misc.css" />
-    <link rel="stylesheet" href="../assets/css/themes.css" />
-    <link rel="stylesheet" href="date-calculator.css" />
-    <!-- Scripts -->
-    <script src="../helpers/script.js"></script>
-    <script src="../helpers/constants.js" defer></script>
-    <script src="../helpers/text-config.js" defer></script>
-    <script src="../helpers/util.js" defer></script>
-    <script src="../helpers/timezone-resolver.js" defer></script>
-    <!-- Web Components -->
-    <script src="../components/site-header/site-header.js" defer></script>
-    <script src="../components/menu-header/menu-header.js" defer></script>
-    <script src="../components/site-footer/site-footer.js" defer></script>
-    <script src="../components/date-input/date-input.js" defer></script>
-    <script src="../components/time-input/time-input.js" defer></script>
-    <script src="../components/searchable-select/searchable-select.js" defer></script>
-    <script type="module" src="../components/timezone-input/timezone-input.js" defer></script>
-    <script src="../components/calculator-description/calculator-description.js" defer></script>
-    <script src="date-calculator.js" defer></script>
 
 </head>
 <body>
@@ -91,7 +87,7 @@
                                 </div>
                             </div>
                             <!-- From and To Sections Side by Side -->
-                            <div style="display: grid; grid-template-columns: 40% 16% 40%; gap: 16px; margin-bottom: 8px;">
+                            <div class="count-days-grid" style="display: grid; grid-template-columns: 40% 16% 40%; gap: 16px; margin-bottom: 8px;">
                                 <!-- From Section -->
                                 <div class="card">
                                     <h4 class="input-label">Start Date</h4>
@@ -265,21 +261,5 @@
 
     </div>
     
-    <!-- Initialize Date Calculator -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Wait for web components to be ready
-        setTimeout(() => {
-          if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
-            window.DateCalculator.initializeDateCalculator();
-            console.log("Date Calculator initialized successfully");
-          } else {
-            console.error(
-              "Date Calculator not found or initializeDateCalculator not available"
-            );
-          }
-        }, 200);
-      });
-    </script>
   </body>
 </html> 

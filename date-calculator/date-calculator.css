@@ -228,4 +228,15 @@
     flex-direction: column;
     gap: 16px;
   }
+  
+  /* Count Days Grid - Remove 16% spacer div in mobile */
+  .count-days-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .count-days-grid > div:empty {
+    display: none !important;
+  }
 } 

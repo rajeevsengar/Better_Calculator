@@ -9,16 +9,60 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon.png" />
     
-    <!-- Critical theme initialization to prevent flash -->
+    <!-- Scripts -->
+    <script src="helpers/script.js"></script>
+    <script src="helpers/script-loader.js"></script>
     <script>
-      // Wait for DOM and CSS to be ready before showing content
+      // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
-        // Small delay to ensure CSS variables are loaded
+        // Apply data-theme first to prevent flash
         setTimeout(() => {
           if (document.body) {
             document.body.setAttribute('data-theme-applied', 'true');
           }
         }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('home');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('home').then(() => {
+          // Initialize home page after all scripts are loaded
+          const brandInfo = window.getBrandInfo();
+          const pageTitle = document.getElementById('pageTitle');
+          if (pageTitle) {
+            pageTitle.textContent = brandInfo.fullTitle;
+          }
+          
+          const urls = window.getURLS();
+        
+          // Set up click handlers for each calculator card
+          const calculatorMappings = {
+            'emi-calculator-card': urls.emiCalculator,
+            'unit-converter-card': urls.unitConverter,
+            'bmi-calculator-card': urls.bmiCalculator,
+            'date-calculator-card': urls.dateCalculator,
+            'time-calculator-card': urls.timeCalculator,
+            'investment-calculator-card': urls.investmentCalculator
+          };
+          
+          Object.entries(calculatorMappings).forEach(([cardId, url]) => {
+            const card = document.getElementById(cardId);
+            if (card) {
+              card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on the iframe
+                if (e.target.closest('.calculator-iframe')) {
+                  return;
+                }
+                
+                // Navigate to the calculator
+                window.location.href = url;
+              });
+            }
+          });
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
       });
       
       // Hide spinner after all resources are loaded
@@ -29,59 +73,6 @@
           loader.style.display = 'none';
           app.style.display = 'block';
         }
-      });
-    </script>
-    
-    <!-- Styles-->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/misc.css" />
-    <link rel="stylesheet" href="assets/css/themes.css" />
-    <link rel="stylesheet" href="assets/css/home-page.css" />
-    
-    <!-- Scripts -->
-    <script src="helpers/script.js"></script>
-    <script src="helpers/constants.js"></script>
-    <script src="components/site-header/site-header.js" defer></script>
-    <script src="components/menu-header/menu-header.js" defer></script>
-    <script src="components/site-footer/site-footer.js" defer></script>
-    <script src="components/calculator-description/calculator-description.js"></script>
-    
-    <!-- Calculator Card Click Handlers -->
-    <script>
-      // Set page title and make calculator cards clickable
-      document.addEventListener('DOMContentLoaded', function() {
-        const brandInfo = window.getBrandInfo();
-        const pageTitle = document.getElementById('pageTitle');
-        if (pageTitle) {
-          pageTitle.textContent = brandInfo.fullTitle;
-        }
-        
-        const urls = window.getURLS();
-        
-        // Set up click handlers for each calculator card
-        const calculatorMappings = {
-          'emi-calculator-card': urls.emiCalculator,
-          'unit-converter-card': urls.unitConverter,
-          'bmi-calculator-card': urls.bmiCalculator,
-          'date-calculator-card': urls.dateCalculator,
-          'time-calculator-card': urls.timeCalculator,
-          'investment-calculator-card': urls.investmentCalculator
-        };
-        
-        Object.entries(calculatorMappings).forEach(([cardId, url]) => {
-          const card = document.getElementById(cardId);
-          if (card) {
-            card.addEventListener('click', function(e) {
-              // Don't trigger if clicking on the iframe
-              if (e.target.closest('.calculator-iframe')) {
-                return;
-              }
-              
-              // Navigate to the calculator
-              window.location.href = url;
-            });
-          }
-        });
       });
     </script>
   </head>

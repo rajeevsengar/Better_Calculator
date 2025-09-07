@@ -371,3 +371,63 @@ const MODES = [
   { value: "speed", label: "Speed" },
   { value: "time", label: "Time" },
 ];
+
+/* ============================================================
+   Constants: Calculator Categories and Mappings
+   ============================================================ */
+const CALCULATOR_CATEGORIES = {
+  general: {
+    name: "General",
+    calculators: [
+      { text: "Unit Converter", urlKey: "unitConverter", description: "Convert between different units of measurement" },
+      { text: "Currency Converter", urlKey: "currencyConverter", description: "Convert between different currencies", available: false },
+      { text: "Tip Calculator", urlKey: "tipCalculator", description: "Calculate tips and split bills", available: false }
+    ]
+  },
+  health: {
+    name: "Health",
+    calculators: [
+      { text: "BMI Calculator", urlKey: "bmiCalculator", description: "Calculate Body Mass Index with age and gender considerations" },
+      { text: "Body Fat Calculator", urlKey: "bodyFatCalculator", description: "Calculate body fat percentage", available: false },
+      { text: "Water Intake Calculator", urlKey: "waterIntakeCalculator", description: "Calculate daily water intake needs", available: false },
+      { text: "Sleep Calculator", urlKey: "sleepCalculator", description: "Calculate optimal sleep cycles", available: false }
+    ]
+  },
+  dateTime: {
+    name: "Date and Time",
+    calculators: [
+      { text: "Date Calculator", urlKey: "dateCalculator", description: "Calculate date differences and perform date arithmetic" },
+      { text: "Time Calculator", urlKey: "timeCalculator", description: "Calculate time differences and perform time arithmetic" },
+      { text: "Timezone Converter", urlKey: "timezoneConverter", description: "Convert between different timezones", available: false },
+      { text: "Age Calculator", urlKey: "ageCalculator", description: "Calculate age in different formats", available: false }
+    ]
+  },
+  finance: {
+    name: "Finance",
+    calculators: [
+      { text: "Investment Calculator", urlKey: "investmentCalculator", description: "Calculate investment returns and projections" },
+      { text: "EMI Calculator", urlKey: "emiCalculator", description: "Calculate Equated Monthly Installments with advanced features" }
+    ]
+  }
+};
+
+// Helper function to get all available calculators (excluding unavailable ones)
+function getAvailableCalculators() {
+  const available = [];
+  Object.values(CALCULATOR_CATEGORIES).forEach(category => {
+    category.calculators.forEach(calc => {
+      if (calc.available !== false) {
+        available.push({
+          ...calc,
+          category: category.name
+        });
+      }
+    });
+  });
+  return available;
+}
+
+// Helper function to get calculators by category
+function getCalculatorsByCategory() {
+  return CALCULATOR_CATEGORIES;
+}
