@@ -12,8 +12,6 @@ class MenuHeader extends HTMLElement {
     }
 
     render() {
-      const isSubPage = window.isSubPage();
-      
       this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="${window.getCSSPaths ? window.getCSSPaths().components.menuHeader : 'components/menu-header/menu-header.css'}">
         

@@ -18,24 +18,34 @@ The project is now modularized with each calculator having its own directory and
 ```
 Calculator/
 ├── index.html                    # Main hub with calculator previews and navigation
-├── unit-converter/
-│   ├── index.html               # Unit Converter standalone page
-│   └── unit-converter.js        # Unit conversion logic
-├── bmi-calculator/
-│   ├── index.html               # BMI Calculator standalone page
-│   └── bmi-calculator.js        # BMI calculation logic
-├── date-calculator/
-│   ├── index.html               # Date Calculator standalone page
-│   └── date-calculator.js       # Date calculation logic
-├── time-calculator/
-│   ├── index.html               # Time Calculator standalone page
-│   └── time-calculator.js       # Time calculation logic
-├── emi-calculator/
-│   ├── index.html               # EMI Calculator standalone page
-│   └── emi-calculator.js        # EMI calculation logic
-├── investment-calculator/
-│   ├── index.html               # Investment Calculator standalone page
-│   └── investment-calculator.js # Investment calculation logic
+├── health/
+│   └── bmi-calculator/
+│       ├── index.html           # BMI Calculator standalone page
+│       └── bmi-calculator.js    # BMI calculation logic
+├── date/
+│   ├── date-calculator/
+│   │   ├── index.html           # Date Calculator standalone page
+│   │   └── date-calculator.js   # Date calculation logic
+│   └── time-calculator/
+│       ├── index.html           # Time Calculator standalone page
+│       └── time-calculator.js   # Time calculation logic
+├── finance/
+│   ├── emi-calculator/
+│   │   ├── index.html           # EMI Calculator standalone page
+│   │   └── emi-calculator.js    # EMI calculation logic
+│   └── investment-calculator/
+│       ├── index.html           # Investment Calculator standalone page
+│       └── investment-calculator.js # Investment calculation logic
+├── general/
+│   └── unit-converter/
+│       ├── index.html           # Unit Converter standalone page
+│       └── unit-converter.js    # Unit conversion logic
+├── footer-pages/
+│   ├── about-us/
+│   ├── contact-us/
+│   ├── privacy/
+│   ├── terms/
+│   └── sitemap/
 ├── timezone_calculator/
 │   └── timezone_calculator.js   # Timezone conversion logic
 ├── components/                   # Web components (date-input, time-input, etc.)
@@ -66,12 +76,12 @@ Open `index.html` in the root directory to access all calculators through the ma
 
 ### Individual Calculators
 Each calculator can be accessed directly through its respective directory:
-- `unit-converter/` - Unit Converter
-- `bmi-calculator/` - BMI Calculator
-- `date-calculator/` - Date Calculator
-- `time-calculator/` - Time Calculator
-- `emi-calculator/` - EMI Calculator
-- `investment-calculator/` - Investment Calculator
+- `general/unit-converter/` - Unit Converter
+- `health/bmi-calculator/` - BMI Calculator
+- `date/date-calculator/` - Date Calculator
+- `date/time-calculator/` - Time Calculator
+- `finance/emi-calculator/` - EMI Calculator
+- `finance/investment-calculator/` - Investment Calculator
 
 ## Technical Details
 

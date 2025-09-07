@@ -29,7 +29,7 @@ A reusable web component for creating consistent info pages like About Us, Conta
   page-title="Contact Us" 
   content-key="contact.content"
   sidebar-title="Quick Links"
-  sidebar-links='[{"text":"Unit Converter","href":"../unit-converter/"},{"text":"BMI Calculator","href":"../bmi-calculator/"}]'>
+  sidebar-links='[{"text":"Unit Converter","href":"../general/unit-converter/"},{"text":"BMI Calculator","href":"../health/bmi-calculator/"}]'>
 </info-page>
 ```
 
@@ -88,7 +88,7 @@ The component uses CSS custom properties that automatically adapt to your site's
   page-title="About ZeroCalculator.net" 
   content-key="aboutUs.content"
   sidebar-title="Our Calculators"
-  sidebar-links='[{"text":"Unit Converter","href":"../unit-converter/"},{"text":"BMI Calculator","href":"../bmi-calculator/"},{"text":"Date Calculator","href":"../date-calculator/"},{"text":"Time Calculator","href":"../time-calculator/"},{"text":"EMI Calculator","href":"../emi-calculator/"},{"text":"Investment Calculator","href":"../investment-calculator/"}]'>
+  sidebar-links='[{"text":"Unit Converter","href":"../general/unit-converter/"},{"text":"BMI Calculator","href":"../health/bmi-calculator/"},{"text":"Date Calculator","href":"../date/date-calculator/"},{"text":"Time Calculator","href":"../date/time-calculator/"},{"text":"EMI Calculator","href":"../finance/emi-calculator/"},{"text":"Investment Calculator","href":"../finance/investment-calculator/"}]'>
 </info-page>
 ```
 

@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title id="terms-title"></title>
+    <title id="contact-title"></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon.png" />
     
     <!-- Scripts -->
-    <script src="../helpers/script.js"></script>
-    <script src="../helpers/script-loader.js"></script>
+    <script src="../../helpers/script.js"></script>
+    <script src="../../helpers/script-loader.js"></script>
     <script>
       // Initialize page with centralized CSS and script loading
       document.addEventListener('DOMContentLoaded', function() {
@@ -26,13 +26,25 @@
         
         // Then load scripts and initialize
         window.loadScriptsForPage('info').then(() => {
-          // Initialize terms page after all scripts are loaded
+          // Initialize contact-us page after all scripts are loaded
           const brandInfo = window.getBrandInfo();
           
           // Set page title
-          const pageTitle = document.getElementById('terms-title');
+          const pageTitle = document.getElementById('contact-title');
           if (pageTitle) {
-            pageTitle.textContent = `Terms of Service - ${brandInfo.name}`;
+            pageTitle.textContent = `Contact Us - ${brandInfo.name}`;
+          }
+          
+          // Initialize sidebar links
+          const sidebar = document.getElementById('contact-sidebar');
+          if (sidebar) {
+            const urls = window.getURLS();
+            const links = [
+              {"text":"FAQ","href":urls.faqUrl},
+              {"text":"Report Bug","href":urls.contactEmail},
+              {"text":"Feature Request","href":urls.contactEmail}
+            ];
+            sidebar.setAttribute('sidebar-links', JSON.stringify(links));
           }
         }).catch(error => {
           console.error('Failed to load scripts:', error);
@@ -64,19 +76,20 @@
 
         <main>
           <div class="main-content-wrapper">
-            <!-- Left Grid: Terms Content -->
+            <!-- Left Grid: Contact Content -->
             <div class="left-grid">
               <info-page 
-                page-title="Terms of Service" 
-                content-key="terms.content">
+                page-title="Contact Us" 
+                content-key="contact.content">
               </info-page>
             </div>
             
             <!-- Right Grid: Additional Content -->
             <div class="right-grid">
               <info-sidebar 
-                sidebar-title="Legal"
-                sidebar-links='[{"text":"Privacy Policy","href":"../privacy/"},{"text":"Contact Us","href":"../contact-us/"},{"text":"About Us","href":"../about-us/"}]'>
+                id="contact-sidebar"
+                sidebar-title="Support"
+                sidebar-links='[]'>
               </info-sidebar>
             </div>
           </div>

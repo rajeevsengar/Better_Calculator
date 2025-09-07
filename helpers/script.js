@@ -20,26 +20,47 @@ function ensureThemeApplied() {
 // =============================================================================
 // PATH UTILITIES
 // =============================================================================
+
+/**
+ * Get the correct base URL based on current page depth
+ * @returns {string} Base URL with appropriate number of ../
+ */
+function getBaseUrl() {
+  const currentPath = window.location.pathname;
+  
+  // Count the number of directory levels from root
+  const pathSegments = currentPath.split('/').filter(segment => segment && segment !== 'index.html');
+  const depth = pathSegments.length;
+  
+  // Return appropriate number of ../
+  if (depth === 0) return '';           // Root level
+  if (depth === 1) return '../';        // 1 level deep
+  if (depth === 2) return '../../';     // 2 levels deep
+  if (depth === 3) return '../../../';  // 3 levels deep
+  
+  // Fallback for deeper nesting
+  return '../'.repeat(depth);
+}
+
 function getURLS() {
-  const isSubPage = window.isSubPage();
-  const baseUrl = isSubPage ? '../' : '';
+  const baseUrl = getBaseUrl();
   
   return {
     // Main pages
     home: `${baseUrl}index.html`,
-    aboutUs: `${baseUrl}about-us/`,
-    sitemap: `${baseUrl}sitemap/`,
-    privacy: `${baseUrl}privacy/`,
-    terms: `${baseUrl}terms/`,
-    contactUs: `${baseUrl}contact-us/`,
+    aboutUs: `${baseUrl}footer-pages/about-us/`,
+    sitemap: `${baseUrl}footer-pages/sitemap/`,
+    privacy: `${baseUrl}footer-pages/privacy/`,
+    terms: `${baseUrl}footer-pages/terms/`,
+    contactUs: `${baseUrl}footer-pages/contact-us/`,
     
     // Calculators
-    unitConverter: `${baseUrl}unit-converter/`,
-    bmiCalculator: `${baseUrl}bmi-calculator/`,
-    dateCalculator: `${baseUrl}date-calculator/`,
-    timeCalculator: `${baseUrl}time-calculator/`,
-    emiCalculator: `${baseUrl}emi-calculator/`,
-    investmentCalculator: `${baseUrl}investment-calculator/`,
+    unitConverter: `${baseUrl}general/unit-converter/`,
+    bmiCalculator: `${baseUrl}health/bmi-calculator/`,
+    dateCalculator: `${baseUrl}date/date-calculator/`,
+    timeCalculator: `${baseUrl}date/time-calculator/`,
+    emiCalculator: `${baseUrl}finance/emi-calculator/`,
+    investmentCalculator: `${baseUrl}finance/investment-calculator/`,
     
     // External URLs
     githubUrl: GITHUB_REPO_URL,
@@ -50,8 +71,8 @@ function getURLS() {
     faqUrl: `${baseUrl}faq/`,
     
     // Asset paths
-    cssPath: isSubPage ? '../components/site-footer/site-footer.css' : 'components/site-footer/site-footer.css',
-    imagePrefix: isSubPage ? '../assets/images/' : 'assets/images/'
+    cssPath: `${baseUrl}components/site-footer/site-footer.css`,
+    imagePrefix: `${baseUrl}assets/images/`
   };
 }
 
@@ -61,8 +82,7 @@ function getURLS() {
  * @returns {Object} Object containing all script paths
  */
 function getScriptPaths() {
-  const isSubPage = window.isSubPage();
-  const baseUrl = isSubPage ? '../' : '';
+  const baseUrl = getBaseUrl();
   
   return {
     // Helper scripts
@@ -72,7 +92,7 @@ function getScriptPaths() {
       textConfig: `${baseUrl}helpers/text-config.js`,
       util: `${baseUrl}helpers/util.js`,
       timezoneResolver: `${baseUrl}helpers/timezone-resolver.js`,
-      bmiFactsConfig: `${baseUrl}helpers/bmi-facts-config.js`
+      bmiFactsConfig: `${baseUrl}health/bmi-calculator/bmi-facts-config.js`
     },
     
     // Component scripts
@@ -91,12 +111,12 @@ function getScriptPaths() {
     
     // Calculator scripts
     calculators: {
-      bmiCalculator: `${baseUrl}bmi-calculator/bmi-calculator.js`,
-      dateCalculator: `${baseUrl}date-calculator/date-calculator.js`,
-      timeCalculator: `${baseUrl}time-calculator/time-calculator.js`,
-      emiCalculator: `${baseUrl}emi-calculator/emi-calculator.js`,
-      investmentCalculator: `${baseUrl}investment-calculator/investment-calculator.js`,
-      unitConverter: `${baseUrl}unit-converter/unit-converter.js`
+      bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.js`,
+      dateCalculator: `${baseUrl}date/date-calculator/date-calculator.js`,
+      timeCalculator: `${baseUrl}date/time-calculator/time-calculator.js`,
+      emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.js`,
+      investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.js`,
+      unitConverter: `${baseUrl}general/unit-converter/unit-converter.js`
     }
   };
 }
@@ -107,8 +127,7 @@ function getScriptPaths() {
  * @returns {Object} Object containing all CSS paths
  */
 function getCSSPaths() {
-  const isSubPage = window.isSubPage();
-  const baseUrl = isSubPage ? '../' : '';
+  const baseUrl = getBaseUrl();
   
   return {
     // Main CSS files
@@ -133,17 +152,17 @@ function getCSSPaths() {
     
     // Calculator CSS files
     calculators: {
-      bmiCalculator: `${baseUrl}bmi-calculator/bmi-calculator.css`,
-      dateCalculator: `${baseUrl}date-calculator/date-calculator.css`,
-      timeCalculator: `${baseUrl}time-calculator/time-calculator.css`,
-      emiCalculator: `${baseUrl}emi-calculator/emi-calculator.css`,
-      investmentCalculator: `${baseUrl}investment-calculator/investment-calculator.css`,
-      unitConverter: `${baseUrl}unit-converter/unit-converter.css`
+      bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.css`,
+      dateCalculator: `${baseUrl}date/date-calculator/date-calculator.css`,
+      timeCalculator: `${baseUrl}date/time-calculator/time-calculator.css`,
+      emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.css`,
+      investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.css`,
+      unitConverter: `${baseUrl}general/unit-converter/unit-converter.css`
     },
     
     // Page-specific CSS files
     pages: {
-      sitemap: `${baseUrl}sitemap/sitemap.css`
+      sitemap: `${baseUrl}footer-pages/sitemap/sitemap.css`
     }
   };
 }
@@ -290,17 +309,17 @@ function initializeCalculatorCategories() {
  */
 function isSubPage() {
   const currentPath = window.location.pathname;
-  return currentPath.includes('/unit-converter') || 
-         currentPath.includes('/bmi-calculator') || 
-         currentPath.includes('/date-calculator') || 
-         currentPath.includes('/time-calculator') || 
-         currentPath.includes('/emi-calculator') || 
-         currentPath.includes('/investment-calculator') ||
-         currentPath.includes('/about-us') ||
-         currentPath.includes('/contact-us') ||
-         currentPath.includes('/privacy') ||
-         currentPath.includes('/terms') ||
-         currentPath.includes('/sitemap');
+  return currentPath.includes('/general/unit-converter') || 
+         currentPath.includes('/health/bmi-calculator') || 
+         currentPath.includes('/date/date-calculator') || 
+         currentPath.includes('/date/time-calculator') || 
+         currentPath.includes('/finance/emi-calculator') || 
+         currentPath.includes('/finance/investment-calculator') ||
+         currentPath.includes('/footer-pages/about-us') ||
+         currentPath.includes('/footer-pages/contact-us') ||
+         currentPath.includes('/footer-pages/privacy') ||
+         currentPath.includes('/footer-pages/terms') ||
+         currentPath.includes('/footer-pages/sitemap');
 }
 
 /**
@@ -313,6 +332,7 @@ function isHomePage() {
 }
 
 // Make functions globally available immediately
+window.getBaseUrl = getBaseUrl;
 window.isSubPage = isSubPage;
 window.isHomePage = isHomePage;
 window.getURLS = getURLS;

@@ -16,7 +16,6 @@ class SiteHeader extends HTMLElement {
   }
 
   render() {
-    const isSubPage = window.isSubPage();
     const homeURL = window.getURLS().home;
     const imagePrefix = window.getURLS().imagePrefix;
     
