@@ -1,0 +1,195 @@
+/* Add Time Calculator Specific Styles */
+
+/* Enhanced Input Styles */
+.enhanced-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.enhanced-inputs input[type="time"],
+.enhanced-inputs select {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+
+.enhanced-inputs input[type="time"] {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.enhanced-inputs select {
+  cursor: pointer;
+}
+
+/* Chip Selection Styles */
+.chip {
+  padding: 8px 16px;
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.chip:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+}
+
+.chip.selected {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Time Arithmetic Result Styles */
+.time-arithmetic-result {
+  padding: 16px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.time-arithmetic-result h3 {
+  margin: 0 0 16px 0;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.calculation-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calculation-breakdown > div {
+  padding: 12px;
+  background: var(--input-bg);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.base-time,
+.operation,
+.result-time {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.base-time strong,
+.operation strong,
+.result-time strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.result-time {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.result-time strong {
+  color: white;
+}
+
+.day-note {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--info-bg, #dbeafe);
+  color: var(--info-text, #1e40af);
+  border-radius: 4px;
+  font-size: 13px;
+  font-style: italic;
+  text-align: center;
+}
+
+.error {
+  color: var(--error-color, #dc2626);
+  background: var(--error-bg, #fef2f2);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--error-border, #fecaca);
+}
+
+/* Input Field Styles */
+.input-field {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Mobile-specific time input styles */
+.mobile-time-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Mobile time input adjustments */
+@media (max-width: 768px) {
+  .enhanced-inputs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .enhanced-inputs input[type="time"],
+  .enhanced-inputs select {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--input-background);
+    color: var(--text-primary);
+    font-size: 16px;
+  }
+  
+  .chip {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .calculation-breakdown > div {
+    padding: 16px;
+    font-size: 16px;
+  }
+  
+  .input-field {
+    padding: 12px;
+    font-size: 16px;
+  }
+}

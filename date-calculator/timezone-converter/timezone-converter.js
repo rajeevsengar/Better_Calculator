@@ -1,7 +1,8 @@
-// Time Calculator - Simple Timezone Converter Implementation
+// Timezone Converter - Simple Timezone Converter Implementation
 "use strict";
 
-
+// Create global namespace
+window.TimezoneConverter = window.TimezoneConverter || {};
 
 class TimeCalculator {
   constructor() {
@@ -144,7 +145,19 @@ class TimeCalculator {
   }
 }
 
+// Initialize function
+function initializeTimezoneConverter() {
+  console.log('Timezone Converter initialized');
+  window.timeCalculator = new TimeCalculator();
+}
+
+// Export the initialization function
+window.TimezoneConverter.initializeTimezoneConverter = initializeTimezoneConverter;
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.timeCalculator = new TimeCalculator();
+  // Only initialize if not already initialized by the main script
+  if (!window.timeCalculator) {
+    initializeTimezoneConverter();
+  }
 }); 

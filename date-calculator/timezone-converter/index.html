@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Timezone Converter - Time Calculator</title>
+    <meta name="description" content="Convert between different timezones easily. Free online timezone converter with date and time support.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon.png" />
+    
+    <!-- Scripts -->
+    <script src="../../../helpers/script.js"></script>
+    <script src="../../../helpers/script-loader.js"></script>
+    <script>
+      // Initialize page with centralized CSS and script loading
+      document.addEventListener('DOMContentLoaded', function() {
+        // Apply data-theme first to prevent flash
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('calculator', 'timezoneConverter');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('calculator', 'timezoneConverter').then(() => {
+          // Initialize calculator after all scripts are loaded
+          if (window.TimezoneConverter && window.TimezoneConverter.initializeTimezoneConverter) {
+            window.TimezoneConverter.initializeTimezoneConverter();
+          } else {
+            console.error("Timezone Converter not found or initializeTimezoneConverter not available");
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
+    </script>
+</head>
+<body>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <!-- Site Header Component -->
+        <site-header></site-header>
+        <menu-header></menu-header>
+
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <div class="calculator-content">
+                <div class="calculator-main-section">
+                  <!-- Timezone Converter Section -->
+                  <section id="timezone" class="active-section">
+                    <div class="timezone-converter-container">
+                      <h2 class="calculator-title">Timezone Converter</h2>
+                      <p class="calculator-description">
+                        Convert between different timezones. Enter a date and time in one timezone and see the equivalent time in another timezone.
+                      </p>
+                      
+                      <!-- Timezone Converter Grid -->
+                      <div class="timezone-grid" style="display: grid; grid-template-columns: 50% 50%; gap: 12px; align-items: stretch;">
+                        <!-- From Section -->
+                        <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                          <h4 class="input-label">From</h4>
+                          <timezone-input id="fromTimezone_tzConverter" default="now" size="full"></timezone-input>
+                          <time-input id="fromTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                          <date-input id="fromDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                        </div>
+                        
+                        <!-- To Section -->
+                        <div class="card" style="display: flex; flex-direction: column; gap: 8px;">
+                          <h4 class="input-label">To</h4>
+                          <timezone-input id="toTimezone_tzConverter" default="now" size="full"></timezone-input>
+                          <time-input id="toTime_tzConverter" default="now" size="full" show-quick-links></time-input>
+                          <date-input id="toDate_tzConverter" default="now" size="full" show-quick-links></date-input>
+                        </div>
+                      </div>
+                      
+                      <!-- Instructions -->
+                      <div class="instructions-card" style="margin-top: 16px;">
+                        <h4>How to use:</h4>
+                        <ul>
+                          <li>Select the source timezone, date, and time in the left column</li>
+                          <li>Select the target timezone in the right column</li>
+                          <li>The converted time will automatically appear in the right column</li>
+                          <li>You can also change the right column to convert in the opposite direction</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
+          </div>
+              
+          <!-- Additional Content Wrapper (for calculator description, etc.) -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Description -->
+            <div class="left-grid">
+              <calculator-description calculator="timezone"></calculator-description>
+            </div>
+            
+            <!-- Right Grid: Additional Ad Space or Content -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Site Footer Component -->
+        <site-footer></site-footer>
+
+      </div>
+    </div>
+    
+  </body>
+</html>

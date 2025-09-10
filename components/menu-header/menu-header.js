@@ -15,12 +15,12 @@ class MenuHeader extends HTMLElement {
       this.shadowRoot.innerHTML = `
         <link rel="stylesheet" href="${window.getCSSPaths ? window.getCSSPaths().components.menuHeader : 'components/menu-header/menu-header.css'}">
         
-        <!-- Menu Header Section -->
-          <div class="menu-header" style="position: sticky; top: 0; z-index: 100;">
+        <!-- Navigation Menu Section -->
+          <nav class="menu-header" style="position: sticky; top: 0; z-index: 100;">
               <div class="header-content" id="calculatorCategories">
                       <!-- Calculator categories will be populated dynamically -->
               </div>
-          </div>
+          </nav>
       `;
     }
   

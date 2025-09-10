@@ -57,8 +57,13 @@ function getURLS() {
     // Calculators
     unitConverter: `${baseUrl}general/unit-converter/`,
     bmiCalculator: `${baseUrl}health/bmi-calculator/`,
-    dateCalculator: `${baseUrl}date-calculator/date-calculator/`,
-    timeCalculator: `${baseUrl}date-calculator/time-calculator/`,
+    dateCalculator: `${baseUrl}date-calculator/duration/`,
+    dateCalculatorDuration: `${baseUrl}date-calculator/duration/`,
+    dateCalculatorAddDays: `${baseUrl}date-calculator/add-days/`,
+    timezoneConverter: `${baseUrl}date-calculator/timezone-converter/`,
+    timeCalculator: `${baseUrl}date-calculator/time-duration/`,
+    timeCalculatorDuration: `${baseUrl}date-calculator/time-duration/`,
+    timeCalculatorAddTime: `${baseUrl}date-calculator/add-time/`,
     emiCalculator: `${baseUrl}finance/emi-calculator/`,
     investmentCalculator: `${baseUrl}finance/investment-calculator/`,
     
@@ -106,14 +111,20 @@ function getScriptPaths() {
       timezoneInput: `${baseUrl}components/timezone-input/timezone-input.js`,
       searchableSelect: `${baseUrl}components/searchable-select/searchable-select.js`,
       infoPage: `${baseUrl}components/info-page/info-page.js`,
-      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.js`
+      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.js`,
+      calculatorTabs: `${baseUrl}components/calculator-tabs/calculator-tabs.js`
     },
     
     // Calculator scripts
     calculators: {
       bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.js`,
-      dateCalculator: `${baseUrl}date-calculator/date-calculator/date-calculator.js`,
-      timeCalculator: `${baseUrl}date-calculator/time-calculator/time-calculator.js`,
+      dateCalculator: `${baseUrl}date-calculator/duration/duration.js`,
+      dateCalculatorDuration: `${baseUrl}date-calculator/duration/duration.js`,
+      dateCalculatorAddDays: `${baseUrl}date-calculator/add-days/add-days.js`,
+      timezoneConverter: `${baseUrl}date-calculator/timezone-converter/timezone-converter.js`,
+      timeCalculator: `${baseUrl}date-calculator/duration/duration.js`,
+      timeCalculatorDuration: `${baseUrl}date-calculator/duration/duration.js`,
+      timeCalculatorAddTime: `${baseUrl}date-calculator/add-time/add-time.js`,
       emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.js`,
       investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.js`,
       unitConverter: `${baseUrl}general/unit-converter/unit-converter.js`
@@ -147,14 +158,20 @@ function getCSSPaths() {
       timeInput: `${baseUrl}components/time-input/time-input.css`,
       searchableSelect: `${baseUrl}components/searchable-select/searchable-select.css`,
       infoPage: `${baseUrl}components/info-page/info-page.css`,
-      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.css`
+      infoSidebar: `${baseUrl}components/info-sidebar/info-sidebar.css`,
+      calculatorTabs: `${baseUrl}components/calculator-tabs/calculator-tabs.css`
     },
     
     // Calculator CSS files
     calculators: {
       bmiCalculator: `${baseUrl}health/bmi-calculator/bmi-calculator.css`,
-      dateCalculator: `${baseUrl}date-calculator/date-calculator/date-calculator.css`,
-      timeCalculator: `${baseUrl}date-calculator/time-calculator/time-calculator.css`,
+      dateCalculator: `${baseUrl}date-calculator/duration/duration.css`,
+      dateCalculatorDuration: `${baseUrl}date-calculator/duration/duration.css`,
+      dateCalculatorAddDays: `${baseUrl}date-calculator/add-days/add-days.css`,
+      timezoneConverter: `${baseUrl}date-calculator/timezone-converter/timezone-converter.css`,
+      timeCalculator: `${baseUrl}date-calculator/duration/duration.css`,
+      timeCalculatorDuration: `${baseUrl}date-calculator/duration/duration.css`,
+      timeCalculatorAddTime: `${baseUrl}date-calculator/add-time/add-time.css`,
       emiCalculator: `${baseUrl}finance/emi-calculator/emi-calculator.css`,
       investmentCalculator: `${baseUrl}finance/investment-calculator/investment-calculator.css`,
       unitConverter: `${baseUrl}general/unit-converter/unit-converter.css`
@@ -184,6 +201,11 @@ function getScriptsForPage(pageType, calculatorName = null) {
   scriptList.push({ src: scripts.components.menuHeader, defer: true });
   scriptList.push({ src: scripts.components.siteFooter, defer: true });
   
+  // Load calculator-tabs component early for calculator pages
+  if (pageType === 'calculator') {
+    scriptList.push({ src: scripts.components.calculatorTabs, defer: false });
+  }
+  
   if (pageType === 'home') {
     scriptList.push({ src: scripts.components.calculatorDescription, defer: false });
   } else if (pageType === 'calculator') {
@@ -199,7 +221,7 @@ function getScriptsForPage(pageType, calculatorName = null) {
     // Add component scripts based on calculator type
     if (calculatorName === 'bmiCalculator') {
       scriptList.push({ src: scripts.helpers.bmiFactsConfig, defer: true });
-    } else if (calculatorName === 'dateCalculator' || calculatorName === 'timeCalculator') {
+    } else if (calculatorName === 'dateCalculator' || calculatorName === 'dateCalculatorDuration' || calculatorName === 'dateCalculatorAddDays' || calculatorName === 'timezoneConverter' || calculatorName === 'timeCalculator' || calculatorName === 'timeCalculatorDuration' || calculatorName === 'timeCalculatorAddTime') {
       scriptList.push({ src: scripts.helpers.timezoneResolver, defer: true });
       scriptList.push({ src: scripts.components.dateInput, defer: true });
       scriptList.push({ src: scripts.components.timeInput, defer: true });
@@ -253,6 +275,11 @@ function generateCSSTags(pageType, calculatorName = null) {
     if (calculatorName && cssPaths.calculators[calculatorName]) {
       cssList.push(cssPaths.calculators[calculatorName]);
     }
+    
+    // Add calculator tabs CSS for date and time calculators
+    if (calculatorName === 'dateCalculator' || calculatorName === 'dateCalculatorDuration' || calculatorName === 'dateCalculatorAddDays' || calculatorName === 'timezoneConverter' || calculatorName === 'timeCalculator' || calculatorName === 'timeCalculatorDuration' || calculatorName === 'timeCalculatorAddTime') {
+      cssList.push(cssPaths.components.calculatorTabs);
+    }
   } else if (pageType === 'info') {
     cssList.push(cssPaths.components.infoPage);
     cssList.push(cssPaths.components.infoSidebar);
@@ -283,7 +310,7 @@ function initializeCalculatorLinks() {
   return availableCalculators.map(calc => ({
     text: calc.text,
     url: urls[calc.urlKey] || '#',
-    active: currentPath.includes(calc.urlKey.replace('Calculator', '-calculator').replace('Converter', '-converter'))
+    active: isCalculatorActive(calc.urlKey, currentPath)
   }));
 }
 
@@ -297,10 +324,33 @@ function initializeCalculatorCategories() {
     calculators: category.calculators.map(calc => ({
       text: calc.text,
       url: urls[calc.urlKey] || '#',
-      active: currentPath.includes(calc.urlKey.replace('Calculator', '-calculator').replace('Converter', '-converter')),
+      active: isCalculatorActive(calc.urlKey, currentPath),
       available: calc.available !== false
     }))
   }));
+}
+
+function isCalculatorActive(urlKey, currentPath) {
+  // Specific path matching for each calculator
+  switch (urlKey) {
+    case 'dateCalculator':
+      return currentPath.includes('/date-calculator/duration') || currentPath.includes('/date-calculator/add-days');
+    case 'timezoneConverter':
+      return currentPath.includes('/date-calculator/timezone-converter');
+    case 'timeCalculator':
+      return currentPath.includes('/date-calculator/time-duration') || currentPath.includes('/date-calculator/add-time');
+    case 'bmiCalculator':
+      return currentPath.includes('/health/bmi-calculator');
+    case 'unitConverter':
+      return currentPath.includes('/general/unit-converter');
+    case 'emiCalculator':
+      return currentPath.includes('/finance/emi-calculator');
+    case 'investmentCalculator':
+      return currentPath.includes('/finance/investment-calculator');
+    default:
+      // Fallback to generic matching
+      return currentPath.includes(urlKey.replace('Calculator', '-calculator').replace('Converter', '-converter'));
+  }
 }
 /**
  * Centralized function to check if current page is a sub-page
@@ -311,8 +361,11 @@ function isSubPage() {
   const currentPath = window.location.pathname;
   return currentPath.includes('/general/unit-converter') || 
          currentPath.includes('/health/bmi-calculator') || 
-         currentPath.includes('/date-calculator/date-calculator') || 
-         currentPath.includes('/date-calculator/time-calculator') || 
+         currentPath.includes('/date-calculator/duration') || 
+         currentPath.includes('/date-calculator/add-days') || 
+         currentPath.includes('/date-calculator/timezone-converter') || 
+         currentPath.includes('/date-calculator/time-duration') || 
+         currentPath.includes('/date-calculator/add-time') || 
          currentPath.includes('/finance/emi-calculator') || 
          currentPath.includes('/finance/investment-calculator') ||
          currentPath.includes('/footer-pages/about-us') ||

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Count Days Between Dates - Date Calculator</title>
+    <meta name="description" content="Calculate the number of days between two dates. Free online date calculator with timezone support and enhanced mode for precise time calculations.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon.png" />
+    
+    <!-- Scripts -->
+    <script src="../../../helpers/script.js"></script>
+    <script src="../../../helpers/script-loader.js"></script>
+    <script>
+      // Initialize page with centralized CSS and script loading
+      document.addEventListener('DOMContentLoaded', function() {
+        // Apply data-theme first to prevent flash
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('calculator', 'dateCalculatorDuration');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('calculator', 'dateCalculatorDuration').then(() => {
+          // Initialize calculator after all scripts are loaded
+          if (window.DateCalculator && window.DateCalculator.initializeDateCalculator) {
+            window.DateCalculator.initializeDateCalculator();
+          } else {
+            console.error("Date Calculator not found or initializeDateCalculator not available");
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
+    </script>
+
+</head>
+<body>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <!-- Site Header Component -->
+        <site-header></site-header>
+        <menu-header></menu-header>
+
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <div class="calculator-content">
+                <div class="calculator-main-section">
+                  <!-- Calculator Tabs -->
+                  <calculator-tabs 
+                    tab-config='[
+                      {"name": "Count Days", "url": "../duration/", "key": "duration"},
+                      {"name": "Add Days", "url": "../add-days/", "key": "add-days"}
+                    ]'
+                    default-tab="duration">
+                  </calculator-tabs>
+
+                  <!-- Date Calculator Section -->
+                  <section id="date" class="active-section">
+                    <!-- Enhanced Mode Toggle -->
+                    <div id="toggle-slider-enhanced" style="cursor: pointer;" class="enhanced-toggle">
+                        <div class="toggle-container">
+                            <label class="toggle-label">Enhanced Mode</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="enhancedToggle" />
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- From and To Sections Side by Side -->
+                    <div class="count-days-grid" style="display: grid; grid-template-columns: 40% 16% 40%; gap: 16px; margin-bottom: 8px;">
+                        <!-- From Section -->
+                        <div class="card">
+                            <h4 class="input-label">Start Date</h4>
+                            <date-input id="fromDate" size="full" show-quick-links default="now"></date-input>
+                            <div id="fromTimeInputs" style="display: none; flex-direction: column;">
+                                <h4 class="input-label">From Timezone</h4>
+                                <timezone-input id="fromTimezone" size="full" default="now"></timezone-input>
+                                <h4 class="input-label">From Time</h4>
+                                <time-input id="fromTime" size="full" show-quick-links default="now"></time-input>
+                            </div>
+                        </div>
+                        <div></div>
+                        <!-- To Section -->
+                        <div class="card">
+                            <h4 class="input-label">End Date</h4>
+                            <date-input id="toDate" size="full" show-quick-links default="now"></date-input>
+                            <div id="toTimeInputs" style="display: none; flex-direction: column;">
+                              <h4 class="input-label">To Timezone</h4>
+                              <timezone-input id="toTimezone" size="full" default="now"></timezone-input>
+                              <h4 class="input-label">To Time</h4>
+                                <time-input id="toTime" size="full" show-quick-links default="now"></time-input>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add 1 day to end date section -->
+                    <div id="includeEndDateDiv" class="card">
+                        <label style="cursor: pointer; display: grid; grid-template-columns: 5% 80%; gap: 16px; margin-bottom: 8px; margin-top: 32px;">
+                          <input type="checkbox" id="includeEndDate" />
+                            Include end date in calculation (1 day is added)
+                        </label>
+                    </div>
+                    <!-- Compute Difference Button -->
+                    <div style="display: flex; gap: 8px; margin-top: 32px; margin-bottom: 16px;">
+                        <button class="button-primary" onclick="countDays()">
+                            Compute Difference
+                        </button>
+                        <button onclick="clearDates()">Clear</button>
+                    </div>
+                    <!-- Result Section at Bottom -->
+                    <div id="dateResultContainer" style="display: none; margin-top: 16px;">
+                        <div id="dateResult" class="muted card result-box"></div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
+          </div>
+              
+              <!-- Additional Content Wrapper (for calculator description, etc.) -->
+              <div class="main-content-wrapper">
+                <!-- Left Grid: Calculator Description -->
+                <div class="left-grid">
+                  <calculator-description calculator="date"></calculator-description>
+                </div>
+                
+                <!-- Right Grid: Additional Ad Space or Content -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
+                </div>
+              </div>
+            </main>
+
+        <!-- Site Footer Component -->
+        <site-footer></site-footer>
+
+    </div>
+    
+  </body>
+</html>

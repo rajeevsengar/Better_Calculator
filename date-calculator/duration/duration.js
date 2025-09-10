@@ -1,6 +1,14 @@
 // Date Calculator - Main Implementation
 "use strict";
 
+// window.addEventListener('load', () => {
+//   const loader = document.querySelector('#initial-loader');
+//   const app = document.querySelector('#app');
+
+//   loader.style.display = 'none';  // Hide spinner
+//   app.style.display = 'block';    // Show content
+// });
+
 class DateCalculator {
   constructor() {
     this.initializeElements();
@@ -24,6 +32,10 @@ class DateCalculator {
     this.baseDateInput = document.querySelector('date-input[id="baseDate"]');
     this.baseTimeInput = document.querySelector('time-input[id="baseTime"]');
     
+    // Time input containers
+    this.fromTimeInputs = document.getElementById("fromTimeInputs");
+    this.toTimeInputs = document.getElementById("toTimeInputs");
+    
     // Date arithmetic inputs
     this.daysDeltaInput = document.getElementById("deltaDays");
     this.weeksDeltaInput = document.getElementById("deltaWeeks");
@@ -43,6 +55,7 @@ class DateCalculator {
     this.addDaysEnhancedToggle = document.getElementById("addDaysEnhancedToggle");
     this.toggleSliderAddDays = document.getElementById("toggle-slider-add-days");
     
+    
 
   }
 
@@ -52,9 +65,20 @@ class DateCalculator {
      if (timeArithmeticCard) {
        timeArithmeticCard.style.display = "none";
      }
+     
+     // Hide time input containers by default
+     if (this.fromTimeInputs) {
+       this.fromTimeInputs.style.display = "none";
+     }
+     if (this.toTimeInputs) {
+       this.toTimeInputs.style.display = "none";
+     }
   }
 
   bindEvents() {
+    // Tab functionality
+    this.initializeTabs();
+
     // Enhanced toggle
     if (this.enhancedToggle) {
       this.enhancedToggle.addEventListener("change", () => this.toggleEnhancedMode());
@@ -79,7 +103,6 @@ class DateCalculator {
       }
     }
 
-
     // Initialize delta sign chips
     this.initializeDeltaSignChips();
     
@@ -88,6 +111,29 @@ class DateCalculator {
     if (selectedChip) {
       this.updateArithmeticLabels(selectedChip.dataset.value);
     }
+  }
+
+  /* Initialize tab functionality */
+  initializeTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+        
+        // Remove active class from all buttons and contents
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to clicked button and corresponding content
+        button.classList.add('active');
+        const targetContent = document.getElementById(targetTab);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
+    });
   }
 
   /* Initialize the delta sign chips */
@@ -130,18 +176,12 @@ class DateCalculator {
   toggleEnhancedMode() {
     const isEnhanced = this.enhancedToggle.checked;
     
-    // Show/hide time and timezone inputs based on enhanced mode
-    if (this.fromTimeInput) {
-      this.fromTimeInput.style.display = isEnhanced ? "inline-block" : "none";
+    // Show/hide time input containers based on enhanced mode
+    if (this.fromTimeInputs) {
+      this.fromTimeInputs.style.display = isEnhanced ? "flex" : "none";
     }
-    if (this.fromTimezoneInput) {
-      this.fromTimezoneInput.style.display = isEnhanced ? "inline-block" : "none";
-    }
-    if (this.toTimeInput) {
-      this.toTimeInput.style.display = isEnhanced ? "inline-block" : "none";
-    }
-    if (this.toTimezoneInput) {
-      this.toTimezoneInput.style.display = isEnhanced ? "inline-block" : "none";
+    if (this.toTimeInputs) {
+      this.toTimeInputs.style.display = isEnhanced ? "flex" : "none";
     }
     
     // Hide/show include end date checkbox based on enhanced mode
@@ -307,8 +347,8 @@ class DateCalculator {
       type: 'datetime',
       displayFrom: from,
       displayTo: to,
-      from: from,
-      to: to,
+      from: fromTzAdjusted,
+      to: toTzAdjusted,
       milliseconds: timeDiff,
       fromTimezone: fromTimezone,
       toTimezone: toTimezone,
@@ -432,12 +472,17 @@ class DateCalculator {
     const day     = date.getDate().toString().padStart(2, '0');
     const year    = date.getFullYear();
     
-    if(showTime) {
-      const hours   = date.getHours().toString().padStart(2, '0');
+    if (showTime) {
+      let hours = date.getHours();
       const minutes = date.getMinutes().toString().padStart(2, '0');
-      const seconds = date.getSeconds().toString().padStart(2, '0');
+      
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      hours = hours.toString().padStart(2, '0');
+      
       const timezoneName = timezone.split('/').pop() || timezone;
-      return `${weekday}, ${day} ${month} ${year} ${hours}:${minutes}:${seconds} ${timezoneName} time`;
+      return `${weekday}, ${day} ${month} ${year} ${hours}:${minutes} ${ampm} ${timezoneName} time`;
     }
 
     return `${weekday}, ${day} ${month} ${year}`;
@@ -498,9 +543,12 @@ class DateCalculator {
     const years = end.getFullYear() - start.getFullYear();
     const months = end.getMonth() - start.getMonth();
     const days = end.getDate() - start.getDate();
-    const hours = end.getHours() - start.getHours();
-    const minutes = end.getMinutes() - start.getMinutes();
-    const seconds = end.getSeconds() - start.getSeconds();
+    let hours = end.getHours() - start.getHours();
+    let minutes = end.getMinutes() - start.getMinutes();
+    const totalMinutes = hours * 60 + minutes;
+    hours = Math.floor(totalMinutes / 60);
+    minutes = Math.floor(totalMinutes % 60);
+    // const seconds = end.getSeconds() - start.getSeconds();
   
     // Helper to add units if > 0
     const addUnit = (value, name) => value > 0 && parts.push(`${value} ${name}${value !== 1 ? 's' : ''}`);
@@ -517,11 +565,10 @@ class DateCalculator {
       const dayDiff = Math.floor((end - start) / (1000 * 60 * 60 * 24));
       addUnit(dayDiff, 'day');
     }
-  
     // Add remaining time
     addUnit(hours < 0 ? hours + 24 : hours, 'hour');
     addUnit(minutes < 0 ? minutes + 60 : minutes, 'minute');
-    addUnit(seconds < 0 ? seconds + 60 : seconds, 'second');
+    // addUnit(seconds < 0 ? seconds + 60 : seconds, 'second');
   
     if (parts.length === 0) return "0 seconds";
     if (parts.length === 1) return parts[0];
@@ -730,6 +777,126 @@ class DateCalculator {
     }
   }
 
+  /* Time Calculator Methods */
+  calculateTimeDifference() {
+    if (!this.fromTimeInput || !this.toTimeInput) {
+      console.error('Time inputs not found');
+      return;
+    }
+
+    const fromTime = this.fromTimeInput.value;
+    const toTime = this.toTimeInput.value;
+
+    if (!fromTime || !toTime) {
+      alert('Please enter both start and end times');
+      return;
+    }
+
+    const fromDate = new Date(`2000-01-01T${fromTime}`);
+    const toDate = new Date(`2000-01-01T${toTime}`);
+
+    // Handle case where end time is before start time (next day)
+    if (toDate < fromDate) {
+      toDate.setDate(toDate.getDate() + 1);
+    }
+
+    const diffMs = toDate - fromDate;
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const diffSeconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    const resultDiv = document.getElementById('timeResult');
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <h3>Time Difference</h3>
+          <div style="font-size: 24px; font-weight: bold; color: var(--primary-color); margin: 20px 0;">
+            ${diffHours.toString().padStart(2, '0')}:${diffMinutes.toString().padStart(2, '0')}:${diffSeconds.toString().padStart(2, '0')}
+          </div>
+          <div style="color: var(--text-secondary);">
+            ${diffHours} hours, ${diffMinutes} minutes, ${diffSeconds} seconds
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  addSubtractTime() {
+    if (!this.baseTimeInput) {
+      console.error('Base time input not found');
+      return;
+    }
+
+    const baseTime = this.baseTimeInput.value;
+    if (!baseTime) {
+      alert('Please enter a base time');
+      return;
+    }
+
+    // Get delta values
+    const hours = parseInt(this.deltaHoursInput?.value || 0);
+    const minutes = parseInt(this.deltaMinutesInput?.value || 0);
+    const seconds = parseInt(this.deltaSecondsInput?.value || 0);
+
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+      alert('Please enter at least one time delta value');
+      return;
+    }
+
+    // Get operation (add/subtract)
+    const operation = document.querySelector('input[name="timeDeltaSign"]:checked')?.value || 'add';
+
+    // Create base date object
+    const baseDate = new Date(`2000-01-01T${baseTime}`);
+    
+    // Calculate new time
+    if (operation === 'add') {
+      baseDate.setHours(baseDate.getHours() + hours);
+      baseDate.setMinutes(baseDate.getMinutes() + minutes);
+      baseDate.setSeconds(baseDate.getSeconds() + seconds);
+    } else {
+      baseDate.setHours(baseDate.getHours() - hours);
+      baseDate.setMinutes(baseDate.getMinutes() - minutes);
+      baseDate.setSeconds(baseDate.getSeconds() - seconds);
+    }
+
+    // Format result
+    const resultTime = baseDate.toTimeString().slice(0, 8);
+    
+    const resultDiv = document.getElementById('timeMathRes');
+    if (resultDiv) {
+      resultDiv.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+          <h3>Result</h3>
+          <div style="font-size: 24px; font-weight: bold; color: var(--primary-color); margin: 20px 0;">
+            ${resultTime}
+          </div>
+          <div style="color: var(--text-secondary);">
+            ${operation === 'add' ? 'Added' : 'Subtracted'}: ${hours}h ${minutes}m ${seconds}s
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  clearTime() {
+    if (this.baseTimeInput) {
+      this.baseTimeInput.value = new Date().toTimeString().slice(0, 5);
+    }
+    
+    if (this.deltaHoursInput) this.deltaHoursInput.value = '';
+    if (this.deltaMinutesInput) this.deltaMinutesInput.value = '';
+    if (this.deltaSecondsInput) this.deltaSecondsInput.value = '';
+    
+    // Reset to add operation
+    const addRadio = document.querySelector('input[name="timeDeltaSign"][value="add"]');
+    if (addRadio) addRadio.checked = true;
+    
+    // Clear result
+    const resultDiv = document.getElementById('timeMathRes');
+    if (resultDiv) resultDiv.textContent = '';
+  }
+
   // Static method for initialization
   static initializeDateCalculator() {
     if (!window.dateCalculator) {
@@ -739,9 +906,15 @@ class DateCalculator {
   }
 }
 
+// Expose the class globally
+window.DateCalculator = DateCalculator;
+
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.dateCalculator = new DateCalculator();
+  // Wait a bit for web components to be ready
+  setTimeout(() => {
+    window.dateCalculator = new DateCalculator();
+  }, 100);
 });
 
 // Expose functions globally for HTML onclick handlers
@@ -750,3 +923,8 @@ window.clearAddDays = () => window.dateCalculator.clearAddDays();
 window.clearDates = () => window.dateCalculator.clearDates();
 window.countDays = () => window.dateCalculator.countDays();
 window.calculateDateDifference = () => window.dateCalculator.countDays();
+
+// Time calculator functions
+window.calculateTimeDifference = () => window.dateCalculator.calculateTimeDifference();
+window.addSubtractTime = () => window.dateCalculator.addSubtractTime();
+window.clearTime = () => window.dateCalculator.clearTime();

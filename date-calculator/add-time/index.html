@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Time to Time Calculator</title>
+    <meta name="description" content="Add or subtract time from any time. Calculate future or past times easily with our free online time calculator.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon.png" />
+    
+    <!-- Scripts -->
+    <script src="../../../helpers/script.js"></script>
+    <script src="../../../helpers/script-loader.js"></script>
+    <script>
+      // Initialize page with centralized CSS and script loading
+      document.addEventListener('DOMContentLoaded', function() {
+        // Apply data-theme first to prevent flash
+        setTimeout(() => {
+          if (document.body) {
+            document.body.setAttribute('data-theme-applied', 'true');
+          }
+        }, 50);
+        
+        // Load CSS first
+        window.loadCSSForPage('calculator', 'timeCalculatorAddTime');
+        
+        // Then load scripts and initialize
+        window.loadScriptsForPage('calculator', 'timeCalculatorAddTime').then(() => {
+          // Initialize calculator after all scripts are loaded
+          if (window.TimeCalculator && window.TimeCalculator.initializeTimeCalculator) {
+            window.TimeCalculator.initializeTimeCalculator();
+          } else {
+            console.error("Time Calculator not found or initializeTimeCalculator not available");
+          }
+        }).catch(error => {
+          console.error('Failed to load scripts:', error);
+        });
+      });
+      
+      // Hide spinner after all resources are loaded
+      window.addEventListener('load', function() {
+        const loader = document.querySelector('#initial-loader');
+        const app = document.querySelector('#app');
+        if (loader && app) {
+          loader.style.display = 'none';
+          app.style.display = 'block';
+        }
+      });
+    </script>
+
+</head>
+<body>
+    <div id="initial-loader">
+      <div class="spinner"></div>
+    </div>
+    <div id="app" style="display:none;">
+      <div class="page-container">
+        <!-- Site Header Component -->
+        <site-header></site-header>
+        <menu-header></menu-header>
+
+        <main>
+          <!-- Main Content Wrapper -->
+          <div class="main-content-wrapper">
+            <!-- Left Grid: Calculator Content -->
+            <div class="left-grid">
+              <div class="calculator-content">
+                <div class="calculator-main-section">
+                  <!-- Calculator Tabs -->
+                  <calculator-tabs 
+                    tab-config='[
+                      {"name": "Count Time", "url": "../time-duration/", "key": "time-duration"},
+                      {"name": "Add Time", "url": "../add-time/", "key": "add-time"}
+                    ]'
+                    default-tab="add-time">
+                  </calculator-tabs>
+
+                  <!-- Time Calculator Section -->
+                  <section id="time" class="active-section">
+                    <!-- Enhanced Mode Toggle -->
+                    <div class="enhanced-toggle" style="cursor: pointer;" id="toggle-slider-add-time">
+                        <div class="toggle-container">
+                            <label class="toggle-label">Show Date Inputs</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="addTimeEnhancedToggle" />
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Arithmetic -->
+                    <div class="card" style="display: grid; grid-template-columns: 100%; align-items: stretch;">
+                        <!-- Time Input -->
+                        <label>Time Arithmetic</label>
+                        <time-input id="baseTime" label="Base Time" size="full" show-label show-quick-links default="now"></time-input>
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                            <label for="baseDate" style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-secondary, #475569); font-weight: 500;">Base Date</label>
+                            <date-input id="baseDate" size="full" show-quick-links default="now" style="display: none;"></date-input>
+                            <label for="baseTimezone" style="display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-secondary, #475569); font-weight: 500;">Base Timezone</label>
+                            <timezone-input id="baseTimezone" size="full" default="now" style="display: none; margin-top: 8px;"></timezone-input>
+                        </div>
+                    </div>
+
+                    <!-- Time Arithmetic Inputs -->
+                    <div class="card" style="margin-top: 16px;">
+                        <label id="timeArithmeticLabel" style="display: block; margin-bottom: 12px; font-weight: 500;">Add/Subtract Time</label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                            <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaHours">Hours</label>
+                                <input class="input-field" type="number" id="deltaHours" placeholder="Hours" />
+                            </div>
+                            <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaMinutes">Minutes</label>
+                                <input class="input-field" type="number" id="deltaMinutes" placeholder="Minutes" />
+                            </div>
+                            <div>
+                                <label style="margin-bottom: 12px;" class="input-label" for="deltaSeconds">Seconds</label>
+                                <input class="input-field" type="number" id="deltaSeconds" placeholder="Seconds" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operation -->
+                    <div class="card" style="margin-top: 16px; width: 50%;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Operation</label>
+                        <div id="deltaSignChips" style="display: grid; grid-template-columns: 20% 20%; gap: 12px;">
+                            <button class="chip selected" data-value="add">Add</button>
+                            <button class="chip" data-value="subtract">Subtract</button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="card" style="margin-top: 16px;">
+                        <div style="display: flex; gap: 8px;">
+                            <button class="button-primary" onclick="addSubtractTime()">
+                                Apply
+                            </button>
+                            <button onclick="clearAddTime()">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Result Section -->
+                    <div id="timeResultContainer1" style="display: none; margin-top: 16px;">
+                        <div id="timeMathRes" class="muted card result-box"></div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+              
+            <!-- Right Grid: Ad Space -->
+            <div class="right-grid">
+              <div class="ad-space">
+                Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+              </div>
+            </div>
+          </div>
+              
+              <!-- Additional Content Wrapper (for calculator description, etc.) -->
+              <div class="main-content-wrapper">
+                <!-- Left Grid: Calculator Description -->
+                <div class="left-grid">
+                  <calculator-description calculator="time"></calculator-description>
+                </div>
+                
+                <!-- Right Grid: Additional Ad Space or Content -->
+                <div class="right-grid">
+                  <div class="ad-space">
+                    Additional Ad Space<br><br><br><br><br><br>Ad Space<br><br><br><br><br><br>Ad Space
+                  </div>
+                </div>
+              </div>
+            </main>
+
+        <!-- Site Footer Component -->
+        <site-footer></site-footer>
+
+    </div>
+    
+  </body>
+</html>

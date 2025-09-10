@@ -16,7 +16,6 @@
   display: flex;
   flex-direction: column;
   height: auto;
-  --header-height: 6rem; /* Default header height for mobile menu positioning */
 }
 
 /* ========================================
@@ -156,33 +155,6 @@
 
 .variant-toggle input[type="checkbox"]:checked + .variant-toggle-label .toggle-icon {
     content: '🌙';
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .integrated-theme-selector {
-        gap: 0.75rem;
-    }
-    
-    .theme-radio-label {
-        width: 0.8rem;
-        height: 0.8rem;
-        font-size: 0.5rem;
-    }
-    
-    .variant-toggle-label {
-        width: 2.2rem;
-        height: 1rem;
-    }
-    
-    .variant-toggle-label::before {
-        width: 0.1rem;
-        height: 1.2rem;
-    }
-    
-    .variant-toggle input[type="checkbox"]:checked + .variant-toggle-label::before {
-        transform: translateX(1.9rem);
-    }
 }
 
 .flag-icon {
@@ -355,7 +327,7 @@
 }
 
 .mobile-menu-toggle:hover span {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--primary-color, #333333);;
   transform: scale(1.1);
 }
 
@@ -383,7 +355,7 @@
 .mobile-menu-overlay {
   display: none;
   position: fixed;
-  top: 0;
+  top: 0; /* Start from top of viewport */
   left: 0;
   width: 100%;
   height: 100%;
@@ -394,13 +366,6 @@
 }
 
 /* Mobile menu overlay starts below header on mobile */
-@media (max-width: 1024px) {
-  .mobile-menu-overlay {
-    top: var(--header-height, 6rem); /* Start below header */
-    height: calc(100% - var(--header-height, 6rem)); /* Adjust height */
-  }
-}
-
 .mobile-menu-overlay.active {
   display: block;
   opacity: 1;
@@ -419,13 +384,6 @@
   box-shadow: -0.5rem 0 2rem rgba(0, 0, 0, 0.1);
   transform: translateX(100%);
   transition: transform 0.3s ease;
-}
-
-/* Mobile menu content positioning for mobile */
-@media (max-width: 1024px) {
-  .mobile-menu-content {
-    height: 100%; /* Full height of the overlay area */
-  }
 }
 
 .mobile-menu-overlay.active .mobile-menu-content {
@@ -508,6 +466,13 @@
    ======================================== */
 @media (max-width: 1024px) {
   /* Header Layout Adjustments - Sticky for all mobile and tablet screens */
+  /* Ensure host element is also sticky */
+  :host {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+  }
+
   .site-header {
     height: auto; /* Scaled down from 14rem to 5rem for better proportions */
     position: sticky;
@@ -516,11 +481,8 @@
     box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   }
   
-  /* Ensure host element is also sticky */
-  :host {
-    position: sticky;
-    top: 0;
-    z-index: 1001;
+  .mobile-menu-overlay {
+    top: 9rem; /* Start from top, but content will be positioned below header */
   }
   
   /* Left Section Adjustments */
@@ -620,10 +582,11 @@
   }
 
   .mobile-menu-content {
+    height: 100%; /* Full height of the overlay area */
     width: 80%; /* Reduced from 85% for very small screens */
     padding: 1.25rem; /* Reduced from 1.5rem for very small screens */
   }
-  
+
   /* Further reduce mobile menu items on very small screens */
   .mobile-item {
     margin-bottom: 0.5rem; /* Reduced from 0.75rem */
@@ -631,6 +594,33 @@
     font-size: 1.2rem; /* Reduced from 1.4rem */
   }
   
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .integrated-theme-selector {
+      gap: 0.75rem;
+  }
+  
+  .theme-radio-label {
+      width: 0.8rem;
+      height: 0.8rem;
+      font-size: 0.5rem;
+  }
+  
+  .variant-toggle-label {
+      width: 2.2rem;
+      height: 1rem;
+  }
+  
+  .variant-toggle-label::before {
+      width: 0.1rem;
+      height: 1.2rem;
+  }
+  
+  .variant-toggle input[type="checkbox"]:checked + .variant-toggle-label::before {
+      transform: translateX(1.9rem);
+  }
 }
 
 @media (max-width: 480px) {
@@ -645,6 +635,10 @@
     position: sticky;
     top: 0;
     z-index: 1001; /* Higher than mobile menu overlay */
+  }
+
+  .mobile-menu-overlay {
+    top: 7rem; /* Start from top, but content will be positioned below header */
   }
   
   .header-content .brand-section {

@@ -397,8 +397,8 @@ const CALCULATOR_CATEGORIES = {
     name: "Date and Time",
     calculators: [
       { text: "Date Calculator", urlKey: "dateCalculator", description: "Calculate date differences and perform date arithmetic" },
+      { text: "Timezone Converter", urlKey: "timezoneConverter", description: "Convert between different timezones" },
       { text: "Time Calculator", urlKey: "timeCalculator", description: "Calculate time differences and perform time arithmetic" },
-      { text: "Timezone Converter", urlKey: "timezoneConverter", description: "Convert between different timezones", available: false },
       { text: "Age Calculator", urlKey: "ageCalculator", description: "Calculate age in different formats", available: false }
     ]
   },

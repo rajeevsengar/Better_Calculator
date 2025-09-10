@@ -209,7 +209,7 @@
 }
 
 /* Mobile Responsive Styles - Only for phones, not tablets */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .bmi-input-container {
     order: 1;
     flex: none;
@@ -219,11 +219,11 @@
   
   .bmi-result-container {
     order: 3;
-    flex: none;
+    max-width: 100%;
     width: 100%;
-    max-width: none;
+    flex: 1 1 100%;
   }
-  
+
   /* Speedometer takes full width on mobile */
   .card.modes-card {
     order: 2;
@@ -304,11 +304,5 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     font-size: 11px;
-  }
-
-  .bmi-result-container {
-    max-width: 100%;
-    width: 100%;
-    flex: 1 1 100%;
   }
 }
